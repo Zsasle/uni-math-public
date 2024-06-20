@@ -1,0 +1,244 @@
+\section{Differenzierbarkeit}
+\begin{itemize}
+	\item $ m = \frac{ \Delta y }{ \Delta x } \rightsquigarrow $ bei affin-linearen Funktionen konstant, ``Steigung''
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+			width = 0.8\textwidth,
+			height = 1\textwidth,
+			xmin= -5, xmax= 5,
+			ymin= -2, ymax = 8,
+			axis lines = middle,
+		]
+			\addplot[domain=-5:10, samples=100]{0.7*x + 3};
+			\draw (-2, 1.6) -- node[anchor = north] {$ \Delta x $} (-1, 1.6);
+			\draw (-1, 1.6) -- node[anchor = west] {$ \Delta y $} (-1, 2.3);
+		\end{axis}
+	\end{tikzpicture}
+	\caption{somthing}
+	\label{somthing}
+\end{figure}
+\[
+	\lim_{\overset{x\to x_0}{x \neq x}} \frac{ f(x) - f(x_0) }{ x - x_0 } \eqqcolon f^\prime(x_0) 
+\]
+
+\subsection{Differenzierbarkeit}
+Steigung:
+\[
+	\frac{ f(x) - f(x_0) }{ x - x_0 } 
+\]
+und wenn $ \lim_{x \to x_0}  $ dann ist das die infinitesimale Steigung in $ x_0 $.\\
+Früher gab es die Annahme jede stetige Funktion müsse (außer Außnahmepunkte) vollständig Differenzierbar sein. (Stimmt nicht)
+\begin{subdefinition}
+	Sei $ \Omega \subset \R  $ nichtleer. $ f: \Omega \to \R  $ heißt \textbf{differenzierbar} in $ x_0 \in \Omega $, falls $ x_0 \in \Omega $ Häufungspunkt von $ \Omega $ ist und der Limes (``Ableitung von $ f $ in $ x_0 $'')
+	\[
+		f^\prime \coloneqq \frac{ df }{ dx } (x_0) \coloneqq \lim_{\overset{x\to x_0}{x \in \Omega\setminus \left\{ x_0 \right\} }} \frac{ f(x) - f(x_0) }{ x - x_0 } 
+	\]
+	existiert.\\
+	Ist $ f $ in jedem $ x_0 \in \Omega $ differenzierbar, so heißt $ f $ differenzierbar in $ \Omega $.
+\end{subdefinition}
+
+\begin{subexample}
+	Für $ n \in \N_0 : f_n(x) \coloneqq x^n $.\\
+	\textbf{Beh.:} $ f_n : \R \to \R  $ differenzierbar mit $ f^\prime(x_0) = n x_0^{n-1} \quad \forall x_0 \in \R  $.
+	\[
+		f_n^{\prime} (x_0) = \lim_{\overset{h\to 0}{h\neq 0}} \frac{ f_n(x_0 + h) - f_n(x_0) }{ h } .
+	\]
+	Für $ h \neq 0 $:
+	\begin{align*}
+		\frac{ 1 }{ h } \left( f_n (x_0 + h) - f(x_0) \right) &= \frac{ 1 }{ h } \left( \left( \sum_{k=0}^{n} \binom{n}{k} x_0^kh^{n-k}  \right) - x_0^n \right) \\
+		~&= \sum_{k=0}^{n-1} \binom{n}{k} x_0^kh^{n-k-1} \\
+		~&\quad \mid n-k-1 = 0 \text{ für } k = n - 1 \text{ sonst ist Exponent pos. also } = 0\\
+		~&= \binom{n}{n-1} x_0^{n-1} \cdot 1 \\
+		~&= n x_0^{n-1}  \\
+	\end{align*}
+\end{subexample}
+
+\begin{subexample}
+	$ \exp : \R \to \R  $ differenzierbar mit $ \exp^\prime = \exp  $.
+	\begin{itemize}
+		\item $ x_0 = 0 $. Für $ h \neq 0 $:
+			\begin{align*}
+				\left| \frac{ 1 }{ h } \left( \exp (h) - \exp (0) \right) - \exp (0) \right| &= \left| \frac{ \exp (h) - \exp (0) - \exp (0)h }{ h }  \right|  \\
+				~&= \frac{ 1 }{ h } \sum_{n=2}^{\infty} \frac{ h^n }{ n! }  \\
+				~&= \left| h \right| \sum_{n=2}^{\infty} \frac{ \left| h \right|^{n-2} }{ n! }  \\
+				~&\overset{\left| h \right| \leq 1}{\leq } \left| h \right| \sum_{n=0}^{\infty} \frac{ 1 }{ n! }  \\
+				~&\leq \left| h \right| \exp (1) \overset{\left| h \right| \to 0}{\to } 0. \\
+			\end{align*}
+			$ \implies \exp^\prime (0) = 1 $.
+		\item $ x_0 \in \R  $ beliebig. $ \exp^\prime (x_0) = \lim_{\overset{h \to 0}{h \neq 0}} \frac{ \exp (x_0 + h) - \exp (x_0) }{ h } = \lim_{\overset{h\to 0}{h\neq 0}} \exp (x_0) \underbrace{\frac{ \exp (h) - 1}{ h }}_{\to 1} = \exp (x_0)  $.
+		\item Lesen wir Definition \ref{11.1.1} mit den offensichtlichen Mod. für $ \C  $-wertige Funktionen, dass $ f: \R \ni x \mapsto \exp (\lambda x) \in \C  $ für $ \lambda \in \C  $ die Ableitung $ f^\prime(x) = \lambda \exp (\lambda x) $ hat.
+	\end{itemize}
+\end{subexample}
+
+\begin{subexample}
+	$ f(x) \coloneqq \exp (ix) $. Dann $ f^\prime(x) = ie^{ix}  $,
+	\[
+		f^\prime(x) = \left( \cos (x) + i\sin (x) \right)^\prime = \cos^\prime(x) + i\sin^\prime(x) = i\exp (ix) = -\sin (x) + i\cos (x).
+	\]
+	$ \implies \sin^\prime = \cos, \cos^\prime = -\sin  $.
+\end{subexample}
+
+\begin{subexample}
+	$ \left| \cdot  \right| : \R \ni x \mapsto \left| x \right|  $ ist stetig, aber in $ x_0 = 0 $ nicht differnezierbar 
+	\[
+		x_n \searrow 0: \frac{\left| x_n \right| -0}{ x_n - 0 } = 1,
+	\]
+	\[
+		x_n \nearrow 0: \frac{\left| x_n \right| - 0}{ x_n - 0 } = -1.
+	\]
+	Also $ \left| \cdot  \right|  $ nicht differenzierbar in $ x_0 = 0 $.
+\end{subexample}
+
+\begin{subtheorem}
+	Sei $ \Omega \subset \R  $ nichtleer, $ x_0 \in \Omega $ Häufungspunkt von $ \Omega $. Dann ist $ f: \Omega \to \R  $ in $ x_0 $ differenzierbar genau dann wenn:\\
+	$ \exists c>0 : \exists \varphi: \Omega \to \R : \lim_{\overset{x\to x_0}{x \neq x_0}} \frac{ \varphi(x) }{ x - x_0 } = 0 $ und $ \forall x \in \Omega : f(x) = f(x_0) + c(x - x_0) + \varphi(x) $. In diesem Fall $ c = f^\prime(x_0) $ 
+\end{subtheorem}
+
+\begin{subproof*}[Theorem \ref{11.1.6}]
+	Angenommen, Darstellung gilt. Dann $ \forall x \in \Omega\setminus {x_0} \implies \left| \frac{ f(x) - f(x_0) }{ x - x_0 } - c \right| \leq \left| \frac{ \varphi(x) }{ x - x_0 }  \right| \overset{x \to  x_0}{\to }0 $\\
+	$ \implies f $ differenzierbar in $ x_0 $ und $ f^\prime(x_0) = c $.
+
+	Andere Richtung: Definiere
+	\[
+		\varphi(x) \coloneqq f(x) - f(x_0) - f^\prime(x_0)(x - x_0),
+	\]
+	\[
+		x \neq x_0: \left| \frac{ \varphi(x) }{ x - x_0 }  \right| = \left| \frac{ f(x) - f(x_0) }{ x - x_0 } - f^\prime(x_0) \right| \to 0,
+	\]
+	da $ f $ differenzierbar in $ x_0 $.qed
+\end{subproof*}
+
+\begin{subcorollary}
+	Ist $ \Omega \subset \R  $ nichtleer, $ x_0 \in \Omega $ Häufungspunkt von $ \Omega $ und $ f: \Omega \to \R  $ differenzierbar in $ x_0 $, so ist $ f $ stetig in $ x_0 $.
+\end{subcorollary}
+\begin{subproof*}[Corollar \ref{11.1.7}]
+	\begin{align*}
+		\left| f(x) - f(x_0) \right| &= \left| c(x- x_0) + \varphi(x) \right|  \\
+		~&\leq c \overset{\to 0}{\left| x - x_0 \right|} + \overset{\to 0}{\left| x - x_0 \right| \left| \frac{ \varphi(x) }{ \left| x - x_0 \right|  } \right| } \overset{\overset{x \neq 0}{x\to x_0}}{\to } 0 \qed
+	\end{align*}
+	
+\end{subproof*}
+
+\begin{subexample}
+	$ \sgn $ ist in $ x_0 = 0 $ nicht differenzierbar [Da $ \sgn $ in 0 unstetig]
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[
+				xmin= -10, xmax= 10,
+				ymin= -2, ymax = 2,
+				axis lines = middle,
+			]
+				\addplot[domain=-10:0, samples=100]{-1};
+				\addplot[domain=-0:10, samples=100]{1};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{signum}
+		\label{plot:11.1.8.1}
+	\end{figure}
+\end{subexample}
+
+\textsc{Diffbar} $ \overset{\centernot \impliedby }{\implies } $ \textsc{Stetig}
+
+\subsection{Differenziationsregeln}
+\begin{subtheorem}
+	Seien $ f, g : \underbrace{\Omega}_{\neq 0}\to \R  $ diffbar in $ x_0 \in \Omega $. Dann
+	\begin{enumerate}[label=(\roman*)]
+		\item $ \forall \lambda, \mu \in \R : \lambda f + \mu g $ differenzierbar in $ x_0 $ mit 
+			\[
+				( \lambda f + \mu g )^\prime(x_0) = \lambda f^\prime(x_0) + \mu g^\prime(x_0).
+			\]
+			[Linearität der Ableitung]
+		\item $ f, g $ differenzierbar in $ x_0 $ mit $ (fg)^\prime(x_0) = f^\prime(x_0)g(x_0) + f(x_0)g^\prime(x_0) $. (Produkt-/Leibnizregel)
+		\item Ist $ g(x_0) \neq 0 $, so ist $ \frac{ f }{ g }  $ differenzbar in $ x_0 $ mit $ \left( \frac{ f }{ g }  \right)^\prime (x_0) = \frac{ f^\prime(x_0)g(x_0) - g^\prime(x_0)f(x_0) }{ g^2(x_0) }  $ (Quotientenregel)
+			\[
+				\color{gadse-dark-green} \left( \frac{ Z }{ N }  \right)^\prime = \frac{ NAZ - ZAN }{ N^2 } 
+			\]
+	\end{enumerate}
+\end{subtheorem}
+
+\begin{subproof*}[Theorem \ref{11.2.1}]
+	\begin{enumerate}[label=(\roman*)]
+		\item Limiten linear.
+		\item Schreibe
+			\begin{align*}
+				\frac{ f(x)g(x) - f(x_0)g(x_0) }{ x - x_0 } &= \underbrace{f(x)}_{\to f(x_0)} \underbrace{\frac{ g(x) - g(x_0) }{ x - x_0 } }_{\to g^\prime(x_0)} + g(x_0) \underbrace{ \frac{f(x) - f(x_0) }{ x - x_0 } }_{\to f^\prime (x_0)} \\
+				~&\overset{x \overset{\neq }{\to }x_0}{\to }f(x_0)g^\prime(x_0) + g(x_0) f^\prime(x_0).
+			\end{align*}
+		\item 
+			\[
+				\frac{ \frac{ 1 }{ g(x) } - \frac{ 1 }{ g(x_0) } }{ x - x_0 } = \frac{ 1 }{ g(x)g(x_0) } \cdot \frac{ g(x_0) - g(x) }{ x - x_0 } \to - \frac{g^\prime(x_0)}{ g^2(x_0) } .
+			\]
+			Beachte: $ g $ differenzierbar in $ x_0 \implies $ stetig in $ x_0 $. Aber $ g(x_0) \neq 0 \implies \exists \varepsilon > 0 : \forall x \in (x_0 - \varepsilon , x_0 + \varepsilon ) : g(x) \neq 0 $. Damit $ \frac{ 1 }{ g } : (x_0 - \varepsilon , x_0 + \varepsilon ) \to \R  $ stetig. Für (iii): Schreibe $ \frac{ f }{ g } = f \cdot \frac{ 1 }{ g }  $, und verwende (ii) und oben genannte Formel. \qed
+	\end{enumerate}
+\end{subproof*}
+
+\begin{subexample}
+	$ f_n(x) \coloneqq x^n, f_n^\prime(x) = nx^{n-1}  $. ($ n \in \N  $)\\
+	$ n = 1: f_1(x) = x \implies f_1^\prime(x) = 1 $.\\
+	$ n \curvearrowright n + 1 $:\\ 
+	$ f_{n+1}^\prime(x) = \left( x^{n+1}  \right)^\prime = \left( x \cdot x^n \right)^\prime $ 
+	Nach IV:
+	$ = 1 \cdot x^n + x \cdot n \cdot x^{n-1} = ( n + 1 ) x^n $.
+	Analog: $ g_n(x) \coloneqq x^{-n}  $, so gilt $ g_n^\prime(x) = (-n)x^{-n-1}  $, $ \forall n \in \Z \setminus \left\{ 0 \right\}  $.
+\end{subexample}
+
+\begin{subtheorem}[Kettenregel]
+	Seien $ f: \Omega \to \R , g : f(\Omega) \to \R  $ differenzierbar in $ x_0 \in \Omega $ beziehungsweise in $ f(x_0) $. Dann ist $ g \circ f : \Omega \in \R  $ differenzierbar in $ x_0 $ mit $ ( g \circ f )^\prime(x_0) = f^\prime(x_0)g^\prime(f(x_0)) $.
+\end{subtheorem}
+
+\begin{subproof*}[Theorem \ref{11.2.3}]
+	\ldots
+\end{subproof*}
+
+\begin{subtheorem}
+	Sei $ I \subset \R  $ nichtleeres Intervall, $ f : I \to \R  $ stetig, streng monoton mit Umkehrfunktion $ f^{-1} : f(I) \to \R  $. Ist $ f $ in $ x_0 \in I $ differenzierbar und $ f^\prime(x_0) \neq  0 $ so ist $ f^{-1}  $ in $ f(x_0) $ differenzierbar mit $ \left( f^{-1} \right)^\prime (f(x_0)) = \frac{ 1 }{ f^\prime(x_0) }  $.
+\end{subtheorem}
+
+\begin{subexample}
+	$ \log^\prime(x) = \frac{ 1 }{ x } . \exp^\prime = \exp  $.\\
+	$ \implies \log^\prime(x) = \frac{ 1 }{ \exp (\log (x)) } = \frac{ 1 }{ x }  $.
+\end{subexample}
+
+\begin{subexample}
+	Erinnerung: $ e \coloneqq \lim_{n \to \infty} (1 + \frac{ 1 }{ n })^n $\\
+	$ \exp (1) = \sum_{n=0}^{\infty} \frac{ 1 }{ n! }  $.
+	$ \log (e) = \lim_{n \to \infty} \log \left( \left( 1 + \frac{ 1 }{ n }  \right)^n \right) $ 
+	\ldots
+\end{subexample}
+
+\begin{subexample}
+	$ \tan \left( - \frac{ \pi }{ 2 } , \frac{ \pi }{ 2 }  \right) \to \R  $ 
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[
+				xmin= -2, xmax= 2,
+				ymin= -10, ymax = 10,
+				axis lines = middle,
+			]
+				\addplot[domain=-1.56:1.56, samples=100]{tan(x*360/2/pi)};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{tan}
+		\label{plot:11.2.7}
+	\end{figure}
+	Frage: $ \arctan ^\prime $?\\
+	$ f(f^{-1} (x)) = x, f = \tan  $\\
+	$ \left( f^{-1}  \right) ^\prime(x) = \frac{ 1 }{ f^\prime\left( f^{-1} (x) \right)  }  $\\
+	$ f^\prime(x) = \left( \frac{\sin (x)}{ \cos (x) }  \right) ^\prime = \frac{ \cos ^2(x) + \sin ^2(x)}{ \cos ^2(x) } = 1 + \tan ^2(x) $ 
+	$ \implies \arctan ^\prime(x) = \frac{ 1 }{ 1 + \tan ^2\left( \arctan (x) \right)  } = \frac{ 1 }{ 1 + x^2 }  $.
+\end{subexample}
+
+\subsection{Höhere Ableitungen}
+\begin{subdefinition}
+	Sei $ \Omega \subset \R  $ nichtleer und $ f : \Omega \to \R  $ eine Funktion.
+	Existiert für $ x \in \Omega $ ein $ \varepsilon > 0 $, so dass $ f $ in $ ( x - \varepsilon , x + \varepsilon ) $ differenzierbar ist, so nennen wir \textbf{$ f $ in $ x $ zweimal} differenzierbar, falls $ f^\prime $ in $ x $ differenzierbar ist.
+	Notation $ f^{\prime\prime} \coloneqq \left( f^\prime \right) ^\prime $.
+	Analog für $ k $-te Ableitung (induktiv).
+\end{subdefinition}
+

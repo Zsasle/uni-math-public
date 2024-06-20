@@ -1,0 +1,353 @@
+\documentclass[sectionformat = aufgabe]{gadsescript}
+\settitlelh{\today\\\semester\\Gruppe 3, Briefkasten 11, Baiz}
+\setsemester{Summer Semester 2024}%
+\setuniversity{University of Konstanz}%
+\setfaculty{Faculty of Science\\(Mathematics and Statistics)}%
+\settitle{Übungsblatt 05}
+\setsubtitle{Elias Gestrich}
+%Salisha Baiz, salisha.baiz@uni-konstanz.de
+
+\begin{document}
+\maketitle
+\setcounter{section}{5}
+\subsection{}
+\begin{enumerate}[label=(\alph*)]
+	\item 
+		\begin{description}
+			\item[Beh.:] $ \Kern (D) = \left\{ 0 \right\} \cap K[x]_{= 0}   $ und $ R_{D} = K[x] $ für $ \Char (K) = 0 $
+			\item[Bew.:] ~
+				\begin{description}
+					\item[$ \Kern (D) = \left\{ 0 \right\} \cap K{[x]}_{= 0}  $:] ~
+						\begin{description}
+							\item[``$ \subset $'':] 
+								Sei $ f \in K[x] $, mit $ \deg f = n \geq 1 $, sodass
+								\[
+									f = \sum_{i=0}^{n} f_i x^i
+								\]
+								mit insbesondere $ f_i \neq 0 $ gilt.
+								Daraus folgt:
+								\[
+									D(f) = \sum_{i=0}^{n} i f_i x^{i - 1} = \left( \sum_{i=1}^{n - 1} i f_i x^{i - 1} \right) + \underbrace{n f_n}_{ \neq 0} x^{n - 1} 
+								\]
+								Also $ \deg D(f) = n - 1 \geq 0 \implies D(f) \neq 0  $. Was zu zeigen war.
+							\item[``$ \supset $'':] 
+								Sei $ f = 0 $, dann folgt aus Linearität von $ D $, dass $ D(f) = D(0) = 0 $.\\
+								Sei $ f \in K[x]_{=0}  $, sodass $ f(x) = c $, dann gilt $ D(f) = 0 $.\\
+						\end{description}
+					\item[$ R_D = K{[x]} $:] ~
+						\begin{description}
+							\item[``$ \subset $'':] trivial
+							\item[``$ \supset $'':] 
+								Sei $ f \in K[x] $, zu zeigen $ \exists g \in K[x] $ mit $ D(g) = f $.
+								Da $ f \in K[x] : \exists f_0, \dotsc, f_n \in K : f = \sum_{i=0}^{n} f_i x^i $.\\
+								Setze
+								\[
+									g \coloneqq \sum_{i=0}^{n} \frac{ f_{i}  }{ i + 1 } x^{i + 1} .
+								\]
+								So, dass gilt:
+								\[
+									D(g) = \sum_{i=0}^{n} ( i + 1 ) \cdot \frac{ f_i }{ i + 1 } \cdot x^{i + 1 - 1} = \sum_{i=0}^{n} f_i x^i = f \qed
+								\]
+						\end{description}
+				\end{description}
+		\end{description}
+	\item ~
+		\begin{description}
+			\item[Beh.:] $ \Kern(D) = \Span \left\{ 1, x^p, x^{2p} , \dotsc \right\}  $ und $ R_D = \Span \left( \left\{ 1, x , x^2, \dotsc \right\} \setminus \left\{ x^{p - 1} , x^{2p - 1} , \dotsc \right\}  \right) \eqcolon X $
+				\begin{description}
+					\item[$ \Kern (D) = \Span \left\{ 1, x^p, x^{2p} , \dotsc \right\}  $:] ~
+						\begin{description}
+							\item[``$ \subset $'':] 
+								Sei $ f \in K[x] $, so dass $ f = \sum_{i=0}^{n} f_i x^{i}  $, wobei ein $ i_0 \leq n $ existiert mit $ f_{i_0} \neq 0 $ und $ \overline{i_0} \neq 0 $.
+								Daraus folgt:
+								\[
+									D(f) = \sum_{i=1}^{n} i f_{i} x^{i - 1} = \underbrace{i_0}_{\neq 0} \underbrace{f_{i_0}}_{\neq 0} x^{i_0 - 1} + \sum_{i=1}^{i_0 - 1} i f_i x^{i - 1} + \sum_{i=i_0 + 1}^{n} i f_i x^{i - 1} \neq 0
+								\]
+							\item[``$ \supset $'':] 
+								Sei $ f \in K[x] $, sodass $ f_0, \dotsc, f_{n}  \in K $ existieren mit
+								\[
+									f = \sum_{i=0}^{n} f_{i} x^{ip} 
+								\]
+								so, dass
+								\[
+									D(f) = \sum_{i=1}^{n} i \underbrace{p}_{= 0?} f_i x^{ip - 1} = 0
+								\]
+								was zu zeigen war
+						\end{description}
+					\item[$ R_D = X $:] ~
+						\begin{description}
+							\item[``$ \subset $'':]
+								Sei $ f \in K[x] $ gegeben, mit $ \exists f_0, \dotsc, f_n \in K : f = \sum_{i=0}^{n} f_i x^i $. Sei $ g \coloneqq D(f) $ mit $ g = \sum_{i=0}^{n - 1} g_i x^i $ zu zeigen $ D(f) = g \in X $, also $ g_{ap - 1} = 0 $ für $ a \in \N $
+								\[
+									D(f) = \sum_{i=1}^{n} i f_i x^{i - 1} = \sum_{i=0}^{n - 1} ( i + 1 ) f_{i + 1} x^i = \sum_{i=0}^{n - 1} g_i x^i
+								\]
+								Also $ g_i = ( i + 1 ) f_{i + 1}  $.
+								Sei $ a \in \N $, zu zeigen $ g_{ap - 1} = 0 $:
+								\[
+									g_{ap - 1} = ( (ap - 1) + 1 ) f_{(ap - 1) + 1} = \underbrace{ap}_{= 0} f_{ap} = 0
+								\]
+								was zu zeigen war.
+							\item[``$ \supset $'':] 
+								Sei $ f \in X $, zu zeigen $ \exists g \in K[x] : D(g) = f $.
+								Da $ f \in X $ gibt es $ f_0, \dotsc, f_n \in K $ so, dass
+								\[
+									f = \sum_{i=0}^{n} f_i x^i
+								\]
+								wobei $ f_{ap - 1} = 0 $ für $ a \in \N  $.
+								Setze für $ p \nmid i $, so dass $ i \not\equiv 0 $
+								\[
+									g_i = \frac{f_{i - 1}}{ i } 
+								\]
+								und $ g_i = 0 $ sonst, sodass $ i \cdot g_i = f_{i - 1}  $ für alle $ i = 1, \dotsc, n + 1 $
+								so, dass
+								\[
+									D(g) = \sum_{i=1}^{n + 1} i g_i x^{i - 1} = \sum_{i=1}^{n + 1} f_{i - 1}  x^{i - 1} = \sum_{i=0}^{n} f_i x^i = f\qed
+								\]
+						\end{description}
+				\end{description}
+		\end{description}
+\end{enumerate}
+
+\subsection{}
+\begin{enumerate}[label=(\alph*)]
+	\item es gilt für $ f = x^3 - 2x^2 + x - 4 $:
+		\begin{align*}
+			f^{(1)} &= 3x^2 - 4x + 1\\
+			f^{(2)} &= 6x - 4 \\
+			f^{(3)} &= 6 \\
+			f^{(4)} &= 0
+		\end{align*}
+		Also $ f(2) = 2^3 - 2 \cdot 2^2 + 2 - 4 = 8 - 8 + 2 - 4 = -2 $, $ f^{(1)} (2) = 3 \cdot 2^2 - 4 \cdot 2 + 1 = 12 - 8 + 1 = 5 $, $ f^{(2)} (2) = 6 \cdot 2 - 4 = 12 - 4 = 8 $ und $ f^{(3)} (2) = 6 $
+		so, dass die Taylorentwicklung von $ f $ in 2 wie folgt aussieht:
+		\[
+			f = \sum_{i=0}^{3} \frac{ f^{(i)} (2) }{ i! } (x - 2)^i =  -2 + 5(x - 2) + \frac{ 8 }{ 2 } (x - 2)^2 + \frac{ 6 }{ 2 \cdot 3 } (x - 2)^3 = - 2 + 5(x - 2) + 4(x - 2)^2 + (x - 2)^3
+		\]
+	\item ~
+		\begin{description}
+			\item[Vor.:] Seien $ f_0, \dotsc, f_n \in K[x]_{\leq n}  $ mit $ \deg(f) = i $ für alle $ i = 0, \dotsc, n $.
+			\item[Beh.:] $ \left\{ f_0, \dotsc, f_n \right\}  $ ist eine Basis von $ K[x]_{\leq n}  $,
+				also
+				\begin{itemize}
+					\item $ f_0, \dotsc, f_n $ l.u,
+					\item $ f_0, \dotsc, f_n \in K[x]_{\leq n}  $ und
+					\item erzeugend, bzw. es reicht zu zeigen, dass $ \left| \left\{ f_0, \dotsc, f_n \right\}  \right| = \dim K[x]_{\leq n} $
+				\end{itemize}
+			\item[Bew.:] ~
+				\begin{description}
+					\item[``Lineare Unabhängigketi'':] Zum Widerspruch, sei
+						\[
+							\sum_{i=0}^{n} a_i f_i = 0
+						\]
+						mit $ a_i \in K $ für $ i = 0, \dotsc, n $ und es existerit ein $ i_0 \in \left\{ 0, \dotsc, n \right\} $ mit $ a_{i_0} \neq 0 $.
+						Da $ \left\{ 0, \dotsc, n \right\}  $ endlich, existiert ein größtes $ i_0 $ so, dass $ a_{i_0} \neq 0 $
+						Das bedeutet aber
+						\[
+							\deg \left(\sum_{i=0}^{n} a_i f_i \right)= \underbrace{\deg\left(\sum_{i=0}^{i_0 - 1} a_i f_i\right) }_{< i_0} + \underbrace{\deg(a_{i_0} f_{i_0}) }_{= i_0} \overset{Aufgabe 3.4 (d)}{=} i_0
+						\]
+					\item[``$ f_0, \dotsc, f_n \in K{[x]}_{\leq n}  $'':] gilt nach Voraussetzung
+					\item[``$ \left| \left\{ f_0, \dotsc, f_n \right\}  \right| = \dim K{[x]}_{\leq n} $'':]
+					$ \left| \left\{ f_0, \dotsc, f_n \right\}  \right| = n + 1 = \dim K[x]_{\leq n} $\qed
+				\end{description}
+		\end{description}
+	\item ~
+		Für die Basiswechselmatrix $ P $ von $ \mathcal{B}^\prime   $ nach $ \mathcal{B}  $ gilt:
+		\[
+			\begin{pmatrix} 
+				[1]_{\mathcal{B} } & [x - 1]_{\mathcal{B} } & [(x - 1)^2]_{\mathcal{B} } & \hdots & [(x - 1)^n]_{\mathcal{B} } \\
+			\end{pmatrix} 
+		\]
+		Es gilt $ (x - 1)^i = \sum_{j=0}^{i} \binom{i}{j} x^{j}  \cdot (-1)^{i - j} $ nach Ana I.
+		Also
+		\[
+			[(x - 1)^i]_{\mathcal{B} } =
+			\begin{pmatrix} 
+				(-1)^{i} \\
+				(-1)^{i - 1}i \\
+				\vdots \\
+				(-1)^{i - j} \binom{i}{j}\\
+				\vdots \\
+				-i \\
+				1 \\
+				0 \\
+				\vdots \\
+				0\\
+			\end{pmatrix} 
+		\]
+		\[
+			P_{ij} =
+			\begin{cases}
+				(-1)^{j - i} \binom{j}{i} & \quad \text{für $ i \leq j $} \\
+				0 & \quad \text{für $ i > j $} 
+			\end{cases}
+		\]
+		
+		Also ist die Basiswechselmatrix $ P $
+		\[
+			\begin{pmatrix} 
+				1 & -1 &  1 & & \hdots & & (-1)^{j}			& \hdots & (-1)^{n - 1}         & (-1)^{n} \\
+				0 &  1 & -2 & & \hdots & & (-1)^{j - 1} j		& \hdots & (-1)^{n - 1} (n - 1) & (-1)^{n - 1} n\\
+				0 &  0 &  1 & & \hdots & & (-1)^{j - 2} \binom{j}{2}	& \hdots & (-1)^{n - 2} \binom{n-1}{2}& (-1)^{n - 2} \binom{n}{2}\\
+				0 &  0 &  0 & \ddots& & & \vdots			&        & \vdots & \vdots \\
+				\vdots & \vdots & \vdots & & & & & & & \\
+				0 &  0 &  0 & & \hdots & & (-1)^{j - i} \binom{j}{i}	& \hdots & (-1)^{n - 1 - i} \binom{n-1}{i} & (-1)^{n - i} \binom{n}{i}\\
+				\vdots & \vdots & \vdots & & & & \vdots & & \vdots & \vdots \\
+				0 &  0 &  0 & & \hdots & & 0				& \hdots & 0 &1\\
+			\end{pmatrix}  
+		\]
+		
+	\item ~
+		\begin{description}
+			\item[Vor.:] Sei $ a \in K $, so ist $ l_i(p) = p^{(i)} (a) $ und $ p_j \coloneqq \frac{ 1 }{ j! } (x - a)^{j}  $ für alle $ i, j = 0, \dotsc, n $
+			\item[Beh.:] $ l_i(p_j) = \delta_{ij}  $ für alle $ i, j = 0, \dotsc, n $
+			\item[Bew.:] ~
+				\begin{description}
+					\item[``$ i < j $'':] Es gilt:
+						\begin{align*}
+							l_i(p_j) &= p_j^{(i)} (a) \\
+							&= \left(\frac{ j \cdot (j - 1) \dotsc (i + 1) }{ j! } (x - a)^{j - i}\right) (a)  \\
+							&= \frac{ 1 }{ i! } (a - a)^{j - i}  \\
+							&= 0
+						\end{align*}
+					\item[``$ i = j $'':] Es gilt:
+						\begin{align*}
+							l_i(p_j) &= p_j^{(i)} (a) \\
+							&= \left(\frac{ j! }{ j! } (x - a)^{j - j}\right) (a)  \\
+							&= 1 (a - a)^{0}  \\
+							&= 1
+						\end{align*}
+					\item[``$ i > j $'':] Es gilt:
+						\begin{align*}
+							l_i(p_j) &= p_j^{(i)} (a) \\
+							&= \left(\frac{ j!  }{ j! } (x - a)^{j - j}\right)^{(i - j)}  (a)  \\
+							&= (1)^{(i - j)} (a) \\
+							&= 0(a)\\
+							&= 0
+						\end{align*}
+				\end{description}
+		\end{description}
+\end{enumerate}
+
+\subsection{}
+Die Basiswechselmatrix von $ \mathcal{B}  $ nach $ \mathcal{B} ^\prime  $ ist
+\[
+	\begin{pmatrix} 
+		[1]_{\mathcal{B} ^\prime } & [x]_{\mathcal{B} ^\prime } & \hdots & [x^n]_{\mathcal{B} ^\prime } 
+	\end{pmatrix} 
+\]
+Dabei ist nach Skript 22 LA I
+\[
+	[x^j]_{\mathcal{B} ^\prime } =
+	\begin{pmatrix} 
+		L_0(x^j) \\
+		L_1(x^j) \\
+		\vdots \\
+		L_i(x^j) \\
+		\vdots \\
+		L_n(x^j) \\
+	\end{pmatrix} 
+	=
+	\begin{pmatrix} 
+		t_0^j \\
+		t_1^j \\
+		\vdots \\
+		t_i^j \\
+		\vdots \\
+		t_n^j \\
+	\end{pmatrix} 
+\]
+Also ist die Basiswechselmatrix
+\[
+	\begin{pmatrix} 
+		t_0^0 & t_0^1 & t_0^2 & \hdots & t_0^n \\
+		t_1^0 & t_1^1 & t_1^2 & \hdots & t_1^n \\
+		t_2^0 & t_2^1 & t_2^2 & \hdots & t_2^n \\
+		\vdots & \vdots & \vdots & \ddots & \vdots\\
+		t_n^0 & t_n^1 & t_n^2 & \hdots & t_n^n \\
+	\end{pmatrix} 
+	=
+	\begin{pmatrix} 
+		1 & t_0^1 & t_0^2 & \hdots & t_0^n \\
+		1 & t_1^1 & t_1^2 & \hdots & t_1^n \\
+		1 & t_2^1 & t_2^2 & \hdots & t_2^n \\
+		\vdots & \vdots & \vdots & \ddots & \vdots\\
+		1 & t_n^1 & t_n^2 & \hdots & t_n^n \\
+	\end{pmatrix} \qed
+\]
+
+\subsection{}
+\begin{enumerate}[label=(\alph*)]
+	\item Nach Korollar 10.10 reicht es zu zeigen, dass $ 2x^2 + 4x - 10 $ und $ x + 2 $ relativprim zueinander sind.
+		Da $ \deg(x + 2) = 1 $ ist $ x + 2 $ ein Primpolynom. Also reicht es zu zeigen, dass $ \forall f \in K[x] : (x + 2) \cdot f \neq 2x^2 + 4x - 10 $.
+		Betrachte dafür:
+		\[
+			( (x + 2) \cdot f )(-2) \overset{Thm. 7.5}{=} (x + 2)(-2) \cdot f(-2) = 0 \cdot f(-2) = 0 \neq -10 = 8 - 8 - 10 = 2 \cdot (-2)^2 + 4 \cdot (-4) - 10
+		\]
+		Also $ x + 2 $ und $ 2x^2 + 4x - 10 $ relativprim, was zu zeigen war.
+	\item Durch Ausprobieren:
+		$ f(-1) = 0 $, aber $ f^{(1)} (-1) = 18 - 24 \cdot (-1) - 6 \cdot (-1)^2 + 4 \cdot (-1)^3 = 18 + 24 - 6 - 4 = 32 \neq 0 $.
+		Also $ (-1) $ einfache Nullstelle von $ f $.
+		Es existiert also ein $ g $ so dass $ f = (x + 1)g $.
+		Setze $ g \coloneqq x^3 - 3x^2 - 9x + 27 $ so dass $ (x + 1) \cdot g = f $ gilt.
+		Es gilt $ g(-3) = (-3)^3 - 3 \cdot (-3)^2 - 9 \cdot (-3) + 27 = -27 - 27 + 27 + 27 = 0 $, also ist $ -3 $ Nullstelle von $ g $.
+		$ g^{(1)} (-3) = 3 \cdot (-3)^2 - 6 \cdot (-3) - 9 = 27 + 18 - 9 = 36 \neq 0 $. Also ist $ -3 $ eine einfache Nullstelle von $ g $ und es existiert ein $ h $ so, dass $ g = (x + 3) h $.
+		Sezte hierfür $ h = x^2 - 6x + 9 $ so, dass $ (x + 3) h = g $.
+		Betrachte $ h = x^2 - 6x + 9 = x^2 - 2\cdot 3x + 9 = (x - 3)^2 $.
+		Also ist $ f = (x + 3)(x +1)(x - 3)(x - 3) $.
+
+		Trivialer Weise ist $ -3 $ eine Nullstelle von $ f $.
+		Betrachte
+		\[
+			f^{(1)} (-3) = 18 - 24 \cdot (-3) - 6 \cdot (-3)^2 + 4 \cdot (-3)^3 = 18 + 72 - 3 \cdot 27 - 4 \cdot 27 \]
+		\[
+			= 90 - 7 \cdot 27 = 10 \cdot 9 - 21 \cdot 9 = -11 \cdot 9 \neq 0
+		\]
+		Also ist $ -3 $ einfache Nullstelle nach Satz 9.8
+
+		Trivialer Weise ist $ 3 $ eine Nullstelle von $ f $.
+		Betrachte
+		\[
+			f^{(1)} (3) = 18 - 24 \cdot (3) - 6 \cdot 3^2 + 4 \cdot 3^3 = 2 \cdot 9 - 8 \cdot 9 - 6 \cdot 9 + 12 \cdot 9 = (2 - 8 - 6 + 12) \cdot 9 = 0
+		\]
+		und
+		\[
+			f^{(2)} (3) = -24 - 12 \cdot (3) + 12 \cdot (3) = -24 \neq 0
+		\]
+		also ist $ 3 $ eine doppelte Nullstelle nach Satz 9.8
+	\item 
+		Für $ a = 0 $ ist $ 0 $ eine Nullstelle mit Vielfachheit $ \geq 2 $, da $ 0^p = 0 $ und $ p \cdot 0^{p - 1} = 0 $.\\
+		Für $ a \geq 1 $
+		Sei $ b = a^{-p} $ so, dass $ b^p - a = 0 $. Zu zeigen $ b $ ist auch Nullstelle von der ersten Ableitung.
+		Dafür gilt $ p \cdot b^{p - 1} = 0 $. \qed
+\end{enumerate}
+
+\subsection*{\textbf{Zusatzafugabe für Interessierte:}}
+\begin{enumerate}[label=(\alph*)]
+	\item 
+		\begin{enumerate}[label=(\roman*)]
+			\item Sei $ f, g \in \left\{ h \in \Q [x] : h(0) = 0 \right\} \eqcolon M $, zu zeigen $ fg \in M $, also zu zeigen $ fg \in \Q [x] $ und $ (fg)(0) = 0 $.\\
+				$ fg \in \Q [x] $ trivial, und $ (fg)(0) = f(0) g(0) = 0 $ 
+			\item $ x^3 \in \left\{ f \in \Q [x] : f = 0 \text{ oder } \deg(f) \leq 4 \right\} \eqcolon M $, aber $ x^3 \cdot x^3 = x^6 \not\in M $, da $ \deg x^6 = 6 > 4 $
+			\item Sei $ f, g \in \left\{ h \in \Q [x] : D(h)(2) = 0 \right\}  $.
+				Also
+				\[
+					f = \sum_{i=0}^{n} \frac{f^{(i)} (2)}{ i! } (x - 2)^{i} 
+				\]
+				und
+				\[
+					g = \sum_{i=0}^{m} \frac{g^{(i)} (2)}{ i! } (x - 2)^{i}  
+				\]
+				Also ist
+				\begin{align*}
+					D(fg)(2) &= D\left(\left( \sum_{i=0}^{n} \frac{f^{(i)} (2)}{ i! } (x - 2)^i  \right) \left( \sum_{j=0}^{m} \frac{g^{(j)} (2)}{ j!} (x - 2)^j  \right)\right)(2)  \\
+					&= D \left(\sum_{i=0}^{n} \sum_{j=0}^{m} \frac{f^{(i)}(2) g^{(j)} (2) }{ i!j! } (x - 2)^{i + j}\right)(2) \\
+					&= \left(\sum_{i=0}^{n} \sum_{j=0}^{m} \frac{f^{(i)}(2) g^{(j)} (2) ( i + j ) }{ i!j! } (x - 2)^{i + j - 1}\right)(2) \\
+					&= \sum_{i=0}^{n} \sum_{j=0}^{m} \frac{f^{(i)}(2) g^{(j)} (2) ( i + j ) }{ i!j! } \underbrace{0^{i + j - 1}}_{= 0 \text{ für $ i + j > 1 $}}  \\
+					&= \frac{f^{(0)}(2) g^{(1)} (2) ( 0 + 1 ) }{ 0!1! } 0^{0 + 1 - 1} + \frac{f^{(1)}(2) g^{(0)} (2) ( 1 + 0 ) }{ 1!0! } 0^{1 + 0 - 1} \\
+					&= f^{(0)}(2) \cdot 0 + 0 \cdot g^{(0)} (2) \\
+					&= 0 \\
+				\end{align*}
+		\end{enumerate}
+\end{enumerate}
+
+
+\end{document}

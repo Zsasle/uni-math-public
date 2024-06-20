@@ -1,0 +1,221 @@
+\documentclass[sectionformat=aufgabe]{gadsescript}
+
+\setsemester{Summer Semester 2024}%
+\setuniversity{University of Konstanz}%
+\settitlelh{\today\\\semester\\Gruppe 3, Jonathan Weihing}
+\setfaculty{Faculty of Science\\(Mathematics and Statistics)}%
+\settitle{Übungsblatt 4}
+\setsubtitle{Elias Gestrich}
+\usepackage{subfig}
+
+\begin{document}
+\maketitle
+\section{Stetigkeit}
+\begin{enumerate}[label=(\alph*)]
+	\item ~
+		\begin{description}
+			\item[Vor.:] Ist $ (x_j, y_j) $ eine Folge mit $ d_{\R ^2} ((x_j, y_j), (x, y)) \to 0 $,\\
+				so konvergiert $ d_{\R } (f((x_j, y_j)), f((x, y))) \to 0$.\\
+				Bzw. $ (x_j, y_j) \to (x, y) \implies f((x_j, y_j)) \to f(x, y) $
+			\item[Beh.:]
+				\[
+					f:\R ^2 \to \R , (x_1, x_2) \mapsto 
+					\begin{cases}
+						\frac{ x_1^2x_2^2 }{ (x_1^2 + x_2^2)^2 } & x \neq 0\\
+						0 & x = 0
+					\end{cases}
+				\]
+				ist Stetig mit $ d_{\R ^2}  $ sei die von $ \left\| \cdot  \right\| _2 $ induzierte Metrik und $ d_{\R }  $ die von $ \left| \cdot  \right|  $ induzierte Metrik.
+			\item[Bew.:]
+				Sei $ (x_j), (y_j) $ konvergente Folgen mit $ \lim_{j \to \infty} x_j = x, \lim_{j \to \infty} y_j = y $. Sei $ (c_j) $ definiert durch $ c_j \coloneqq x_j^3y_j^2 $, sodass
+				\[
+					\lim_{j \to \infty} c_j = \left( \lim_{j \to \infty} x_j \right)^3 \left( \lim_{j \to \infty} y_j \right) ^2 = x^3 y^2
+				\]
+				und sei $ (h_j) $ definiert durch $ h_j \coloneqq (x_j^2 + y_j^2)^2 $, sodass
+				\[
+					\lim_{j \to \infty} h_j = \left( \left( \lim_{j \to \infty} x_j \right) ^2 + \left( \lim_{j \to \infty} y_j \right) ^2 \right) ^2 = (x^2 + y^2)^2
+				\]
+				nach Ana I.\\
+				Für $ (x, y) \neq (0, 0) $: (insbesondere $ 0 < \left| \lim_{j \to \infty} c_j \right| , \left| \lim_{j \to \infty} h_j \right| < \infty $)
+				\begin{align*}
+					\lim_{j \to \infty} f((x_j, y_j)) &= \lim_{j \to \infty} \frac{x_j^3 y_j^2}{ (x_j^2 + y_j^2)^2 } \\
+					~ &= \lim_{j \to \infty} \frac{c_j}{ h_j } \\
+					~ &= \frac{ \lim_{j \to \infty} c_j }{ \lim_{j \to \infty} h_j }  \\
+					~ &= \frac{ x^3y^2 }{ ( x^2 + y^2 )^2 } \\
+					~ &= f((x, y))
+				\end{align*}
+				Für $ (x, y) = (0,0) $:
+				\begin{align*}
+					\lim_{j \to \infty} \frac{ x_j^3y_j^2 }{ (x_j^2 + y_j^2)^2 } &= \begin{cases}
+						0, & \quad y_j = 0 \\
+						\lim_{j \to \infty} \frac{ x_j^3y_j^2 }{ (x_j^2 + y_j^2)^2 } & \quad \text{sonst} 
+					\end{cases}\\
+					&= \begin{cases}
+						0, & \quad y_j = 0 \\
+						\lim_{j \to \infty} \frac{ x_j^3y_j^2 }{ x_j^4 + 2x_j^2y_j^2 + y_j^4 } & \quad \text{sonst} 
+					\end{cases}\\
+					&\leq \begin{cases}
+						0, & \quad y_j = 0 \\
+						\lim_{j \to \infty} \frac{ x_j^3y_j^2 }{ 2x_j^2y_j^2 } & \quad \text{sonst} 
+					\end{cases} \\
+					&\leq \begin{cases}
+						0, & \quad y_j = 0 \\
+						\lim_{j \to \infty} \frac{ x_j }{ 2 } & \quad \text{sonst} 
+					\end{cases} \\
+					&= \begin{cases}
+						0, & \quad y_j = 0 \\
+						0 & \quad \text{sonst} 
+					\end{cases} \\
+				\end{align*}
+		\end{description}
+		
+	\item Stetig für geraden: $ (ax_j, bx_j) \to 0 $, zu zeigen $ f((ax_j, bx_j)) \to 0 $:
+		\begin{align*}
+			\lim_{j \to \infty} | f((ax_j, bx_j)) | &= %
+			\lim_{j \to \infty} \left| \frac{ax_jb^2x_j^2}{ a^2x_j^2 + b^4x_j^4) } \right| \\
+			~ &=\lim_{j \to \infty} \left| \frac{ab^2x_j^3}{ x_j^2(a^2 + b^4x_j^2) } \right| \\
+			~ &=\lim_{j \to \infty} \left( \frac{ \left| ab^2x_j \right| }{ a^2 + b^4x_j^2 } \right) \\
+			~ &\leq \lim_{j \to \infty} \left( \frac{ \left| ab^2x_j \right| }{ a^2 } \right) \\
+			&= 0 \\
+		\end{align*}
+
+		Nicht Stetig in $ x_0 = 0 $: Sei $ (x_j) $ eine nicht-negative Nullfolge, betrachte die Folge:
+		\[
+			\left(x_j, \sqrt{x_j}\right)
+		\]
+		mit $ \lim_{j \to \infty} \left(x_j, \sqrt{x_j} \right)  = \left(0, \sqrt{0} \right) $.
+		Aber
+		\begin{align*}
+			\lim_{j \to \infty} \left| f\left( \left( x_j, \sqrt{x_j}  \right)  \right)  \right|
+			&= \lim_{j \to \infty} \left| \frac{ x_j \cdot \sqrt{x_j}^2 }{ x_j^2 + \sqrt{x_j} ^4 } \right|  \\
+			&= \lim_{j \to \infty} \frac{ x_j^2 }{ 2 x_j^2 }  \\
+			&= \frac{ 1 }{ 2 } \neq 0 = f\left( \left( 0, \sqrt{0}  \right)  \right)  \\
+		\end{align*}
+		Also nicht Stetig
+\end{enumerate}
+
+\section{Kompaktheit unter stetiger Abbildung}
+\begin{enumerate}[label=(\alph*)]
+	\item ~
+		\begin{description}
+			\item[Beh.:] Ist $ f : X \to Y $ stetig und $ K \subset X $ kompakt, dann ist auch $ f(K) \subset Y $ kompakt.\\
+				Äquivalent zu: Ist $ f $ stetig und $ K $ kompakt, dann gilt $ \forall (y_j) \subset f(K) $ existiert eine konvergente Teilfolge, die gegen $ y \in f(K) $ konvergiert.
+			\item[Bew.:] 
+				Sei $ (y_j) \subset f(K) $ gegeben, zu zeigen, es existiert eine konvergente Teilfolge mit Grenzwert in $ f(K) $.\\
+				Sei $ (x_j) \subset f((y_j)) $, mit $ x_j = \max \left\{ f^{-1} (y_j) \right\} $.
+				Da $ K $ kompakt hat $ (x_j) $ eine konvergente Teilfolge $ x_{j_k}  $, die gegen $ x \in f(K) $ konvergiert.
+				Da $ f $ stetig konvergiert $ (f(x_{j_k} )) = (y_{j_k} )  $ gegen $ f(x) \in f(K) $, da $ x \in K \implies f(x) \in f(K)$
+		\end{description}
+		
+	\item sei $ X = \R , Y = \left\{ 0, 1 \right\}  $, dann gilt für die Kompakte Menge: $ K = [-1, 1] $ mit
+		\[
+			f \coloneqq x \to \begin{cases}
+				0, & \quad x = 0\\
+				1, & \quad \text{sonst},
+			\end{cases} 
+		\]
+		sodass $ f $ nicht stetig, aber $ f(K) = \left\{ 0, 1 \right\}  $ kompakt.
+\end{enumerate}
+
+\section{Kompaktheit bleibt erhalten}
+\begin{enumerate}[label=(\alph*)]
+	\item ~
+		\begin{description}
+			\item[Vor.:] Eine Menge $ K \subset X $ ist genau dann kompakt, wenn für alle Folgen in $ K $ gilt, dass eine konvergente Teilfolge existiert, deren Grenzwert in $ K $ liegt.\\
+				Es sei $ (X, d) $ ein metrischer Raum und $ A, B \subset X $ seien kompakt.
+			\item[Beh.:] $ A \cup B $ und $ A \cap B $ sind kompakt.
+			\item[Bew.:] ~
+				\begin{description}
+					\item[$ A \cup B $:] Sei $ (x_j) $ eine Folge in $ A \cup B $, zu zeigen es existiert eine konvergente Teilfolge, die gegen ein $ x $ in $ A \cup B $ konvergiert.\\
+						Falls endlich viele Folgenglieder in $ A $ liegen, müssen unendlich viele Folgenglieder in $ B $ liegen, sei $ (x_{j_k} ) $ die Folge aller Folgenglieder in $ B $.
+						Da $ B $ kompakt, existiert eine konvergente Teilfolge in $ (x_{k_n} ) $, deren Grenzwert in $ B $ liegt. Was zu zeigen war.\\
+						Falls unendlich viele Folgenglieder in $ A $ liegen analog (vertausche $ B $ mit $ A $)\qed
+					\item[$ A \cap B $:] Sei $ (x_j) $ eine Folge in $ A \cap B $, zu zeigen: es existiert eine konvergente Teilfolge, die gegen ein $ x $ in $ A \cap B $ konvergiert.\\
+						Da insbesondere $ (x_j) $ in $ A $ liegt, existiert eine konvergente Teilfolge, die gegen $ x \in  A $ konvergiert.
+						Diese Teilfolge liegt aber auch in $ B $, also muss wegen der Kompaktheit auch ihr Grenzwert $ x $ in $ B $ liegen.
+						Also liegt $ x $ sowohl in $ A $, als auch in $ B $, also $ x \in A \cap B $.\qed
+				\end{description}
+		\end{description}
+		\newpage
+	\item ~
+		\begin{description}
+			\item[Vor.:] Ein Unterraum $ K \subset X $ ist genau dann kompakt, wenn für alle Folgen in $ K $ gilt, dass eine konvergente Teilfolge existert, deren Grenzwert in $ K $ liegt.\\
+				Es sei $ (X, d) $ ein normierter Vektorraum und $ A, B \subset X $ seien kompakt.
+			\item[Beh.:] $ A + B \coloneqq \left\{ a + b : a \in A, b \in B \right\}  $ ist kompakt.
+			\item[Bew.:] Sei $ (a_j + b_j) $ eine Folge in $ A + B $ mit $ \forall j \in \N : a_j \in A, b_j \in B $, da $ (a_j) \subset A $ existiert eine konvergente Teilfolge $ (a_{j_k} ) $, die gegen einen Wert $ a $ in $ A $ konvergiert.\\
+				Da $ (b_j) \subset B  $ folgt auch $ (b_{j_k} ) \subset B $, also hat auch $ (b_{j_k} ) $ eine konvergente Teilfolge $ (b_{j_{k_n} } ) $ in $ B $, die gegen einen Wert $ b \in  B $ konvergiert.\\
+				Da jede Teilfolge von konvergenten Folgen konvergieren, konvergiert auch $ ( a_{j_{k_n} } ) $ gegen $ a $.\\
+				Also konvergiert $ (a_{j_{k_n} } + b_{j_{k_n} } ) $ gegen $ a + b \in A + B $.\qed
+		\end{description}
+\end{enumerate}
+
+\section{Kompaktheit}
+\begin{description}
+	\item[Vor.:] $ (X, d) $ ein kompakter metrischer Raum und $ (U_i)_{i \in I}  $ eine Überdeckung von $ X $, durch offene Mengen in $ X $.
+	\item[Beh.:] $ \exists r > 0: \forall B_{r}(x) : \exists i \in I : B_{r}(x) \subseteq U_i $
+	\item[Bew.:] Da $ X $ kompakt existieren endlich viele $ U_i $'s, sodass
+		\[
+			X \subset \bigcup_{i = 1}^N U_i
+		\]
+		Sei $ C_i \coloneqq X\setminus U_i $ und
+		\[
+			f(x) \coloneqq \frac{ 1 }{ N } \sum_{i=1}^{N} \inf_{c \in C_i} d(x, c)
+		\]
+		\textbf{Zwischenbeh. 1:}
+		\[
+			0 < f(x) \leq \sup_{1 \leq i \leq N} \inf_{c \in C_i} d(x, c) 
+		\]
+		\textbf{Bew. der Zwischenbeh. 1:}\\
+		Für ein beliebiges $ x \in X $ gilt, dass $ x \in \bigcup_{i = 1} ^N U_i $, also existiert ein $ 1 \leq i_0 \leq N $ mit $ x \in U_{i_0}  $, bzw. $ x \not\in X \setminus U_{i_0}  $.
+		Somit $ \forall c \in C_{i_0} : x \neq  c \implies d(x, c) > 0 $.\\
+		Also da $ d(x, c) \geq 0 $ für alle $ c \in C_{i_0}  $ ist also:
+		\[
+			\frac{ 1 }{ N } \sum_{i=1}^{N} \inf_{c \in C_i} d(x, c) \geq \frac{ 1 }{ N } \inf_{c \in C_i} d(x, c) > 0
+		\]
+		und
+		\[
+			\frac{ 1 }{ N } \sum_{i=1}^{N} \inf_{c \in C_i} d(x, c) \leq \frac{ 1 }{ N } \sup_{1 \leq i \leq N} \inf_{c \in C_{i} } d(x, c) 
+			= \frac{ 1 }{ N } \cdot N \cdot \left( \sup_{1 \leq i \leq N} \inf_{c \in C_{i} } d(x, c) \right)
+			= \sup_{1 \leq i \leq N} \inf_{c \in C_{i} } d(x, c)
+		\]
+		\textbf{Zwischenbeh. 2:}\\
+		$ \forall (x_j) \subset X $ gilt $ f(x_j) $ konvergiert nicht gegen Null.\\
+		Also $ \exists \varepsilon > 0 : \forall N_0 \in \N : \exists n > N_0 : | f(x_n) | = f(x_n) \geq  \varepsilon  $\\
+		\textbf{Bew. der Zwischenbeh. 2:}\\
+		Sei $ (x_j) \subset X $ eine Folge.\\
+		Da $ X $ kompakt hat $ (x_j) $ eine konvergente Teilfolge $ (x_{j_k} ) $ für die gilt $ \lim_{k \to \infty} x_{j_k} = x \in X $.\\
+		Da $ f(x) > 0 : \exists \delta > 0 : f(x) > \delta $,
+		da $ (x_{j_k} ) $ konvergent existiert ein $ N_1 \in \N  $,
+		so dass für alle $ k > N_1  $ gilt $ d(x_{j_k}, x) < \frac{ \delta }{ 2 }   $,
+		so dass $ x_{j_k} \in B_{\frac{ \delta }{ 2 } }(x) \implies f(x_{j_k} ) \geq \frac{ \delta }{ 2 }  $.\\
+		Wähle also $ \varepsilon = \frac{ \delta }{ 2 }  $, sodass für alle $ N_0 \in \N  $ ein $ n > N_0 $ existiert, sodass $ f(x_n) \geq \frac{ \delta }{ 2 } = \varepsilon  $. Was zu zeigen war
+
+		\textbf{Fortsetzung des Bew.:}\\
+		Aus der Zwischenbehauptung 2 folgt, dass $ \inf_{x \in X} f(x) > 0 $, da $ f(x) > 0 $ für alle $ x \in X $ und für alle $ (x_j) $ für die $ f(x_j) $ konvergiert, dass $ \lim_{j \to \infty}  f(x_j) > 0 $.
+
+		Wähle also
+		\[
+			r < \inf_{x \in X} f(x) = \inf_{x \in X} \frac{ 1 }{ N } \sum_{i=1}^{N} \inf_{c \in C_i} d(x, c)
+		\]
+		Zu zeigen $ \forall x \in X : \exists 1 \leq i_0 \leq N : B_{r}(x) \subset U_{i_0}  $.\\
+		Sei $ x \in X $ gegeben.\\
+		Aus Zwischenbeh. 1 folgt:
+		\[ 
+			r < f(x) = \frac{ 1 }{ N } \sum_{i=1}^{N} \inf_{c \in C_i} d(x, c) \leq \sup_{1 \leq i \leq N} \inf_{c \in C_{i} } d(x, c)
+		\]
+		Da 
+		\[
+			\left\{ \inf_{c \in C_i} d(x, c) : 1 \leq i \leq N \right\} 
+		\]
+		$ N $ Elemente hat, also endlich ist, ist sie auch Kompakt und besitzt ein Maximum, wähle $ i_0 $ so, dass $ \inf_{c \in C_{i_0} } d(x, c) $ eben dieses Maximum ist.
+		Also
+		\[ 
+			r < f(x) \leq \inf_{c \in C_{i_0} } d(x, c)
+		\]
+		Also $ \forall c \in C_{i_0} : d(x, c) \geq r \implies B_{r}(x) \subset U_{i_0}  $.\\
+		(Beweis durch Widerspruch, sei $ x_1 \in B_{r}(x)  $ mit $ x_1 \not\in U_{i_0}  $, also $ x_1 \in C_{i_0} $, also $ d(x, x_1) \leq r < \inf_{c \in C_{i_0}} d(x, c) \leq d(x, x_1) $, was ein Widerspruch ist)
+		
+\end{description}
+
+
+\end{document}

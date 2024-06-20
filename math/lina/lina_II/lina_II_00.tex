@@ -1,0 +1,668 @@
+\section{Präliminarien}
+\textbf{Ansatz:}\\
+$ K $ Körper und $ V $ ein endlich dimensionaler $ K $-Vektorraum
+\subsection{Annulatoren}
+Erinnerung (s. Skript 22 LA I)
+\begin{subtheorem*}[Charakterisierung von Dualbasen)]
+	$ K $ Körper\\
+	Sei $ V $ ein n-dim. $ K $-Vektorraum und $ \mathcal{B} = \left( \alpha_1, \dotsc, \alpha_n \right)  $ eine geordnete Basis für $ V $.
+	Es gibt genau eine geordnete Dualbasis für $ V^\star $, $ \mathcal{B}^\star = \left( f_1, \dotsc, f_n \right)  $, sodass:
+	\begin{enumerate}[label=(\arabic*)]
+		\item $ f_i (\alpha_j) = \delta_{ij}  $
+		\item $ \forall f \in V^\star : f = \sum_{i = 1}^{n} f(\alpha_i) f_i $
+		\item $ \forall \alpha \in V : \alpha = \sum_{i=1}^{n} f_i(\alpha) \alpha_i $
+	\end{enumerate}
+	Das heißt: $ \forall f \in V^\star $ und $ \forall \alpha \in V $ gilt:
+	\begin{align*}
+		[f]_{B^\star} &= \begin{pmatrix} f(\alpha_1) \\ \vdots \\ f(\alpha_n) \end{pmatrix} \text{ und}  \\
+		[\alpha]_{B} &= \begin{pmatrix} f_1(\alpha) \\ \vdots \\ f_n(\alpha) \end{pmatrix}  \\
+	\end{align*}
+	(Dualität)
+\end{subtheorem*}
+
+\begin{subdefinition}
+	Sei $ V $ ein n-dim. $ K $-Vektorraum und $ S \subseteq V $. Der Annihilator (Annulator) von $ S $, was wir mit $ S^0 $ bezeichnen, ist die folgende Untermenge von $ V^\star : S^0 \coloneqq \left\{ f \in V^\star : S \subseteq \Kern(f) \right\}  $
+\end{subdefinition}
+
+\begin{subproposition}
+	Folgende Aussagen gelten:
+	\begin{enumerate}[label=(\roman*)]
+		\item $ S_1 \subseteq S_2 \implies S_2^0 \subseteq S_1^0 $
+		\item $ S^0 = (\Span(S))^0 $
+		\item $ S^0 \subseteq V^\star $ ist ein Unterraum
+		\item $ \Span(S) = \left\{ 0 \iff S^0 = V^\star \right\}  $ 
+		\item $ \Span(S) = V \iff S^0 = \left\{ 0 \right\}  $
+	\end{enumerate}
+\end{subproposition}
+
+\begin{subproof*}[Proposition \ref{0.1.2}]
+	\begin{description}
+		\item[``$ \implies  $''] trivial
+		\item[``$ \impliedby  $''] z.z. $ \Span(S) = \left\{ 0 \right\}  $ Zum Widerspruch sei $ \alpha \neq 0 $ und $ \alpha \in \Span(S) $, dann ist $ \left\{ \alpha \right\}  $ l.u.
+			Wir ergänzen zu einer Basis $ \mathcal{B}  $ für $ V $.
+			$ \mathcal{B} = (\alpha = \alpha_1, \dotsc, \alpha_n) $ Sei $ \mathcal{B} ^\star = ( f_1, \dotsc, f_n) $ die Dualbasis für $ V^\star $. Es gilt: $ f_1(\alpha_1) = 1 $, also $ f_1 \not\in S^0 $ 
+	\end{description}
+	
+	(v)
+	\begin{description}
+		\item[``$ \implies  $''] folgt aus (ii) und (iv)
+		\item[``$ \impliedby  $''] Sei $ S^0 = \left\{ 0 \right\}  $ z.z. $ \Span(S) = V $.\\
+			Setze $ W \coloneqq \Span(S) $. Zum Widerspruch: sei $ \alpha \in V \setminus W $ und $ (\alpha_1, \dotsc, \alpha_k) \subseteq W $ eine geordnete Basis für $ W $. Dann ist $ (\alpha_1, \dotsc, \alpha_k, \alpha) $ l.u. in $ V $.\\
+			Ergänze zu einer geordneten Basis $ (\alpha_1, \dotsc, \alpha_k, \alpha_{k+1} = \alpha, \dotsc, \alpha_n) $. Sei nun $ \mathcal{B} ^\star \coloneqq (f_1, \dotsc, f_k, f_{k+1} , \dotsc, f_n) $ die Dualbasis für $ V^\star $.\\
+			Es gilt
+			\[
+				\underbrace{f_{k+1} (\alpha_j) = 0 : \forall j = 1, \dotsc, k}_{f_{k + 1} \in S^0} \text{ und } \underbrace{f_{k + 1} (\alpha_{k+1} ) = 1}_{f_{k+1} \neq 0} \qed
+			\]
+	\end{description}
+	
+\end{subproof*}
+
+\begin{subcorollary}[Trennung Eigenschaft]
+	$ V $ n-dim $ K $-VR\\
+	Sei $ W \subsetneqq V $ ein Unterraum und $ \alpha \in V \setminus W $. Es existiert ein $ f \in V^\star $ so, dass:
+	\[
+		f(W) = \left\{ 0 \right\} \text{ und } f(\alpha) \neq 0
+	\]
+	
+\end{subcorollary}
+
+\begin{subproof*}[Korollar \ref{0.1.3}]
+	Wir werden aus Proposition \ref{0.1.2} (v) herleiten.\\
+	(v) ist äquivalent zur Aussage
+	\[
+		\forall S \subseteq V : \Span(S) \subsetneqq V \iff S^0 \neq \left\{ 0 \right\} 
+	\]
+	Sei nun $ S $ eine Basis für $ W $ dann ist $ \Span(S) \subsetneqq V $, es folgt $ S^0 \neq \left\{ 0 \right\}  $, d.h. $ \exists f \in V^\star, f \neq 0 \wedge \underbrace{f \in S^0}_{f \in W^0} $\\
+	Sei $ (\alpha_1, \dotsc, \alpha_k) $ eine geordnete Basis für $ W $.
+	$ \alpha \not\in \Span(\alpha_1, \dotsc, \alpha_k) $, also $ (\alpha_1, \dotsc, \alpha_k, \alpha) $ l.u. Ergänze zur Basis
+	\[
+		\mathcal{B} = \left( \alpha_1, \dotsc, \alpha_k, \alpha_{k+1} = \alpha, \dotsc, \alpha_n  \right) 
+	\]
+	Sei $ \mathcal{B}^\star = (f_1, \dotsc, f_k, f_{k+1}, \dotsc, f_n) $ Dualbasis. Setzte $ f \coloneqq f_{k+1}  $.\qed
+\end{subproof*}
+
+\begin{subtheorem}[Dimensionsformel für Annihilatoren]
+	Sei $ V $ ein n-dim $ K $-VR und $ W \subseteq V $ ein Unterraum\\
+	\textbf{Es gilt:}
+	\[
+		\dim W + \dim W^0 = \dim V
+	\]
+	
+\end{subtheorem}
+
+\begin{subproof*}[Satz \ref{0.1.4}]
+	Sei $ (\alpha_1, \dotsc, \alpha_k) $ eine geordnete Basis für $ W $.
+	Ergänze zu einer geordneten Basis
+	\[
+		\mathcal{B} = (\alpha, \dotsc, \alpha_k, \alpha = \alpha_{k+1} , \dotsc, \alpha_n)
+	\]
+	für $ V $. Sei
+	\[
+		\mathcal{B} ^\star = (f_1, \dotsc, f_k, f_{k+1} , \dotsc, f_n)
+	\]
+	die Dualbasis für $ V^\star $.\\
+	\textbf{Beh.} $ (f_{k+1} , \dotsc, f_n) $ eine Basis für $ W^0 $.\\
+	\textbf{Bew. der Beh.} bemerke dass $ \forall i = k+1, \dotsc, n $ ist $ f_i \in W^0 $, weil $ f_i(\alpha_j) = 0 $, wenn $ i \geq k + 1 $ und $ j \leq k $.\\
+	\textbf{Beweis von Satz \ref{0.1.4} (Fortsetzung)}\\
+	Nun ist $ \left\{ f_{k+1} , \dotsc, f_n \right\} \subseteq V^\star $ l.u. (weil Teil einer Basis). 
+	Also genügt es nun z.z.:
+	\[
+		\Span \left\{ f_{k+1} ,\dotsc, f_n \right\} = W^0,
+	\]
+	also sei $ f \in W^0 $. Es gilt (wegen (2) Charakteristik von Dualbasen), dass $ f = \sum_{i=1}^{n} f(\alpha_i) f_i $.
+	Da aber $ f \in W^0 $ und $ \alpha_1, \dotsc, \alpha_k \in W $ folgt $ f(\alpha_1) = \dotsc = f(\alpha_k) = 0 $. Also $ f = \sum_{i = k+1}^{n} f(\alpha_i) f_i $, also $ f \in \Span(f_{k+1} , \dotsc, f_n) $
+\end{subproof*}
+
+\begin{subcorollary*}[zum Trennungssatz]
+	\label{zumtrennungssatz}
+	 Seien $ W_1, W_2 \subseteq V $ Unterräume.\\
+	 \textbf{Es gilt:} $ W_1^0 = W_2^0 \iff W_1 = W_2 $ 
+\end{subcorollary*}
+
+\begin{subproof*}[Korollar \ref{zumtrennungssatz}]
+	\begin{description}
+		\item[``$ \impliedby  $''] trivial
+		\item[``$ \implies  $''] Zum Widerspruch\\
+			Sei $ \alpha \in W_2 \setminus W_1 $. Nach Trennungssatz $ \exists f \in V^\star $ so dass $ f(W_1) = 0 $ und $ f(\alpha) \neq 0 $, also $ f \in W_1^0 $, aber $ f \not\in W_2^0 $\qed
+	\end{description}
+\end{subproof*}
+
+%\setcounter{section}{1}
+\subsection{Berechnen von Annulatoren, Beziehung zu HGS}
+\begin{subexample}
+	$ V = \R ^5 $ $ S \coloneqq \left\{ \alpha_1, \alpha_2, \alpha_3, \alpha_4 \right\} \subseteq V $, wobei: $ \alpha_1 = (2, -2, 3, 4, -1), \alpha_2 = ( -1, 1, 2, 5, 2), \alpha_3 = (0, 0, -1, -2, 3), \alpha_4 = 1, -1, 2, 3, 0) $\\
+	Setze $ W \coloneqq \Span(S) $. Finde $ W^0 $ 
+
+	\textbf{Lösung:}\\
+	Wir wollen beschreiben $ f \in V^\star $ wofür gilt: $ f \in S^0 $, d.h. $ f(\alpha_1) = f(\alpha_2) = f(\alpha_3) = f(\alpha_4) = 0 $\\
+	Es gilt allgemein (s. Bsp. 22.3 LA I) für $ f \in V^\star $, $ \exists c_1, c_2, c_3, c_4, c_5 \in K $ s.d. $ \forall (x_1, x_2, \dotsc, x_5) \in \R ^5 :  f(x_1, x_2, \dotsc, x_5) = \sum_{j=1}^{5} c_j x_j $\\
+	Insbesondere $ f \in W^0 \iff c_1, \dotsc, c_5 $ erfüllen $ \sum_{j=1}^{5} A_{ij} cj = 0 \quad \forall 1 \leq i \leq 4 $, wobei $ A_{ij}  $ die Koeffizienten der Matrix
+	\[
+		\begin{pmatrix} 
+			2 & -2 & 3 & 4 & -1 \\
+			-1 & 1 & 2 & 5 & 2 \\
+			0 & 0 & -1 & -2 & 3 \\
+			1 & -1 & 2 & 3 & 0 \\
+		\end{pmatrix} ,
+	\]
+	d.h. Wir müssen HGS lösen und zwar
+	\[
+		A \begin{pmatrix} c_1\\c_2\\c_3\\c_4\\c_5 \end{pmatrix} = \begin{pmatrix} 0\\0\\0\\0\\0 \end{pmatrix} .
+	\]
+	Gauß-Eliminations-Verfahren $ \implies  $ r.Z.S.F:
+	\[
+		R = \begin{pmatrix} 
+			1 & -1 & 0 & -1 & 0 \\
+			0 & 0 & 1 & 2 & 0 \\
+			0 & 0 & 0 & 0 & 1 \\
+			0 & 0 & 0 & 0 & 0 \\
+			(c_1) & ~ & (c_3) & ~ & (c_5)\\
+		\end{pmatrix} 
+	\]
+	$ c_1, c_3, c_5 $ Hauptvariablen $ c_2, c_4 $ freie Variablen\\
+	Wir bekommen
+	\begin{align*}
+		c_1 - c_2 - c_4 &= 0 \\
+		c_3 + 2c_4 &= 0 \\
+		c_5 &= 0 \\
+	\end{align*}
+	Lösungsraum. Sezte $ c_2 \coloneqq a \in \R , c_4 \coloneqq b \in \R $\\
+	$ c_1 = a + b, c_3 = -2b, c_5 = 0 $ also einsetzen.\\
+	$ W^0 = \left\{ f : f(x_1, x_2, x_3, x_4, x_5) = (a+b)x_1 + ax_2 - 2bx_3 + bx_4 : a, b \in \R  \right\}  $
+\end{subexample}
+
+\subsection*{0.2~Bi-Dualraum}
+\addcontentsline{toc}{subsection}{0.2~~~Bi-Dualraum}
+Als Motivation, wollen wir die folgenden Fragen betrachten:
+\begin{enumerate}[label=(\arabic*)]
+	\item $ V \to V^\star, \mathcal{B} \mapsto \mathcal{B}^\star  $\\
+		sie ist die Umkehrung? Genauer:\\
+		Sei $ \mathbb{B} $ eine geordnete Basis für $ V^\star $, gibt es eine geordnete $ \mathcal{B}  $ für $ V $ s.d. $ \mathcal{B} ^\star = \mathbb{B} $?
+	\item $ V \to V^\star, W \mapsto W^0 $ Wie ist die Umkehrung= Genauer formuliert:\\
+		Sei $ U $ ein Unterraum von $ V^\star  $, gibt es ein Unterraum $ W $ von $ V $ so dass $ W^0 = U $?
+\end{enumerate}
+
+\textbf{Schlüssel:} wir arbeiten mit $ \left( V^\star  \right) ^\star \coloneqq V^{\star \star }  $
+
+\setcounter{subenvironmentnumber}{1}
+\begin{subexample}
+	$ \dim(V^{\star \star }) = \dim(V^\star ) = \dim V  $
+\end{subexample}
+
+\begin{subdefinition}[Bi-Dualraum]
+	$ V^{\star \star }  $ heißt \textbf{Bidualraum} zu $ V $.
+\end{subdefinition}
+
+\begin{subproposition}
+	Sei $ \alpha \in V $, $ \alpha $ induziert (kanonisch) eine lineare Funktionale $ L_\alpha \in V^{\star \star }  $ wie folgt
+	\[
+		L_{\alpha} : V^\star \to K
+	\]
+	definiert durch: $ L_{\alpha} (f) \coloneqq f(\alpha) \quad \forall f \in V^\star $ 
+\end{subproposition}
+
+\begin{subproof*}[Proposition \ref{0.2.4}]
+	Wir berechnen für $ \forall c \in K, f, g \in V^\star  $:\\
+	$ L_{\alpha} (cf + g) = (cf + g)(\alpha) = cf(\alpha) + g(\alpha) = c L_{\alpha} (f) + L_{\alpha} (g) $.\qed
+\end{subproof*}
+
+\begin{subtheorem}
+	Die Abbildung $ \chi : V \to V^{\star \star } , \alpha \mapsto L_{\alpha}  $ definiert eine (kanonische) Isomorphie.
+\end{subtheorem}
+
+\begin{subproof*}[Satz \ref{0.2.5}]
+	$ \lambda $ ist linear. Zu prüfen:\\
+	$ \chi(c\alpha + \beta) \overset{?}{=} c\lambda(\alpha)) + \lambda(\beta) $? $ \forall c \in K, \alpha, \beta \in V, f \in V^\star  $.\\
+	Wir berechnen:
+	\begin{align*}
+		[\lambda(c\alpha + \beta)](f) &= L_{c\alpha + \beta} (f) \\
+		~&= f(c\alpha + \beta) \\
+		~&= cf(\alpha) + f(\beta) \\
+		~&= cL_{\alpha} (f) + L_{\beta} (f) \\
+		~&= c\lambda(\alpha)(f) + \lambda(\beta)(f) \\
+		~&= [c\lambda(\alpha) + \lambda(\beta)](f)
+	\end{align*}
+	
+	Wir müssen noch zeigen dass $ \lambda $ bijektiv ist. Da aber $ \dim V = \dim V^{\star \star }  $ ist (folgt aus Satz 19.10 LA I)\\
+	es genügt zu zeigen: $ \lambda $ ist injektiv, d.h. z.z. dass $ \Kern(\lambda) = \left\{ 0 \right\}  $. Zum Widerspruch nehmen wir an $ \exists \alpha \in V $ s.d.:
+	\begin{align*}
+		\lambda(\alpha) = 0 \quad &\text{aber} \quad \alpha \neq 0 \\
+		L_\alpha \equiv 0 \quad &\text{aber} \quad \alpha \neq 0 
+	\end{align*}
+	Aber: $ \alpha \neq 0 \implies \left\{ \alpha \right\}  $ ist l.u. $ \implies \mathcal{B} = (\alpha_1 = \alpha, \dotsc, \alpha_n) $ eine geordnete Basis. Sei $ \mathcal{B}^\star  = (f_1, \dotsc, f_n) $ Dualbasis. Es gilt dann: $ f_1(\alpha) = f_1(\alpha_1) = 1 $, d.h. $ L_{\alpha} (f_1) = 1 \neq 0 $ Wiederspruch \qed
+\end{subproof*}
+
+\subsection{Vorlesung 3}
+\begin{subcorollary}
+	Sei $ L \in V^{\star \star }  $ bzw. Sei $ L $ eine lineare Funktionale auf $ V^\star  $.\\
+	$ \exists ! \alpha \in V $ s.d. $ L = L_{\alpha} $, d.h. s.d.:
+	\begin{equation}
+		\label{eq:0.3.1}
+		L(f) = f(\alpha) \quad \forall f \in V^\star.
+	\end{equation}
+	
+\end{subcorollary}
+
+\begin{subproof*}[Korollar \ref{0.3.1}]
+	Setze: $ \alpha \coloneqq \lambda^{-1} (L) $ \qed
+\end{subproof*}
+
+\begin{subcorollary}
+	Sei $ \mathbb{B} $ eine geordnete Basis für $ V^\star $. Dann gibt es eine geordnete Basis $ \mathcal{B}  $ für $ V $, so dass $ \mathcal{B} ^\star = \mathbb{B} $.
+\end{subcorollary}
+
+\begin{subproof*}[Korollar \ref{0.3.2}]
+	Setze $ \mathbb{B} = (f_1, \dotsc, f_n) $ und $ \mathbb{B}^\star  \coloneqq (L_1, \dotsc, L_n $ für $ V^{\star \star }  $ so dass $ L_i (f_j) = \delta_{ij}  $ 
+\end{subproof*}
+
+Korollar \ref{0.3.1} liefert: $ \forall i : \exists ! \alpha_i \in V $ mit \eqref{eq:0.3.1} d.h. $ L_{i} (f) = f(\alpha_i) \forall 1 \leq i \leq n, f\in V^\star  $ Insbesondere $ L_{i} (f_j) = f_j(\alpha_i) = \delta_{ij} \quad \forall 1 \leq i,j \leq n $. Setze $ \mathcal{B} \coloneqq (\alpha_1, \dotsc, \alpha_n). $\qed
+
+\begin{subexample}
+	$ E \subseteq V^\star  $\\
+	$ E^0 = \left\{ L \in \left( V^\star  \right) ^\star : \forall f \in E : L(f) = 0 \right\} $
+	Betrachte $ \lambda : V \to V^{\star \star } , \alpha \mapsto L_\alpha $
+	\begin{align*}
+		\lambda^{-1} (E^0) &= \left\{ \alpha \in V : \lambda(\alpha) \in E^0 \right\} \\
+		~&= \left\{ \alpha \in V : L_{\alpha} \in E^0 \right\} \\
+		~&= \left\{ \alpha \in V : \forall f \in E : L_{\alpha} = 0 \right\}  \\
+		~&= \left\{ \alpha \in V : \forall  f \in E : f(\alpha) = 0 \right\}  \\
+	\end{align*}
+\end{subexample}
+
+\begin{subtheorem}
+	Sei $ W \subseteq V $ Unterraum, dann gilt
+	\[
+		\lambda^{-1} (W^{00} ) = W
+	\]
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{0.3.4}]
+	\textbf{Dimensionsformel} für Annihilatoren (Satz \ref{0.1.4}) liefert
+	\[
+		\dim W + \dim W^0 = \dim V = \dim V^\star = \dim W^0 + \dim W^{00} 
+	\]
+	Daraus folgt $ \dim W = \dim W^{00} = \dim (\lambda^{-1} (W^{00} )) $\\
+	Es genügt zu zeigen: $ W \subseteq \lambda^{-1} (W^{00} ) $\\
+	Sei $ \alpha \in W $ beliebig aber fest, dann berechne $ \lambda(\alpha) = L_{\alpha}  $.
+	Zu zeigen: $ L_{\alpha} \in W^{00} =(W^0)^0 $, d.h. zu zeigen ist
+	\[
+		L_{\alpha} (f) = 0 \text{ für alle } f \in W^0
+	\]
+	Sei $ f \in W^0 $ beliebig aber fest, dann gilt $ L_{\alpha} (f) = f(\alpha) = 0 $ da $ f(W^0) $ und $ \alpha \in W $ \qed
+	Also wurde gezeigt, dass $ W $ ein Unterraum von $ \lambda^{-1} (W^{00} ) $ ist und 
+	\[
+		\dim W = \dim \lambda^{-1} (W^{00} ) \text{, also folgt } W = \lambda^{-1} (W^{00} )\qed
+	\]
+	
+\end{subproof*}
+
+\begin{subcorollary}
+	Sei $ U \subseteq V^\star , W \coloneqq \lambda^{-1} (U^0) \subseteq V $, dann gilt
+	\[
+		W^0 = U
+	\]
+\end{subcorollary}
+
+\begin{subproof*}[Korollar \ref{0.3.5} Dimensionsformel für Annihilatoren (Satz \ref{0.1.4})]
+	\[
+		\dim U + \dim^0 = \dim V^\star  = \dim V = \dim W + \dim W^0
+	\]
+	Bemerke $ \dim W = \dim \lambda^{-1} (U^0) = \dim U^0 $. Es folgt $ \dim U = \dim W^0 $.
+	Es genügt zu zeigen: $ U \subseteq W $\\
+	Bemerke
+	\begin{align*}
+		W &= \lambda^{-1} (U^0) \\
+		~ &= \left\{ \alpha \in V : \lambda(\alpha \in U^0 \right\}  \\
+		~ &= \left\{ \alpha \in V : L_{\alpha} \in U^0 \right\}  \\
+		~ &= \left\{ \alpha \in V : \forall f \in U : L_{\alpha} = 0 \right\}  \\
+		~ &= \left\{ \alpha \in V : \forall f \in U : f(\alpha) = 0 \right\} .
+	\end{align*}
+	Sei $ f \in U $ beliebig aber fest.
+	Zu zeigen $ f \in W^0 $, d.h. z.z. für alle $ \alpha \in W : f(\alpha) = 0 $\\
+	Sei $  \alpha \in W $ beliebig aber fest, dann gilt
+	\[
+		f(\alpha) = L_{\alpha} (f) = 0
+	\]
+	Also folgt $ U \subseteq  W^0 $ der gleichen Dimension, also $ U = W^0 $
+\end{subproof*}
+
+\subsection*{\textsc{Die Transponierte Abbildung}}
+Sei $ T : V \to W $ eine lineare Abbildung, dann induziert diese eine Abbildung $ T^{t} : W^\star  \to V^\star , g \mapsto g \circ T $\\
+\textbf{Behauptung:} $ T^{t}  $ ist linear.\\
+\textbf{Beweis:} Sei $ g_1, g_2 \in W^\star , c \in K $, dann gilt
+\begin{align*}
+	T^{t} (g_1 + c g_2) &= (g_1 + cg_2) \circ T \\
+	~&= g_1 \circ T + (cg_2) \circ T \\
+	~&= g_1 \circ T + c (g_2 \circ T)  \\
+	~&= T^{t} (g_1) + cT^{t} (g_2)
+\end{align*}
+
+\textbf{Definition:} Die lineare Abbildung $ T^{t}  $ wird die \textbf{transponierte Abbildung} zu $ T $ genannt
+
+\setcounter{subenvironmentnumber}{5}
+\begin{subtheorem}
+	Seien $ V, W $ endlich-dimensionale $ K $-VR und $ T $ eine lineare Abbildung, dann existiert eine eindeutige lineare Abbildung
+	\[
+		T^{t} : W ^\star \to V^\star \text{ s.d. } \forall \alpha \in V : \forall g \in W^\star  : \left( T^{t} (g) \right) (\alpha) = g(T(\alpha)) \qed
+	\]
+\end{subtheorem}
+
+\setcounter{subsection}{4}
+\setcounter{subenvironmentnumber}{1}
+\begin{subtheorem}
+	\begin{enumerate}[label=(\arabic*)]
+		\item $ \ker(T^{t} ) = (R_T)^0$
+		\item $ \Rang(T^{t} ) = \Rang(T ) $
+		\item $ R_{T^{t} } = (\ker(T))^0 $
+	\end{enumerate}
+\end{subtheorem}
+
+\begin{subproof*}[Satz \ref{0.4.2}]
+	\begin{enumerate}[label=(\arabic*)]
+		\item Es gilt
+			\begin{align*}
+				g \in \ker(T^{t} ) &\iff T^{t} (g) = 0\\
+				~&\iff g \circ T = 0 \\
+				~&\iff \forall \alpha \in V : g(T(\alpha)) = 0 \\
+				~&\iff g \in (R_T)^0
+			\end{align*}
+		\item Setze $ n \coloneqq  \dim V $ und $ m \coloneqq  \dim W $
+			Sei ferner $ r = \Rang(T) = \dim R_T $\\
+			Dimensionsformel für Annihilatoren (Satz \ref{0.1.4} liefert
+			\begin{align*}
+				~& \dim R_T + \dim (R_T)^0 = \dim W \\
+				\implies & r + \dim (R_T)^0 = m \\
+				\implies & \dim (R_T)^0 = m - r \\
+				\implies & \dim \ker T^{t} = m - r
+			\end{align*}
+			Nach dem Homorphiesatz (Satz 18.2) gilt für die lineare Abbildung $ T^{t} : W^\star  \to V^\star  $ schon
+			\[
+				\dim R_{T^t} = \dim W^\star  - \dim \ker T^t
+			\]
+			$ \implies \Rang(T^t) = \dim R_{T^t} = m - \dim \ker T^t = m - (m - r) = r = \Rang(T) $ 
+		\item Dimensionsformel für Annihilatoren (Satz \ref{0.1.4})
+			\begin{align*}
+				~ & \dim \ker T + \dim ( \ker T )^0 = \dim V \\
+				\implies & \dim (\ker T )^0 = \dim V - \dim \ker T = \dim R_T = \Rang T = \Rang T^t = \dim R_{T^t} 
+			\end{align*}
+			Es genügt daher zu zeigen, dass $ R_{T^t} \subseteq ( \ker T )^0 $\\
+			Sei daher $ f \in R_{T^t}  $ beliebig aber fest. Dann gilt für jedes $ \alpha \in \ker T $ schon $ f(\alpha) = T^t(g) (\alpha) = ( g \circ T ) (\alpha) = g(T(\alpha)) = g(0) = 0 $ somit folgt $ f \in ( \ker T )^0 $ \qed
+	\end{enumerate}
+\end{subproof*}
+
+\begin{subtheorem}
+	Seien $ V, W $ endlich-dimensionale $ K $-Vektorräume und eine lineare Abbildung $ T: V \to W $ mit transponierter Abbildung $ T^t: W^\star \to V^\star  $, seien ferner $ \mathcal{B}  $ eine geordnete Basis von $ V  $ mit Dualbasis $ \mathcal{B} ^\star  $ und $ \mathcal{B} ^\prime $ eine geordnete Basis von $ W $ mit Dualbasis $ (\mathcal{B} ^\prime)^\star  $. Dann gilt
+	\[
+		[T^t]_{(\mathcal{B} ^\prime)^\star , \mathcal{B}^\star } = [T]_{\mathcal{B} , \mathcal{B} ^\prime} ^t
+	\]
+\end{subtheorem}
+
+\begin{subproof*}[Satz \ref{0.4.3}]
+	Setze $ A \coloneqq  [T]_{\mathcal{B} , \mathcal{B} ^\prime} $ und $ B \coloneqq [T^t]_{(\mathcal{B}^\prime)^\star , \mathcal{B} ^\star  }  $\\
+	$ \mathcal{B} = (\alpha_1, \dotsc, \alpha_n), \mathcal{B}^\star  = (f_1, \dotsc, f_n) $\\
+	$ \mathcal{B} ^\prime = (\beta_1, \dotsc, \beta_m), (\mathcal{B} ^\prime)^\star (g_1, \dotsc, g_m) $\\
+	\textbf{Erinnerung:} $ T(\alpha_j) = \sum_{i = 1}^{m} A_{ij} \beta_i \quad \text{für } j = 1, \dotsc, n $\\
+	$ T^t(g_j) = \sum_{i = 1}^{n} B_{ij} f_i \quad \text{für } j = 1, \dotsc, m $\\
+	Für beliebiges $ f \in V^\star  $ gilt $ f = \sum_{i = 1}^{n} f(\alpha_i)f_i $ (Dualbasis)\\
+	Insbesondere ergibt sich damit für $ f \coloneqq  T^t(g_j) \in V^\star  $ schon
+	\[
+		\sum_{i = 1}^{n} B_{ij} f_i = T^t(g_j) = \sum_{i = 1}^{n} (T^t(g_j))(\alpha_i)f_i = \sum_{i = 1}^{n} A_{ji} f_i
+	\]
+	Wir berechnen ferner
+	\begin{align*}
+		(T^t(g_j))(\alpha_i) &= (g_j \circ T)(\alpha_i) \\
+		~ &= g_j(T(\alpha_j)) \\
+		~ &= g_j \left( \sum_{k=1}^{m} A_jk \beta_k \right)  \\
+		~ &= \sum_{k = 1}^{m} A_{jk} g_j (\beta_k)  \\
+		~ &= \sum_{k = 1}^{m} A_{ki} \delta_{jk}  \\
+		~ &= A_{ji}  \\
+	\end{align*}
+	Somit folgt, dass $ A_{ji} = B_{ij}  $ für alle $ i $ und $ j $. Damit ist $ B = A^t $
+	
+\end{subproof*}
+
+\textbf{Erinnerung:}\\
+Sei $ A \in \mat_{m \times n} (K) $ 
+\begin{enumerate}[label=(\roman*)]
+	\item $ \Sr(A) \coloneqq \dim \Span \text{Spalten von A} $
+	\item $ \Zr(A) \coloneqq \dim \Span \text{Zeilen von A} $
+\end{enumerate}
+
+\begin{subcorollary}
+	Sei $ A \in \mat_{m \times n} (K) $.
+	Es gilt: $ \Zr(A) = \Sr ( A ) $.
+\end{subcorollary}
+
+\begin{subproof*}[Korollar \ref{0.4.4}]
+	Sei $ \mathcal{E}_n  $ die Standardbasis für $ K^{n \times 1}  $ und $ \mathcal{E} _m $ die Standardbasis für $ K^{m \times 1}  $\\
+	Und betrachte die lineare Abbildung
+	\[
+		T_A : K^{n \times 1} \to K^{m \times 1} 
+	\]
+	definiert durch
+	\[
+		T_A \begin{pmatrix} \begin{bmatrix} x_1\\ \vdots \\ xn \end{bmatrix}  \end{pmatrix} = A \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix} 
+	\]
+	die $ \left[ T_A \right]_{\mathcal{E} _n, \mathcal{E} _m} = A $\\
+	Bemerke dass $ \Sr (A) = \Rang (T_A) $ weil $ R_{T_A} = \Span (\text{Spaltenvektoren von $ A $} ) $\\
+	Außerdem ist $ \Zr A = \Sr A^t $, weil die Zeilen von A sind die Spaöten von $ A^t $.
+	Es folgt nun aus Satz \ref{0.4.2} (1) (anwednem mit $ T \coloneqq T_A $)
+	\[
+		\Sr A = \Rang T_A = \Rang T^t = \Sr A^t = \Zr A
+	\]
+	(weil $ A^t = \left[ T_A \right]_{\mathcal{E} _m^\star , \mathcal{E} _n^\star }  $)\qed
+\end{subproof*}
+
+\begin{subdefinition}
+	Sei $ A \in \mat_{m \times n} (K) $. Definiere $ \Rang A \coloneqq \operatorname{r} A = \Sr A = \Zr A $ 
+\end{subdefinition}
+
+\subsection{Skript 5}
+\subsubsection{4 Quotientraum}
+\textbf{Ansatz:} $ K $ ist ein Körper, $ V $ ist ein $ K $-Vektorraum. Sei $ W \subseteq V $ ein Unterraum
+
+\begin{subdefinition}
+	Seien $ \alpha, \beta \in V $, wenn $ \alpha - \beta \in W $\\
+	Bezeichnung: $ \alpha \equiv \beta \mod W $. \textbf{$ \alpha $ ist kongruent zu $ \beta $ modulo $ W $}
+\end{subdefinition}
+
+\begin{sublemma}
+	Die Reltaion ``$ \alpha \equiv \beta \mod W $'' definiert eine Äquivalenzrelation auf $ V $.
+\end{sublemma}
+
+\begin{subproof*}[Lemma \ref{0.5.2}]
+	\begin{enumerate}[label=(\arabic*)]
+		\item $ \equiv $ ist reflexiv: $ \forall \alpha \in V $ gilt $ \alpha \equiv \alpha \mod W $, weil $ \alpha - \alpha = 0 \in W $ 
+		\item $ \equiv $ ist symmetrisch: $ \forall \alpha, \beta \in V $ gilt: $ \alpha \equiv \beta \mod W \implies  \beta \equiv \mod W $, weil $ (\alpha - \beta) \in W \implies -(\alpha - \beta) \in W \implies \beta - \alpha \in W $.
+		\item Seien $ \alpha \equiv \beta \mod W $ und $ \alpha, \beta, \gamma \in W $\\
+			$ \beta \equiv \gamma \mod W \implies  (\alpha - \beta) \in W $ und $ (\beta - \gamma) \in W \implies (\alpha - \beta) + (\beta - \gamma) = \alpha - \gamma \in W \implies  \alpha \equiv \gamma \mod W $ 
+	\end{enumerate}
+	Also ist $ \equiv $ transitiv \qed
+\end{subproof*}
+
+\begin{subdefinition}
+	Sei $ \alpha \in V $. Die \textbf{Restklasse} von $ \alpha \mod W $, oder auch \textbf{Nebenklasse} von $ \alpha \mod W $ ist die Äquivalenzklasse von $ \alpha $ bzgl der Äquivalenzrelation ``$ \equiv \mod W $''. Das heißt
+	\[
+		[\alpha]_W \coloneqq \left\{ \beta \in V : \alpha \equiv \beta \mod W \right\} .
+	\]
+	
+\end{subdefinition}
+
+\textbf{Bemerkung:} ($ \beta - \alpha \in W \implies \beta - \alpha = w \in W \implies \beta = \alpha + w $ für $ w \in W $)
+\[
+	[\alpha]_W = \left\{ \alpha + w : w \in W \right\} 
+\]
+
+\textbf{Bezeichnung:} Wir schreiben auch $ \alpha + W $ für die $ [\alpha]_W $. 
+
+\begin{subdefinition}
+	Bezeichne mit $ V / W $ Die Menge aller Nebenklassen $ \mod W $, d.h.
+	\[
+		V / W = \left\{ [\alpha]_W : \alpha \in V \right\} 
+	\]
+	$ V / W $ heißt: $ V $ modulo $ W $ 
+\end{subdefinition}
+
+Auf diese Menge $ V / W $ wollen wir jetzt eine $ K $-Vektorraum Struktur erklären
+
+\begin{subdefinition}
+	\begin{enumerate}[label=(\arabic*)]
+		\item Sei $ [\alpha]_W $ die Nebenklasse von $ \alpha \in V $. Ein Representant der Nebenklasse ist 
+			\[ \beta \in [\alpha]_W \]
+			(Bemerke: $ [\beta]_W = [\alpha]_W $ gdw. $ \alpha \in [\beta]_W $ gdw. $ \beta \in [\alpha]_W $.
+		\item Wir definieren Verknüpfung
+			\[
+				+ : V / W \times V / W \to V / W
+			\]
+			Seien $ \alpha_1 + W, \alpha_2 + W \in V / W $ definiere $ (\alpha_1 + W) + (\alpha_2 + W) \coloneqq (\underbrace{\alpha_1 + \alpha_2}_{\in V}) + W $ 
+			Wir definieren eine Skalarmultiplikation, Verknüpfung
+			\[
+				K \times ( V / W ) \to ( V / W )
+			\]
+			$ \forall c \in K, \forall \alpha \in V  $ definiere $ c(\alpha + W) \coloneqq (\underbrace{c\alpha}_{\in V}) + W $.
+	\end{enumerate}
+\end{subdefinition}
+
+\begin{sublemma}
+	Die Verknüpfungen (in Def \ref{0.5.5}) sind wohldefiniert unabhängig der Wahl der Repräsentanten, d.h. 
+	\begin{enumerate}[label=(\alph*)]
+		\item $ \alpha \equiv \alpha^\prime \mod W $ und $ \beta \equiv \beta^\prime \mod W \implies \alpha + \beta \equiv \alpha^\prime + \beta^\prime \mod W $ 
+		\item $ \alpha \equiv \alpha^\prime \mod W $ und $ c \in K $, $ c \alpha \equiv c\alpha^\prime \mod W $
+	\end{enumerate}
+\end{sublemma}
+
+\begin{subproof*}[Lemma \ref{0.5.6}]
+	\begin{enumerate}[label=(\alph*)]
+		\item $ \alpha - \alpha^\prime \in W $ und $ \beta - \beta^\prime \in W \implies (\alpha - \alpha^{ \prime  } ) + ( \beta - \beta^{ \prime  } ) \in W $, also $ (\alpha + \beta) - (\alpha^\prime + \beta^\prime ) \in W $ \\
+			$ \alpha + \beta \equiv \alpha^\prime + \beta^\prime \mod W $.
+		\item $ \alpha - \alpha^\prime \in W \implies  c(\alpha - \alpha^\prime ) \implies  c\alpha - c\alpha^\prime  \in W \implies c\alpha \equiv c\alpha^\prime \mod W $\qed
+	\end{enumerate}
+\end{subproof*}
+
+\begin{subtheorem}
+	Die Menge $ V / W $, versehen mit Verknüpfungen ist ein $ K $-Vektorraum.
+\end{subtheorem}
+
+\begin{subproof}[Satz \ref{0.5.7}]
+	Ü.A. Zum Beweis bemerke dass:\\
+	nehme $ 0_{V / W} \coloneqq [0_V]_W $\\
+	Für additive Inverse: $ -\left( [\alpha]_W \right) = [-\alpha]_W $
+\end{subproof}
+
+\begin{subdefinition*}
+	$ (V / W, +_{V / W} , \cdot _K) $ ist der \textbf{Quotiontenraum} von $ V $ modulo $ W $ 
+\end{subdefinition*}
+
+\textbf{Bezeichnung:} $ \alpha + W \coloneqq \overline{\alpha}  $ falls $ W $ klar im Ansatz ist\\
+\textbf{Begründung:} die Schreibweise der Verknüpfungen wird einfacher: $ \overline{\alpha_1} + \overline{\alpha_2} = \overline{\alpha_1 + \alpha_2} \quad \forall \alpha_1, \alpha_2 \in V $
+$ \forall \alpha, \alpha_1, \alpha_2 \in V, \forall c \in K: c \overline{\alpha} = \overline{c\alpha}  $
+
+\begin{subtheorem}[Die kanonische Projektion]
+	Die Abbildung
+	\[
+		\pi _W : V \to V / W
+	\]
+	definiert durch 
+	\[
+		\forall \alpha \in V : \pi _W(\alpha) \coloneqq  \overline{\alpha} 
+	\]
+	ist eine surjektive lineare Transformation mit $ \Kern(\pi _W) = W $
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{0.5.9}]
+	Linearität?\\
+	Für $ \alpha_1, \alpha_2 \in V, c \in K: \pi _W(c\alpha_1 + \alpha_2) = \overline{c\alpha_1 + \alpha_2} = \overline{c\alpha_1} + \overline{\alpha_2} = c \overline{\alpha_1} + \overline{\alpha_2} = c \pi _W(\alpha_1) + \pi _W(\alpha_2) $\\
+	Surjektiv: Sei $ \overline{\alpha} \in V / W $, dann ist $ \pi _W(\alpha) = \overline{\alpha}  $. für $ \alpha \in V $\\
+	$ \Kern(\pi _W) $? Sei $ \alpha \in V, \alpha \in \Kern(\pi _W) \iff \pi _W(\alpha) = 0_{V / W} \iff \underbrace{\alpha + W}_{\overline{\alpha} } = W \iff \alpha \in W $
+\end{subproof*}
+
+\begin{subcorollary}
+	Es gilt: $ \dim W + \dim ( V / W ) = \dim V $
+\end{subcorollary}
+\begin{subproof*}[Korollar \ref{0.5.10}]
+	Folgt aus LAI Satz 18.2, (Dimensionssatz), Anwenden auf $ T = \pi _W $\qed
+\end{subproof*}
+
+\begin{subtheorem}[Homomorphiesatz für Vektorräume]
+	Seien $ V, Z $ K-VR und $ T: V \to Z $ eine lieare Transformation. Es gilt:
+	\[
+		V / \Kern(T) \overset{\overline{T} }{\simeq} R_T
+	\]
+	Genauer, betrachte die Abbildung $ \overline{T} : V / \Kern(T) \to R_T $ definiert durch $ \overline{T} (\overline{\alpha} ) \coloneqq T(\alpha) $ ist wohldefiniert, linear, injektiv und surjektiv
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{0.5.11}]
+	\begin{enumerate}[label=(\roman*)]
+		\item Seien $ \overline{\alpha} = \overline{\alpha^\prime }  $ für $ \alpha, \alpha^\prime \in V \implies T(\alpha)  = T(\alpha^\prime ) $?\\
+			Wir argumentieren
+			\begin{align*}
+				\overline{\alpha} = \overline{\alpha^\prime }  &\iff \alpha - \alpha^\prime \in \Kern(T) \\
+					  &\iff T(\alpha - \alpha^\prime ) = 0 \\
+					  &\iff T(\alpha) - T(\alpha^\prime ) = 0 \\
+					  &\iff T(\alpha = T(\alpha^\prime )
+			\end{align*}
+		\item $ \overline{T} (c \overline{\alpha_1} + \overline{\alpha_2} ) = c \overline{T} (\overline{\alpha_1} )+ \overline{T} (\overline{\alpha_2} ) $ (ÜB)
+		\item Sei $ T(\alpha) \in R_T $ für ein geegnetes $ \alpha \in V $. Es ist $ \overline{T} (\overline{\alpha} ) = T(\alpha) $ Also $ \overline{T}  $ ist surjektiv.
+		\item $ \overline{\alpha} \in \Kern(\overline{T} ) \iff \overline{T} (\overline{\alpha} ) = 0 \iff T(\alpha) = 0 \iff \alpha \in \Kern(T) $
+	\end{enumerate}
+\end{subproof*}
+
+\textbf{Erinnerung:} Seien $ W, W^\prime \subseteq V $ so dass
+\begin{enumerate}[label=(\roman*)]
+	\item $ V = W + W^\prime  $ und
+	\item $ W \cap W^\prime = \left\{ 0 \right\}  $.
+\end{enumerate}
+Dann ist $ V $ die \textbf{direkte Summe} von $ W $ und $ W^\prime  $, wir schreiben
+\[
+	V = W \oplus W^\prime 
+\]
+$ \forall v \in V \exists ! w \in W, w^\prime in W^\prime : v = w + w^\prime  $
+
+
+\begin{subcorollary}
+	Seien $ W, W^\prime  $ Unterräume, s. d. $ V = W \oplus W^\prime  $ Es gilt:
+	\[
+		\frac{ W \oplus W^\prime }{ W } \simeq W^\prime 
+	\]
+	
+\end{subcorollary}
+\begin{subproof*}[Korollar \ref{0.5.12}]
+	Definiere eine Abbildung $ P_W: V\to W^\prime  $ folgendermaßen: für $ v \in V $ schreibe $ v = w + w^\prime  $ für geeignete $ w \in W, w^\prime \in W^\prime  $, definiere
+	\[
+		P_{W^\prime } (v) \coloneqq w^\prime
+	\]
+	\textbf{Beh.} $ P_{W^\prime }  $ ist surjektiv. Sei $ w^\prime \in W^\prime  $, dann ist $ P_{W^\prime } (0 + w^\prime ) = w^\prime  $\\
+	\textbf{Beh.} $ \Kern(P_{W^\prime } ) = W $ weil $ v \in \Kern(P_{W^\prime } ) \iff v = w + 0 \iff v \in W $\\
+	Satz \ref{0.5.11} anwenden
+	\[
+		\frac{ W \oplus W^\prime }{ W } \simeq W^\prime \qed
+	\]
+\end{subproof*}
+
+\begin{subcorollary}
+	Sei $ W \subseteq V $ ein Unterraum. Es gilt:
+	\[
+		\left( V / W \right) ^* \simeq W^0
+	\]
+\end{subcorollary}
+\begin{subproof}[Korollar \ref{0.5.13}]
+	Setze $ T \coloneqq  \pi _W $ die kanonische Projektion $ T: V \to V / W $ Betrachte $ T^t: \left( V / W \right) ^*  \to V^* $\\
+	Wir wollen Satz \ref{0.4.2} anwenden, und bekommen
+	\[
+		R_{T^t} = \left( \Kern T \right) ^0 = W^0
+	\]
+	und
+	\[
+		\Kern T^t = \left( R_T \right) ^0 = \left( V / W \right) ^0 = \left\{ 0 \right\} 
+	\]
+	Also ist $ T^t: ( V / W )^* \overset{\sim}{\longrightarrow }W^0 $ linear, injektiv und surjektiv \qed
+\end{subproof}
+
+\begin{subcorollary}
+	Sei $ W \subseteq V $ Es gilt
+	\[
+		W^* \simeq V^* / W^0
+	\]
+\end{subcorollary}
+\begin{subproof}[Korollar \ref{0.5.14}]
+	Betrachte $ \Id: W \to V $ und dazu $ \Id^t: V^* \to W^* $\\
+	Satz \ref{0.4.2} anwenden: $ \Kern(\Id^t) = \left( R_{\Id}  \right) ^0 = W^0 $ und $ R_{\Id^t} = \left( \Kern(\Id) \right) ^0 = \left( \left\{ 0 \right\}  \right) ^0 = W^* $\qed
+\end{subproof}
+

@@ -1,0 +1,42 @@
+\documentclass[sectionformat = aufgabe]{gadsescript}
+
+\setsemester{Winter Semester 2023/2024}%
+\setuniversity{University of Konstanz}%
+\setfaculty{Faculty of Science\\(Mathematics and Statistics)}%
+\settitle{BMA}
+
+\begin{document}
+\maketitle
+\section{Beweismechanikaufgabe}
+\textbf{Beh.:} $ f: D \to \R , x \mapsto \frac{ 1 }{ x^2 }  $ 
+\begin{enumerate}[label=(\roman*)]
+	\item ist nicht gleichmäßig stetig in $ D = (0, 1) $ und
+	\item gleichmäßig stetig in $ D = (1, \infty) $.
+\end{enumerate}
+\begin{proof*}
+	\begin{enumerate}[label=(\roman*)]
+		\item z.z. $ \exists \varepsilon > 0 : \forall \delta > 0 : \exists x, x_0 \in D : \left| x - x_0 \right| < \delta \wedge \left| f(x) - f(x_0) \right| \geq \varepsilon  $.
+			Wähle $ \varepsilon < 1 $, sei $ \delta > 0 $, sei $ \R_{>0}  \ni a \coloneqq \min \left\{ \delta, 1 \right\} $ dann wähle $ x = \frac{ a }{ 2 } , x_0 \frac{ a }{ 3 } $ so, dass $ \left| x - x_0 \right| = \left| \frac{ 3a - 2a }{ 6 }  \right| = \frac{ a }{ 6 } < a \leq  \delta  $.\\
+			Aber es gilt
+			\[
+				\left| \frac{ 4 }{ a^2 } - \frac{ 9 }{ a^2 }  \right| = \frac{ 5 }{ a^2 } \geq 5 > 1 > \varepsilon \qed
+			\]
+			
+		\item z.z. $ \forall \varepsilon > 0 : \exists \delta > 0 : \forall x, x_0 \in D : \left| x - x_0 \right| < \delta \implies \left| f(x) - f(x_0) \right| < \varepsilon  $.
+			Sei $ \varepsilon > 0 $ gegeben, wähle $ \delta = \frac{ \varepsilon }{ 4 }  $, dann gilt für alle $ x, x_0 \in D $, also $ 1 < x, x_0 $ mit $ \left| x - x_0 \right| < \delta $:
+			\begin{align*}
+				\left| \frac{ 1 }{ x^2 } - \frac{ 1 }{ x_0^2 }  \right| &= \left| \frac{x_0^2 - x^2}{ x^2x_0^2 }  \right|  \\
+				~&= \left| \frac{ ( x_0 - x) \cdot (x_0 + x) }{ x^2x_0^2 }  \right| \\
+				~&= \left| (x_0 - x) \right| \cdot \left| \frac{ x_0 + x }{ x^2x_0^2 }  \right| \\
+				~&\leq  \delta \cdot \left| \frac{ x_0 }{ x^2x_0^2 } + \frac{ x }{ x^2x_0^2 } \right| \quad \mid \quad \text{Da } 1 < x < x^2, 1 < x_0 < x_0^2\\
+				~&\leq  \delta \cdot \left| \frac{ x_0 }{ x_0 } + \frac{ x }{ x } \right| \\
+				~&= 2 \delta \\
+				~&= \frac{ \varepsilon }{ 2 }  \\
+				~&< \varepsilon \\
+			\end{align*}
+	\end{enumerate}
+	
+\end{proof*}
+
+
+\end{document}

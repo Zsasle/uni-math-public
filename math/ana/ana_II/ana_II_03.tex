@@ -1,0 +1,166 @@
+\section{Kurven}
+
+\begin{definition}
+	Sei $ I \subset \R  $ ein Intervall.
+	Eine (steige/stetig diffbare) \textbf{Kurve} ist eine (\%) Abbildung $ f : (f_1, \dotsc, f_n) : I \to \R ^n $. Hierbei bedeutet stetig/stetig differenzierbar, dass es die einzelnen Komponentenfunktionen $ f_i $ sind. Wir nennen $ \Spur(f) \coloneqq \left\{ f(t) : t \in I \right\}  $ die \textbf{Spur der Kurve}.
+\end{definition}
+
+\begin{example}
+	$ f : [0, 2 \pi ] \ni t \mapsto \underbrace{\begin{pmatrix} \cos (t) \\ \sin (t) \end{pmatrix} }_{\in \R ^2} $ 
+	\[
+		g: [0, 6 \pi ] \ni t \mapsto 
+		\begin{cases}
+			f, & [0, 2 \pi ]\\
+			\begin{pmatrix} 1 \\ 0 \end{pmatrix} , & [2 \pi , 4 \pi ]\\
+			f, & [4 \pi , 6 \pi ]
+		\end{cases}
+	\]
+	\[
+		h : [0, 2 \pi ] \ni t \mapsto \begin{pmatrix} \cos (-t) \\ \sin (-t) \end{pmatrix} = \begin{pmatrix} \cos (t) \\ - \sin (t) \end{pmatrix} 
+	\]
+	Sieht gleich aus, aber läuft in verschiedene Richtungen, und $ g $ macht wonky things
+\end{example}
+
+\begin{example}
+	Für $ v \in  \R ^n $ (Richtungsvektor) und $ a \in \R ^n $ (Aufhängepunkt) sei
+	\[
+		f : \R \ni t \mapsto a + tv \in \R ^n.
+	\]
+	Spur von $ f $ entspricht Gerade. $ [0, 1] \to  $ Spur entspricht Strecke
+\end{example}
+
+\begin{example}[Helicen]
+	\[
+		f : \R  \ni t \mapsto \begin{pmatrix} r \cos (t) \\ r \sin (t) \\ ct \end{pmatrix} \in \R ^3
+	\]
+\end{example}
+
+\begin{definition}
+	Für eine differenzierbare Kurve $ f : I \to \R ^n $ mit $ f = (f_1, \dotsc, f_n) $ heißt für $ t \in I $ 
+	\[
+		f ^\prime (t) = \left( f_1^\prime , \dotsc, f_n^\prime (t) \right) 
+	\]
+	\textbf{Tangentialvektor} an \textbf{$ f $ in $ t $}.
+	Ist $ f^\prime (t) \neq 0 $, so heißt $ \frac{ f^\prime (t) }{ \left\| f^\prime (t) \right\| _2 }  $ der \textbf{Einheitstangentialvektor.}
+\end{definition}
+
+\begin{example}
+	Kurven sind im Allgemeinen \textbf{nicht} injektiv. Wir sagen, $ x \in \R ^n $ ist \textbf{Doppelpunkt der Kurve}, falls es $ t_1, t_2 \in I $ gibt mit $ t_1 \neq t_2 $ und $ x = f(t_1) = f(t_2) $.\\
+	\textbf{Z.B.} $ f(t) = (t^2 - 1, t^3 - t) $ $ t \in \R  $ 
+\end{example}
+
+\begin{definition}[Rektifizierbare Kurven (Kurven endlicher Länge)]
+	Eine Kurve $ f : \underbrace{[a, b]}_{\text{kompakt} }\to \R  $ heißt \textbf{rektifizierbar} mit \textbf{Länge} $ L \geq 0 $, falls
+	\[
+		\forall  \varepsilon > 0 : \exists \delta > 0 : a = t_0 < \dotsb < t_k = b
+	\]
+	und
+	\[
+		\max_{i = 1, \dotsc, k} \left| t_i - t_{i-1}  \right| < \delta \implies \left| p_f (t_0, \dotsc, t_k) - L \right| < \varepsilon > 0.
+	\]
+	Hierbei:
+	\[
+		p_f(t_0, \dotsc, t_k) \coloneqq \sum_{i=1}^{k} \left\| f(t_i) - f(t_{i-1} ) \right\| _2
+	\]
+	(Länge des Polygonzugs)
+\end{definition}
+
+\begin{theorem}[Stetig differenzierbare Kurven und Rektifizierbarkeit]
+	Jede stetig differenzierbare Kurve $ f : \underbrace{[a, b]}_{\text{kompakt} } \to \R ^n $ ist \textbf{rektifizierbar} mit
+	\[
+		L_f = \int_{a}^{b} \left\| f^\prime (t) \right\| _2 \dd t.
+	\]
+	\begin{itemize}
+		\item $ f^\prime  = \left( f_1^\prime , \dotsc, f_n^\prime  \right)  $ $ \left\| f^\prime (t) \right\| _2 = \sqrt{\left| f_1^\prime (t) \right| ^2 + \dotsb + \left| f_n^\prime (t) \right| ^2}  $.
+	\end{itemize}
+\end{theorem}
+\begin{proof*}[Theorem \ref{3.8}]
+	\begin{description}
+		\item[Hilfsaussage (H1):] Für jedes $ \varepsilon > 0 : \exists \delta > 0 $, sodass
+			\[
+				\forall s, t \in [a, b], 0 < \left| s - t \right| < \delta \implies \left\| \frac{f(s) - f(t)}{ s - t }  - f^\prime (t) \right\|_2 < \varepsilon 
+			\]
+		\item[Bew. (H1):] Durch komponentenweise Betrachtung genügt der eindimensionale Fall.
+			Auf $ [a, b] $ ist dann $ f^\prime  $ gleichmäßig stetig.
+			Sei $ \varepsilon > 0 $.
+			Dann gibt es ein $ \delta > 0 $, sodass $ \left| \xi - t \right| < \delta \implies \left| f^\prime (\xi) - f^\prime (t) \right| < \varepsilon  $ $ \forall \xi, t \in [a, b] $ mit $ \left| \xi - t \right| < \delta $
+			Seien $ s, t \in [a, b] $ mit $ \left| s - t \right| < \delta $, dann ex. nach MWS ein
+			\[
+				\xi \in [ \min \left\{ s, t \right\} , \max \left\{ s, t \right\} ]
+			\]
+			mit
+			\[
+				f^\prime (\xi) = \frac{ f(s) - f(t) }{ s - t } 
+			\]
+			Insgesamt wegen $ \left| \xi - t \right| < \delta $ folgt
+			\[
+				\left\| \frac{ f(s) - f(t) }{ s - t } - f^\prime (t) \right\| _2 < \varepsilon 
+			\]
+	\end{description}
+	Sei $ f : [a, b] \to \R ^n $ stetig differenzierbar und $ \varepsilon > 0 $.
+	Nach MWS d. Int. gibt es ein $ \delta^\prime  > 0 $, sodass für jede Partition
+	\[
+		a = t_0 < \dotsb < t_k = b \quad \text{gilt} 
+	\]
+	\[
+		\max_{i = 0, \dotsc, k - 1} \left| t_{i + 1} - t_{i}  \right| \implies \left| \int_{a}^{b} \left\| f^\prime (t) \right\| _2 \dd t - \sum_{i=0}^{k - 1} \left\| f^\prime (t_i) \right\| _2(t_{i + 1} - t_i) \right| < \frac{ \varepsilon }{ 2 } 
+	\]
+	{\color{gadse-red}
+		\textbf{MWS:} $ \exists \xi \in [t_{i + 1} , t_{i} ] : \int_{t_i}^{t_{i + 1} } \left\| f^\prime (t) \right\| \dd t = \left\| f(\xi) \right\| _{2} (t_{i + 1} - t_i) $ 
+	}
+	Wähle $ \delta > 0 $ wie in H1 für $ \frac{ \varepsilon }{ 2(b - a) }  $ statt $ \varepsilon  $.
+	Setze $ \tilde \delta \coloneqq \min \{ \delta_1, \delta_2 \} $.
+	Dann gilt
+	\[
+		\max_{i} \left| t_{i + 1} - t_i \right| < \tilde \delta \implies \left\| f(t_{i + 1} ) - f(t_i) - f^\prime (t_i)(t_{i + 1} - t_i) \right\|_2 < \frac{ \varepsilon (t_{i  + 1} - t_i) }{ 2 (b - a) }
+	\]
+	Mit umgekehrter $\triangle$-Ungleichung
+	\[
+		\max_{i} \left| t_{i + 1} - t_i \right| < \tilde \delta \implies \left| \left\| f(t_{i + 1} ) - f(t_i) \right\|_2 - \left\|f^\prime (t_i)(t_{i + 1} - t_i)\right\|_2 \right| < \frac{ \varepsilon (t_{i  + 1} - t_i) }{ 2 (b - a) } \qed
+	\]
+\end{proof*}
+
+\begin{example}
+	Sei $ f : [0, 2 \pi ] \ni t \to (\cos (t), \sin (t)) \in \R ^2 $.
+	dann $ f^\prime (t) = (-\sin (t), \cos (t)) $ und damit
+	\[
+		L_{f} = \int_{0}^{2 \pi }\left\| f^\prime (t) \right\| _2 \dd t = \int_{0}^{2 \pi }1 \dd t = 2 \pi 
+	\]
+	\begin{tikzpicture}
+		\begin{axis}[
+			xmin= -1, xmax= 1,
+			ymin= -1, ymax = 1,
+			axis lines = middle,
+			height = 8cm,
+			width = 8cm,
+		]
+			\addplot[parametric, domain=0:30, samples=1000] function{cos(t), sin(t) };
+		\end{axis}
+	\end{tikzpicture}
+\end{example}
+
+\begin{example}
+	\[
+		f : [0, 2 \pi ] \ni t \mapsto \left( t - \sin (t), 1 - \cos (t) \right) \in \R ^2, f^\prime (t) = \left( 1 - \cos (t), \sin (t) \right) 
+	\]
+	Damit
+	\[
+		\left\| f^\prime (t) \right\| ^2 = \left( (1 - \cos (t))^2 + \sin ^2(t) \right) = 1 - 2 \cos (t) = 4 \sin ^2 \left( \frac{ t }{ 2 }  \right) 
+	\]
+	\[
+		L_f = \int_{0}^{2 \pi } \left\| f^\prime (t) \right\| \dd t = \int_{0}^{2 \pi } 2 \sin \left(  \frac{ t }{ 2 }  \right) \dd t = 8
+	\]
+	\begin{tikzpicture}
+		\begin{axis}[
+			xmin= 0, xmax= 10,
+			ymin= 0, ymax = 2,
+			axis lines = middle,
+			height = 8cm,
+			width = 8cm,
+		]
+			\addplot[parametric, domain=0:30, samples=1000] function{t - sin(t), 1 - cos(t) };
+		\end{axis}
+	\end{tikzpicture}
+\end{example}
+
+

@@ -1,0 +1,208 @@
+\section{Konsequenzen aus der Differenzierbarkeit}
+\subsection{Lokale Extrema und Mittelwertsatz}
+
+\begin{subdefinition}
+	Seien $ - \infty \leq  a < b < \infty $ und sei $ f: (a, b) \to \R  $ eine Funktion. $ f $ hat in $ x_0 \in (a, b) $ 
+	\begin{itemize}
+		\item ein lokales Maximum $ \iff \exists \varepsilon > 0 \forall y \in ( x_0 - \varepsilon , x_0 + \varepsilon ) : f(y) \leq f(x_0) $
+		\item ein lokales Minimum $ \iff \exists \varepsilon > 0 \forall y \in ( x_0 - \varepsilon , x_0 + \varepsilon ) : f(x_0) \leq f(y) $
+	\end{itemize}
+	
+\end{subdefinition}
+
+\begin{subtheorem}
+	Es habe $ f:(a,b) \to \R  $ in $ x_0 \in (a, b) $ ein lokales Extremum (i.e., lokales Maximum oder lokales Minimum). Ist $ f $ in $ x_0 $ differenzierbar, so \fbox{$ f^\prime(x_0) = 0 $}
+\end{subtheorem}
+
+\begin{subproof*}[Theorem \ref{12.1.2}]
+	\OE lokales Maximum. Dann $ \exists \varepsilon > 0 : \forall y \in (x_0 - \varepsilon , x_0 + \varepsilon ) : f(y) \leq f(x_0) $\\
+	$ x_0 + \varepsilon > y > x_0 \implies 0 \geq \frac{ f(y) - f(x_0) }{ y - x_0 } \to f^\prime(x_0 \implies  f^\prime(x_0) \leq 0 $.\\
+	$ x_0 - \varepsilon < y < x_0 \implies 0 \leq  \frac{ f(y) - f(x_0) }{ y - x_0 } \to f^\prime(x_0 \implies  f^\prime(x_0) \geq 0 $.\\
+	$ f^\prime(x) = 0 $.\qed
+\end{subproof*}
+
+\begin{subexample}
+	Ist $ f^\prime(x_0) = 0 $, so folgt nicht, dass $ x_0  $ lokales Extremum von $ f $! Betrachte $ f(x) = x^3 $ in $ x_0 = 0 $.
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[
+				xmin= -2, xmax= 2,
+				ymin= -4, ymax = 4,
+				axis lines = middle,
+			]
+				\addplot[domain=-2:2, samples=100]{x^3};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{kubisch}
+		\label{plot:12.1.3.1}
+	\end{figure}
+\end{subexample}
+
+\begin{subtheorem}[Rolle]
+	Seien $ -\infty<a<b<\infty $ und sei $ f : [a,b] \to \R  $ stetig auf $ (a, b) $ differenzierbar. Gilt $ f(a) = f(b) $, so $ \exists x_0 \in (a, b) : $ \fbox{$ f^\prime(x_0) = 0 $}
+\end{subtheorem}
+
+\begin{subproof*}[Theorem \ref{12.1.4}]
+	\OE $ f $ nicht konstant. $ f $ nimmt als stetige Funktion auf $ [a, b] $ sein Maximum und Minimum an. Da $ f $ nicht konstant, können nicht beide in $ \left\{ a, b \right\}  $ angenommen werden (da $ f(a) = f(b) $).\\
+	Also hat $ f $ in einem $ x_0 \in (a, b) $ ein lokales Extremum.
+	Damit nach Theorem \ref{12.1.2}: $ f^\prime(x_0) = 0 $\qed
+\end{subproof*}
+
+\begin{subtheorem}[Mittelwertsatz]
+	Seien $ -\infty < a < b < \infty, f : [a, b] \to \R  $ stetig und auf $ (a, b) $ differenzierbar. Dann
+	\[
+		\exists x_0 \in (a, b) : f^\prime(x_0) = \frac{ f(b) - f(a) }{ b - a } .
+	\]
+	
+\end{subtheorem}
+
+\begin{subproof}[Theorem \ref{12.1.5}]
+	Definiere
+	\[
+		F(x) \coloneqq f(x) - \frac{ f(b) - f(a) }{ b - a } (x - a).
+	\]
+	$ F $ ist auf $ [a, b] $ stetig und auf $ (a, b) $ differenzierbar.
+	\[
+		\left.\begin{matrix}
+				F(a) &= f(a),\\
+				F(b) &= f(a).\\
+			\end{matrix}
+		\right\} \overset{\text{Rolle} }{\implies }F^\prime(x_0) = 0 \implies f^\prime(x_0) = \frac{ f(b) - f(a) }{ b - a } 
+	\]
+\end{subproof}
+
+\begin{itemize}
+	\item $ f $ differenzierbar in $ (a, b) \implies f $ stetig
+	\item Lipschitz $ \iff \exists L \geq 0 : \forall x, y : \left| f(x) - f(y) \right| \leq L \left| x - y \right|  $.
+\end{itemize}
+
+\begin{subtheorem}
+	In der Situation von Theorem \ref{12.1.5} gebe es ein $ L \geq 0 $ mit $ \forall x \in (a, b) : \left| f^\prime(x_0) \right| \leq L $.
+	\begin{enumerate}[label=(\roman*)]
+		\item Dann ist $ f $ Lipschitz mit Lipschitzkonstante $ L $.
+		\item $ L = 0 \implies f $ konstanz. (Kriterium für Konstanz)
+	\end{enumerate}
+	
+\end{subtheorem}
+
+\begin{subproof*}
+	\begin{enumerate}[label=(\roman*)]
+		\item \OE $ a < x < y < b $. Dann, nach Mittelwertsatz, 
+			\[
+				\exists \xi \in (x, y) : \left| \frac{ f(y) - f(x) }{ y - x }  \right| = \left| f^\prime(\xi) \right| \leq L
+				\implies \left| f(y) - f(x) \right| \leq L \left| x - y \right| .
+			\]
+		\item $ L = 0 $ in (i) $ \implies \forall x, y \in [a, b]: f(x) = f(y) $.\qed
+	\end{enumerate}
+	
+\end{subproof*}
+
+\begin{subexample}
+	Der Mittelwertsatz gilt nur auf Intervallen (siehe dies via Theorem \ref{12.1.6}.
+	Betrachte $ f: [0,1] \cup [2, 3] \to  x \ni \begin{cases}
+		1, &\quad x \in [0, 1],\\
+		2, &\quad x \in [2, 3].
+	\end{cases} $ \\
+	Dann $ f $ stetig und auf $ (0, 1) \cup (2, 3) $ differenzierbar mit $ f^\prime(x) = 0 $ $ \forall x \in (0, 1) \cup (2, 3) $. Aber $ f $ ist nicht konstant.
+\end{subexample}
+
+\subsection{Monotonie}
+\textbf{Ziel:} Charakterisiere Monotonie via Ableitungen.
+
+\begin{subtheorem}
+	Sei $ f: [a, b] \to \R  $ stetig und auf $ (a, b) $ differenzierbar.
+	\begin{enumerate}[label=(\roman*)]
+		\item 
+			\[
+				\forall x \in (a, b) :
+				\left.
+				\begin{matrix}
+					f^\prime(x) &\geq 0\\
+					f^\prime(x) &> 0\\
+					f^\prime(x) &\leq  0\\
+					f^\prime(x) &< 0\\
+				\end{matrix}\right\}
+				\implies f
+				\left\{
+				\begin{matrix}
+					~&\text{monoton wachsend} \\
+					\text{streng } &\text{monoton wachsend} \\
+					~&\text{monoton fallend} \\
+					\text{streng } &\text{monoton fallend} \\
+				\end{matrix}\right..
+			\]
+		\item 
+			\[
+				f \quad
+				\left.
+				\begin{matrix}
+					\text{monoton wachsend} \\
+					\text{monoton fallend} \\
+				\end{matrix}\right\}
+				\implies \forall x \in (a,b):
+				\left\{
+				\begin{matrix}
+					f^\prime \geq 0\\
+					f^\prime \geq 0\\
+				\end{matrix}\right..
+			\]
+	\end{enumerate}
+\end{subtheorem}
+
+\begin{subexample}
+	$ f: x \mapsto x^3 $ streng monoton wachsend auf $ \R  $, aber $ f^\prime(0) = 0 $. (``(ii) scharf'')
+\end{subexample}
+
+\begin{subproof*}[Theorem \ref{12.2.1}]
+	\begin{enumerate}[label=(\roman*)]
+		\item Seien $ x, y \in  (a, b), x < y $. Nach Mittelwertsatz existiert $ \xi \in (x, y): 0 \leq  f^\prime(\xi) = \frac{ f(y) - f(x) }{ y - x } \implies f(x) \leq f(y) $.
+			Andere Fälle analog.
+		\item $ f $ differenzierbar und MW
+			\[
+				\implies \left( x < y \implies f(x) \leq f(y) \right) \implies 0 \leq  \frac{ f(y) - f(x) }{ y - x } \to f^\prime(x).\qed
+			\]
+	\end{enumerate}
+\end{subproof*}
+
+\begin{subtheorem}
+	Sei $ f : (a, b) \to \R  $ differenzierbar und in $ x \in (a, b) $ zweimal differenzierbar mit $ f^\prime(x) = 0 $ und $ f^{\prime\prime} (x) > 0 $ (bzw. $ f^{\prime\prime} < 0 $\\
+	Dann hat $ f $ in $ x $ ein lokales Minimum (bzw. lokales Maximum).
+	\hrule height 0.4pt depth 0pt width 2cm \relax
+	%\rule{2cm}{0.4pt}\\
+	\noindent Kurzum: $ f^{\prime\prime} \implies $ Linkskrümmung\\
+	\phantom{Kurzum: $$}$ f^{\prime\prime} \implies $ Rechtskrümmung.\\
+\end{subtheorem}
+
+\begin{subproof*}[Theorem \ref{12.2.3}]
+	Nach Vor.: 
+	\[
+		\lim_{y \to x} \frac{ f^\prime(y) - f^\prime(x) }{ y - x } = f^{\prime\prime} > 0.
+	\]
+	\[
+		\implies \exists 0 < \varepsilon < 1 : \forall \xi : \left| \xi - x \right| < \varepsilon  \implies \frac{ f^\prime }{ \xi - x } = \frac{ f^\prime(\xi) - f^\prime(x) }{ \xi - x } > 0.
+	\]
+	
+	\[
+		\implies \begin{Bmatrix}
+			\xi > x \implies f^\prime(\xi) > 0.\\
+			\xi < x \implies f^\prime(\xi) < 0.\\
+		\end{Bmatrix} 
+		\implies  \text{Monotonie} ???
+	\]
+	
+\end{subproof*}
+
+\begin{subdefinition}
+	Sei $ -\infty < a < b < \infty $, wir nennen $ f : (a, b) \to \R  $ \textbf{konvex}, falls
+	\[
+		\forall x, y \in (a, b) : \forall \lambda \in (0, 1) : f( \lambda x + ( 1 - \lambda ) y) \leq \lambda f(x) + ( 1 - \lambda ) f(y)
+	\]
+	
+\end{subdefinition}
+
+\begin{subtheorem}
+	Seien $ - \infty < a < b < \infty $ und $ f : (a, b) \to \R  $ eine zweimal differenzierbare Funktion, dann ist $ f $ genau dann konvex, wenn $ f^{\prime\prime}(x) \geq 0  \quad \forall x \in (a, b) $
+\end{subtheorem}
+
+

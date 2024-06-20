@@ -1,0 +1,111 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+
+%====================================================================
+% SETZEN SIE HIER DIE NUMMER DES ÜBUNGSBLATTES UND IHRE(N) NAMEN EIN
+% FILL IN THE SHEET NUMBER AND YOUR NAME(S)
+%====================================================================
+\newcommand{\sheetNum}{1} % Nummer des Übungsblatt / Sheet number
+\newcommand{\studentOne}{Vorname Nachname} % Name 1
+\newcommand{\studentTwo}{Vorname Nachname} % Name 2
+\newcommand{\studentThree}{Vorname Nachname} % Name 3
+%====================================================================
+
+\setkomafont{sectioning}{\normalfont\normalcolor\bfseries}
+\usepackage[left=2.5cm,right=2.5cm,top=2.0cm,bottom=2.5cm]{geometry}
+
+% Hyperlinks
+\usepackage{hyperref}
+
+% Pseudocode
+\usepackage[german,vlined,longend,ruled,linesnumbered]{algorithm2e}
+\SetKw{KwDownTo}{downto}
+\SetKw{KwAnd}{and}
+\SetKw{KwOr}{or}
+\DontPrintSemicolon
+
+% Grafiken
+\usepackage{graphicx}
+\graphicspath{{img/}}
+\usepackage{tikz}
+
+% Makros für Aufgaben und Teilaufgaben
+\usepackage{marginnote}
+\reversemarginpar
+\setlength{\parindent}{0cm}
+\newcommand{\task}[1]{\subsubsection*{#1}}
+\newcommand{\subtask}[1]{\marginnote{#1)}}
+
+
+\begin{document}
+
+%====================================================================
+\begin{small}
+\begin{minipage}{0.5 \linewidth}
+  Algorithmen und Datenstrukturen\\
+  Sommersemester 2024
+\end{minipage}
+\begin{minipage}{0.5\linewidth}
+  \begin{flushright}
+    \studentOne\\
+    \studentTwo\\
+    \studentThree
+  \end{flushright}
+\end{minipage}
+\end{small}
+\begin{center}
+\begin{sffamily}\Large\bfseries \sheetNum. Übungsblatt\end{sffamily}
+\end{center}
+%====================================================================
+
+
+\task{Aufgabe 1 - Pseudocode}
+Mit der \texttt{algorithm}-Umgebung aus dem Paket \href{https://www.ctan.org/pkg/algorithm2e}{algorithm2e} lässt sich wunderschöner Pseudocode schreiben.
+
+\begin{algorithm}[H]
+\caption{InsertionSort(int[] $A$)}
+\For{$j=2$ \KwTo $A.length$}{
+  $key = A[j]$\;
+  $i = j-1$\;
+  \tcp{Verschiebe die größeren Elemente aus $A[1\dots j-1]$ nach rechts}
+  \While{$i > 0$ \KwAnd $A[i] > key$}{
+    A[i+1] = A[i]\;
+    i = i-1
+  }
+  $A[i+1] = key$\;
+}
+\end{algorithm}
+
+\task{Aufgabe 2 - Grafiken}
+
+\subtask{a} \href{http://ipe.otfried.org/}{Ipe} ist ein Zeichenprogramm, welches Grafiken im PDF-Format erzeugt und es erlaubt \LaTeX{} einzubinden. Eine Beispieldatei, die sich mit Ipe editieren lässt, befindet sich im Ordner \texttt{img}.
+\begin{figure}[h]
+\centering
+\includegraphics{ipe-example}
+\caption{Eine mit Ipe erzeugte Grafik}
+\end{figure}
+
+\subtask{b} Mit Hilfe des Pakets \href{https://www.ctan.org/pkg/pgf}{TikZ} lassen sich Grafiken direkt im \LaTeX-Quellcode erzeugen. Hilfreiche Links zum Umgang mit TikZ sind
+\begin{itemize}
+  \item \url{http://cremeronline.com/LaTeX/minimaltikz.pdf} - Kurze Einführung
+  \item \url{http://www.texample.net/tikz/examples/} - Viele Beispiele
+  \item \url{http://mirrors.ctan.org/graphics/pgf/base/doc/pgfmanual.pdf} - Ausführliches Handbuch mit vielen Beispielen
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\tikzset{bul/.style={circle,fill=black,inner sep=1pt,draw=black}}
+\begin{tikzpicture}[scale=.4]
+ \draw (0,0)node[bul,label=below:{$t_2$}](t2){} (1,0)node[bul,label=right:{$s_1$}](s1){} (4,0)node[bul,label=left:{$s_2$}](s2){} (5,0)node[bul,label=above:{$t_1$}](t1){};
+ \draw (1.5,-1.5)node[bul](ll){} (3.5,-1.5)node[bul](lr){} (1.5,1.5)node[bul](ul){} (3.5,1.5)node[bul](ur){};
+ \draw [->](s1) to (ul);\draw [->] (s1) to (ll);
+ \draw [->](s2) to (ur);\draw [->] (s2) to (lr);
+ \draw [->](ul) to (t2);\draw [->] (ll) to (t2);
+ \draw [->](ur) to (t1);\draw [->] (lr) to (t1);
+ \draw [red,line width=2pt] (ul) -- (ur) (ll) -- (lr);
+\end{tikzpicture}
+\caption{Eine mit TikZ erzeugte Grafik}
+\end{figure}
+
+\end{document}

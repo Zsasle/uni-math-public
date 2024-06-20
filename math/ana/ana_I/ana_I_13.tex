@@ -1,0 +1,532 @@
+\section{Integrierbarkeit}
+\textbf{Ziel:} Berechnung von Flächeninhalten von Flächen unter Graphen\\
+\textbf{Vorgehensweise:}
+\begin{enumerate}[label=(\roman*)]
+	\item Erkläre für Funktionen, für die das anschaulich klar ist, einen Integralbegriff. Diese Funktionen $ \hat{=}  $ Treppenfunktion
+	\item Lässt sich eine Funktion \textbf{geeignet} durch Treppenfunktionen approximieren, so können wir durch Grenzübergang (+ Reduktion auf Treppenfunktion) für derartige \textbf{Regelfunktionen} einen Integralbergriff einführen
+\end{enumerate}
+
+\subsection{Das Regelintegral}
+\begin{subdefinition}
+	Seien $ -\infty < a < b \infty $. Wir nennen $ f: [a, b] \to \R  $ 
+	\begin{enumerate}[label=(\roman*)]
+		\item eine \textbf{Treppenfunktion}, falls es Punkte $ a \eqqcolon x_0 < x_1 < \dotsc < x_N \coloneqq b $ so, dass $ f $ auf jedem Teilintervall $ (x_j, x_{j+1} ), j = 0, \dotsc, N -1 $, konstanz gleich $ f_j \in \R  $ ist. Die Treppenfunktion auf $ [a, b] $ bilden einen reellen Vektorraum $ \mathcal{T} \left( [a, b] \right)  $.
+		\item \textbf{Regelfunktion}, falls es eine Folge $ \left( \varphi_n \right) \subset \mathcal{T} \left( [a, b] \right)  $ gibt mit 
+			\[
+				\lim_{n \to \infty} \left\| f - \varphi_n \right\|_{\infty, [a, b]} = 0
+			\]
+			(gleichmäßig Konvergent) Schreibweise: $ \mathcal{R} \left( [a, b] \right)  $
+	\end{enumerate}
+	
+\end{subdefinition}
+
+\begin{subexample}
+	\ldots
+\end{subexample}
+
+\begin{subdefinition}
+	Seien $ -\infty< a < b < \infty $ und $ f \in \mathcal{R} \left( [a, b] \right)  $. wir setzen
+	\[
+		\int_{a}^{b} f(x) dx \coloneqq \lim_{n \to \infty} \int_{a}^{b}\varphi_n(x) dx,
+	\]
+	wobei $ \left( \varphi_n \right) \subset \mathcal{T} \left( [a, b] \right)  $ mit $ \underbrace{\varphi_n \to f}_{\lim_{n \to \infty} \left\| \varphi_n - f \right\|_{\infty, [a, b]} = 0 } $ gleichmäßig auf $ [a, b] $.\\
+	Dies ist wegen folgendem REsultat \textbf{zulässig/wohldefiniert}.
+\end{subdefinition}
+
+\begin{sublemma}
+	Sei $ f \in \mathcal{R} ([a, b]) $. Sind $ \left( \varphi_n \right) , \left( \psi_n \right) \subset \mathcal{T} \left( [a, b] \right)  $ so, dass $ \left\| \varphi_n - f \right\|_{\infty, [a, b]} \to 0, \left\| \psi_n - f \right\|_{\infty, [a, b]} \to 0 $, so folgt
+	\[
+		\lim_{n \to \infty} \int_{a}^{b} \varphi_n(x) dx = \lim_{n \to \infty} \int_{a}^{b}\psi_n(x) dx.
+	\]
+	
+\end{sublemma}
+
+\begin{subproof*}[Lemma \ref{13.1.4}]
+		Sei $ \varepsilon > 0 $, dann $ \exists N \in \N : n \geq N : \left\| f - \varphi_n \right\|_{\infty, [a, b]} , \left\| f - \psi_n \right\|_{\infty, [a, b]} < \frac{ \varepsilon }{ 2(b - a) }  $.\\
+		Sei nun $ a = x_0 < \dotsc < x_k = b $ eine Zerlegung von $ [a, b] $, bezüglich der sowohl $ \phi_n $ als auch $ \psi_n $ Treppenfunktionen sind. Sei $ \varphi_n^{(j)}  $ beziehungsweise $ \psi_n^{(j)}  $ die Werte von $ \phi_n $ bzw. $ \psi_n $ auf $ (x_j, x_{j+1}  $. Damit
+		\begin{align*}
+			\left| \int_{a}^{b}\varphi_{n} (x) dx - \int_{a}^{b} \psi_n(x) dx \right| &\overset{\text{Def} }{=} \left| \sum_{j=0}^{k-1} \left(\phi_n^{(j)} - \psi_n^{(j)} \right) \left( x_{j+1} - x_j \right)   \right|  \\
+			~&\leq \sum_{j = 0}^{k - 1 } \underbrace{\left| \varphi_n^{(j)} - \psi_n^{(j)}  \right| }_{\leq \left\| \varphi_n - \psi_n \right\|_{\infty, [a, b]} } \left( x_{j + 1} - x_j \right)  \\
+			~&\leq \left\| \varphi_n - \psi_n \right\|_{\infty, [a, b]} \underbrace{\sum_{j = 0}^{k - 1} \left( x_{j+1} - x_j \right) }_{(b - a)} \\
+			~&\leq \left( \left\| \varphi_n - f + f - \psi_n \right\|_{\infty, [a, b]}  \right) (b-a) \\
+			~&\leq \left( \underbrace{\left\| \varphi_n - f \right\|_{\infty, [a, b]} }_{< \frac{ \varepsilon }{ 2(b - a) } } + \underbrace{\left\| \psi_n - f \right\|_{\infty, [a, b]}  }_{ < \frac{ \varepsilon }{ 2(b - a) } } \right)  \\
+			~&\leq \varepsilon  \qed
+		\end{align*}
+		$ f_j \in \R , f_j \cdot \left( x_{j+1} - x_j \right)  $
+\end{subproof*}
+
+\begin{subtheorem}
+	$ -\infty < a < b < \infty $. Das \textbf{Regelintegral}
+	\begin{enumerate}[label=(\roman*)]
+		\item ist \textbf{linear}: $ \forall f, g \in \mathcal{R} \left( [a, b] \right) : \forall \lambda, \mu \in \R : \int_{a}^{b} \lambda f(x) + \mu g(x) dx = \lambda \int_{a}^{b} f(x) dx + \mu \int_{a}^{b} g(x) dx $.
+		\item ist \textbf{monoton}: $ \forall f, g \in \mathcal{R} \left( [a, b] \right) : f \leq  g \implies \int_{a}^{b} f(x) dx \leq \int_{a}^{b} g(x) dx $.
+		\item erfüllt die \textbf{Standardabschätzung}: $ \forall f \in \mathcal{R} \left( [a, b] \right) : \left| \int_{a}^{b}f(x) dx \right| \leq \int_{a}^{b} \left| f(x) \right| dx \leq  \left( \sup_{x \in [a, b]} \left| f(x) \right|  \right) (b - a) $.
+	\end{enumerate}
+	
+\end{subtheorem}
+
+\begin{subproof*}[Theorem \ref{13.1.5}]
+	$ f, g \in \mathcal{R} \left( [a, b] \right) , (\varphi_n) , (\psi_n) \subset \mathcal{T} ([a, b]): \left\| \varphi_n - f \right\| _{\infty, [a, b]} \to 0, \left\| \psi_n - g \right\| _{\infty, [a, b]} \to 0 $.
+	Dann: $ (\lambda \varphi_{n} + \mu \psi_n) \subset \mathcal{T} ([a, b]) $ und
+	$ \left\| \left( \lambda f(x) + \mu g(x) \right) - \left( \lambda \varphi_n(x) + \mu \psi_n(x) \right)  \right\|_{\infty, [a, b]} \to 0, n \to \infty $.
+	Nach Lemma \ref{13.1.4}:
+	\begin{align*}
+		\int_{a}^{b} \lambda f(x) + \mu g(x) dx &= \lim_{n \to \infty} \int_{a}^{b} \lambda \varphi_n(x) + \mu \psi_n(x) \\
+		~&= \lambda \lim_{n \to \infty} \int_{a}^{b} \varphi_n(x) dx + \mu \lim_{n \to \infty} \int_{a}^{b} \psi_n(x) dx \\
+		~&= \lambda \int_{a}^{b} f(x) dx + \mu \int_{a}^{b} g(x) dx. \qed
+	\end{align*}
+\end{subproof*}
+
+\begin{subtheorem}
+	Seien $ -\infty < a < b < \infty $ und $ f: [a, b] \to \R  $ stetig. Dann
+	\[
+		\forall \varepsilon > 0 : \exists  f_{\varepsilon } , f^{\varepsilon } \in \mathcal{T} ([a, b]): f_{\varepsilon }  \leq  f \leq  f^{\varepsilon } \& \left\| f^{\varepsilon } - f_{\varepsilon }  \right\| _{\infty, [a, b]} < \varepsilon 
+	\]
+	
+\end{subtheorem}
+
+\begin{subproof*}[Theorem \ref{13.1.6}]
+	$ f $ gleichmäßig stetig, da $ f $, stetig auf Kompaktum. Ist $ \varepsilon > 0 $ gegeben, so $ \exists \delta > 0: \left| x - < \right| < \delta \implies \left| f(x) - f(y) \right| < \varepsilon  $. Sei $ N \in \N  $ so groß, dass $ \frac{ b - a }{ N } < \delta $. Setze
+	\[
+		s_k^{+} \coloneqq \sup \left\{ f(x): x \in [ a + \frac{ k }{ N } (b - a), a + \frac{k+1}{ N } (b - a) \right\} , k \in \left\{ 0, \dotsc, N - 1 \right\},
+	\]
+	\[
+		s_k^{-} \coloneqq \inf \left\{ f(x): x \in [ a + \frac{ k }{ N } (b - a), a + \frac{k+1}{ N } (b - a) \right\} , k \in \left\{ 0, \dotsc, N - 1 \right\}.
+	\]
+	Sei $ f^{\varepsilon } $: Auf $ k $-tem Teilintervall $ \hat{=} s_k^{+}  $, 
+	$ f_{\varepsilon } $: Auf $ k $-tem Teilintervall $ \hat{=} s_k^{-}  $\\
+	$ \implies \left\| f^{\varepsilon } - f_{\varepsilon } \right\|_{\infty, [a, b]} < 2 \varepsilon   $.\\
+	Nuun beachte $ f_{\varepsilon } \leq f \leq f^{\varepsilon }  $.
+\end{subproof*}
+
+\subsection{Hauptsatz der Differenzial- und Integralrechung}
+\textbf{Ziel}: Integration und Differentiation verhatlen sich in gewissem Sinne invers zueinander
+
+\begin{subtheorem}[MWS der Integralrechung]
+	Seien $ -\infty < a < b < \infty $ und sei $ \omega \in \mathcal{R} ([a, b]) $ mit $ \omega \geq 0 $. Dann existieren für jede stetige Funktion $ f: [a, b] \to \R  $ ein $ x_0 \in [a, b] $ mit
+	\[
+		\int_{a}^{b} f(x) \omega(x) dx = f(x_0) \int_{a}^{b}\omega(x_0) dx.
+	\]
+	Setzen wir $ \omega = 1 $, so existiert also ein $ x_0 \in [a, b] $:
+	\[
+		\int_{a}^{b} f(x) dx = f(x_0) (b-a).
+	\]
+	
+\end{subtheorem}
+
+\begin{subproof*}[Theorem \ref{13.2.1}]
+	$ f $ stetig auf Kompaktum $ [a, b] \implies f $ nimmt auf $ [a, b] $ Minumum $ m $ und Maximum $ M $ an $ \implies \forall x \in [a, b] : m \leq  f(x) \leq  M $. \\
+	$ \overset{\omega \geq 0}{\implies } \forall x \in [a, b]: m \omega(x) \leq  f(x) \omega(x) \leq  M \omega(x) $.\\
+	$ \overset{\ref{13.1.5}}{\implies }  m \int_{a}^{b} \omega(x) dx \leq  \int_{a}^{b} f(x) \omega(x) dx \leq M \int_{a}^{b} \omega(x) dx $\\
+	$ \overset{\text{ZWS} }{\implies } \exists t \in [m, M] \int_{a}^{b} f(x) \omega(x) dx = t \int_{a}^{b} \omega(x) $ Zwischenwertsatz auf $ t \mapsto t \int_{a}^{b} \omega(x) dx $\\
+	$ \overset{\text{ZWS} }{\implies } $ schreibe $ t = f(x_0) : \int_{a}^{b} f(x) \omega(x) dx = f(x_0) \int_{a}^{b} \omega(x) dx $
+\end{subproof*}
+
+\begin{subtheorem}[Hauptsatz der Differenzial- und Integralrechnung]
+	Sei $ - \infty < a < b < \infty $. Ist $ f: [a, b] \to \R  $ stetig, so ist die Funktion
+	\[
+		F:[a, b] \to \R, x \mapsto \int_{a}^{x} f(t) dt
+	\]
+	auf $ [a, b] $ differenzierbar mit $ F^{\prime} = f $.
+\end{subtheorem}
+
+\begin{subproof*}[Theorem \ref{13.2.2}]
+	Sei \OE $ x \in (a, b) $.
+	Seien $ h_1, h_2 > 0 $ mit $ a \leq x - h_2 \leq x \leq x + h_1 \leq b $. Dann existieren nach Mittelwertsatz der Integralrechnung $ \xi_{h_1} \in [x, x + h_1] $ und $ \xi_{h_2} \in [x - h_2, x] $, sodass
+	\[
+		F(x + h_1) - F(x) = \int_{x}^{x + h_1} f(t) dt \overset{\text{MWS der Int.} }{=} h_1 f(\xi_{h_1} ), 
+	\]
+	also
+	\[
+		\frac{ F(x + h_1) - F(x) }{ h_1 } = f(\xi_{h_2})
+	\]
+	\[
+		F(x - h_2) - F(x) = \int_{x - h_2}^{x} f(t) dt = h_2 f(\xi_{h_2} , 
+	\]
+	also
+	\[
+		\frac{ F(x - h_2) - F(x) }{ h_2 } = f(\xi_{h_2} )
+	\]
+	Nun ist
+	\[
+		\lim_{h_1 \to 0} \xi_{h_1} = \lim_{h_2 \to 0} \xi_{h_2} = x.
+	\]
+	Da $ f $ stetig ist, folgt
+	\[
+		\lim_{h_1 \to 0} f(\xi_{h_1} ) = \lim_{h_2 \to 0} f(\xi_{h_2} ) = f(x).
+	\]
+	Daraus folgt
+	\[
+		\frac{ F(x + h_1) - F(x) }{ h_1 } = f(\xi_{h_1} ) \overset{h_1 \searrow 0}{\to }f(x)
+	\]
+	und
+	\[
+		\frac{ F(x - h_2) - F(x) }{ h_2 } = f(\xi_{h_2} ) \overset{h_2 \searrow 0}{\to }f(x)
+	\]
+	Also $ F^{\prime} = f $.
+\end{subproof*}
+
+\begin{subdefinition}[Stammfunktion]
+	Sei $ f:[a, b] \to \R  $ stetig. Wir nennen eine differenezierbare Funktion $ F: [a, b] \to \R  $ eine \textbf{Stammfunktion} von $ f $, falls $ F^{\prime} = f $ gilt. Die Menge aller Stammfunktionen von $ f $ nennen wir \textbf{unbestimmtes Integral} und schreiben dafür
+	\[
+		\int f(x) dx.
+	\]
+	\textbf{Beobachtung:} Sind $ F_1, F_2: [a, b] \to \R  $ zwei Stammfunktionen, dann folgt $ \forall x \in [a, b] $:
+	\[
+		\left| F_1^{\prime} (x) F_2^{\prime} (x) \right| = \left| f(x) - f(x) \right| = 0.
+	\]
+	Also folgt $ F_1(x) = F_2(x) + C $ mit $ C \in \R  $.\\
+	\fbox{Zwei Stammfunktionen unterscheiden sich höchstens um eine additive Konstante}\\
+	Wir schreiben salopp
+	\[
+		\int f(x) = F(x) + c,
+	\]
+	wobei $ F $ eine Stammfunktion von $ f $ ist.
+\end{subdefinition}
+
+\begin{subcorollary}
+	Seien $ -\infty < a < b < \infty $ und $ F: [a, b] \to \R  $ eine Stammfunktion von $ f : [a, b] \to  \R  $. Dann gilt
+	\[
+		\int_{a}^{b}f(x) dx = \left[ F(x) \right]_{x = a}^{x = b} \coloneqq F(b) - F(a).
+	\]
+\end{subcorollary}
+
+\begin{subproof*}[Korollar \ref{13.2.4}]
+	Nach Theorem \ref{13.2.2} ist die Funktion
+	\[
+		G(x) \coloneqq \int_{a}^{x} f(t) dt \quad \text{für } x \in [a, b]
+	\]
+	eine Stammfunktoin von $ f $. Es existiert also ein $ c \in \R  $ mit
+	\[
+		F(x) = G(x) + c \quad \forall x \in [a, b]
+	\]
+	Also gilt
+	\[
+		\int_{a}^{b}f(t) = G(b) - G(a) = (G(b) + c) - (G(a) + c) = F(b) - F(a). \qed
+	\]
+\end{subproof*}
+
+\begin{subexample*}[Eine Sammlung an Stammfunktionen]
+	\begin{align*}
+		\int x^n dx &= \frac{ 1 }{ n + 1 } x^{n + 1} + c \\
+		\int \frac{ 1 }{ x } dx &= \log (x) + c \\
+		\int \exp (x) dx &= \exp (x) + c \\
+		\int \sin (x) dx &= - \cos (x) + c \\
+		\int \cos (x) dx &= \sin (x) + c \\
+	\end{align*}
+\end{subexample*}
+
+\begin{subexample*}
+	Sind $ F_1, F_2 $ Stammfunktionen von $ f_1, f_2 $, dann ist $ \forall \lambda_1, \lambda_2 \in \R : \lambda_1 F_1(x) + \lambda_2 F_2(x) $ eine Stammfunktion von $ \lambda_1 f_1(x) + \lambda_2 f_2(x) $.
+\end{subexample*}
+
+\begin{subexample}
+	Seien $ 0 \leq  a < b < \infty $. Wir berechnen von Hand
+	\[
+		\int_{a}^{b}x dx 
+	\]
+	$ f : x \mapsto x $ ist stetig, also Regelfunktion. Wir basteln Folge $ (\varphi_n)_n $ von Treppenfunktionen, die gleichmäßig gegen $ f $ konvergiert.
+
+	Für $ n \in \N  $ und $ j \in \left\{ 0, \dotsc, n - 1 \right\}  $ definieren wir
+	\[
+		I_j \coloneqq  \left( a + j \frac{ b - a }{ n } , a + (j + 1) \frac{b - a}{ n }  \right]
+	\]
+	und setzen 
+	\[
+		\varphi_n (x) \coloneqq  \sum_{j = 0}^{n - 1} \left( a + ( j + 1) \frac{b - a}{ n }  \right) \mathbf{1} _{I_j} (x)
+	\]
+	mit
+	\[
+		\mathbf{1}_{I_j} (x) = \begin{cases}
+			1 &\quad \text{für } x \in I_j\\
+			0 &\quad \text{sonst} 
+		\end{cases}
+	\]
+	Es gilt $ \left\| f - \varphi \right\| _{\infty, I_j} \leq \frac{ b - a }{ n }  $ \\
+	also $ U_j \to f $ gleichmäßig in $ [a, b] $.
+	Es gilt
+	\begin{align*}
+		\int_{a}^{b} \varphi_n (x) dx &= \sum_{j = 0}^{n} \left( a + ( j + 1) \frac{ b - a }{ n }  \right) \frac{ b - a }{ n } \\
+		~&= a \cdot \frac{ b - a }{ n } \cdot n + \left( \frac{ b- a}{ n }  \right) ^2 \sum_{j=1}^{n} j \\
+		~&= a(b-a) + \left( \frac{ b- a }{ n }  \right) ^2 \cdot \frac{ n ( n + 1 ) }{ 2 }  \\
+		~&= ab - a^2 + \frac{ 1 }{ 2 } ( b - a )^2 + \frac{( b - a )^2}{ 2n } \\
+		~&\overset{n\to \infty}{\to } ab - a^2 + \frac{ 1 }{ 2 } b^2 - ab + \frac{ a }{ 2 } a^2 = \frac{ 1 }{ 2 } ( b^2 - a^2 ) \\
+	\end{align*}
+
+	Mit Hauptsatz gilt auch
+	\[
+		\int_{a}^{b} f(x) dx = \left[ \frac{ 1 }{ 2 } x^2 \right]_{x = a}^{x = b} = \frac{ 1 }{ 2 } (b^2 - a^2).
+	\]
+	
+\end{subexample}
+
+\subsection{Integrationstechniken}
+\begin{subtheorem}[Partielle Integration und Substitutionsregel]
+	\begin{enumerate}[label=(\roman*)]
+		\item \textbf{Partielle Integration:} Sind $ f, g: [a, b] \to \R  $ zwei stetig differenzierbare Funktionen, so gilt 
+			\[
+				\int_{a}^{b}f(x) g^{\prime} (x) dx = \left[ f(x) g(x) \right]_{x = a} ^{x = b} - \int_{a}^{b} f^{\prime} (x) g(x) dx.
+			\]
+		\item \textbf{Substitutinsregel:} Ist $ f: [c, d] \to \R  $ stetig und $ \varphi : [a, b] \to [c, d] $ stetig differenzierbar, dann gilt
+			\[
+				\int_{\varphi(a)}^{\varphi(b)}f(x) dx = \int_{a}^{b}f(\varphi(x)) \varphi^{\prime} (x) dx.
+			\]
+			
+	\end{enumerate}
+	
+\end{subtheorem}
+
+\begin{subexample*}
+	\textbf{Typ 1: Phönix} Wollen
+	\[
+		\int \sin ^2(x) dx
+	\]
+	berechnen.
+	\begin{align*}
+		\int \sin ^2(x) dx &= \int \sin (x) \cdot \sin (x) dx \\
+		~&= - \int \sin (x) \cos ^{\prime} (x) dx \\
+		~&= - \sin (x) \cos (x) + \int \cos (x) \cos (x) dx \\
+		~& \color{gadse-red} \text{Holzweg: Letztes Integral mit partieller Integration:}  \\
+		~& \color{gadse-red} = - \sin (x) \cos (x) + \sin (x) \cos (x) + \int \sin (x) \sin (x) dx \\
+		~& \color{gadse-red} = \int \sin ^2(x)dx \\
+		~& \text{Stattdessen:} \\
+		~&= -\sin (x) \cos (x) + \int 1 - \sin ^2(x) dx \\
+		~&= - \sin (x) \cos (x) + x - \int \sin ^2 (x) dx \\
+	\end{align*}
+	Also
+	\[
+		\int \sin ^2(x) dx = \frac{ 1 }{ 2 } (x - \sin (x) \cos (x)) + c
+	\]
+	\textbf{Typ 2:}
+	\[
+		\int \log (x) dx = \int 1 \cdot \log (x) dx = x \log (x) - \int x \cdot \frac{ 1 }{ x } dx = x \log  (x) - x + c.
+	\]
+	
+\end{subexample*}
+
+\begin{subexample*}[Vertauschen der Integrationsgrenzen]
+	mit $ \varphi(t) = b - ( t - a ) $:
+	\[
+		\int_{b}^{a}f(x) dx = \int_{a}^{b} f(\varphi(t)) \varphi^{\prime} dt = - \int_{a}^{b} f( b + a - t ) dt
+	\]
+\end{subexample*}
+
+\[
+	\int_{-1}^{1} \sqrt{1 - x^2} dx = - \int_{\pi }^{0} \sqrt{1 - \cos ^2 (y)} \sin (y) dy = - \int_{\pi }^{0} \sin ^2(y)dy = \int_{0}^{\pi }\sin ^2 (y) dy = \frac{ \pi }{ 2 } 
+\]
+
+\begin{itemize}
+	\item 
+		\begin{align*}
+			\int \frac{dx}{ 1 - x^2 } \quad &\| \cos ^2(t) + \sin ^2(t) = 1 \\
+			~& x = \cos ^2(t)\\
+			~& \frac{ dx }{ dt } = - \sin (t) \\
+			= \int \frac{ - \sin (t) dt }{ \sqrt{1 - \cos ^2 (t)}  } &~\\
+			= - \int \frac{ \sin (t) }{ \sin (t) } dt &~\\
+			= - \int 1 dt &	~\\
+			= - t &~\\
+			= - \arccos (x) &~\\
+		\end{align*}
+		Vorzeichen hängt vom Intervall ab
+\end{itemize}
+
+\subsection{Uneigentliche Integrale \& die \mathsec{\Gamma}{Gamma}-Funktion}
+\textbf{Ziel:} Ausdehneun des Integrals/Regelintegrals auf nichtkompakte Intervalle z.B.
+\[
+	\int_{0}^{1} \frac{ dx }{ \sqrt{x}  } 
+\]
+$ f(x) = \frac{ 1 }{ \sqrt{x}  }  $ def. auf $ (0, 1] $
+
+\begin{enumerate}[label=(\Alph*)]
+	\item Eine Integrationsgrenze ist unendlich. Form
+		\[
+			 \int_{a}^{\infty} f(x) dx
+		\]
+		z.B. $ f(x) = \frac{ 1 }{ 1 + x^2 }  $
+\end{enumerate}
+
+\begin{subdefinition}
+	Sei $  a \in \R \& f: [a, \infty) \to \R  $ eine Funktion, die auf jedem Intervall $ [a, b] $ mit $ a < b < \infty $ regelintegrierbar ist. Falls 
+	\[
+		\lim_{b \to \infty} \int_{a}^{b} f(x) dx
+	\]
+	existiert, so heißt
+	\[
+		\int_{a}^{\infty}f(x) dx
+	\]
+	konvergent, und wir setzen
+	\[
+		\int_{a}^{\infty} f(x) = \lim_{b \to \infty} \int_{a}^{b}f(x)dx
+	\]
+	
+\end{subdefinition}
+
+\begin{subexample}
+	\[
+		\int_{1}^{\infty} \frac{dx}{ x^s } \text{ -- für welche $ s $ konvergent?} 
+	\]
+	Hierzu sei $ b > 1 $. Setze $ f(x) = x^{-s}  $. Diese Funktion hat Stammfunktion
+	\[
+		\int x^{-s} dx = \frac{ 1 }{ -s + 1 } x^{-s + 1} 
+	\]
+	falls $ s \neq 1 $, und sonst
+	\[
+		\int x^{-1} dx = \log (x).
+	\]
+	Zuerst $ s \neq 1 $. Dann
+	\begin{align*}
+		\int_{1}^{b}x^{-1} dx &= \left[ \frac{ 1 }{ -s + 1 } x^{-s + 1}  \right]_{x = 1} ^{x = b}  \\
+		~&= \frac{ 1 }{ -s + 1 } \left[ b^{-s+1} - 1 \right] \\
+		~&\text{( Für Konvergenz $ -s + 1 \leq 0 \implies 1 \leq s \implies 1 < s $ )}\\
+		~&\overset{b \to \infty}{\to } \frac{ 1 }{ 1 - s } (-1) = \frac{ 1 }{ s - 1 } 
+	\end{align*}
+	$ \overset{s > 1}{\implies } \int_{1}^{\infty} \frac{ dx }{ x^s } = \frac{ 1 }{ s - 1 }  $\\
+	Ist $ s = 1 $, so gilt $ \forall b > 1: $\\
+	\[
+		\int_{1}^{b} \frac{ dx }{ x } = \log (b) \overset{b \to \infty}{\to }\infty, \text{ keine Konvergenz} 
+	\]
+\end{subexample}
+
+\begin{enumerate}[label=(\Alph*)]
+	\setcounter{enumi}{1}
+	\item Integrand ist an einer Intervallgrenze undefiniert. z.B.:
+		\[
+			\int_{0}^{1} \frac{dx}{ \sqrt{x}  } 
+		\]
+\end{enumerate}
+
+\begin{subdefinition}
+	Sei $ f: (a, b] \to \R  $ eine auf jedem Intervall $ [a + \varepsilon , b] $ regelintegriebar ist. Falls $ \lim_{\varepsilon \searrow 0} \int_{a+\varepsilon }^{b} f(x) dx $ existiert, so heißt
+	\[
+		\int_{a}^{b} f(x) dx
+	\]
+	konvergent, und wir setzen
+	\[
+		\int_{a}^{b} f(x) dx = \lim_{\varepsilon \searrow 0} \int_{a + \varepsilon }^{b}f(x) dx
+	\]
+	
+\end{subdefinition}
+
+\begin{subexample}
+	\[
+		\int_{0}^{1} \frac{ dx }{ x^{s}  } 
+	\]
+	\begin{itemize}
+		\item $ s \neq 1 $. Dann
+			\[
+				\int \frac{ dx }{ x^{s}  } = \frac{ 1 }{ -s + 1 } x^{-s + 1} 
+			\]
+			\begin{align*}
+				\int_{0 + \varepsilon }^{1} \frac{dx}{ x^{s}  } &= \frac{ 1 }{ -s + 1 } \left[ x^{-s + 1}  \right]_{x = \varepsilon } ^{x = 1}  \\
+				~&= \frac{ 1 }{ -s + 1 } \left[ 1 - \varepsilon^{-s + 1}  \right] \\
+				~&\to \frac{ 1 }{ 1 - s } 
+			\end{align*}
+			
+	\end{itemize}
+	
+\end{subexample}
+
+\begin{enumerate}[label=(\Alph*)]
+	\setcounter{enumi}{2}
+	\item Beide Integraionsgrenzen kritisch
+\end{enumerate}
+
+\begin{subdefinition}
+	Sei $ f: (a, b) \to \R, a \in \R \cup \left\{ -\infty \right\} \& b \in \R \cup {+\infty} $, auf jedem Kompaktum $ [c, d] \subset (a, b) $ regelintegrierbar und $ x_0 \in (a, b) $ beliebig. Falls
+	\[
+		\int_{a}^{x_0}f(x) dx \quad \& \quad \int_{x_0}^{b}f(x) dx
+	\]
+	beide konvergieren, so heißt $ \int_{a}^{b} f(x) dx $ konvergent, und wir setzen
+	\[
+		\int_{a}^{b}f(x) dx \coloneqq \int_{a}^{x_0} f(x) dx + \int_{x_0}^{b} f(x) dx.
+	\]
+	
+\end{subdefinition}
+
+\begin{subexample}
+	\begin{align*}
+		\int_{-\infty}^{\infty} \frac{dx}{ 1 + x^2 } &= \int_{-\infty}^{0} \frac{ dx }{ 1 + x^2 } + \int_{0}^{\infty} \frac{dx}{ 1 + x^2 } = I + II \\
+		II &= \lim_{b \to \infty} \int_{0}^{b} \frac{dx}{ 1 + x^2 } \\
+		~&= \lim_{b \to \infty} \left[ \arctan (x) \right]_{x = 0} ^{x = b}  \\
+		~&= \lim_{b \to \infty} \arctan (b) \\
+		~&= \frac{ \pi }{ 2 } . \\
+		~&\implies \int_{-\infty}^{\infty} \frac{dx}{ 1 + x^2 } = \frac{ \pi }{ 2 } + \frac{ \pi }{ 2 } = \pi .
+	\end{align*}
+\end{subexample}
+
+\textbf{Ziel nun:} Nutze uneigentliche Integrale, um die Fakultät zu interpolieren. $ ( n! = 1 \cdot 2\cdot 3\cdot \dotsb \cdot (n-1) \cdot n $\\
+Frage: Fakultäten von rationalen Zahlen?\\
+
+\begin{subdefinition}[Eulersche $ \Gamma $-Funktion]
+	Für $ x > 0 $ definieren wir die Eulersche $ \Gamma $-Funktion durch
+	\[
+		\Gamma(x) \coloneqq \int_{0}^{\infty} t ^{x-1} e^{-t} dt. 
+	\]
+	Diese Funktion ist wohldifiniert:
+	\[
+		\int_{0}^{1} t ^{x - 1} \underbrace{e^{-t} }{\leq 1} \leq \int_{0}^{1} t ^{x - 1} dt
+	\]
+	existiert nach erstem Teil der Vorlesung
+	\[
+		\int_{1}^{\infty}t ^{x-1} e^{-t} dt : \lim_{t \to \infty} t ^{x-1} e^{-t} = 0
+	\]
+	\[
+		\implies \exists C > 0: \forall t \geq 1 : t ^{x-1} e^{-t} \leq C t ^{-2} .
+	\]
+	Damit
+	\[
+		\int_{1}^{\infty}t ^{x-1} e^{-t} dt \leq C \int_{1}^{\infty} t ^{-2} dt < \infty
+	\]
+	nach erstem Teil der Vorlesung
+\end{subdefinition}
+
+\begin{subtheorem}
+	$ \forall n \in \N : \Gamma(n + 1) = n! $ und\\
+	$ \forall x > 0 : \Gamma(x + 1) = x \Gamma(x) $.
+\end{subtheorem}
+
+\begin{subproof*}[Theorem \ref{13.4.8}]
+	Sei $  x > 0 $. Damit
+	\begin{align*}
+		\Gamma(x+1) &\overset{\text{Def.} }{=} \int_{0}^{\infty} t ^{x} e^{-t} dt \\
+		~&= \lim_{b \to \infty, \varepsilon \searrow 0} \int_{\varepsilon }^{b} \underbrace{t ^{x} }_{u} \underbrace{e^{-t} }_{v^\prime}dt  \\
+		~&= \lim_{b \to \infty, \varepsilon \searrow 0} \left( \underbrace{\left[ \underbrace{t ^{x} }_{u} \underbrace{\left( -e^{-t}  \right) }_{v} \right] }_{\to 0, b \to \infty, \varepsilon \searrow 0} - \int_{\varepsilon }^{b} \underbrace{x t ^{x-1} }_{u^\prime} \underbrace{\left( - e^{-t}  \right) }_{v} \right)  \\
+		~&= \lim_{b \to \infty, \varepsilon \searrow 0} x \int_{\varepsilon }^{b} \\
+	\end{align*}
+	
+\end{subproof*}
+
+\subsection{Differentiation, Integration \& Limesbildung}
+\begin{subtheorem}
+	Seien $ -\infty < a < b < \infty $ sowie $ f_n : [a, b] \to \R  $ stetig mit $ f_n \to r $ gleichmäßig für ein $ f: [a, b] \to \R  $. Dann gilt
+	\[
+		\int_{a}^{b}f(x) dx = \lim_{n \to \infty} \int_{a}^{b} f_n (x) dx.
+	\]
+	\begin{itemize}
+		\item Bei gleichmäßiger Konvergenz dürfen Limiten und Integrale vertauscht werden.
+	\end{itemize}
+\end{subtheorem}
+
+\begin{subproof*}[Thorem \ref{13.5.1}]
+	Da alle $ f_n $'s stetig und gleichmäßig konvergieren $ \implies f $ stetig, also regelintegrierbar. Nun gilt $ \forall n \in \N : $ 
+	\[
+		\left| \int_{a}^{b} f(x) dx - \int_{a}^{b} f_n(x) dx \right| = \left| \int_{a}^{b} f(x) - f_n(x) dx \right| \leq \int_{a}^{b} \underbrace{\left| f_n (x) - f(x) \right| }_{\leq \sup_{x \in [a, b]} \left| f_n(x) - f(x) \right| } dx \leq  ( b - a ) \underbrace{\sup_{x \in  [a, b]} \left| f(x) - f_n(x) \right|  }_{\to 0} \overset{n \to 0}{\to } 0
+	\]
+\end{subproof*}
+
+\begin{subexample}
+	Aussage bleibt nicht wahr bei punktweiser Konvergenz\\
+	Fläache = $ \frac{ 1 }{ 2 }  $ 
+	\[
+		\int_{0}^{1} f_n(x) dx = \frac{ 1 }{ 2 } 
+	\]
+	$ f_n \to 0 $
+	punktweise auf $ (0, 1), $ $ f $ äquivalent $ 0 $.
+	\[
+		\int_{0}^{1} f(x) dx = 0, 
+	\]
+	aber $ lim_{n \to \infty} \int_{0}^{1}f_n(x) dx = \frac{ 1 }{ 2 }  $.
+	
+\end{subexample}
+
+

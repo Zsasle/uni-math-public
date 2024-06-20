@@ -1,0 +1,194 @@
+\documentclass[sectionformat=aufgabe]{gadsescript}
+
+\setsemester{Summer Semester 2024}%
+\setuniversity{University of Konstanz}%
+\settitlelh{\today\\\semester\\Gruppe 3, Jonathan Weihing}
+\setfaculty{Faculty of Science\\(Mathematics and Statistics)}%
+\settitle{Übungsblatt 5}
+\setsubtitle{Elias Gestrich}
+\usepackage{subfig}
+
+\begin{document}
+\maketitle
+\section{Bogenlänge}
+\[
+	f^\prime : [a, b] \to \R ^3 = (- r \sin t, r \cos t, c).
+\]
+Also $ \left| f^\prime (t) \right| = \sqrt{(-r \sin t)^2 + (r \cos t )^2 + c^2} = \sqrt{r^2 \cdot (\sin ^2(t) + \cos ^2 (t)) + c^2} = \sqrt{r^2 + c^2}  $.\\
+Also
+\[
+	L = \int_{a}^{b} \left| f^\prime (t) \right| \dd t = \int_{a}^{b} \sqrt{r^2 + c^2} \dd t = \sqrt{r^2 + c^2} (b - a)
+\]
+
+\section{Logarithmische Spirale}
+\begin{enumerate}[label=(\alph*)]
+	\item ~
+		\begin{figure}[h]
+			\centering
+			\begin{tikzpicture}
+				\begin{axis}[
+					xmin= -4, xmax= 4,
+					ymin= -4, ymax = 4,
+					axis lines = middle,
+					xtick={-3, -2,..., 3},
+					xticklabels={},
+					extra x ticks = {-3, -1, ..., 3},
+					extra x tick labels = {-3, -1, ..., 3},
+					ytick={-3, -2,..., 3},
+					yticklabels={},
+					extra y ticks = {-3, -1, ..., 3},
+					extra y tick labels = {-3, -1, ..., 3},
+					width= 8cm,
+					height=8cm,
+				]
+					\addplot[parametric, domain=-1:1, samples=1000] function{ exp(t) *  cos(2 * pi * t), exp(t) * sin( 2 * pi * t)};
+				\end{axis}
+			\end{tikzpicture}
+			\caption{Logarithmische Spirale}
+			\label{fig:Logarithmische Spirale}
+		\end{figure}
+	\item 
+		\begin{align*}
+			L_{[a, b]} &= \int_{a}^{b} \left| f^\prime (t) \right| \dd t \\
+			L_{[a, b]} &= \int_{a}^{b} \left| (c \exp (ct) \cos t - \exp (ct) \sin t, c \exp (ct) \sin t + \exp (ct) \cos t \right| \dd t \\
+			L_{[a, b]} &= \int_{a}^{b} \left| (\exp (ct) \cdot ( c \cos t - \sin t), \exp (ct) \cdot (c \sin t + \cos t) \right| \dd t \\
+			L_{[a, b]} &= \int_{a}^{b} \sqrt{\exp (2ct) \cdot ( c \cos t - \sin t)^2 + \exp (2ct) \cdot (c \sin t + \cos t)^2} \dd t \\
+			L_{[a, b]} &= \int_{a}^{b} \exp (ct) \sqrt{c^2 \cos^2 t -2 c \cos (t) \sin (t) + \sin^2 t + c^2 \sin^2 t +2 c\sin (t) \cos (t) + \cos^2 t} \dd t \\
+			L_{[a, b]} &= \int_{a}^{b} \exp (ct) \sqrt{c^2 \cos^2 t + \sin^2 t + c^2 \sin^2 t + \cos^2 t} \dd t \\
+			L_{[a, b]} &= \int_{a}^{b} \exp (ct) \sqrt{c^2 + 1} \dd t \\
+			&= \left[ \frac{ \sqrt{c^2 + 1}  }{ c } \exp ct \right]_{a} ^{b}  \\
+			&= \frac{ \sqrt{c^2 + 1 }  }{ c } (\exp (cb) - \exp (ca)) \\
+			&= \sqrt{ 1 + \frac{ 1 }{ c^2 }  } (\exp (cb) - \exp (ca))
+		\end{align*}
+
+	\item 
+		\begin{align*}
+		\lim_{a \to -\infty} L_{a, 0} &\overset{(b)}{=} \lim_{a \to -\infty}  \sqrt{1 + \frac{ 1 }{ c^2 } } (\underbrace{\exp (0)}_{= 1} - \underbrace{\exp (ca)}_{ \overset{a \to -\infty}{\to } 0} ) \\
+			&= \sqrt{1 + \frac{ 1 }{ c^2 } } (1 - 0) \\
+			&= \sqrt{1 + \frac{ 1 }{ c^2 } }
+		\end{align*}
+		
+	\item Sei
+		\[
+			g : \R \to \R ^2, g(t) = (r\cos t, r\sin t),
+		\]
+		Da für alle $ t \in \R  $ gilt, $ \left| g(t) \right| = r $, müssen wir nur eine Lösung für $ \left| f(t_0) \right|  = r $ finden, dann existiert genau ein Punkt auf den Kreis, der auf dem selben Punkt liegt.\\
+		$ \left| f(t_0) \right| = \sqrt{\exp (2ct) \cos ^2 (t) + \exp (2ct) \sin ^2(t)} \exp (ct_0) \overset{!}{=} r \implies t_0 = \frac{ \log r }{ c }  $
+		\[
+			f(t_0) = r \cos \left( \frac{\log r}{ c }  \right) , r \sin \left( \frac{\log r}{ c }  \right) = g\left( \frac{\log r}{ c }  \right)
+		\]
+		Sei also $ t_1 \coloneqq  \frac{ \log r }{ c } = t_0 $, sodass $ f(t_0) = g(t_1) $
+		\[
+			f^\prime(t) \overset{(b)}{=} (\exp (ct) \cdot (c \cos t - \sin t), \exp (ct) \cdot (c \sin t + \cos t)) = \exp ct (c \cos t - \sin t, c \sin t + \cos t)
+		\]
+		$ \implies f^\prime (t_0) = r ( c \cos t_0 - \sin t_0, c \sin t_0 - \cos t_0) $
+		\[
+			\left| f^\prime (t) \right| \overset{(b)}{=} \sqrt{c^2 + 1} \exp (ct) \implies \left| f^\prime (t_0) \right| = r \sqrt{c^2 + 1}
+		\]
+		\[
+			g^\prime (t) = (-r \sin t, r \cos t)
+		\]
+		\[
+			\left| g^\prime (t) \right| = r
+		\]
+		
+		\begin{align*}
+			\alpha &= \arccos \frac{ \left< \exp (ct_0) (c \cos t_0 - \sin t_0, c \sin t_0 + \cos t_0), (-r \sin t_1, r \cos t_1) \right> }{ \sqrt{c^2 + 1} r \cdot r } \\
+			&= \arccos r \frac{-cr \cos (t_0) \sin (t_0) + r \sin ^2(t_0) + cr \sin (t_0) \cos (t_0) + r \cos ^2 (t_0) }{ r^2 \sqrt{c^2 + 1}  }  \\
+			&= \arccos r \frac{r \sin ^2(t_0)) + r \cos ^2 (t_0) }{ r^2 \sqrt{c^2 + 1}  }  \\
+			&= \arccos r \frac{ r }{ r^2 \sqrt{c^2 + 1}  }  \\
+			&= \arccos \frac{ 1 }{ \sqrt{c^2 + 1}  }  \\
+		\end{align*}
+\end{enumerate}
+
+\section{Vollst. elliptisches Integral 2. Gattung}
+\begin{enumerate}[label=(\alph*)]
+	\item 
+		Substitution mit $ \varphi(t) = \sin (t) $, sodass $ \varphi^\prime  = \cos  $ und $ \varphi^{-1} (a) = \arcsin (a) < \frac{ \pi }{ 2 } $ für $ a < 1 $
+		\begin{align*}
+			\lim_{a \nearrow 1} \int_{0}^{a} \frac{ \sqrt{1 - k^2t^2} }{ \sqrt{1 - t^2} } \dd t &= \lim_{a \nearrow 1} \int_{0}^{\phi^{-1} (a) } \frac{ \sqrt{1 - k^2 \sin ^2(t)} }{ \sqrt{1 + \sin ^2 (t)}  } \cos (t) \dd t \\
+			&= \lim_{a \nearrow 1} \int_{0}^{\varphi^{-1} (a)} \frac{ \sqrt{1 - k^2 \sin ^2(t) } }{ \sqrt{\cos ^2(t)}  }  \cos (t) \dd t \\
+			& \qquad\text{da } \cos (t) > 0 \text{ für } 0 \leq t < \frac{ \pi }{ 2 } \\
+			&= \lim_{a \nearrow 1} \int_{0}^{\arcsin (a)} \sqrt{1 - k^2 \sin ^2(t) } \dd t\\
+			&\leq  \lim_{a \nearrow 1} \int_{0}^{\arcsin (a)} 1 \dd t\\
+			&\leq \lim_{a \nearrow 1} [t]_{0} ^{\arcsin (a)} \\
+			&\leq \lim_{a \nearrow 1} \arcsin (a) \\
+			&\leq \frac{ \pi }{ 2 } 
+		\end{align*}
+		Also existiert
+		\[
+			E(k) = \int_{0}^{1} \frac{ \sqrt{1 - k^2t^2} }{ \sqrt{1 - t^2}  } \dd t = \int_{0}^{\frac{ \pi }{ 2 } } \sqrt{1 - k^2 \sin ^2(t)} \dd t
+		\]
+		
+	\item 
+		Ich weiß nicht wie ich das Argumentieren soll, aber ich bin davon ausgegangen, dass
+		\[
+			\int_{a \cdot \frac{ \pi }{ 2 } }^{(a + 1) \cdot \frac{ \pi }{ 2 } } f(\sin ^2(x)) \dd x = \int_{0}^{\frac{ \pi }{ 2 } } f(\sin ^2(x)) \dd x
+		\]
+		Sodass 
+		\begin{equation}
+			\label{eq:A3 b) 1}
+			\int_{a\cdot \frac{\pi }{ 2 } }^{ (a + 4) \cdot \frac{ \pi }{ 2 }  } f( \sin ^2(x) ) \dd x = 4 \int_{0}^{\frac{ \pi }{ 2 } } f( \sin ^2(x)) \dd x
+		\end{equation}
+		
+		Für $ a^2 \leq b^2 $:
+		\begin{align*}
+			\int_{0}^{2 \pi } \left| \sqrt{a^2 \cos ^2 (t) + b^2 \sin ^2 (t)}  \right| \dd t &= \int_{0}^{2 \pi } \left| \sqrt{ a^2 \sin ^2 (t) + (b^2 - b^2 \sin ^2 (t) ) }  \right| \dd t \\
+			&= \int_{0}^{2 \pi } \sqrt{b^2 - (b^2 - a^2) \sin ^2 (t)} \dd t \\
+			&= b \int_{0}^{2 \pi } \sqrt{1 - \frac{b^2 - a^2}{ b^2 }  \sin ^2 (t)} \dd t \\
+			&\overset{\eqref{eq:A3 b) 1}}{=} 4 b \int_{0}^{\frac{ \pi }{ 2 }  } \sqrt{1 - \frac{b^2 - a^2}{ b^2 }  \sin ^2 (t)} \dd t \\
+			&= 4 b E \left( \frac{ b^2 - a^2 }{ b^2 }  \right)  \dd t \\
+		\end{align*}
+		Für $ a^2 > b^2 $:
+		\begin{align*}
+			\int_{0}^{2 \pi } \left| \sqrt{a^2 \cos ^2 (t) + b^2 \sin ^2 (t)}  \right| \dd t
+			&= \int_{0}^{2 \pi } \left| \sqrt{ a^2 - a^2 \cos ^2 (t) + b^2 \cos ^2 (t) }  \right| \dd t \\
+			&= \int_{0}^{2 \pi } \left| \sqrt{ a^2 - (a^2 - b^2) \cos ^2 (t) }  \right| \dd t \\
+			&= \int_{0}^{2 \pi } \left| \sqrt{ a^2 - (a^2 - b^2) \sin ^2 \left(t - \frac{ \pi }{ 2 } \right) }  \right| \dd t \\
+			&= \int_{-\frac{ \pi }{ 2 } }^{\frac{3 \pi }{ 2 }  } \left| \sqrt{ (a^2 - (a^2 - b^2) \sin ^2 (t) }  \right| \dd t \\
+			&= a \int_{-\frac{ \pi }{ 2 } }^{\frac{3 \pi }{ 2 } } \left| \sqrt{ (1 - \frac{a^2 - b^2}{ a^2 }  \sin ^2 (t) }  \right| \dd t \\
+			&\overset{\eqref{eq:A3 b) 1}}{=} 4 b \int_{0}^{\frac{ \pi }{ 2 }  } \sqrt{1 - \frac{a^2 - b^2}{ a^2 }  \sin ^2 (t)} \dd t \\
+			&= 4 b E \left( \frac{ a^2 - b^2 }{ a^2 }  \right) \\
+		\end{align*}
+		
+\end{enumerate}
+
+\section{Nochmal Kompaktheit}
+\begin{description}
+	\item[Vor.:] $ X $ kompakt folgt $ \forall (U_i)_{i \in I}  $ Familien offener Mengen mit $ X \subset \bigcup_{i \in  I} $ impliziert es gibt eine endliche Indexmenge $ I_0 $ mit $ X \subset \bigcup_{i \in  I_0} U_i $.
+	\item[Beh.:] $ X $ kompakt $ \iff  $ für jedes zentrierte System $ \left\{ A_i \right\} _{i \in I} : \bigcap_{i \in I} A_i \neq \OO  $ 
+	\item[Bew.:] ~
+		\begin{description}
+			\item[$ \implies  $:] Sei $ X $ eine kompakte Menge und $ \left\{ A_i \right\} _{i \in I}  $ ein zentriertes System so, dass für alle endlichen Indexmengen $ I_0 \subset I $ gilt, $ \bigcap_{i \in I_0} A_i \neq \OO  $, zu zeigen $ \bigcap_{i \in  I} A_i \neq \OO  $.\\
+				Zum Widerspruch nehmen wir an, dass $ \bigcap_{i \in I} A_i = \OO  $.\\
+				Sei $ (U_i)_{i \in I}  $ definiert durch $ U_i \coloneqq X \setminus A_i $.
+				Da $ A_i $ abgeschlossen, muss $ U_i $ offen sein. Es gilt
+				\[
+					X = X \setminus \bigcap_{i \in  I} A_i = \bigcup_{i \in  I} X \setminus A_i = \bigcup_{i \in  I} U_i
+				\]
+				Da 
+				\begin{align*}
+					X \setminus \bigcap_{i \in  I} A_i &= \left\{ x \in X : \neg \left( \forall i \in I : x \in  A_i \right)  \right\} \\
+									   &= \left\{ x \in X : \exists i \in I : x \not\in A_i \right\} \\
+									   &= \left\{ x \in X : \exists i \in I : x \in U_i \right\} \\
+									   &= \bigcup_{i \in  I} U_i
+				\end{align*}
+				Also $ (U_i) $ Familie offener Mengen die $ X $ überdecken. Da $ X $ kompakt existiert ein $ I_0 $ so, dass 
+				$ X \subset \bigcup_{i \in I_0} U_i $.
+				Für dieses $ I_0 $ gilt: $ \bigcap_{i \in I_0} A_i = X \setminus \bigcup_{i \in I_0} U_i = \OO  $.
+				Also $ \left\{ A_i \right\} _{i \in I}  $ kein zentriertes System - Widerspruch
+				
+				
+			\item[$ \impliedby  $:] Gelte für alle Zentrierten Systeme $ \left\{ A_i \right\} _{i \in I}  $, dass $ \bigcap_{i \in  I} A_i \neq \OO  $. Zu zeigen $ X $ kompakt, bzw. jede offene Überdeckung $ (U_i) $ hat eine endliche Teilüberdeckung $ X \subset U_i $.\\
+				Sei $ (U_i) $ eine offene Überdeckung von $ X $, so dass $ U_i^C $ abgeschlossen, da $ U_i $ offen.
+				Zu zeigen es gibt eine endliche Teilüberdeckung.
+				Zum Widerspruch, es existiert keine solche Teilüberdeckung, also $ X \not \subset \bigcup_{i \in I_0} U_i $, also $ \exists x \in X : x \not\in  \bigcup_{i \in I_0} U_i $, bzw $ \forall i \in I_0 : x \not\in U_i $, also $ \forall i \in I_0 : x \in U_i^C $.
+				Für alle endlichen Indexmengen $ I_0 $.
+				Daraus folgt aus Vor. (für alle zentrierten Systeme gilt $ \bigcap_{i \in  I} A_i \neq \OO  $), dass $ \bigcap_{i \in  I} U_i^C \neq \OO  $, also gibt es ein $ x \in \bigcap_{i \in  I} U_i^C  $ für das gilt, $ \forall i \in I : x \in U_i^C $, also $ \forall i \in I : x \not\in U_i $, also $ U_i $ keine offene Überdeckung - Widerspruch.
+		\end{description}
+		
+\end{description}
+
+
+\end{document}
+

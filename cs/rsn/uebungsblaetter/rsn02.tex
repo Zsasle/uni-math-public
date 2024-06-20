@@ -1,0 +1,113 @@
+\documentclass{gadsescript}
+
+\settitle{2. Übungsblatt}
+
+\begin{document}
+\maketitle
+
+\section{Boolsche Algebra/Schaltalgebra}
+\begin{enumerate}[label=\alph*)]
+	\item Boolsche Algebra ist Menge mit einem Nullelement und einem Einselement, über der die \textbf{Konjunktion}, \textbf{Disjunktion} und \textbf{Negation} definiert ist und die \textbf{Kommutativität}, \textbf{Distributivität}, \textbf{Neutralität} und \textbf{Komplimentarität} gilt.\\
+		Schaltalgebra ist eine spezifische Boolsche Algebra, die aus der Trägermenge $ \{ 0, 1 \} $ besteht.
+	\item $\wedge$: ``und''\\
+		$\vee$: ``oder''\\
+		$\neg$: ``nicht''\\
+	\item
+		\begin{align*}
+			\neg \left( a \vee b \right) \vee b &\mid \text{ DeMorgan}\\
+			(\neg a \wedge \neg b) \vee b &\mid \text{ Distributivität}\\
+			(\neg a \vee b) \wedge (\neg b \vee b) &\mid \text{ Komplementarität}\\
+			(\neg a \vee b) \wedge 1 &\mid \text{ Neutralität}\\
+			\neg a \vee b
+		\end{align*}
+	\item
+		\begin{tabular}{cc|| c|c|c ||c}
+			$ a $ & $ b $ & $ a $ & $ \vee $ & $ ( \neg a \wedge b ) $ & $ a \vee b $\\\hline
+			0 & 0 & 0 & 0 & 0 & 0\\
+			0 & 1 & 0 & 1 & 1 & 1\\
+			1 & 0 & 1 & 1 & 0 & 1\\
+			1 & 1 & 1 & 1 & 1 & 1
+		\end{tabular}
+	\item
+		\begin{align*}
+			( \neg \wedge d ) \vee ( d \wedge ( a \vee \neg )) \vee &\iff c \vee ( \neg c \wedge d ) \vee ( d \wedge ( a \vee \neg b ))\\
+			&\iff c \vee d \vee ( d \wedge ( a \vee \neg b))\\
+			&\iff d \vee ( ( c \vee d ) \wedge ( c \vee ( a \vee \neg b ) ) ) \\
+			&\iff d \vee ( ( c \vee d ) \wedge ( c \vee a \vee \neg b ) )\\
+			&\iff ( d \vee c \vee d ) \wedge ( d \vee c \vee a \vee \neg b )\\
+			&\iff ( ( d \vee c \vee ) 0) \wedge ( ( d \vee c ) \vee a \vee \neg b )\\
+			&\iff ( d \vee c ) \vee ( 0 \wedge ( a \vee \neg b ) )\\
+			&\iff ( d \vee c ) \vee ( 0 )\\
+			&\iff ( d \vee c ) \qed
+		\end{align*}
+\end{enumerate}
+
+\section{Boolesche Algebra/Schaltalgebra}
+\begin{enumerate}[label=\alph*)]
+	\item
+		\begin{align*}
+			\neg ( a_1 \wedge 1_2 \wedge a_3 \wedge \dotsb \wedge a_{n-1} \wedge a_n ) &\iff \neg a_1 \vee \neg ( a_2 \wedge a_3 \wedge \dotsb \wedge a_{n-1} \wedge a_n )\\
+			&\iff \neg a_1 \vee \neg a_2 \vee \neg ( a_3 \wedge \dotsb \wedge a_{n-1} \wedge a_n )\\
+			&\vdots\\
+			&\iff \neg a_1 \vee \neg a_2 \vee \neg a_3 \vee \dotsb \vee \neg ( a_{n-1} \wedge a_n )\\
+			&\iff \neg a_1 \vee \neg a_2 \vee \neg a_3 \vee \dotsb \vee \neg a_{n-1} \vee \neg a_n\\
+		\end{align*}
+		\begin{align*}
+			\neg ( a_1 \vee 1_2 \vee a_3 \vee \dotsb \vee a_{n-1} \vee a_n ) &\iff \neg a_1 \wedge \neg ( a_2 \vee a_3 \vee \dotsb \vee a_{n-1} \vee a_n )\\
+			&\iff \neg a_1 \wedge \neg a_2 \wedge \neg ( a_3 \vee \dotsb \vee a_{n-1} \vee a_n )\\
+			&\vdots\\
+			&\iff \neg a_1 \wedge \neg a_2 \wedge \neg a_3 \wedge \dotsb \wedge \neg ( a_{n-1} \vee a_n )\\
+			&\iff \neg a_1 \wedge \neg a_2 \wedge \neg a_3 \wedge \dotsb \wedge \neg a_{n-1} \wedge \neg a_n\\
+		\end{align*}
+	\item Alle, bei denen binäre Operatoren mit Klammern vorkommen, also Distributivität, Assoziativität und Absorbtion
+\end{enumerate}
+
+\section{Boolesche Algebra/Schaltalgebra}
+zu zeigen: Term 1 $ \iff $ Term 2, also $ ( a \wedge \neg c ) \vee b \iff \neg ( \neg a \wedge \neg b \wedge \neg c ) \wedge ( a \vee b \vee \neg c ) \wedge \neg ( c \wedge \neg b ) $
+\begin{description}
+	\item[Term 2:]
+		\begin{alignat*}{2}
+			\neg ( \neg a \wedge \neg b \wedge \neg c ) \wedge ( a \vee b \vee \neg c ) \wedge \neg ( c \wedge \neg b ) & \iff (\neg \neg a \vee \neg\neg b \vee \neg\neg c) \wedge ( a \vee b \vee \neg c ) \wedge (\neg c \vee \neg \neg b )\\
+			~&\iff ( a \vee b \vee c ) \wedge ( a \vee b \vee \neg c ) \wedge ( \neg c \vee b )\\
+			~&\iff ( ( a \vee b ) \vee c ) \wedge ( ( a \vee b ) \vee neg c ) \wedge ( \neg c \vee b )\\
+			~&\iff ( ( a \vee b ) \vee ( c \wedge \neg c ) )  \wedge ( \neg c \vee b )\\
+			~&\iff ( ( a \vee b ) \vee 0 ) \wedge ( \neg c \vee b )\\
+			~&\iff ( a \vee b ) \wedge ( \neg c \vee b )\\
+			~&\iff ( a \wedge \neg c ) \vee b\\
+		\end{alignat*}
+\end{description}
+Somit ist Term 2 logisch äquivalent zu Term 1.\\
+Neben einem direkten Beweis durch Termumformung, könnte man auch zwei Wertetabelle erstellen, zu je einem Term eine, und dann diese auf Gleichheit überprüfen.
+
+\section{Disjunktive und konjunktive Normalform}
+\begin{enumerate}[label=\alph*)]
+	\item Bei der disjunktiven Normalform, werden sich alle Argumenttermkombinationen angeschaut, welche zu einer wahren Aussage führen sollen. In diesen werden die Argumente so konjunktiv verknüpft, dass die Verknüpfung für die Argumenttermkombination wahr ist. Die gebildeten Verknüpfungen werden disjunktiv verknüpft.\\
+		Bei der konjunktiven Normalform, werden sich alle Argumenttermkombinationen angeschaut, welche zu einer falschen Aussage führen sollen. In diesen werden die Argumente so disjunktiv verknüpft, dass die Verknüpfung für die Argumenttermkombination falsch ist. Die gebildeten Verknüpfungen werden konjunktiv verknüpft.
+	\item Die disjunktive Normalform ist günstiger, wenn es weniger Argumenttermkombinationen gibt, welche zu einer wahren Aussage führen sollen, die konjunktive Normalfall dementsprechend im anderen Fall.
+	\item ~\\ \begin{tabular}{c|c|c||c|c|c||c}
+			$a$ 	& $b$	& $c$	& $ (b \wedge \neg a) $	& $ \vee $	& $ a \wedge b \wedge \neg c ) $	& $ f(a,b,c)$\\\hline\hline
+			0	& 0	& 0	& 0			& 0		& 0					& 0\\
+			0	& 0	& 1	& 0			& 0		& 0					& 0\\\hdashline
+			0	& 1	& 0	& 1			& 1		& 0					& 1\\
+			0	& 1	& 1	& 1			& 1		& 0					& 1\\\hdashline
+			1	& 0	& 0	& 0			& 0		& 0					& 0\\
+			1	& 0	& 1	& 0			& 0		& 0					& 0\\\hdashline
+			1	& 1	& 0	& 0			& 1		& 1					& 1\\
+			1	& 1	& 1	& 0			& 0		& 0					& 0\\
+	\end{tabular}
+		In dem Falle ist in den meisten Fällen wahrscheinlich die disjunktive Normalform am geschicktesten, sodass $ f(a,b,c) $ geschrieben werden kann, als $ f(a,b,c) = (\neg a \wedge b \wedge \neg c ) \vee ( \neg a \wedge b \wedge c ) \vee ( a \wedge b \wedge \neg c) $
+	\item
+		\begin{align*}
+			(b \wedge \neg a ) \vee ( a \wedge b \wedge \neg c ) &= \neg \neg \left( ( b \wedge \neg a ) \vee ( a \wedge b \wedge \neg c ) \right)\\
+			~&= \neg \left[ \neg ( \neg a \wedge b ) \wedge \neg ( a \wedge b \wedge \neg c ) \right]\\
+			~&= \neg \left[ \neg ( \neg a \wedge b ) \wedge \neg ( (a \wedge b) \wedge (\neg c) ) \right]\\
+			~&= \neg \left[ \neg ( \neg a \wedge b ) \wedge \neg ( \neg \neg (a \wedge b) \wedge (\neg c) )  \right]\\
+			~&= \neg \left[ ( \neg a \downarrow b ) \wedge ( \neg (a \downarrow b) \downarrow (\neg c) )  \right]\\
+			~&= ( \neg a \downarrow b ) \downarrow ( \neg (a \downarrow b) \downarrow (\neg c) ) \\
+			~&= ( \neg a \downarrow b ) \downarrow ( (a \downarrow b) \downarrow (a \downarrow b) \downarrow (c\downarrow c) )
+		\end{align*}
+
+\end{enumerate}
+
+
+\end{document}

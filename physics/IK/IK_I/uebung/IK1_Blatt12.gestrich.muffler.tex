@@ -1,0 +1,84 @@
+\documentclass[sectionformat = aufgabe]{gadsescript}
+
+\setsemester{Winter Semester 2023/2024}%
+\setuniversity{University of Konstanz}%
+\setfaculty{Faculty of Science\\(Physics)}%
+\settitle{Übungsblatt 12}
+
+\begin{document}
+\maketitle
+\section{Elastischer Stoß in zwei Dimensionen}
+Die Billardkuglen stoßen in einem Winkel von $ \frac{ \pi }{ 2 }  $ aufeinander, da wegen Impulserhaltung
+\[
+	m_0 \vec v_0  + m_1 \vec v_1 = m_0 \vec v_0^{\prime} + m_1 v_1^{\prime} 
+\]
+gilt und da $ m_0 = m_1 $ und $ v_1 = 0 $ gilt:
+\[
+	\vec v_0 = \vec v_0^{\prime} + \vec v_1^{\prime} 
+\]
+und somit Bilden die Vektoren ein Dreieck mit den Seiten $ v_0, v_0^\prime, v_1^\prime $.\\
+Außerdem gilt Energieerhaltung, also gilt:
+\[
+	\frac{ 1 }{ 2 } m_0 v_0^2 + \frac{ 1 }{ 2 } m_1 v_1^2 = \frac{ 1 }{ 2 } m_0 v_0^{\prime 2} + \frac{ 1 }{ 2 } m_1 v_1^{\prime 2} 
+\]
+Also gilt nach oben genannten Vorraussetzungen
+\[
+	v_0^2 = v_0^{\prime 2} + v_1^{\prime 2} 
+\]
+Das bedeuted aber, dass das ober erwähnte Dreieck ein rechtwinkliges Dreieck ist mit der Hypothenuse $ v_0 $, also ist zwischen $ v_0^{\prime} $ und $ v_1^\prime $ ein rechter Winkel.
+
+\section{Stoßexperimente in einer Dimension}
+\begin{enumerate}[label=\alph*)]
+	\item Es gilt
+		\begin{align*}
+			m_1 v_1 + m_2 v_2 &= m_1 v_1^{\prime} + m_2 v_2^{\prime} \\
+			\qty{ 10 }{ \kilogram } \cdot v_2 &= \qty{ 80 }{ \kilogram } \cdot v_1^{\prime}  \\
+			v_1^{\prime} &= \frac{ v_2 }{ 8 } \\
+		\end{align*}
+	\item Es gilt
+		\begin{align*}
+			m_2 v_2 &= m_1 v_1^{\prime} + m_2 v_2^{\prime}  \\
+			m_2 v_2 - m_2 v_2^{\prime} &= m_1 v_1^{\prime}  \\
+			m_2 \left( v_2 - v_2^{\prime} \right) &= m_1 v_1^{\prime}  \\
+			v_1^{\prime} &= \frac{ m_2 }{ m_1 } \left( v_2 - v_2^{\prime} \right) \\
+		\end{align*}
+		Außerdem gilt, da es ein elastischer Stoß ist:
+		\begin{align*}
+			\frac{ 1 }{ 2 } m_2 v_2^2 &= \frac{ 1 }{ 2 } m_1 v_1^{\prime 2} + \frac{ 1 }{ 2 } m_2 v_2^{\prime 2}  \\
+			m_2 v_2^2 &= \frac{ m_2^2 }{ m_1 } \left( v_2 - v_2^{\prime} \right)^2 + m_2 v_2^{\prime 2} \\
+			0 &= v_2^{\prime 2} \left( 1 + \frac{ m_2 }{ m_1 } \right) - 2 v_2^{\prime} v_2 \cdot \frac{ m_2 }{ m_1 } + \left( \frac{ m_2 }{ m_1 } - 1 \right) v_2^2  \\
+			0 &= \frac{ 8 }{ 7 } v_2^{\prime 2} - \frac{ 2 }{ 7 } v_2^{\prime} v_2 - \frac{ 6 }{ 7 } v_2^2  \\
+			0 &= 8 v_2^{\prime 2} - 2 v_2^{\prime} v_2 - 6 v_2^2  \\
+			v_{2_{1,2} }^{\prime} &= \frac{ 2 v_2 \pm \sqrt{4 v_2^2 + 4 \cdot 6 \cdot 8 v_2^2}  }{ 16 } \\
+			v_2^{\prime} &= \frac{ 2 v_2 - \sqrt{196 v_2^2} }{ 16 } \\
+			v_2^{\prime} &= \frac{ 2 v_2 - \sqrt{196} }{ 16 } \\
+			v_2^{\prime} &= -\frac{ 3 }{ 4 } v_2 \\
+		\end{align*}
+		Also gilt:
+		\begin{align*}
+			v_1^{\prime} &= \frac{ m_2 }{ m_1 } \left( v_2 - v_2^{\prime} \right) \\
+			v_1^{\prime} &= \frac{ 1 }{ 7 }  \left( v_2 + \frac{ 3 }{ 4 } v_2 \right) \\
+			v_1^{\prime} &= \frac{ 1 }{ 4 }  v_2 \\
+		\end{align*}
+	\item $ v_1^{\prime} = \frac{ 1 }{ 2 } v_2 $.
+		\begin{align*}
+			m_2 v_2 &= \frac{ 1 }{ 2 } m_1 v_2 + m_2 v_2^{\prime} \\
+			v_2 - \frac{ m_1 }{ 2m_2 } v_2 &= v_2^{\prime} \\
+			-\frac{ 5 }{ 2 } v_2 &= v_2^{\prime} \\
+		\end{align*}
+		Und
+		\begin{align*}
+			\frac{ 1 }{ 2 } m_2 v_2^2 + E &= \frac{ 1 }{ 8 } m_1 v_2^2 + \frac{ 25 }{ 8 } m_2 v_2^2 \\
+			E &= \frac{ m_1 + 21 m_2 }{ 8 } v_2^2 \\
+			E &= \qty{ 35 }{ \kilogram } v_2^2 \\
+		\end{align*}
+	\item 
+		\begin{enumerate}[label=\alph*)]
+			\item inelastisch, da die kinetische Energie nach dem Stoß nach dem Stoß geringer ist, als vor dem Stoß
+			\item elastisch, da die kinetische Energie vor und nach dem Stoß gleich sind
+			\item superelastisch, da die kinetische Energie nach dem Stoß größer ist, als vor dem Stoß.
+		\end{enumerate}
+		
+\end{enumerate}
+
+\end{document}

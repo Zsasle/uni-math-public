@@ -1,0 +1,56 @@
+\documentclass[sectionformat=exercise]{gadsescript}
+
+\usetikzlibrary{shapes}
+
+\setsemester{Winter Semester 2023/2024}%
+\setuniversity{University of Konstanz}%
+\setfaculty{Faculty of Science\\(Computer and Data Science)}%
+\settitle{Elias Gestrich}
+\setsubtitle{Regular languages, context-free grammars}
+
+\begin{document}
+\maketitle
+\section{Type-3 Grammars}
+
+\section{Type-3 Grammars}
+\begin{tikzpicture}
+	\node[draw, circle, minimum size = 40] (v2) at (0,0) {$ V_2 $};
+	\node[draw, circle, minimum size = 40] (v1) at (4,0) {$ V_1 $};
+	\node[draw, circle, minimum size = 40] at (6,2) {$ V_1E $};
+	\node[draw, circle, minimum size = 45] (v1e) at (6,2) {};
+	\node[draw, circle, minimum size = 40] at (6,-2) {$ E $};
+	\node[draw, circle, minimum size = 45] (e) at (6,-2) {};
+	\draw[-stealth] (-1.5, 0) -- (v2);
+	\draw[-stealth] (v2) -- node[midway, above] {$ a $} (v1);
+	\draw[-stealth] (v2) to[out=120,in=60,loop] node[midway,above,inner sep=2pt] {$ b $} ();
+	\draw[-stealth] (v1) -- node[midway, above left, inner sep = 2pt] {$ a $} (v1e);
+	\draw[-stealth] (v1) -- node[midway, below left, inner sep = 2pt] {$ b $} (e);
+	\draw[-stealth] (v1e) to[out=120, in=60, loop] node[midway, above, inner sep = 2pt] {$ a $} (v1e);
+	\draw[-stealth] (v1e) -- node[midway, right] {$ b $} (e);
+\end{tikzpicture}
+
+\section{Pumping Lemma}
+Assume there is a number $ n \in \N  $ so that for all words $ x \in L_3, \left| x \right| \geq n $ the word can be written as $ uvw $ so that $ \left| v \right| \geq 1, \left| uv \right| \leq n, \forall i \in N_0: uv^iw \in L_3 $.
+Take the word $ x \coloneqq e^nd^{2n} $, so that $ \left| x \right| \geq n $,
+so that $ x = uv^iw $. Since $ \left| uv \right| \leq n $ $ v $ has to contain only $ e $'s because the first $ n $ symbols are $ e $'s.
+And because $ \left| v \right| \geq 1 $ it means $ v $ contains at least one $ e $.
+That means one could loop $ v $ once more, so $ e^{n+\left| v \right| }d^{2n} $ would be also in $ L_3 $, but that is in contradiction to the definition, that means $ L_3 $ is not regular.
+\section{Context-free Grammars}
+\begin{enumerate}[label=\alph*)]
+	\item S-B-cBb-ccAab-ccBaab-ccbaab
+	\item $ Z = \left\{ z_0 \right\} , \Gamma = \left\{ S, A, B, a, b, c \right\}, \# \equiv S $\\
+		\begin{tabular}{|c|c|c|}
+			\hline
+			Input & stack & transition \\\hline
+			\hline
+			$ \varepsilon  $ & $ S $ & pop; push B \\\hline
+			$ \varepsilon  $ & $ B $ & pop; push b \\\hline
+			$ \varepsilon  $ & $ A $ & pop; push B; push a\\\hline
+			$ \varepsilon  $ & $ B $ & pop; push b; push B; push c\\\hline
+			$ \varepsilon  $ & $ B $ & pop; push a; push A; push c\\\hline
+			\hline
+			$ \varepsilon  $ & $ a $ & pop \\\hline
+			$ \varepsilon  $ & $ b $ & pop \\\hline
+		\end{tabular}
+\end{enumerate}
+\end{document}

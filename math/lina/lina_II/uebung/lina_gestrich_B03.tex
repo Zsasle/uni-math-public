@@ -1,0 +1,206 @@
+\documentclass[sectionformat = aufgabe]{gadsescript}
+\settitlelh{\today\\\semester\\Gruppe 3, Briefkasten 11, Baiz}
+\setsemester{Summer Semester 2024}%
+\setuniversity{University of Konstanz}%
+\setfaculty{Faculty of Science\\(Mathematics and Statistics)}%
+\settitle{Übungsblatt 03}
+\setsubtitle{Elias Gestrich}
+%Salisha Baiz, salisha.baiz@uni-konstanz.de
+
+\begin{document}
+\maketitle
+\setcounter{section}{3}
+\subsection{}
+\begin{enumerate}[label=(\alph*)]
+	\item $ U_1, U_2 \subset V_1 = V_2 $, und $ U_1 + U_2 = V $ und $ U_1 \cap U_2 = \OO  $, also $ V_1 / U_1 \cong U_2 $ und $ V_2 / U_2 \cong U_1 $.
+		Außerdem sind $ U_1 $ und $ U_2 $ Isomorph zueinander, da
+		\[
+			T: U_1 \to U_2, (x, 0)^t \mapsto (0, x)^t,
+		\]
+		injektiv: $ \forall (x, 0)^t : T((x, 0)^t) = (0, 0) \implies x = 0 \implies (x, 0)^t = 0 $ und surjektiv: $ \dim U_1 = 1 = \dim U_2 $. (Also weil $ \left\{ (1, 0)^t \right\}  $ Basis von $ U_1 $, usw.)\\
+		D.h. $ V_1 / U_1 \cong U_2 \cong U_1 \cong V_2 / U_1 $?
+	\item $ \left\{ u_{11} \coloneqq  (1, -1, 0, 2)^t, u_{12} \coloneqq (0, 1, 1, 1)^t \right\}  $ ist eine Basis von $ U_1 $, da
+		\[
+			\forall u \in U_1: \exists a, b \in \Q : u = (a, -a + b, b, 2a + b)^t = a u_{11} + b u_{12} \text{ und} 
+		\]
+		\[
+			\forall u \in \Span \left\{ u_{11}, u_{12} \right\} : \exists a, b \in Q : u = a u_{11} + b u_{12} = (a, -a + b, b, 2a + b)^t \in U_1.
+		\]
+		Außerdem ist $ \left\{ u_{11}, u_{12}, u_{13} \coloneqq (0, 0, 1, 0)^t, u_{14} \coloneqq  (0, 0, 0, 1)^t \right\}  $ eine Basis von $ \Q ^4 $, da:
+		\[
+			\begin{pmatrix}
+				1 & 0 & 0 & 0\\
+				-1 & 1 & 0 & 0\\
+				0 & 1 & 1 & 0\\
+				2 & 1 & 0 & 1\\
+			\end{pmatrix} 
+			\rightsquigarrow
+			\begin{pmatrix}
+				1 & 0 & 0 & 0\\
+				0 & 1 & 0 & 0\\
+				0 & 1 & 1 & 0\\
+				0 & 1 & 0 & 1\\
+			\end{pmatrix} 
+			\rightsquigarrow
+			\begin{pmatrix}
+				1 & 0 & 0 & 0\\
+				0 & 1 & 0 & 0\\
+				0 & 0 & 1 & 0\\
+				0 & 0 & 0 & 1\\
+			\end{pmatrix} 
+		\]
+		Also invertierbar, also linear unabhängig und erzeugend.\\
+		Sei 
+		\[
+			T: \Q ^4 \to \Q ^2, \begin{cases}
+				u_{11} \mapsto 0,\\
+				u_{12} \mapsto 0,\\
+				u_{13} \mapsto (1, 0)^t \text{ und} \\
+				u_{14} \mapsto (0, 1)^t.\\
+			\end{cases}
+		\]
+		Dann ist $ \Kern T = \Span \left\{ u_{11}, u_{12} \right\} = U_1 $ und $ R_T = \Span \left\{ (1, 0)^t, (0, 1)^t \right\} = \Q ^2 $ Also ist $ V_1 / U_1 = V_1 / \Kern T \cong R_T = \Q ^2 $.
+
+		$ V_1 / \left\{ 0 \right\} = \Q ^2 / \Kern \Id \cong R_{\Id} = \Q ^2 $.
+		Also ist $ V_1 / U_1 \cong V_2 / U_2 $
+	\item ---
+\end{enumerate}
+
+\subsection{}
+Sei $ \left\{ w_1, \dotsc, w_m \right\}  $ geordnete Basis von $ W $ und $ \left\{ w_1, \dotsc, w_m, w_{m+1} , \dotsc, w_n \right\}  $ eine geordnete Basis von $ V $.
+Sodass $ \left\{ f_1, \dotsc, f_m \right\}  $ Dualbasis von $ W^* $ und $ \left\{ f_1, \dotsc, f_m, f_{m+1} , \dotsc, f_n \right\}  $ Dualbasis von $ V^* $.
+\begin{enumerate}[label=(\alph*)]
+	\item Zu zeigen,  $ \forall f, g \in V^*, c \in K : \rho (f + cg) = \rho( f) + c \rho (g) $, dafür:\\
+	 	$ \forall x \in W: $ 
+		\begin{align*}
+			\rho(f + cg) (x) &= (f + cg)|_W (x)\\
+			&= (f + cg) (x) \\
+			&\overset{\text{L. von $ V^* $} }{=} f(x) + cg(x)\qed
+		\end{align*}
+	\item Beh.: $ \Kern \rho = \Span(\left\{ f_{m+1} , \dotsc, f_n \right\}), R_\rho = W^*  $\\
+		Bew.:\\
+		Zu zeigen $ \forall f \in V^*: \rho(f) = 0 \iff f \in \Span( \left\{ f_{m+1} , \dotsc, f_n \right\} ) $:
+		Sei $ f \in V^* $ gegeben mit $ \rho ( f ) = 0 $, zu zeigen $ f \in \Span ( \left\{ f_{m+1} , \dotsc, f_n \right\}  ) $.\\
+		$ \rho (f) \implies f|_W = 0 \implies \forall w \in W : f|_W = 0 $. Beweis durch Widerspruch, sei $ f \not\in \Span ( \left\{ f_{m+1} , \dotsc, f_n \right\} ) $, also $ f \coloneqq \sum_{i=1}^{n} a_i f_i $ mit $ a_i \in K $ und $ \exists i \in \N : 1\leq i \leq m : a_i \neq 0 $, D.h. aber, dass für ein solches $ i $ gilt $ f|_W(w_i) = a_i \neq 0 $.
+		Also war die Annahme falsch und $ f|_W $ muss in $ \Span( \left\{  f_{m + 1} , \dotsc, f_n \right\} ) $ liegen.\\
+		Sei $ f \in \Span( \left\{ f_{m+1} , \dotsc, f_n \right\} ) $ gegeben, sodass $ \exists a_{m+1} , \dotsc, a_n : f = \sum_{i=m+1}^{n} a_if_i $, dann folgt bereits für alle $ w \in W $, für die $ b_1, \dotsc, b_m $ existieren mit $ w = \sum_{i=1}^{m} b_i w_i $:
+		\begin{align*}
+			\rho (f)(w) &= f|_W(w) \\
+			&= \left( \sum_{i=m+1}^{n} a_if_i \right) (w) \\
+			&\overset{\text{Linearität} }{=} \sum_{i=m+1}^{n} a_if_i(w) \\
+			&= \sum_{i=m+1}^{n} a_if_i\left( \sum_{j=1}^{m} b_j w_j \right)  \\
+			&= \sum_{i=m+1}^{n} \sum_{j=1}^{m} a_ib_j \underbrace{f_i(w_j)}_{j < i} \\
+			&= 0 \\
+		\end{align*}
+		Also $ f \in \Kern \rho $
+		
+		Für $ R_\rho = W^* $: $ R_\rho \subset W^* $ trivial.\\
+		$ W^* \subset R_\rho $: Sei $ f|_W \in W^* $ gegeben, zu zeigen $ f|_W \in R_\rho $, also zu zeigen, $ \exists g \in V^* : \rho(g) = f|_W $, Wähle $ g \coloneqq f $, dann gilt: $ \rho(g) = \rho(f) = f|_W $\qed
+	\item Beh.: $ \mathcal{B} \coloneqq \left\{ f_1 + \Kern \rho, \dotsc, f_m + \Kern \rho \right\}  $ ist eine Basis für $ V^* / \Kern \rho $, dafür $ \Span(\mathcal{B} ) \subset V^* / \Kern \rho $ trivial und  $ \dim \Span (\mathcal{B} ) = m = n - (n - m) = \dim V^* - \dim \Kern \rho $.\\
+		Nach (b) ist $ R_\rho = W^* $.\\
+		Definiere
+		\[
+			T: V^* / \Kern \rho \to R_\rho
+		\]
+		Wobei für $ \alpha \in V^* / \Kern \rho $, mit $ \exists a_1, \dotsc, a_m \in K : \alpha = \sum_{i=1}^{m} a_if_i + \Kern \rho $ gilt, $ T(\alpha) = \sum_{i=1}^{m} a_if_i $.\\
+		Zu zeigen: $ \forall \alpha \in V^* / \Kern \rho = 0 \implies \alpha = 0 $ und $ \dim R_T = \dim R_\rho $.\\
+		Sei $ \alpha \in V^* / \Kern \rho $ gegeben mit $ T(\alpha) = 0 $, dann existieren $ a_1, \dotsc, a_m \in K : \alpha = \sum_{i=1}^{m} a_i f_i + \Kern \rho $ sodass gilt:
+		\begin{align*}
+			& T(\alpha) = 0\\
+			\iff & \sum_{i=1}^{m} a_if_i = 0 \quad | \text{ Da $ f_i $ l.u.} \\
+			\iff & a_1, \dotsc, a_m = 0 \\
+			\iff & \sum_{i=1}^{m} 0 \cdot f_i + \Kern \rho = \alpha\\
+			\iff & \alpha = 0
+		\end{align*}
+		Zu den Dimensionen:
+		$ \dim R_T \overset{\text{L.A.I Dimensionssatz} }{=} \dim V^* / \Kern \rho - \dim \Kern T = \left| \mathcal{B}  \right| - 0 = m = \dim W = \dim W^* = R_\rho $\\
+		Also ist $ T $ ein Isomorphismus von $ V^* / \Kern \rho $ nach $ R_\rho $.
+\end{enumerate}
+
+\subsection{}
+$ \dim U - \dim ( U \cap W ) = \dim U - ( \dim U + \dim W - \dim U + W ) = \dim ( U + W ) - \dim W $.\\
+Sei $ \mathcal{B} _1 \coloneqq  \left\{ \alpha_1, \dotsc, \alpha_l \right\}  $ eine Basis für $ U \cap W $,
+$ \mathcal{B} _U \coloneqq \left\{ \alpha_1, \dotsc, \alpha_l, \beta_1, \dotsc, \beta m \right\}  $ eine geordnete Basis für $ U $ und
+$ \mathcal{B} _W \coloneqq \left\{ \alpha_1, \dotsc, \alpha_l, \gamma_1, \dotsc, \gamma_n \right\} $ eine Basis für $ W $.\\
+Sei
+\[ 
+	T_1: U \to U \setminus W
+\]
+Wobei $ T_1(\alpha_i) = 0 $ für $ 1 \leq i \leq l $ und $ T_1(\beta_i) = \beta_i \quad \forall 1 \leq i \leq m $.\\
+dann $ \Kern T_1 = \left\{ \alpha_1, \dotsc, \alpha_l \right\} = U \cap W $, und da $ \beta_i \in U \setminus W $ für alle $ 1 \leq i \leq m $ und $ \dim R_{T_1}  = \dim U - \dim \Kern T_1 = l + m - l = m = \dim U \setminus W $, also $ T_1 $ ein Isomorphismus und $ R_{T_1}  = U \setminus W $\\
+also $ U / (U \cap W) = U / \Kern T_1 \simeq R_{T_1}  = U \setminus W $.\\
+Sei
+\[
+	T_2 : U + W \to U \setminus  W,
+\]
+wobei $ T_2(\beta_i) \to \beta_i $ mit $ 1 \leq i \leq m $ und $ T_2(\alpha_i) = 0 = T_2(\gamma_j) $ für $ 1 \leq i \leq l, 1 \leq j \leq n $.\\
+Dann gilt $ \Kern T_2 = \left\{ \alpha_1, \dotsc, \alpha_l, \gamma_1, \dotsc, \gamma_n \right\} = W $ und 
+$ R_{T_2} = \left\{ \beta_1, \dotsc, \beta_m \right\} = U \setminus W $, also
+\[
+	(U + W) / W = ( U + W ) / \Kern T_2 \simeq R_{T_2} = W = R_{T_1} \simeq U / \Kern T_1 = U / (U \cap W)
+\]
+
+\subsection{}
+\begin{enumerate}[label=(\alph*)]
+	\item Beweis durch Vollständige Induktion:
+		\begin{description}
+			\item[I.A.:] $ k = 0 $: $ x^k = x^0 = (\underbrace{1}_{0\text{-te Stelle} }, 0, \dotsc) $. Wie gewünscht.
+			\item[I.S.:] \textbf{I.V.:} $ x^k = (0, \dotsc, 0, \underbrace{1}_{k\text{-te Stelle} }, 0, \dotsc) $.\\
+				$ k \curvearrowright k + 1 $,\\
+				zu zeigen $ x^{k + 1} = (0, \dotsc, 0, \underbrace{0}_{k\text{-te Stelle} }, \underbrace{1}_{(k+1)\text{-te Stelle} }, 0, \dotsc) $,\\
+				Also zu zeigen $ (x^{k+1} )_{i \text{-te Stelle} } =  (x^{k + 1} )_i = \begin{cases}
+					1, &\quad i = k+1\\
+					0, &\quad \text{sonst} 
+				\end{cases} = \delta_{i, k+1} $,\\
+				während $ (x)_i = \delta_{i, 1}, (x^k)_i = \delta_{i, k}   $ gilt
+				\begin{align*}
+					(x^{k + 1})_i &= (x \cdot x^k)_i  \\
+					&= \left( \sum_{j=0}^{i} (x)_j (x^k)_{i - j}  \right)  \\
+					&= \sum_{j=0}^{i} \delta_{j, 1}  \delta_{i - j, k} \\
+					&= \delta_{i - 1, k} \\
+					&= \delta_{i, k + 1} \qed
+				\end{align*}
+		\end{description}
+	\item Zu zeigen: $ \forall f, g, h \in K^{\N _0}: f \cdot (g + h) = f \cdot g + f \cdot h $:
+		Sei $ f, g, h \in K^{\N _0}  $, mit $ f = (f_0, f_1, \dotsc), g = (g_0, \dotsc), h = (h_0, \dotsc) $. Zu zeigen $ (f\cdot (g + h))_i = (f \cdot g + f \cdot h)_i \quad \forall i \in \N _0 $
+		\begin{align*}
+			(f \cdot (g + h))_i &= \sum_{j=0}^{i} f_j \cdot (g + h)_{i - j} \\
+			&= \sum_{j=0}^{i} f_j \cdot (g_{i - j} + h_{i - j} ) \\
+			&= \sum_{j=0}^{i} f_j \cdot g_{i - j} + f_j \cdot  h_{i - j} \\
+			&= \sum_{j=0}^{i} f_j \cdot g_{i - j} + \sum_{j=0}^{i} f_j \cdot  h_{i - j} \\
+			&= (f \cdot  g)_i + (f \cdot h)_i \\
+			&= (f \cdot  g + f \cdot h)_i \\
+		\end{align*}
+		Sei $ c \in K $, zu zeigen: $ c(fg) = (cf)g $:
+		\begin{align*}
+			(c(fg))_i &= c (fg)_i \\
+			&= c \sum_{j=0}^{i} f_j g_{i - j}  \\
+			&= \sum_{j=0}^{i} c f_j g_{i - j}  \\
+			&= \sum_{j=0}^{i} (c f)_j g_{i - j}  \\
+			&= ((cf)g)_i \\
+		\end{align*}
+	\item Sei $ f, g \in K[x] $ mit $ f + g \neq 0 $, und $ f = \sum_{j=0}^{n} a_j x^j, g = \sum_{j=0}^{m} b_j x^j $.\\
+		Zu zeigen $ \deg (f + g) \leq \max \left\{ \deg f, \deg g \right\}  $:
+		\OE{} $ n \geq m $, sei $ b_{m+1}, \dotsc, b_n = 0 $
+		\begin{align*}
+			f + g &= \sum_{j=0}^{n} a_j x^j + \sum_{j=0}^{m} b_j x^j \\
+			&= \sum_{j=0}^{n} (a_j + b_j)x^j \\
+		\end{align*}
+		Also ist $ \deg(f + g) < n = \max \left\{ n, m \right\} = \left\{ \deg f, \deg g \right\}  $, für $ m = n $ und $ a_j + b_j = 0 \iff a_j = - b_j $, aber existiert, da $ f + g \neq 0 \iff \deg(f + g) \geq 0 $
+		und sonst $ \deg(f + g) = n = \max \left\{ n, m \right\} = \max \left\{ \deg f, \deg g \right\}  $.
+		
+	\item Sei $ f, g \in K[x] $ mit $ f = \sum_{j=0}^{n} a_j x^j, g = \sum_{j=0}^{m} b_j x^j $, und $ \deg f \neq \deg g \iff n \neq m $\\
+		Zu zeigen $ \deg (f + g) = \max \left\{ \deg f, \deg g \right\}  $:
+		\OE{} $ n > m $, sei $ b_{m+1}, \dotsc, b_n = 0 $
+		\begin{align*}
+			f + g &= \sum_{j=0}^{n} a_j x^j + \sum_{j=0}^{m} b_j x^j \\
+			&= \sum_{j=0}^{m} (a_j + b_j)x^j + \sum_{j=m+1}^{n} a_jx^j \\
+		\end{align*}
+		Also ist $ \deg(f + g) = n = \max \left\{ n, m \right\} = \max \left\{ \deg f, \deg g \right\}  $.
+\end{enumerate}
+
+\vspace{2cm}
+
+Sorry, war ein bisschen frustriert, deswegen ist es leider nicht so schön strukturiert :c
+
+\end{document}

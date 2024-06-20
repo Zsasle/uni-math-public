@@ -1,0 +1,271 @@
+\documentclass[sectionformat = aufgabe]{gadsescript}
+\settitlelh{\today\\\semester\\Gruppe 3, Briefkasten 11, Baiz}
+\setsemester{Summer Semester 2024}%
+\setuniversity{University of Konstanz}%
+\setfaculty{Faculty of Science\\(Mathematics and Statistics)}%
+\settitle{Übungsblatt 08}
+\setsubtitle{Elias Gestrich}
+%Salisha Baiz, salisha.baiz@uni-konstanz.de
+
+\begin{document}
+\maketitle
+\setcounter{section}{8}
+\subsection{}
+\begin{enumerate}[label=(\alph*)]
+	\item 
+		Zu zeigen: Wenn $ \forall i \in \left\{ 1, \dotsc, n \right\} : \forall \alpha_1, \dotsc, \alpha_n \gamma_i \in K^n, c \in K $ gilt, dass
+		\[
+			\delta(\alpha_1, \dotsc, \alpha_i + c\gamma_i, \dotsc, \alpha_n) =
+			\delta(\alpha_1, \dotsc, \alpha_i, \dotsc, \alpha_n) +
+			c \delta(\alpha_1, \dotsc, \gamma_i, \dotsc, \alpha_n)
+		\]
+		Sei nun also $ \alpha_1, \dotsc, \alpha_n, \gamma_i \in K^n, c \in K $ gegeben.
+		Betrachte:
+		\begin{align*}
+			\delta(\alpha_1, \dotsc, \alpha_i + c\gamma_i, \dotsc, \alpha_n)
+			~ &= \sum_{\pi \in S_n}^{} \Signum(\pi ) (\alpha_{1})_{ \pi (1)} \dotsb \left( \left( \alpha_i \right) _{\pi (i)} + c \left( \gamma_i \right) _{\pi (i)} \right) \dotsb \left( \alpha_n \right) _{\pi (n)} \\
+			~ &\overset{\text{Körperaxiome} }{=} \sum_{\pi \in S_n}^{} \Signum(\pi ) (\alpha_{1})_{ \pi (1)} \dotsb \left( \alpha_i \right) _{\pi (i)} \dotsb \left( \alpha_n \right) _{\pi (n)} \\
+			~ &\quad + \sum_{\pi \in S_n}^{} \Signum(\pi ) (\alpha_{1})_{ \pi (1)} \dotsb \left( c \left( \gamma_i \right) _{\pi (i)} \right) \dotsb \left( \alpha_n \right) _{\pi (n)} \\
+			~ &\overset{\text{Körperaxiome} }{=} \sum_{\pi \in S_n}^{} \Signum(\pi ) (\alpha_{1})_{ \pi (1)} \dotsb \left( \alpha_i \right) _{\pi (i)} \dotsb \left( \alpha_n \right) _{\pi (n)} \\
+			~ &\quad + c \sum_{\pi \in S_n}^{} \Signum(\pi ) (\alpha_{1})_{ \pi (1)} \dotsb \left( \gamma_i \right) _{\pi (i)} \dotsb \left( \alpha_n \right) _{\pi (n)} \\
+			~ &= \delta(\alpha_1, \dotsb, \alpha_n) + c\delta(\alpha_1, \dotsc, \alpha_{i - 1} , \gamma_i, \alpha_{i + 1} , \alpha_n) \qed
+		\end{align*}
+	\item ~
+		\begin{description}
+			\item[``$ n $-linear'':] 
+				Sei $ z_1, \dotsc, z_n, a_i \in K^n, c \in K $ gegeben, zu zeigen
+				\[
+					\delta_B \left( z_1, \dotsc, z_i + c a_i, z_n \right)
+					= \delta_B \left( z_1, \dotsc, z_n \right) 
+					+ \delta_B \left( z_1, \dotsc, z_{i - 1} , a_i, z_{i + 1} , \dotsc, z_n \right) 
+				\]
+				Es gilt:
+				\begin{align*}
+					\delta_B \left( z_1, \dotsc, z_i + c a_i, z_n \right) %
+					&= \det \begin{pmatrix} z_1 B \\ \vdots \\ \left( z_i + c a_i \right) B \\ \vdots \\ z_n \end{pmatrix}  \\
+					&\overset{\text{Dist.} }{=} \det \begin{pmatrix} z_1 B \\ \dots \\ z_i B + c \left( a_i B \right) \\  \vdots \\ z_n \end{pmatrix}  \\
+					&\overset{\text{$ n $-lin. von $ \det $} }{=} \det \begin{pmatrix} z_1 B \\ \vdots \\ z_n \end{pmatrix} + c \det \begin{pmatrix} z_1 B \\ \vdots \\ z_{i - 1} B \\ a_i B \\ z_{i + 1} \\ \vdots \\ z_n \end{pmatrix}  \\
+					&= \delta_B (z_1, \dotsc z_n) + c \delta_B \left( z_1, \dotsc, z_{i - 1} , a_i, z_{i + 1} , \dotsc, z_n \right)
+				\end{align*}
+			\item[``alternierend'':]
+				Sei $ i \neq j $ mit $ z_i = z_j $, zu zeigen:
+				\[
+					\delta_B\left( z_1, \dotsc, z_n \right) = 0
+				\]
+				Betrachte hierfür:
+				\[
+					\delta_B(z_1, \dotsc, z_n) = \det \begin{pmatrix} z_1 B \\ \vdots \\ z_n B \end{pmatrix}
+				\]
+				Da $ z_i = z_j $, ist auch $ z_i B = z_j B $, also
+				\[
+					\det \begin{pmatrix} z_1 B \\ \vdots \\ z_n B \end{pmatrix} = 0
+				\]
+				Da $ \det $ alternierend \qed
+		\end{description}
+\end{enumerate}
+
+\subsection{}
+\begin{description}
+	\item[``$ \implies  $'':] 
+		Sei $ A \in M_{m \times m} (K), B \in M_{m \times n} (K), C \in M_{n \times m} (K) $ gegeben, zu zeigen
+		\[
+			\det
+			\left(
+			\begin{array}{c | c}
+				A & B \\ \hline
+				C & \mathcal{O} 
+			\end{array}
+			\right)
+			= 0
+		\]
+		Sei
+		\[
+			D = \left( 
+				\begin{array}{c | c}
+					A & B \\ \hline
+					C & \mathcal{O} 
+				\end{array}
+			\right) 
+		\]
+		So, dass $ D_{ij} = 0 $, wenn $ m + 1 \leq i,j \leq n + m $.
+		\textbf{Beh.:} $ \forall \pi \in S_{m + n} : \exists k \in \left\{ m + 1, \dotsc, m + n \right\} : D_{k \pi (k)} = 0 $.
+		\textbf{Bew.:} Da $ n > m $, muss ein $ k \in \left\{ m + 1, m + n \right\}  $ existieren, so dass $ \pi (k) \in \left\{ m + 1, m + n \right\}  $ für $ k \in \left\{ m + 1, m + n \right\}  $, da $ \pi  $ bijektiv ist, also
+		\[
+			\left| \pi (\left\{ m, \dotsc, m + n \right\}  \right| = \left| \left\{ m, \dotsc, m + n \right\}  \right| = n
+		\]
+		Daraus folgt, dass $ D_{1 \pi (1)} \dotsb D_{(m + n) \pi (m +n) } = 0 $ für alle $ \pi  $, also
+		\[
+			\det(D) = \sum_{\pi \in S_{m + n} }^{} \Signum (\pi) \prod_{k=1}^{m + n} D_{k \pi (k)} = 0  
+		\]
+	\item[``$ \impliedby  $:'']
+		Sei $ A = \begin{pmatrix} 1 \end{pmatrix} , B = \begin{pmatrix} 0 \end{pmatrix} , C = \begin{pmatrix} 1 \end{pmatrix}  $, und $ m = n = 1 $, dann gilt:
+		\[
+			\det\left( 
+				\begin{array}{c | c}
+					A & B \\ \hline
+					C & \mathcal{O} 
+				\end{array}
+			\right) 
+			= \det \begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix} = 1 \cdot 0 - 0 \cdot 1 = 0
+		\]
+		Aber da $ n \ngtr m $ steht dies im Widerspruch zur Aussage ``$ \det \left( \begin{array}{c | c} A & B \\ \hline C & \mathcal{O} \end{array} \right) = 0 $ genau dann, wenn $ n > m $ erfüllt ist.''
+\end{description}
+
+\subsection{}
+\begin{align*}
+	\det\left( A + B \right) - \left( \det (A) + \det (B) \right)
+	&= (a_{11} + b_{11}) \left( a_{22} + b_{22} \right) - \left( a_{12} + b_{12} \right) \left( a_{21} + b_{21} \right)\\
+	&\quad - \left( a_{11} a_{22} - a_{12}a_{21} + b_{11}b_{22} - b_{12}b_{21} \right)\\
+	&= a_{11}a_{22} + a_{11}b_{22} + b_{11}a_{22} + b_{11}b_{22} \\
+	&\quad - a_{12}a_{21} - a_{12}b_{21} - b_{12}a_{21} - b_{12}b_{21} \\
+	&\quad - \left( a_{11} a_{22} - a_{12}a_{21} + b_{11}b_{22} - b_{12}b_{21} \right)\\
+	~ &= a_{11}b_{22} + b_{11}a_{22} - a_{12}b_{21} - b_{12}a_{21}
+\end{align*}
+\begin{align*}
+	\det\left( C \right) + \det\left( D \right) &= c_{11}c_{22} - c_{12}c_{21} + d_{11}d_{22} - d_{12}d_{21} \\
+\end{align*}
+Setze
+$ c_{11} = a_{11}, c_{12} = a_{12}, c_{21} = b_{21}, c_{22} = b_{22} $ und
+$ d_{11} = b_{11}, d_{12} = b_{12}, d_{21} = a_{21}, d_{22} = a_{22} $,
+so gilt:
+\begin{align*}
+	\det\left( A + B \right) - \left( \det\left( A \right) + \det \left( B \right)  \right)
+	&= a_{11}b_{22} - a_{12}b_{21} + b_{11}a_{22} - b_{12}a_{21} \\
+	&= c_{11}c_{22} - c_{12}c_{21} + d_{11}d_{22} - d_{12}d_{21} \\
+	&= \det(C) + \det(D)
+\end{align*}
+
+Sei zum Beispiel
+\[
+	A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix} , B = \begin{pmatrix} 5 & 6 \\ 7 & 8 \end{pmatrix} 
+\]
+So dass
+\[
+	\det(A) = 1 \cdot 4 - 2 \cdot 3 = -2, \det(B) = 5 \cdot 8 - 6 \cdot 7 = 40 - 42 = -2
+\]
+und
+\[
+	\det(A + B) = \left( 1 + 5 \right) \cdot \left( 4 + 8 \right) - \left( 2 + 6 \right) \left( 3 + 7 \right) = 6 \cdot 12 - 8 \cdot 10 = 72 - 80 = -8
+\]
+Setze
+\[
+	C \coloneqq \begin{pmatrix} 1 & 2 \\ 7 & 8 \end{pmatrix} , D \coloneqq \begin{pmatrix} 5 & 6 \\ 3 & 4 \end{pmatrix}
+\]
+Sodass $ \det(C) = 1 \cdot 8 - 2 \cdot 7 = 8 - 14 = -6 $ und $ \det(D) = 5 \cdot 4 - 6 \cdot 3 = 20 - 18 = 2 $
+Also
+\begin{align*}
+	\det\left( A + B \right) - \left( \det(A) + \det(B) \right) &= -8 - \left( -2 + \left( -2 \right)  \right)  \\
+	~ &= -8 - \left( -4 \right)  \\
+	~ &= -8 + 4 \\
+	~ &= -4 \\
+	~ &= -6 + 2 \\
+	~ &= \det(C) + \det(D) \qed
+\end{align*}
+
+\subsection{}
+\begin{enumerate}[label=(\alph*)]
+	\item
+		\begin{align*}
+			\det\left( A + B \right) &= \det\left( 2a | b - e | 2c | b + d \right)  \\
+			~ &\overset{\text{$ n $-linear} }{=} \det\left( 2a | b | 2c | b + d \right) - \det\left( 2a | e | 2c | b + d \right)  \\
+			~ &\overset{\text{$ n $-linear} }{=} \det\left( 2a | b | 2c | b \right) + \det ( 2a | b | 2c | d ) - \det\left( 2a | e | 2c | b \right) - \det\left( 2a | e | 2c | d \right)  \\
+			~ &\overset{\text{alt.} }{=} \det ( 2a | b | 2c | d ) - \det\left( 2a | e | 2c | b \right) - \det\left( 2a | e | 2c | d \right)  \\
+			~ &\overset{\text{alt.} }{=} 4 \det ( a | b | c | d ) + 4 \det\left( a | - e | c | b \right) + 4\det\left( a | d | c | e \right)  \\
+			~ &= 4 \left( 3 - 2 + 5 \right)  \\
+			~ &= 24 \\
+		\end{align*}
+	\item
+		Entwicklung nach der 4. Spalte:
+		\begin{align*}
+			\det
+			\begin{pmatrix} 
+				1 & 3 & 4 & 0 \\
+				3 & 2 & 2 & 0 \\
+				3 & 1 & 0 & 2 \\
+				4 & 2 & 1 & 1 \\
+			\end{pmatrix} 
+			~ &= 
+			- 2 \cdot _n
+			\det
+			\begin{pmatrix} 
+				1 & 3 & 4 \\
+				3 & 2 & 2 \\
+				4 & 2 & 1 \\
+			\end{pmatrix} 
+			+
+			1 \cdot _n
+			\det
+			\begin{pmatrix} 
+				1 & 3 & 4 \\
+				3 & 2 & 2 \\
+				3 & 1 & 0 \\
+			\end{pmatrix} 
+			\\
+			~ &= - 2 \cdot _n ( 1 \cdot _n 2 \cdot _n 1 +_n 3 \cdot _n 2 \cdot _n 4 +_n 4 \cdot _n 3 \cdot _n 2 \\
+			~ &\quad -_n 4 \cdot _n 2 \cdot _n 4 -_n 2 \cdot _n 2 \cdot _n 1 -_n 1 \cdot _n 3 \cdot _n 3) \\
+			~ &\quad+_n ( 1 \cdot _n 2 \cdot _n 0 +_n 3 \cdot _n 2 \cdot _n 3 +_n 4 \cdot _n 3 \cdot _n 1 \\
+			~ &\quad-_n 4 \cdot _n 2 \cdot _n 3 -_n 2 \cdot _n 1 \cdot _n 1 -_n 0 \cdot _n 3 \cdot _n 3 ) \\
+			~ &= -_n 2 \cdot _n ( 2 +_n 3 \cdot _n 2 \cdot _n 4 +_n 4 \cdot _n 3 \cdot _n 2 \\
+			~ &\quad -_n 4 \cdot _n 2 \cdot _n 4 -_n 2 \cdot _n 2 -_n 3 \cdot _n 3) \\
+			~ &\quad+_n ( 3 \cdot _n 2 \cdot _n 3 +_n 4 \cdot _n 3 \\
+			~ &\quad-_n 4 \cdot _n 2 \cdot _n 3 -_n 2 \cdot _n 1 ) \\
+			~ &= \overline{ - 2 \left( 2 + 24 + 24 - 32 - 4 - 9 \right) + 18 + 12 - 24 - 2} \\
+			~ &= \overline{ - 2 \left( 2 + 48 - 32 - 13 \right) + 30 - 26} \\
+			~ &= \overline{ - 2 \left( 50 - 45\right) + 30 - 26} \\
+			~ &= \overline{ - 2 \left( 5 \right) + 4} \\
+			~ &= \overline{ -10 + 4	} \\
+			~ &= \overline{ -6 } \\
+		\end{align*}
+		Also ist die Determinante über $ \F_5 $ gleich $ 4 $ und über $ \F_{11} $ gleich $ 5 $
+\end{enumerate}
+
+\subsection*{Zusatzaufgabe für Interessierte}
+\textbf{Beh.:} 
+für alle $ (b_i)_{i \in \N } \subset \N  $
+\[
+	\sum_{i=1}^{n} (-1)^{b_i} 
+\]
+ist gerade genau dann wenn $ n $ gerade.
+\begin{description}
+	\item[I.A.] $ n = 1 $: $ \sum_{i=1}^{n} (-1)^{b_i} = (-1)^{b_1}  $ ist ungerade
+	\item[I.V.] wenn $ n $ gerade, so $ \sum_{i=1}^{n} (-1)^{b_i}  $ gerade, sonst ungerade
+	\item[I.S.] $ n \curvearrowright n + 1 $:
+		\[
+			\sum_{i=1}^{n + 1} (-1)^{b_i} = (-1)^{b_{n + 1} } + \sum_{i=1}^{n} (-1)^{b_i} 
+		\]
+		Also wenn $ n $ gerade, dann ist die Summe $ \sum_{i=1}^{n} (-1)^{b_i}  $ gerade so, dass wenn man eins addiert oder subtrahiert das ergebnis ungerade ist,
+		für $ n $ ungerade analog, wie gewünscht.
+\end{description}
+
+\textbf{Beh.:} $ m = \frac{3n}{ 2 } $ für $ n $ gerade, und $ m = \frac{3n - 1}{ 2 } = \frac{3(n - 1)}{ 2 } + 1 $ wenn $ n $ ungerade
+\begin{description}
+	\item[I.A.] $ n = 1 $, dann gilt $ 2 | \det(A) $, da für $ A = \begin{pmatrix} 2 \end{pmatrix}  $ gilt $ 2 = 1 \cdot 2 + 0 $ und für $ A = \begin{pmatrix} -2 \end{pmatrix}  $ gilt $ -2 = -1 \cdot 2 + 0 $.
+		Aber $ 4 \not | \det (A) $, da für $ A = \begin{pmatrix} 2 \end{pmatrix}  $ gilt $ \forall l \in \Z $, dass $ 4l < 2 $ oder $ 4l > 2 $.
+	\item[I.V.] $ m = 2n  $ für $ n $ gerade, und $ m = 2n - 1 $ wenn $ n $ ungerade
+	\item[I.S.]
+		für $ n $ gerade:
+		Sei $ (b_i)_{i \in \N } \subset \N $ eine Folge, sodass
+		\[
+			\det(A) = \sum_{i=1}^{n + 1} (-1)^{b_i} \cdot 2 \cdot \det(A[i|j])
+		\]
+		Nach I.V. ist die größtmögliche zweierpotenz, die alle $ \det(A[i|j]) $ teilt $ 2^{\frac{3n}{ 2 } } $ so, dass
+		für alle $ c \in \Z ,  A \in \Q ^{n \times n}  $ gilt
+		$ c | \det(A) \iff  c | \sum_{i=1}^{n + 1} (-1)^{b_i} \cdot 2 \cdot 2^{\frac{3n}{ 2 } } \iff c | 2^{\frac{3n}{ 2 } + 1} \sum_{i=1}^{n + 1} (-1)^{b_i} $.
+		Da $ \sum_{i=1}^{n + 1} (-1)^{b_i}  $ ungerade ist für $ n $ gerade, gilt also $ c | \det(A) \iff c | 2^{\frac{3n}{ 2 } +1}  $
+		Also ist das größte $ m $ gleich $ \frac{3n}{ 2 } + 1 $ für $ n $ gerade
+
+		für $ n $ ungerade:
+		Sei $ (b_i)_{i \in \N } \subset \N $ eine Folge, sodass
+		\[
+			\det(A) = \sum_{i=1}^{n + 1} (-1)^{b_i} \cdot 2 \cdot \det(A[i|j])
+		\]
+		Nach I.V. ist die größtmögliche zweierpotenz, die alle $ \det(A[i|j]) $ teilt $ 2^{\frac{3n - 1}{ 2 } } $ so, dass
+		für alle $ c \in \Z ,  A \in \Q ^{n \times n}  $ gilt
+		$ c | \det(A) \iff  c | \sum_{i=1}^{n + 1} (-1)^{b_i} \cdot 2 \cdot 2^{\frac{3n - 1}{ 2 } } \iff c | 2^{\frac{3n - 1}{ 2 } + 1} \sum_{i=1}^{n + 1} (-1)^{b_i} $.
+		Da $ \sum_{i=1}^{n + 1} (-1)^{b_i}  $ gerade ist für $ n $ ungerade, gilt also $ c | \det(A) \iff c | 2^{\frac{3n - 1}{ 2 } + 2}  $
+		Also ist das größte $ m $ gleich $ \frac{3n - 1}{ 2 } + 2 = \frac{3(n + 1)}{ 2 }  $ für $ n $ gerade
+		Was zu zeigen war.
+\end{description}
+
+\end{document}
+

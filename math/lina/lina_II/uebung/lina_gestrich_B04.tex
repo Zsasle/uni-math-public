@@ -1,0 +1,157 @@
+\documentclass[sectionformat = aufgabe]{gadsescript}
+\settitlelh{\today\\\semester\\Gruppe 3, Briefkasten 11, Baiz}
+\setsemester{Summer Semester 2024}%
+\setuniversity{University of Konstanz}%
+\setfaculty{Faculty of Science\\(Mathematics and Statistics)}%
+\settitle{Übungsblatt 04}
+\setsubtitle{Elias Gestrich}
+%Salisha Baiz, salisha.baiz@uni-konstanz.de
+
+\begin{document}
+\maketitle
+\setcounter{section}{4}
+\subsection{}
+\begin{enumerate}[label=(\alph*)]
+	\item 
+		\begin{align*}
+			f(T) (x_1, x_2, x_3) &= \left( \sum_{i=0}^{3} c_i T^i \right) (x_1, x_2, x_3) \\
+			~ &= \sum_{i=0}^{3} c_i T^i (x_1, x_2, x_3) \\
+			~ &= - (T \circ T \circ T) (x_1, x_2, x_3) + 2 \cdot (x_1, x_2, x_3) \\
+			~ &= - T(T(T((x_1, x_2, x_3)))) + 2 \cdot (x_1, x_2, x_3) \\
+			~ &= - T(T((x_1, x_3, -2x_2 - x_3))) + 2 \cdot (x_1, x_2, x_3) \\
+			~ &= - T((x_1, -2x_2 - x_3, -2x_3 + 2x_2 + x_3)) + 2 \cdot (x_1, x_2, x_3) \\
+			~ &= - T((x_1, -2x_2 - x_3, 2x_2 - x_3)) + 2 \cdot (x_1, x_2, x_3) \\
+			~ &= - (x_1, 2x_2 - x_3, 4x_2 + 2x_3 - (2x_2 - x_3)) + 2 \cdot (x_1, x_2, x_3) \\
+			~ &= - (x_1, 2x_2 - x_3, 4x_2 + 2x_3 - 2x_2 + x_3) + 2 \cdot (x_1, x_2, x_3) \\
+			~ &= - (x_1, 2x_2 - x_3, 2x_2 + 3x_3) + 2 \cdot (x_1, x_2, x_3) \\
+			~ &= (- x_1, - 2x_2 + x_3, -2x_2 - 3x_3) + 2 \cdot (x_1, x_2, x_3) \\
+			~ &= (x_1, x_3, -2x_2 - x_3)
+		\end{align*}
+		und somit $ f(T) = T $
+	\item 
+		\begin{description}
+			\item[Vor.:] $ K $ ein Körper
+				\[
+					\varphi_h : K[x] \to K[x], f = \sum_{i=0}^{n} c_i x^i \mapsto \sum_{i=0}^{n} c_i h^i
+				\]
+				wobei $ h^0 = 1, \underbrace{h \cdot \dotsb \cdot h}_{i\text{-mal} } \in K[x] (i \geq 1) $.
+			\item[Beh.:] $ \varphi_h $ linear und injektiv, also $ \forall f, g \in K[x], \lambda_1, \lambda_2 \in K $
+				\[
+					\varphi_h (\lambda_1 f + \lambda_2 g) = \lambda_1 \varphi_h (f) + \lambda_2 \varphi_h(g) \text{ und} 
+				\]
+				\[
+					\varphi_h(f) = 0 \implies f = 0
+				\]
+			\item[Bew.:] Sei $ f, g \in K $ gegeben mit $ f = \sum_{i=0}^{n} f_i x^i, g = \sum_{i=0}^{m} g_i x^i $ und $ \lambda_1, \lambda_2 \in K $. \OE{} $ n \geq m $ und $ g_i = 0 $ für $ m < i \leq n $, so gilt:
+				\begin{align*}
+					\varphi_h (\lambda_1 f + \lambda_2 g) &= \varphi_h \left( \lambda_1 \left( \sum_{i=0}^{n} f_i x^i \right) + \lambda_2 \left( \sum_{i=0}^{m} g_i x^i \right) \right)  \\
+					~ &= \varphi_h \left( \left( \sum_{i=0}^{n} \lambda_1 f_i x^i \right) + \left( \sum_{i=0}^{m} \lambda_2 g_i x^i \right) \right)  \\
+					~ &= \varphi_h \left( \sum_{i=0}^{n} \lambda_1 f_i x^i + \lambda_2 g_i x^i \right) \\
+					~ &= \varphi_h \left( \sum_{i=0}^{n} (\lambda_1 f_i + \lambda_2 g_i) x^i \right) \\
+					~ &= \sum_{i=0}^{n} (\lambda_1 f_i + \lambda_2 g_i) h^i \\
+					~ &= \left(\sum_{i=0}^{n} \lambda_1 f_i h^i \right) + \left( \sum_{i=0}^{m} \lambda_2 g_i h^i \right) \\
+					~ &= \left(\lambda_1 \sum_{i=0}^{n} f_i h^i \right) + \left(\lambda_2 \sum_{i=0}^{m} g_i h^i \right) \\
+					~ &= \lambda_1 \varphi_h \left(\sum_{i=0}^{n} f_i x^i \right) + \lambda_2 \varphi_h \left(\sum_{i=0}^{m} g_i h^i \right) \\
+					~ &= \lambda_1 \varphi_h \left(f\right) + \lambda_2 \varphi_h (g),
+				\end{align*}
+				was zu zeigen war\\
+				Für $ \deg h \eqcolon l $ gilt
+				$ \deg(h^i) = \deg ( \underbrace{h \cdot \dotsb \cdot h}_{i\text{-mal} }) = \underbrace{l + \dotsb + l}_{i\text{-mal} } = il $
+				Also
+				\begin{equation}
+					\label{eq:deg}
+					\deg(\varphi_h(f)) = \deg(f) \cdot l = nl = \deg(f) \cdot \deg(h).
+				\end{equation}
+				Wenn also $ n \geq 1 $, dann auch $ \deg(\varphi_h(f)) \geq 1 $, also ist $ f = f_0 $.
+				Also $ 0 = \varphi_h(f) = \sum_{i=0}^{0} f_i h^i = f_0 \cdot 1 = f_0 = 0 $, somit ist auch $ f = f_0 = 0 $\qed
+		\end{description}
+	\item s. \eqref{eq:deg}
+	\item 
+		\begin{description}
+			\item[Beh.:] $ \varphi_h $ ist genau dann ein Isomorphismus, wenn $ \deg(h) = 1 $ 
+			\item[Bew.:]  
+				\begin{description}
+					\item[``$ \implies  $'':] Durch Kontraposition, sei $ \deg(h) = n > 1 $, zu zeigen $ \varphi_h $ ist kein Isomorphismus, insbesondere $ \varphi_h $ ist nicht surjektiv.
+						Betrachte hierfür die Funktion $ g(x) = x $, mit $ \deg(g) = 1 $.
+						Für alle Funktionen $ f \in K[x] $ mit $ \deg(f) = m $ gilt $ \deg(\varphi_h(f) = n\cdot m $. Für $ m = 0 $ gilt $ \deg(\varphi_h(f)) = 0 $ und für $ n \geq 1 $ gilt $ \deg(\varphi_h(f)) = nm > n \geq 1 $, da aber wenn $ \varphi_h(f) = g $ gelten soll auch der Grad der Funktionen gleich sein muss, aber $ \deg(\varphi_h(f)) \neq 1 $ für alle $ f \in K[x] $, gibt es kein $ f \in K[x] $ mit $ \varphi_h(f) = g $ 
+					\item[``$ \impliedby  $'':] Sei $ h \in K[x] $ mit $ \deg(h) = 1 $, also $ h = h_0 + h_1 x $ mit $ h_1 \neq 0 $
+						Sei $ g \in K[x] $ beliebig mit $ \deg(g) = n $.
+						So gilt nach Tayors Formel mit Entwicklungspunkt $ a = - \frac{h_0}{ h_1 }  $:
+						\[
+							g = \sum_{i=0}^{n} \frac{ g^{(i)} }{ i! } \cdot \left(x + \frac{ h_0 }{ h_1 } \right)^i
+							= \sum_{i=0}^{n} \frac{ g^{(i)} }{ h_1^i i! } \cdot (h_0 + h_1 x)^i
+						\]
+						Wähle $ f = \sum_{i=0}^{n} f_i x^i $ mit 
+						\[
+							f_i \coloneqq \frac{ g^{(i)} }{ h_1^i i! }
+						\]
+						so, dass
+						\[
+							\varphi_h(f) = \sum_{i=0}^{n} \frac{ g^{(i)} }{ h_1^i i! } h^i = \sum_{i=0}^{n} \frac{ g^{(i)} }{ h_1^i i! } (h_0 + h_1 x)^{i} = g \qed
+						\]
+				\end{description}
+		\end{description}
+\end{enumerate}
+
+\subsection{}
+\begin{enumerate}[label=(\alph*)]
+	\item Sei $ f \in K[x] $ gegeben mit $ f = \sum_{i=0}^{n} f_i x^i $, zu zeigen es existieren endlich viele $ c_{\sigma(1)} , \dotsc, c_{\sigma(m)}  $ mit $ \sigma $ injektiv, sodass $ f = \sum_{i=0}^{m} c_{\sigma(i)} x^{\sigma(i)}  $.
+		Wähle $ \sigma = \Id $, $ m = n $ und $ c_i = f_i $, sodass $ \sum_{i=0}^{m} c_{\sigma(i)} x^{\sigma(i)} = \sum_{i=0}^{n} c_i x^{i} = \sum_{i=0}^{n} f_i x^i = f $\qed
+	\item Wähle $ f = \sum_{i=0}^{\infty} x^{i} \in K\llbracket x \rrbracket $. Behauptung, $ f $ ist nicht durch eine enldiche lineare Kombination von Elementen aus $ \mathcal{B}  $ darstellbar.\\
+		Zum Widerspruch, nehme an es gäbe eine endliche Linearkombination aus Elementen aus $ \mathcal{B}  $, sodass diese $ f $ darstellt.
+		Dann muss es auch ein Element $ x^k $ aus $ \mathcal{B}  $ geben mit dem größtem $ k $, sei dies $ n $.
+		Also existieren $ c_0, \dotsc, c_n $ mit $ f = \sum_{i=0}^{n} c_i x^{i}  $. Das ist aber ein Widerspruch dazu, dass $ f = \sum_{i=0}^{\infty} x^{i}  $ ist.
+
+\end{enumerate}
+
+\subsection{}
+\begin{enumerate}[label=(\alph*)]
+	\item Da $ K $ endlich ist $ \exists m, l \in \N  $, sodass $ c^{m} = c^{l} $, \OE{} $ m > l $, also $ c^{m - l} = 1 $. Setze $ n = m - l $, sodass $ c^n = c ^{m - l} = 1 $.
+	\item Sei $ m \coloneqq \Char(K) \geq 1 $. Für alle $ i = 1,  \dotsc, m - 1 $ existiert nach (a) ein $ n_i $ mit $ i^{n_i} = 1 $. Sei $ n = 1 + \prod_{i = 1} ^{m - 1} n_i $, so dass für alle $ c \in K $ gilt
+		\[
+			c^{n} = c^{\left(1 + \prod_{i} n_i\right)} = c \cdot \left( c^{n_c}  \right) ^{\left(\prod_{i \neq c} n_i\right)} = c \cdot \left( 1 \right) ^{\left(\prod_{i \neq c} n_i\right)} = c \cdot 1 = c
+		\]
+		Sei $ f_1 = c x $ ein Polynom und $ f_2 = cx^{n} $ so, dass $ f_1 \neq f_2 $
+		Dann folgt $ \phi(f_1)(a) = c \cdot a = c \cdot a^n = \phi(f_2)(a) $. Für alle $ a \in K $. Also $ \phi(f_1) = \phi(f_2) $
+\end{enumerate}
+
+\subsection{}
+\begin{enumerate}[label=(\alph*)]
+	\item 
+		Für $ i \neq j $:
+		\begin{align*}
+			L_i(P_j) &= P_j(t_i) \\
+			~ &= \prod_{k \neq j} \frac{ t_i - t_k }{ t_j - t_k }  \\
+			~ &= \frac{ t_i - t_i }{ t_j - t_i } \cdot \left( \prod_{k \neq j, k \neq i} \frac{ t_i - t_k }{ t_j - t_k } \right) \\
+			~ &= 0 \cdot \left( \prod_{k \neq j, k \neq i} \frac{ t_i - t_k }{ t_j - t_k } \right) \\
+			~ &= 0
+		\end{align*}
+		und für $ i = j $:
+		\begin{align*}
+			L_i(P_j) &= L_i(P_i) \\
+			~ &= P_i(t_i) \\
+			~ &= \prod_{k \neq i} \frac{ t_i - t_k }{ t_i - t_k }  \\
+			~ &= 1
+		\end{align*}
+	\item Lineare Unabhängigkeit von $ \left\{ P_0, \dotsc, P_n \right\}  $: Sei
+		\[
+			\sum_{i=0}^{n} a_iP_i = 0
+		\]
+		zu zeigen $ a_i = 0 $ für alle $ 1 \leq i \leq n $.
+		Betrachte hierfür:
+		\begin{align*}
+			0 &= L_j(0) \\
+			~ &= L\left( \sum_{i=0}^{n} a_iP_i \right)  \\
+			~ &= \sum_{i=0}^{n} a_iL_j(P_i) \\
+			~ &= \sum_{i = 0} ^n a_i \delta_{ij}  \\
+			~ &= a_j \\
+		\end{align*}
+		Also $ a_j = 0 $ für alle $ 1 \leq j \leq n $, was zu zeigen war.
+		Da $ \left\{ 1, x, \dotsc, x^n \right\}  $ eine Basis für $ K[x]_{\leq n}  $ gilt $ \dim V = n + 1 = \left| \left\{ P_0, \dotsc, P_n \right\}  \right|  $.
+		Also $ \left\{ P_0, \dotsc, P_n \right\}  $ Basis von $ V $.
+
+		Da $ \left| \left\{ L_0, \dotsc, L_n \right\}  \right| = \left| \left\{ P_0, \dotsc, P_n \right\}  \right|  $ und $ L_i(P_j) = \delta_{ij}  $ ist $ \left\{ L_0, \dotsc, L_n \right\}  $ die Dualbasis zu $ \left\{ P_0, \dotsc, P_n \right\}  $ und damit insbesondere eine Basis.
+\end{enumerate}
+
+
+\end{document}

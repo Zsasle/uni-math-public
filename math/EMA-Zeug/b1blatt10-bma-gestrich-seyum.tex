@@ -1,0 +1,42 @@
+\documentclass{gadsescript}
+
+\setsemester{Winter Semester 2023/2024}%
+\setuniversity{University of Konstanz}%
+\setfaculty{Faculty of Science\\(Mathematics and Statistics)}%
+\settitle{BMA}
+
+\begin{document}
+\maketitle
+\textbf{Vor.:} Es seien $ m, r \in \N  $, $ V $ ein $ \R  $-Vektorraum der Dimension $ m $ und $ W $ ein beliebiger $ \R  $-Vektorraum.
+Weiter seien $ v_1, \dotsc, v_r \in V $ und $ w_1, \dotsc, w_r \in W $.
+\textbf{Beh.:} $ v_1, \dotsc, v_r $ linear unabhängig $ \implies \exists f: V \to W $ mit
+\[
+	f(v_j) = w_j \quad (j = 1, \dotsc, r).
+\]
+und $ f $ eine lineare Abbildung
+\begin{proof*}
+	Sei $ v_1, \dotsc, v_r \in V $ linear unabhängig und $ w_1, \dotsc, w_r \in W $$ f: V \to W $ mit
+	und da $ v_1, \dotsc, v_r $ linear unabhängig Existiert nach Korollar 13.9. eine Basis $ \mathcal{B} $ mit $ \left\{ v_1, \dotsc, v_r \right\} \subset \mathcal{B}  $, sodass $ \mathcal{B} = \left\{ v_1, \dotsc, v_r, \dotsc, v_m \right\}  $.\\
+	Außerdem seien $ w_{r+1} = w_m = 0 $.\\
+	Sei
+	\[
+		f: V \to W, v = \sum_{n=1}^{m} c_n v_n \mapsto \sum_{n=1}^{m} c_n w_n \quad \forall c_n \in \R 
+	\]
+	sodass $ f(v_j) = w_j $ für $ j = 1, \dotsc, r $.
+	zu zeigen $ f $ lineare Abbildung, also zu zeigen $ \forall c \in \R: \forall \alpha, \beta \in V: f(c\alpha + \beta) = cf(\alpha) + f(\beta) $:
+	Seien $ c \in R, \alpha, \beta \in V $ gegeben, zu zeigen $  f(c\alpha + \beta) = cf(\alpha) + f(\beta) $:
+	Seien $ a_n, b_n \in \R  $ mit $ n = 1, \dotsc, r $ gegeben, sodass $ \alpha = \sum_{n=1}^{m} a_n v_n $ und $ \beta = \sum_{n=1}^{m} b_n v_n $:
+	\begin{align*}
+		f(c\alpha + \beta) &= f\left(c \sum_{n=1}^{m} a_n v_n + \sum_{n=1}^{m} b_n v_n \right) \\
+		~&= f\left( \sum_{n=1}^{m} (ca_n +b_n) v_n \right) \\
+		~&= \sum_{n=1}^{m} (ca_n +b_n) w_n \\
+		~&= c \sum_{n=1}^{m} a_n w_n + \sum_{n=1}^{m} b_n w_n\\
+		~&= cf\left( \sum_{n=1}^{m} a_n v_n \right) + f\left( \sum_{n=1}^{m} b_n v_n \right) \\
+		~&= cf(\alpha) + f(\beta) \qed
+	\end{align*}
+	
+
+	
+\end{proof*}
+
+\end{document}

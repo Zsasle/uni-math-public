@@ -1,0 +1,411 @@
+\section{Funktionen und Stetigkeit}
+\subsection{Funktinen}
+
+\[
+	\Omega \subset \R , f: \Omega \ni x \mapsto f(x) \in \R 
+\]
+Setze
+\[
+	\operatorname{Gr}(f) \coloneqq \{ (x, f(x)): x \in \Omega \} \subset \R^2
+\]
+und nennen dies den \textbf{Graphen} von $ f $. In diesem Kontext nennen wir $ x $ auch das \textbf{Argument} von $ f $ und $ f(x) $ den \textbf{Funktionswert} von $ f $ in $ x $. Der Graph ist also die Menge aller Tupel bestehend aus Argumenten und Funktionswerten.
+\begin{subexample}[Polynomfunktionen]
+	Ist $ n \in \N_0, a_0, \dotsc, a_n \in \R  $ mit $ a_n \neq  0 $ Dann:
+	\[
+		\gamma: \R \ni x \mapsto \sum_{k=1}^{\infty} a_k x^k 
+	\]
+	\textbf{Polynomfunktion} vom Grad $ n $. Kurz: Polynom
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[
+				xmin= -2, xmax= 2,
+				ymin= -1, ymax = 5,
+				axis lines = middle,
+			]
+				\addplot[domain=-2:2, samples=100]{- x^2 + x^4};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Beispiel Polynom}
+		\label{Beispiel Polynom}
+	\end{figure}
+	\href{{Beispiel Polynom}}{Hierbei} ist $ f(x) = x^4 - x^2 $
+\end{subexample}
+
+\begin{subexample}[Rationale Funktionen]
+	Sind $ p, q: \R \to \R  $ Polynome, so heißt
+	
+	\[
+		\frac{ p }{ q } : \R \setminus \{x \in \R :q(x) = 0\} \ni x \mapsto \frac{ p(x) }{ q(x) }
+	\]
+	\textbf{rationale Funktion}.
+	Als Beispiel sehen wir uns die rationale Funktion
+	\[
+		f: \R \setminus \left\{ 0 \right\} \ni x \to \frac{x^4 + 1 }{ x^2 } \in \R 
+	\]
+	an. Ihr Graph hat die folgende Gestalt:
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[
+				xmin= -3, xmax= 3,
+				ymin= -3, ymax = 3,
+				axis lines = middle,
+			]
+				\addplot[domain=-3:3, samples=100]{(x^3 + 1)/x};
+				\addplot[domain=-3:3, samples=100, dotted]{x^2};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Beispiel Rationale Funktion}
+		\label{Beispiel Rationale Funktion}
+	\end{figure}
+	In diese Graphik ist auch der (gepunktete) Graph der Quadratfunktion $ x \to x^2 $, dem sich der Graph von $ f $ für große Argumente immer mehr, annähert. In diesem Kapitel werden wir \textit{Grenzwerte} von Funktionen einführen, die uns diese \textit{Annäherung} genau fassen lassen.
+\end{subexample}
+
+\begin{subexample}
+	$ |\cdot| : \R \ni x \mapsto \left| x \right| = \begin{cases}
+		x &= x \geq 0 \\
+		-x &= x < 0 \\
+	\end{cases} $\\
+	``Betragsfunktion''\\
+	Der Graph ist dann gegeben durch
+	\[
+		\Graph(\left| \cdot  \right| = \left\{ (x, x): x \geq 0 \right\} \cup \left\{ (x, -x): x < 0 \right\} ,
+	\]
+	was wiederum wie folgt visualisiert wird:
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[
+				xmin= -10, xmax= 10,
+				ymin= 0, ymax = 10,
+				axis lines = middle,
+			]
+				\addplot[domain=-10:0, samples=100]{-x};
+				\addplot[domain=0:10, samples=100]{x};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Betragsfunktion}
+		\label{Betragsfunktion}
+	\end{figure}
+\end{subexample}
+
+\begin{subexample}
+	Für $ x \in \R  $\\
+	$ \left\lfloor x \right\rfloor \coloneqq \max \left\{ n \in \Z : n \leq 0 \right\}  $\\
+	$ \left\lfloor \cdot  \right\rfloor : \R \ni x \mapsto \left\lfloor x \right\rfloor \in \R  $ ``Gaußklammer''
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[
+				xmin= -5, xmax= 5,
+				ymin= -5, ymax = 5,
+				axis lines = middle,
+			]
+				\addplot[domain=-5:-4, samples=10]{-5};
+				\addplot[domain=-4:-3, samples=10]{-4};
+				\addplot[domain=-3:-2, samples=10]{-3};
+				\addplot[domain=-2:-1, samples=10]{-2};
+				\addplot[domain=-1:0, samples=10]{-1};
+				\addplot[domain=0:1, samples=10]{0};
+				\addplot[domain=1:2, samples=10]{1};
+				\addplot[domain=2:3, samples=10]{2};
+				\addplot[domain=3:4, samples=10]{3};
+				\addplot[domain=4:5, samples=10]{4};
+				\addplot[mark = *, only marks] coordinates{(-5,-5) (-4, -4) (-3,-3) (-2,-2) (-1,-1) (0,0) (1,1) (2,2) (3,3) (4,4) };
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Floor Funktion}
+		\label{Floor Funktion}
+	\end{figure}
+\end{subexample}
+
+\begin{subexample}
+	Für $ x \in \R : \operatorname{sgn}(x) \coloneqq \begin{cases}
+		1 &= x>0 \\
+		0, &= x = 0 \\
+		-1, &= x < 0 \\
+	\end{cases} $ ``Signumsfunktion''
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[
+				xmin= -10, xmax= 10,
+				ymin= -2, ymax = 2,
+				axis lines = middle,
+			]
+				\addplot[domain=-10:0, samples=100]{-1};
+				\addplot[domain=0:10, samples=100]{1};
+				\addplot[mark = *, only marks] coordinates{(0,0)};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Signums Funktion}
+		\label{Signums Funktion}
+	\end{figure}
+\end{subexample}
+
+\subsection{Stetigkeit}
+\textbf{Idee:} Kleine Änderung der Argumente $ \Rightarrow $ kleine Änderung der Funktionswerte
+\begin{subdefinition}
+	Sei $ A\subset \R  $ nichtleer. Eine Funktion $ f: A \to  \R  $ heißt \textbf{stetig in} $ x_0 \in  A $, falls \[
+		\forall \varepsilon > 0 \exists \delta > 0 \forall x \in A : \left| x  - x_0 \right| < \delta \implies \left| f(x) - f(x_0) \right| < \varepsilon 
+	\]
+	Ist $ f $ in \textbf{jedem} $ x_0 \in A $ stetig, so nennen wir $ f $ \textbf{stetig} (in $ A $)\\
+	Ist $ f $ in $ x_0 \in A $ nicht stetig, so heißt $ f $ in $ x_0 $ \textbf{unstetig}
+\end{subdefinition}
+
+\begin{figure}[ht]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+			ticks = none,
+			xmin= -0.2, xmax= 8,
+			ymin= -0.2, ymax = 8,
+			axis lines = middle,
+			clip = false,
+		]
+			\draw[<->] (8.2, 2.023) -- node[anchor = west] {$ \varepsilon  $} (8.2, 3.1439);
+			\draw[<->] (8.2, 3.1439) -- node[anchor = west] {$ \varepsilon  $} (8.2, 4.265);
+			\draw[<->] (5.5, 8.2) -- node[anchor = south] {$ \delta $} (6, 8.2);
+			\draw[<->] (6, 8.2) -- node[anchor = south] {$ \delta $} (6.5, 8.2);
+			\node[anchor = north] (x0) at (6, -0.2) {$  x_0 $};
+			\node[anchor = east] (fx0) at (-0.2, 3.1439) {$f(x_0)$};
+			\begin{scope}
+				\path[clip] (-0.2,-0.2) -- (-0.2, 8) -- (8,8) -- (8, -0.2) -- cycle;
+				\addplot[domain=-0.2:8, samples=100, clip]{2 - 0.25 * x^2 + 0.05 * x^3 - (0.15 * x)^4};
+			\end{scope}
+			\fill[opacity = 0.5, color = gadse-yellow!80!white] (5.5,-0.2) rectangle (6.5, 8);
+			\fill[opacity = 0.5, color = gadse-yellow!80!white] (-0.2,2.023) rectangle (8, 4.265);
+			\addplot[mark = *, only marks, color = yellow!70!black] coordinates {(6, 3.1439)};
+			\draw[dashed] (6, -0.2) -- (6, 8);
+			\draw[dashed] (-0.2, 3.1439) node[anchor = east] {$ f(x_0) $} -- (8, 3.1439);
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Test000}
+\end{figure}
+
+\begin{subexample}
+	\begin{itemize}
+		\item Konstante Funktion: $ f: \R  \ni x \mapsto c \in \R  $.\\
+			Ist $ \varepsilon > 0, x_0 \in \R  $. Für alle $ \delta > 0 : \left| x - x_0 \right| < \delta \implies \left| f(x) - f(x_0) \right| = \left| c - c \right| = 0 < \varepsilon  $. $ \implies  $ Stetigkeit
+		\item $ f: \R  \ni x \mapsto x \in \R  $ (Identität)\\
+			Ist $ \varepsilon > 0, x_0 \in \R $, so setze $ \delta \coloneqq \varepsilon  $. Dann: $ \left| x - x_0 \right| < \delta \implies \left| f(x) - f(x_0) \right| < \varepsilon  $. $ \implies  $ Stetigkeit
+		\item $ f: \R  \ni x \mapsto x^2 \in \R  $.\\
+			\begin{equation}
+				\left| f(x) - f(x_0) \right| = \left| x^2 - x_0^2 \right| = \left| x + x_0 \right| \left| x - x_0 \right| \leq ( | x | + | x_0 | ) | x - x_0 |.
+				\label{eq:7.2.2.1}
+			\end{equation}
+			Sei $ x_0 \in \R , \varepsilon > 0 $. Wir setzten $ \underbrace{\delta}_{\text{Hängt nun von $ x_0 $ ab} } \coloneqq \min \left\{ 1, \frac{ \varepsilon  }{ 2|x_0| + 1 }  \right\}  $.\\
+			Dann: $ | x - x_0 | < \delta $, so mit \eqref{eq:7.2.2.1}\\
+			$ | f(x) - f(x_0) | \overset{\eqref{eq:7.2.2.1}}{\leq } \left( | x - x_0 | + 2|x_0| \right) \cdot \delta \leq ( 1 + 2|x_0|) \cdot  \frac{ \varepsilon  }{ 2|x_0| + 1 } = \varepsilon  $.
+	\end{itemize}
+\end{subexample}
+
+\begin{subexample}
+	$ A\subset \R  $ nichtleer, $ f: A \to \R  $ \textbf{Lipschitz} $ \iff \exists L \geq  0 $ (Lipschitzkonst.) $ \forall x, y \in A: | f(x) - f(y) \leq  L|x - y| $.\\
+	Sei $ x_0 \in \R , \varepsilon > 0 $. Setzte $ \delta \coloneqq \frac{ \varepsilon  }{ L }  $, so ist $ | x - x_0 | < \delta \implies |f(x) - f(x_0)| \leq L \cdot | x - x_0 | \leq  L \cdot \delta = L \cdot \frac{ \varepsilon  }{ L } = \varepsilon $. \textbf{Stetig!} ``Lipschitzstetig''
+\end{subexample}
+
+\begin{subexample}
+	Für $ x \in \R : \operatorname{sgn}(x) \coloneqq \begin{cases}
+		1, &= x > 0 \\
+		0, &= 0 \\
+		-1, &= x < 0 \\
+	\end{cases} $ ``Signumsfunktion''\\
+	Sei $ 0 < \varepsilon < 1 $. Dann gilt $ \forall \delta > 0: | \operatorname{sgn}(\frac{ \delta }{ 2 } - \operatorname{sng}(0) | = | 1 - 0 | = 1 > \varepsilon  $, aber $ | \frac{ \delta }{ 2 } - 0 = \frac{ \delta }{ 2 } < \delta $
+\end{subexample}
+Falls `` $ \delta $ nur von $ \varepsilon  $'' abhängt:
+\begin{subdefinition}
+	Sei $ A \subset \R  $ nichtleer. $ f: A \to \R  $ heißt \textbf{gleichmäßig stetig} in $ A $, falls\\
+	$ \forall \varepsilon > 0\exists \delta > 0 \forall x, x_0 \in A : | x - x_0 | < \delta \implies  |f(x) - f(x_0) | < \varepsilon  $.
+\end{subdefinition}
+
+
+Stetigkeit von $ f: \R  \to \R  $ 
+\begin{align*}
+	\forall \varepsilon > 0 : &\forall x_0 \in \R : \exists \delta > 0 : \forall y \in \R :\\
+	~& | x_0 - y | < \delta \implies |f(x_0) - f(y) | < \varepsilon 
+\end{align*}
+
+Gleichmäßige Stetigkeit:
+\begin{align*}
+	\forall \varepsilon > 0: &\exists \delta > 0 :\forall x, y \in \R :\\
+	~&| x - y | < \delta \implies | f(x) - f(y) | < \varepsilon 
+\end{align*}
+
+\begin{subexample}
+	Die Funktion $ f: (0, \infty) \to \R  $ ist stetig, aber nicht gleichmäßig stetig.
+\end{subexample}
+
+Funktionen $ f,g: \R \to \R  $ können multipliziert und addiert werden.
+\begin{alignat*}{3}
+	(f + g)(x) &\coloneqq f(x) + g(x) && \quad x \in \R \\
+	(f \cdot g)(x) &= f(x) + g(x) && \quad x \in \R \\
+	\left ( \frac{ f }{ g }  \right) (x) &= \frac{ f(x) }{ g(x) } && \quad x \in \R  \\
+\end{alignat*}
+
+\begin{subtheorem}
+	Sei $ R \subseteq \R  $ nichtleer, sowie $ f,g: R \to \R  $ stetig in $ x_0 \in R $.
+	Dann sind $ f+g $, sowie $ f\cdot g $ stetig in $ x_0 $.
+	Gilt weiter $ g(x_0) \neq 0 $, so ist auch $ \frac{ f }{ g }  $ stetig in $ x_0 $.
+	Snd also $ f,g: R\to \R  $ stetig in $ R $, so sind $ f+g, f\cdot g $ stetig in $ R $,
+	und $ \frac{ f }{ g }  $ ist stetig auf $ \left\{ x \in R: g(x) \neq 0 \right\}  $.
+\end{subtheorem}
+
+\begin{subproof*}[Theorem 7.2.7.]
+	\begin{enumerate}[label=(\roman*)]
+		\item Sei $ \varepsilon > 0 $. Dann finden wir $ \delta_1 > 0 $ und $ \delta_2 > 0 $, sodass
+			\begin{align*}
+				|x - x_0| < \delta_1 &\implies |f(x) - f(x_0) | < \frac{ \varepsilon  }{ 2 } , \\
+				|x - x_0| < \delta_2 &\implies |g(x) - g(x_0) | < \frac{ \varepsilon  }{ 2 } , \\
+			\end{align*}
+			Setze $ \delta \coloneqq \min \left\{ \delta_1, \delta_2 \right\}  $. 
+			Dann gilt für alle $ x \in R $ mit $ |x-x_0| < \delta $, dass
+			\begin{align*}
+				| (f+g)(x) - (f+g)(x_0) | &= | f(x) - f(x_0) + g(x) - g(x_0) \\
+				~&\overset{\triangle-\text{Ungl.} }{\leq } | f(x) - f(x_0)| + |g(x) - g(x_0)| \\
+				~&< \frac{ \varepsilon  }{ 2 } + \frac{ \varepsilon  }{ 2 } \\
+				~&< \varepsilon .
+			\end{align*}
+			$ \implies (f+g) $ stetig in $ x_0 $
+		\item Sei $ \varepsilon > 0, M \coloneqq | g(x_0) | + 1 $.
+			Dann finden wir $ \delta_1 > 0 $ und $ \delta_2 > 0 $, sodass
+			\begin{align*}
+				|x - x_0| < \delta_1 &\implies |f(x) - f(x_0) | < \frac{ \varepsilon  }{ 2M } , \\
+				|x - x_0| < \delta_2 &\implies |g(x) - g(x_0) | < \frac{ \varepsilon  }{ 2|f(x_0)| } , \\
+			\end{align*}
+			und $ \delta_3 > 0 $
+			\[
+				\forall x \in R : | x - x_0 | < \delta_3 \implies  | g(x) - g(x_0) | < 1 \quad ( \implies  | g(x) - g(x_0) | < M )
+			\]
+			Setze $ \delta \coloneqq \min \left\{ \delta_1, \delta_2, \delta_3 \right\}  $.
+			Sei $ x \in R $ mit $ | x - x_0 < \delta $, dann gilt
+			\begin{align*}
+				| (fg)(x) - (fg)(x_0) | &= | f(x)g(x) - f(x_0)g(x) + f(x_0)g(x) - f(x_0)g(x_0) \\
+							&\overset{\triangle-\text{Ungl.} }{\leq } |g(x)| | f(x) - f(x_0)| + |f(x_0)||g(x) - g(x_0)| \\
+							&< M \frac{ \varepsilon  }{ 2M } + |f(x_0) | \frac{ \varepsilon  }{ 2|f(x_0)| } 
+							&< \frac{ \varepsilon  }{ 2 } + \frac{ \varepsilon  }{ 2 } \\
+							&< \varepsilon .
+			\end{align*}
+			$ \implies (fg) $ stetig in $ x_0 $
+		\item Übungsaufgabe
+	\end{enumerate}
+\end{subproof*}
+
+\begin{subexample}
+	\begin{enumerate}[label=\arabic*.]
+		\item Beispiel \ref{7.2.2} $ f1 : \R \ni x \mapsto x \in \R  $ stetig ist.
+		\item Induktiv folgt $ f_n : \R \to \R , x \mapsto x^n $ ist stetig
+			(nach Theorem \ref{7.2.7})
+		\item Da konstante Funkionen stetig sind, folgt nach Theorem \ref{7.2.7}, dassfür jedes $ a \in \R : \R \to \R , x \mapsto ax $ stetig ist.
+		\item Jede rationale Funktion ist stetig.
+	\end{enumerate}
+	
+\end{subexample}
+
+\begin{subtheorem}[(Präsenzaufgabe)]
+	Seien $ R_1, R_2 \subset \R  $ nichtleer sowie $ f: R_1 - R_2 $ und $ g:R_2\to \R  $ stetig in $ x_0 $ bzw. in $ f(x_0) $. Dann ist $ g \circ f : R_1 \to \R  $ stetig in $ x_0 $, wobei
+	\[
+		(g \circ f) (x) \coloneqq f(g(x)), \quad x \in \R .
+	\]
+	
+\end{subtheorem}
+
+\subsection{Charakterisierung der Stetigkeit und Grenzwerte von Funktionen}
+\begin{subtheorem}[Folgencharakter der Stetigkeit]
+	Sei $  A \subset \R  $ nichtleer.
+	Eine Funktion $ f: A \to  \R   $ ist stetig in $ x \in  A $, genau dann wenn für jede Folge $ (x_n) \subset A $ mit $ x_n \to x $ gilt, dass $ f(x_n) \to f(x) $.
+\end{subtheorem}
+
+\begin{subproof}[Theorem 7.3.1]
+	\begin{description}
+		\item[``$ \implies  $''] Sei $ f: A\to \R  $ stetig in $ x \in A $ und $ (x_n) \subset A $ mit $ x_n \to x $.
+			Dann gibt es ein $ \delta > 0 $, sodass $ \forall y \in A $ mit $ |x - y| < \delta $ impliziert, dass $ |f(x) - f(y)| < \varepsilon  $.
+			Da $ x_n \to x $, gibt es ein $ N \in \N  $ mit $ |x_n - x| < \delta \quad \forall n\geq N $.
+			Sei $ n\geq \N  $. Dann gilt also $ |f(x_n) - f(x) < \varepsilon  $.
+			Also $ f(x_n) \overset{n\to \infty}{f(x)} $.
+		\item[``$ \impliedby  $''] Angenommen $ f $ ist nicht stetig in $ x $.
+			Dann gibt es ein $ \varepsilon > 0 $, sodass $ \forall n \in \N  \exists x_n \in A : |x_n - x| < \frac{ 1 }{ n }, \delta > 0 $ und $ |f(x) - f(x_n)| \geq \varepsilon  $.
+			Also $  x_n \to x $, aber $ f(x_n) $ konvergiert nicht gegen $ f(x) $.\qed
+	\end{description}
+\end{subproof}
+
+\begin{subdefinition}
+	Sei $ A\subset \R $ nichtleer und $ x_0 \in \R  $ ein Berührpunkt von $ A $.
+	\begin{enumerate}[label=\arabic*.]
+		\item Dann definieren wir
+			\[
+				\lim_{x \to \infty} f(x) \coloneqq \lim_{\overset{x\to x_0}{x \in A}} f(x) \coloneqq c
+			\]
+			falls für jede Folge $ x_n $
+		\item Rechtsseitiger Limes von $ f $ in $ x_0: \lim_{x \searrow x_0} f(x) = c $, falls $ x_0 $ Berührpunkt von $ A  $ und für jede Folge $ (x_n) \subset (x_0, \infty) $ mit $ \lim_{n \to \infty} x_n = x $ gilt: $ \lim_{n \to \infty}  f(x_n) = c$.
+	\end{enumerate}
+	Sei $ A $ nach oben ubeschränkt, dann schreibe
+	\[
+		\lim_{x \to \infty} f(x) \coloneqq c,
+	\]
+	falls $ \forall (x_n) \subset A $ mit $ x_n \to \infty $ gilt $ \lim_{n \to \infty} f(x_n) = c $.\\
+	Analog: $ \lim_{n \nearrow \infty} f(x) $ und $ \lim_{x \to \infty} f(x) $.
+\end{subdefinition}
+
+\begin{subcorollary}
+	Sei $ A \subset \R  $ nichtleer. Dann ist eine Funktion $ f: A \to \R  $ genau dann stetig, wenn $ f(x_0) = \lim_{x \to x_0} f(x) \quad \forall x_0 \in A $ gilt.
+\end{subcorollary}
+
+\begin{subexample}
+	Sei $ x_0 \in \Z  $ 
+	\[
+		\lim_{x \searrow x_0} \left\lfloor x \right\rfloor = x_0
+	\]
+	\[
+		\lim_{x \nearrow x_0} \left\lfloor x \right\rfloor = x_0 -1
+	\]
+\end{subexample}
+
+\subsection{Sätze üver stetige Funktionen}
+\begin{subtheorem}
+	Seien $ -\infty < a < b < \infty $ und $ f:[a, b] \to \R  $ stetig mit $ f(a), f(b) < 0 $.
+	Dann $ \exists x_0 \in [a, b] : f(x) = 0 $
+\end{subtheorem}
+
+\begin{subproof*}[Theorem \ref{7.4.1}]
+	\OE $ f(a) < 0 $ und $ f(b) > 0 $ (ansonsten betrachte $ -f $).\\
+	Es sei $ I_0 \coloneqq [a, b] $.
+	Ist $ I_n = [a_n, b_n] $ für $ n \in \N  $ definiert, so sezte
+	\[
+		I_{n+1} \coloneqq \begin{cases}
+			[a_n, \frac{ a_n + b_n }{ 2 } , & \text{ falls } f\left(\frac{ a_n + b_n }{ 2 }\right)  > 0 \\
+			[\frac{ a_n + b_n }{ 2 } , b_n], \text{ sonst.} 
+		\end{cases}
+	\]
+	Induktiv folgt $ \diam(I_n) = 2^{-n}(b - a) $ f.a. $ n \in \N  $. Weiter ist $ I_0 > I_1 > I_2 > \dotsb $ Also ist $ (I_n) $ eine Schachtelung abgeschlossener Intervalle mit $ \diam(I_n) \to 0 $. Nach Theorem \ref{4.3.2} gibt es genau ein $ x \in \bigcap_{n \in \N } I_n $.
+	Speziell $ \lim_{n \to \infty} a_n = \lim_{n \to \infty} b_n = x $ $ f  $ ist stetig, also gilt 
+	\[
+		0 \leq \lim_{n \to \infty} f(b_n) = f(x) = \lim_{n \to \infty} a_n \leq  0
+	\]
+	
+\end{subproof*}
+
+\begin{subexample}[Eindimensionaler Brouwer]
+	Sei $ f:[0,1] \to [0, 1] $ stetig. Dann hat $ f $ einen Fixpunkt d.h. es gibt ein $ x_0 \in [0,1] $ mit $ f(x_0) = x_0 $, denn die Hilfsfunktion $ g(x) \coloneqq f(x) - x $. Diese ist stetig und es gibt $ \exists \varepsilon > 0: \forall \delta > 0 : \exists x,y \in K: | x-y| < \delta  $ und $ |f(x) - f(y)| \geq \varepsilon  $.\\
+	Wähle solches $ \varepsilon > 0 $. Dann finden wir für alle $ n \in \N  $ $ x_n, y_n \in K $ mit $ |x_n - y_n| < 2^{-n} $ und $ |f(x_n) - f(y_n)| \geq \varepsilon  $. Da $ K $ kompakt, hat $ (x_n) $ eine konvergente Teilfolge $ (x_{n_k}) $ mit Grenzwert $ x \in K $. Nun ist
+	\[
+		\left| y_{n_k} - x  \right| \leq \left| y_{n_k} - x_{n_k} \right| + \left| x_{n_k} - k \right| \to 0.
+	\]
+	Also konvergiert auch $ (y_{n_k}) $ gegen $ x $.
+\end{subexample}
+
+\begin{subtheorem}
+	weiß nicht könnte alles sein
+\end{subtheorem}
+
+\begin{subtheorem}
+	Sei $ K \subseteq \R  $ kompakt und $ f:K\to \R  $ stetig. Dann nimmt $ f $ sowohl Maximum als auch Minimum in $ K $ an.
+\end{subtheorem}
+\begin{subproof*}[Theorem \ref{7.4.4}]
+	Wir zeigen, $ f(K) $ ist kompakt. Sei $ (y_n) \subset f(K) $ eine Folge. Nach Def. des Bildes gibt es also zu jedem $ n \in \N $ ein $ x_n \in K $ mit $ f(x_n) = y_n $.
+	Da $ K $ kompakt ist, gibt es eine konvergente Teilfolge $ (x_{n_k}) \subset K $ mit Grenzwert $ x \in K $. Da $ f $ stetig ist, folgt $ f(x) = f(\lim_{n_k \to \infty} x_{n_k}) \overset{\text{stetig} }{=} \lim_{n_k \to \infty} f(x_{n_k}) = \lim_{n_k \to \infty} y_{n_k} $
+\end{subproof*}
+
+
+

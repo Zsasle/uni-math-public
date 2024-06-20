@@ -1,0 +1,210 @@
+\documentclass[sectionformat = exercise]{gadsescript}
+
+\settitle{Encoding II, Algorithms and Data Structures}
+\setsubtitle{Elias Gestrich}
+
+\begin{document}
+\maketitle
+\section{IEE 754 Number format}
+\begin{enumerate}[label=\alph*)]
+	\item first bit: $ 1 $ $ \rightarrow $ negative\\
+		following $ 8 $ bits: $ 10000001 = \binnum[8]{0111 1111} + \binnum{10} $ $ \rightarrow $ Exponent is $ \binnum{10} $\\
+		other bits: $ {101 0000 0000 0000 0000 0000} \rightarrow $ Mantissa is $ \binnum{1.101} $\\
+		$\implies$ $1 1000 0001 10100000000000000000000 = - \binnum{1.101} \times \binnum{10}^{\binnum{10}} = -\binnum{1101.1} = -\decnum{13.5} $
+	\item positive: first bit = 0\\
+		$\decnum{20.5} =  \binnum{10100.1} \rightarrow $ mantissa: $ 01001000000000000000000 $, exponent: $\binnum[8]{111 1111} + \binnum{100} = \binnum[8]{1000 0011} $\\
+		$\implies 0 1000 0011 010 0100 0000 0000 0000 0000$
+\end{enumerate}
+
+\section{ASCII}
+\begin{enumerate}[label=\alph*)]
+	\item S = $ \hexnum{53} $, k = $ \hexnum{6B} $, I = $ \hexnum{49} $: ``SkI'' = $ \hexnum{536B49} = \binnum{0101 0011 0110 1011 0100 1001} $
+\end{enumerate}
+
+\newpage
+\section{Binary Search Trees}
+\begin{enumerate}[label=\alph*)]
+	\item ~\\
+		\begingroup
+		\setlength\columnseprule{0.4pt}
+		\setlength\columnsep{1cm}
+		\begin{multicols}{2}
+			insert(11)\\
+			empty tree: 11 becomes root\\
+			\begin{tikzpicture}
+				\node{\fbox{11}};
+			\end{tikzpicture}\\[4pt]
+			insert(10)\\
+			$ 10 < 11 $\\
+			\begin{tikzpicture}
+				\node{\fbox{11}} [level distance = 1cm]
+				child {node [xshift = -0.5cm] {\fbox{10}}};
+			\end{tikzpicture}\\[4pt]
+			insert(9)\\
+			$ 9 < 11 \rightarrow 9 < 10 $\\
+			\begin{tikzpicture}
+				\node{\fbox{11}} [level distance = 1cm]
+					child {node [xshift = -0.5cm] {\fbox{10}}
+						child {node [xshift = -0.5cm] {\fbox{9}} }
+					}
+				;
+			\end{tikzpicture}\\[4pt]
+			insert(6)\\
+			$ 6 < 11 \rightarrow 6 < 10 \rightarrow 6 < 9 $\\
+			\begin{tikzpicture}
+				\node{\fbox{11}} [level distance = 1cm]
+					child {node [xshift = -0.5cm] {\fbox{10}}
+						child {node [xshift = -0.5cm] {\fbox{9}}
+							child {node[xshift = -0.5cm] {\fbox{6}} }
+						}
+					}
+				;
+			\end{tikzpicture}\\[4pt]
+			insert(14)\\
+			$ 14 > 11 $\\
+			\begin{tikzpicture}
+				\node{\fbox{11}} [level distance = 1cm]
+					child {node {\fbox{10}}
+						child {node [xshift = -0.5cm] {\fbox{9}}
+							child {node[xshift = -0.5cm] {\fbox{6}} }
+						}
+					}
+					child {node {\fbox{14}} }
+				;
+			\end{tikzpicture}\\[4pt]
+			insert(12)\\
+			$ 12 > 11 \rightarrow 12 < 14$\\
+			\begin{tikzpicture}
+				\node{\fbox{11}} [level distance = 1cm]
+					child {node {\fbox{10}}
+						child {node [xshift = -0.5cm] {\fbox{9}}
+							child {node[xshift = -0.5cm] {\fbox{6}} }
+						}
+					}
+					child {node {\fbox{14}}
+						child {node [xshift = -0.5cm] {\fbox{12}} }
+					}
+				;
+			\end{tikzpicture}\\[4pt]
+			insert(15)\\
+			$ 15 > 11 \rightarrow 15 > 14$\\
+			\begin{tikzpicture}
+				\node{\fbox{11}} [level distance = 1cm]
+					child {node {\fbox{10}}
+						child {node [xshift = -0.5cm] {\fbox{9}}
+							child {node[xshift = -0.5cm] {\fbox{6}} }
+						}
+					}
+					child {node {\fbox{14}}
+						child {node {\fbox{12}} }
+						child {node {\fbox{15}} }
+					}
+				;
+			\end{tikzpicture}\\[4pt]
+			remove(12) $ \rightarrow $ 12 has no child:\\
+			\begin{tikzpicture}
+				\node{\fbox{11}} [level distance = 1cm]
+					child {node {\fbox{10}}
+						child {node [xshift = -0.5cm] {\fbox{9}}
+							child {node[xshift = -0.5cm] {\fbox{6}} }
+						}
+					}
+					child {node {\fbox{14}}
+						child {node [xshift = 0.5cm]{\fbox{15}} }
+					}
+				;
+			\end{tikzpicture}\\[4pt]
+			remove(11) $ \rightarrow $ 11 has two childs: replace 11 with the most right element of the left child (the 10) and remove the child, because 10 has one child on the left side move this child to the left side of the root:\\
+			\begin{tikzpicture}
+				\node{\fbox{10}} [level distance = 1cm]
+					child {node {\fbox{9}}
+						child {node[xshift = -0.5cm] {\fbox{6}} }
+					}
+					child {node {\fbox{14}}
+						child {node [xshift = 0.5cm]{\fbox{15}} }
+					}
+				;
+			\end{tikzpicture}\\[4pt]
+		\end{multicols}
+		\endgroup
+
+\end{enumerate}
+
+\section{Hashing}
+\begin{enumerate}[label=\alph*)]
+	\item 13
+	\item~\\
+		\begin{tabular}{c|l}
+			0 & $\rightarrow$ \\\hline
+			1 & $\rightarrow$ 40 $\rightarrow$ 27\\\hline
+			2 & $\rightarrow$ \\\hline
+			3 & $\rightarrow$ 16\\\hline
+			4 & $\rightarrow$ \\\hline
+			5 & $\rightarrow$ 5 $\rightarrow$ 31\\\hline
+			6 & $\rightarrow$ 19\\\hline
+			7 & $\rightarrow$ 20 $\rightarrow$ 7\\\hline
+			8 & $\rightarrow$ 21 $\rightarrow$ 34\\\hline
+			9 & $\rightarrow$ \\\hline
+			10 & $\rightarrow$ 23\\\hline
+			11 & $\rightarrow$ \\\hline
+			12 & $\rightarrow$ 12
+		\end{tabular}
+	\item~\\
+		\begingroup
+		\renewcommand{\arraystretch}{1.2}
+		\begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|c|}
+			\hline
+			newly inserted key & 20 & 19 & 5 & 21 & 7 & 40 & 23 & 31 & 12 & 16 & 27 & 34\\\hline
+			\multicolumn{13}{l}{}\\[-6pt]\hline
+			0		   &    &    &   &    &   &    &    &    &    &    &    & \mynode{3434}{34}\\\hline
+			1		   &    &    &   &    &   & 40 & 40 & 40 & 40 & 40 & \mynode{2740}{40}
+												& 40\\\hline
+			2		   &    &    &   &    &   &    &    &    &    &    & \mynode{2727}{27}
+												& 27\\\hline
+			3		   &    &    &   &    &   &    &    &    &    & 16 & 16 & 16\\\hline
+			4		   &&&&&&&&&&&&\\\hline
+			5		   &    &    & 5 &  5 & 5 &  5 &  5 & \mynode{315}{5}
+										 &  5 &  5 &  5 &  5\\\hline
+			6		   &    & 19 & 19& 19 & 19& 19 & 19 & \mynode{3119}{19}
+										 & 19 & 19 & 19 & 19\\\hline
+			7		   & 20 & 20 & 20& 20 & \mynode{720}{20}
+								  & 20 & 20 & \mynode{3120}{20}
+										 & 20 & 20 & 20 & 20\\\hline
+			8		   &    &    &   & 21 & \mynode{721}{21}
+								  & 21 & 21 & \mynode{3121}{21}
+										 & 21 & 21 & 21 & \mynode{3421}{21}\\\hline
+			9		   &    &    &   &    & \mynode{77}{7}
+								  &  7 &  7 & \mynode{317}{7}
+										 &  7 &  7 &  7 & \mynode{347}{27}\\\hline
+			10		   &    &    &   &    &   &    & 23 & \mynode{3123}{23}
+										 & 23 & 23 & 23 & \mynode{3423}{23}\\\hline
+			11		   &    &    &   &    &   &    &    & \mynode{3131}{31}
+										 & 31 & 31 & 31 & \mynode{3431}{31}\\\hline
+			12		   &    &    &   &    &   &    &    &    & 12 & 12 & 12 & \mynode{3412}{12}\\\hline
+		\end{tabular}
+		\begin{tikzpicture}[remember picture, overlay]
+			\draw[->, >=stealth] (720)	to	[out = -45, in = 45](721);
+			\draw[->, >=stealth] (721)	to	[out = -45, in = 45](77);
+
+			\draw[->, >=stealth] (315)	to	[out = -45, in = 45](3119);
+			\draw[->, >=stealth] (3119)	to	[out = -45, in = 45](3120);
+			\draw[->, >=stealth] (3120)	to	[out = -45, in = 45](3121);
+			\draw[->, >=stealth] (3121)	to	[out = -45, in = 45](317);
+			\draw[->, >=stealth] (317)	to	[out = -45, in = 45](3123);
+			\draw[->, >=stealth] (3123)	to	[out = -45, in = 45](3131);
+
+			\draw[->, >=stealth] (2740)	to	[out = -45, in = 45](2727);
+
+			\draw[->, >=stealth] (3421)	to	[out = -45, in = 45](347);
+			\draw[->, >=stealth] (347)	to	[out = -45, in = 45](3423);
+			\draw[->, >=stealth] (3423)	to	[out = -45, in = 45](3431);
+			\draw[->, >=stealth] (3431)	to	[out = -45, in = 45](3412);
+			\draw[->, >=stealth] (3412.south) to	[out = -45, in = 45]([yshift = -12pt]3412.south);
+			\draw[->, >=stealth] ([yshift = 8pt]3434.north) to
+								[out = -45, in = 45](3434.north);
+		\end{tikzpicture}
+		\endgroup
+	
+\end{enumerate}
+
+\end{document}

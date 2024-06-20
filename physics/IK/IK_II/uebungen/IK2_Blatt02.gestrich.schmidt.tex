@@ -1,0 +1,92 @@
+\documentclass[sectionformat=aufgabe]{gadsescript}
+
+\setsemester{Winter Semester 2023/2024}%
+\setuniversity{University of Konstanz}%
+\setfaculty{Faculty of Science\\(Physics)}%
+\settitle{Übungsblatt 02}
+\setsubtitle{Davina Schmidt, Elias Gestrich}
+
+\sisetup{exponent-mode = input}
+
+\begin{document}
+\maketitle
+
+\section{Glas im Bodensee}
+\begin{enumerate}[label=\alph*)]
+	\item ~
+		\begin{align*}
+			m_G &= m_W \\
+			    &= \rho_W \cdot V_W \\
+			    &= \qty{ 1000 }{ \kilogram\per\cubic\metre } \cdot A \cdot \frac{ h }{ 2 } \\
+			    &= \qty{ 1000 }{ \kilogram\per\cubic\metre } \cdot \qty{ 1e-3}{ \square\metre } \cdot \frac{\qty{ 20e-2 }{ \metre }}{ 2 } \\
+			    &= \qty{ 0.1 }{ \kilogram } 
+		\end{align*}
+	\item Sei $ F_L  = p_0 A$ die Kraft, die die Luft durch den Luftdruck von oben auf das Glas ausübt und $ F_G $, die Gewichtskraft des Glases. Außerdem sei $ F = p_1 \cdot A $, die Kraft, die die Luft aus dem innerem des Glases auf den Glasboden ausübt.
+		Dabei muss gelten:
+		\begin{align*}
+			F &= F_G + F_L \\
+			p_1 A &= m_G \cdot g + p_0 \cdot A \\
+			p_1 &= \frac{ m_G \cdot g }{ A } + p_0 \\
+			    &= \frac{ \qty{ 0.1 }{ \kilogram } \cdot \qty{ 9.81 }{ \metre\per\square\second } }{ \qty{ 1e-3 }{ \square\metre }  } + \qty{ 1e5 }{ \pascal } \\
+			    &= \qty{ 100981 }{ \pascal }
+		\end{align*}
+		Da $ pV = \text{konst.}  $ gilt:
+		\begin{align*}
+			p_0 h A &= p_1 (h-d) A \\
+			\frac{p_0}{ p_1 } h &= h - d \\
+			d &= \left( 1 - \frac{ p_0 }{ p_1 } \right) h \\
+			d &\sim \qty{ 1.94 }{ \milli\metre } 
+		\end{align*}
+		Da immernoch $ \qty{ 0.1 }{ \kilogram }  $ Wasser verdrengt werden müssen, gilt 
+		\begin{align*}
+			\frac{ h }{ 2 } A &= ( x - d ) A \\
+			d + \frac{ h }{ 2 } &= x \\
+			x &\sim  \qty{ 0.1 }{ \metre } + \qty{ 1.94 }{ \mm }  \\
+			x &\sim \qty{ 10.2 }{ \centi\metre }  \\
+		\end{align*}
+	\item Der Druck $ p $ auf das Glas, wenn das Glas vollständig unterwasser ist, ist der Luftdruck $ p_0 $ plus den Druck $ p_w $ der Wassersäule über dem Glas, für welchen gilt: $ p_w = \frac{ F }{ A } = \frac{ m g }{ A } = \frac{ t A \rho g }{ A } = t\rho g $ für $ t $ die Tiefe des Glases.
+		Folglich gilt:
+		\[
+			p = p_0 + p_w
+		\]
+		Damit das Glas weniger Auftrieb als Abtrieb hat, muss das Gewicht des verdränkten Wassers kleiner sein, als das Gewicht des Glases, Also muss das Volumen der Luft kleiner sein als $ \frac{ 1 }{ 2 } h A $, also gilt
+		\[
+			p > p_0 \cdot \frac{ h A }{ \frac{ 1 }{ 2 } h A } = 2 p_0
+		\]
+		Also
+		\begin{align*}
+			p &= p_0 + p_w \\
+			2p_0 &= p_0 + p_w \\
+			p_0 &=  t \rho g \\
+			t &= \frac{ p_0 }{ \rho g }  \\
+			t &= \frac{ \qty{ 1e5 }{ \pascal } }{ \qty{ 1000 }{ \kilogram\per\cubic\metre } \cdot \qty{ 9.81 }{ \metre\per\square\second }  }  \\
+			t &\sim \qty{ 10.2 }{ \metre } 
+		\end{align*}
+\end{enumerate}
+
+\section{Hydrodynamisches Paradoxon}
+Da in der Aufgabe sehr wenig Informationen gegeben sind, habe ich mir ein paar Fakten ausgedacht: Annahme $ p_{\text{statisch}}  + p_S = p_0 = p = \text{konst} $ wobei $ p_0 $ der Außendruck ist und $ p_S $ der Staudruck. Sei $ d $ der Abstand der beiden Platten.\\
+$ v\rho A = \text{ konst.} \implies vA = \text{ konst} \implies v_1  \pi R_1^2 = v(r) \cdot 2 \pi r d \implies v(r) = v_1 \cdot \frac{R_1^2}{ 2rd }  $, für $ r $ der radiale Abstand zur Mitte der Platten. Also ist der Staudruck in Abhängigkeit von $ r $:
+\[
+	p_S = \frac{ 1 }{ 2 } \rho_L v(r)^2 = \frac{ 1 }{ 2 } \rho_L v_1^2 \cdot \frac{ R_1^4 }{ 4r^2d^2 } 
+\]
+Die gesamte Kraft auf die Untere Platte ist also:
+\begin{align*}
+	F_L &=  \int_{R_1}^{R_2} 2 \pi  r (p_0 - p_S) dr + p_0 \cdot \pi R_1^2 \\
+	    &= \pi p_0 \int_{R_1}^{R_2} 2r dr - \frac{ 1 }{ 4 } \pi \rho_L v_1^2 \cdot \frac{ R_1^4 }{ d^2 } \int_{R_1}^{R_2} \frac{ 1 }{ r } dr + \pi p_0 R_1^2 \\
+	    &= \pi p_0 [r^2]_{R_1} ^{R_2} - \frac{ 1 }{ 4 } \pi \rho_L v_1^2 \cdot \frac{ R_1^4 }{ d^2 } [\ln r]_{R_1} ^{R_2}  + \pi p_0 R_1^2 \\
+	    &= \pi p_0 R_2^2 - \pi R_1^2 - \frac{ 1 }{ 4 } \pi \rho_L v_1^2 \cdot \frac{ R_1^4 }{ d^2 } \left( \ln R_2 - \ln R_1 \right) + \pi p_0 R_1^2 \\
+	    &= \pi p_0 R_2^2 - \frac{ 1 }{ 4 } \pi \rho_L v_1^2 \cdot \frac{ R_1^4 }{ d^2 } \ln \frac{R_2}{ R_1 } \\
+\end{align*}
+Damit die Platte angehoben wird:
+\begin{align*}
+	F_G + F_L &< p_0 \pi R_2^2 \\
+	Mg &< p_0 \pi R_2^2 - F_L \\
+	Mg &< p_0 \pi R_2^2 - p_0 \pi  R_2^2 + \frac{ 1 }{ 4 } \pi  \rho_L v_1^2 \cdot \frac{ R_1^4 }{ d_2 } \ln \frac{R_2}{ R_1 } \\
+	Mg &< \frac{ 1 }{ 4 } \pi  \rho_L v_1^2 \cdot \frac{ R_1^4 }{ d_2 } \ln \frac{R_2}{ R_1 } \\
+	v_1^2 &> \frac{ 4Mgd^2}{ \pi R_1^4 \ln \frac{ R_2 }{ R_1 }  } \\
+	v_1 &> \sqrt{\frac{ 4Mgd^2}{ \pi R_1^4 \ln \frac{ R_2 }{ R_1 }  } } \\
+	v_1 &> \frac{ 2d }{ R_1^2 } \cdot \sqrt{\frac{ Mg}{ \pi \ln \frac{ R_2 }{ R_1 }  } } 
+\end{align*}
+
+\end{document}

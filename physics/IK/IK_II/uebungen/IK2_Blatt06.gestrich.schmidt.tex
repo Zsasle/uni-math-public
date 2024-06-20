@@ -1,0 +1,193 @@
+\documentclass[sectionformat=aufgabe]{gadsescript}
+
+\setsemester{Summer Semester 2024}%
+\setuniversity{University of Konstanz}%
+\setfaculty{Faculty of Science\\(Physics)}%
+\settitle{Übungsblatt 06}
+\setsubtitle{Davina Schmidt, Elias Gestrich}
+
+\sisetup{exponent-mode = input}
+
+\begin{document}
+\maketitle
+
+\section{Oberflächenladungsdichte}
+\begin{enumerate}[label=\alph*)]
+	\item 
+		\begin{align*}
+			\varphi(z) &= \frac{ 1 }{ 4 \pi \varepsilon _0 } \int_{0} ^{R} \int_{0}^{2 \pi } \frac{ \sigma }{ \sqrt{z^2 +{ \rho^\prime} ^2}  } \rho^\prime \dd \psi^\prime  \dd \rho^\prime + C \\
+			&= \frac{ 1 }{ 4 \pi \varepsilon _0 } \int_{0} ^{R} \frac{ 2 \pi \rho^\prime \sigma }{ \sqrt{z^2 +{ \rho^\prime} ^2}  } \dd \rho^\prime + C \\
+			&= \frac{ \sigma }{ 2 \varepsilon _0 } \int_{0} ^{R} \frac{ \rho^\prime  }{ \sqrt{z^2 +{ \rho^\prime} ^2}  } \dd \rho^\prime + C \\
+			&= \frac{ \sigma }{ 2 \varepsilon _0 } \left[ \sqrt{z^2 +{ \rho^\prime} ^2} \right]_{0} ^{R} + C \\
+			&= \frac{ \sigma }{ 2 \varepsilon _0 } \left( \sqrt{z^2 + R^2} - \sqrt{z^2}  \right) + C \\
+			&= \frac{ \sigma }{ 2 \varepsilon _0 } \left( \sqrt{z^2 + R^2} - z \right) + C
+		\end{align*}
+		Dabei soll $ \varphi(0) = 0 $, also
+		\begin{align*}
+			0 &\overset{!}{=} \varphi(0) \\
+			0 &= \frac{ \sigma }{ 2 \varepsilon _0 } \left( \sqrt{R^2} - 0 \right) + C \\
+			0 &= \frac{ \sigma }{ 2 \varepsilon _0 } R + C \\
+			C &= - \frac{ \sigma }{ 2 \varepsilon _0 } R
+		\end{align*}
+		Also
+		\begin{align*}
+			\varphi(z) &= \frac{ \sigma }{ 2 \varepsilon _0 } \left( \sqrt{z^2 + R^2} - z - R \right)  \\
+			\varphi(z) &= -\frac{ \sigma }{ 2 \varepsilon _0 } \left( z - \sqrt{z^2 + R^2} + R \right)
+		\end{align*}
+	\item 
+		\begin{align*}
+			\vec E(z) &= - \nabla \varphi(z) \\
+			&= \left( 0, 0, \frac{ \sigma }{ 2 \varepsilon _0 } \left( 1 - \frac{z}{ \sqrt{z^2 + R^2}  }  \right) \right)  \\
+			&= \frac{ \sigma }{ 2 \varepsilon _0 } \left( 1 - \frac{z}{ \sqrt{z^2 + R^2}  } \right) \vec e_z
+		\end{align*}
+		$ x, y $ Koordinaten sind 0, da die Platte symmetrisch und somit in $ x, y $-Richtungen sich die Felder ausgleichen.
+	\item 
+		Für $ z \gg R $, also $ \frac{ R }{ z } \sim 0 $:
+		\begin{align*}
+			\varphi(z) &= -\frac{ \sigma }{ 4 \varepsilon _0 } \left( z - \sqrt{z^2 + R^2} + R \right) \\
+			 &= -\frac{ \sigma }{ 2 \varepsilon _0 } \left( z - z\sqrt{1 + \left( \frac{ R }{ z }  \right) ^2} + R \right) \\
+			 &\sim -\frac{ \sigma }{ 2 \varepsilon _0 } \left( z - z\left( 1 + \frac{ \left( \frac{ R }{ z }  \right) ^2 }{ 2 } \right) + R \right) \\
+			 &\sim -\frac{ \sigma }{ 2 \varepsilon _0 } \left( z - z\left( 1 + \frac{ \left( 0 \right) ^2 }{ 2 } \right) + R \right) \\
+			 &\sim -\frac{ \sigma }{ 2 \varepsilon _0 } \left( z - z + R \right) \\
+			 &\sim -\frac{ R\sigma }{ 2 \varepsilon _0 } 
+		\end{align*}
+		und
+		\begin{align*}
+			\vec E(z) &= \frac{ \sigma }{ 2 \varepsilon _0 } \left( 1 - \frac{z}{ \sqrt{z^2 + R^2}  } \right) \vec e_z \\
+			&= \frac{ \sigma }{ 2 \varepsilon _0 } \left( 1 - \frac{z}{ z \sqrt{1 + \left( \frac{ R }{ z }  \right) ^2}  } \right) \vec e_z \\
+			&= \frac{ \sigma }{ 2 \varepsilon _0 } \left( 1 - \frac{1}{ \sqrt{1 + \left( \frac{ R }{ z }  \right) ^2}  } \right) \vec e_z \\
+			&\sim \frac{ \sigma }{ 2 \varepsilon _0 } \left( 1 - \left( 1 - \left( \frac{ R }{ z }  \right) ^2 \right) \right) \vec e_z \\
+			&\sim \frac{ \sigma }{ 2 \varepsilon _0 } \left( 1 - \left( 1 - \left( 0 \right) \right)\right) \vec e_z \\
+			&\sim \frac{ \sigma }{ 2 \varepsilon _0 } \left( 1 - 1 \right) \vec e_z \\
+			&\sim 0
+		\end{align*}
+		
+		
+		Für $ R \to \infty $, also $ \frac{ z }{ R } \sim 0 $:
+		\begin{align*}
+			\varphi(z) &= -\frac{ \sigma }{ 4 \varepsilon _0 } \left( z - \sqrt{z^2 + R^2} + R \right) \\
+			 &= -\frac{ \sigma }{ 2 \varepsilon _0 } \left( z - R\sqrt{1 + \left( \frac{ z }{ R }  \right) ^2} + R \right) \\
+			 &\sim -\frac{ \sigma }{ 2 \varepsilon _0 } \left( z - R\left( 1 + \frac{ \left( \frac{ z }{ R }  \right) ^2 }{ 2 } \right) + R \right) \\
+			 &\sim -\frac{ \sigma }{ 2 \varepsilon _0 } \left( z - R\left( 1 + \frac{ \left( 0 \right) ^2 }{ 2 } \right) + R \right) \\
+			 &\sim -\frac{ \sigma }{ 2 \varepsilon _0 } \left( z - R + R \right) \\
+			 &\sim -\frac{ z\sigma }{ 2 \varepsilon _0 } 
+		\end{align*}
+		und
+		\begin{align*}
+			\vec E(z) &= \frac{ \sigma }{ 2 \varepsilon _0 } \left( 1 - \frac{z}{ \sqrt{z^2 + R^2}  } \right) \vec e_z \\
+			&= \frac{ \sigma }{ 2 \varepsilon _0 } \left( 1 - \frac{z}{ R \sqrt{1 + \left( \frac{ z }{ R }  \right) ^2}  } \right) \vec e_z \\
+			&= \frac{ \sigma }{ 2 \varepsilon _0 } \left( 1 - \frac{z}{ R\sqrt{1 + \left( \frac{ z }{ R }  \right) ^2}  } \right) \vec e_z \\
+			&\sim \frac{ \sigma }{ 2 \varepsilon _0 } \left( 1 - \left( \frac{ z }{ R }  - \frac{ z }{ R }  \left( \frac{ R }{ z }  \right) ^2 \right) \right) \vec e_z \\
+			&\sim \frac{ \sigma }{ 2 \varepsilon _0 } \left( 1 - \left( 0 - 0 \right)\right) \vec e_z \\
+			&\sim \frac{ \sigma }{ 2 \varepsilon _0 } \left( 1 - 0 \right) \vec e_z \\
+			&\sim \frac{ \sigma }{ 2 \varepsilon _0 } \vec e_z
+		\end{align*}
+\end{enumerate}
+
+\section{Multipolentwicklung}
+\begin{enumerate}[label=\alph*)]
+	\item 
+		\begin{align*}
+			\vec p &= \int _V \rho( \vec r) \vec r \dd^3 r \\
+			&= \int _V q_1 \delta(\vec r - \vec r_1) \vec r \dd^3 r + \int _V q_2 \delta(\vec r - \vec r_2) \vec r \dd^3 r \\
+			&\quad+ \int _V q_3 \delta(\vec r - \vec r_3) \vec r \dd^3 r + \int _V q_4\delta(\vec r - \vec r_4) \vec r \dd^3 r\\
+			&= q_1 \vec r_1 + q_2 \vec r_2 + q_3 \vec r_3 + q_4 \vec r_4 \\
+			&= q_1 \vec r_1 + q_2 \vec r_2 - q_3 \vec r_1 - q_4 \vec r_2 \\
+			&= (q_1 - q_3) \vec r_1 + (q_2 - q_4) \vec r_2 \\
+			&= (q_1 - q_3) (a, 0, 0) + (q_2 - q_4) (0, a, 0) \\
+			&=a ( (q_1 - q_3) , (q_2 - q_4) , 0)
+		\end{align*}
+		Für $ \vec p = 0 $ muss also $ q_1 = q_3 $ und $ q_2 = q_4 $ gelten
+	\item für $ k \neq l $ gilt:
+		\begin{align*}
+			Q_{kl} &= \int _V \left( 3r_kr_l - \delta_{kl} r^2 \right) \rho(\vec r) \dd ^3 r \\
+			&= \int _V 3r_kr_l \rho(\vec r) \dd ^3 r \\
+			&= \int _V 3r_kr_l q_1 \delta ( \vec r - \vec r_1) \dd ^3 r + \int _V 3r_kr_l q_2 \delta ( \vec r - \vec r_2) \dd ^3 r \\
+			&\quad + \int _V 3r_kr_l q_3 \delta ( \vec r - \vec r_3) \dd ^3 r + \int _V 3r_kr_l q_4 \delta ( \vec r - \vec r_4) \dd ^3 r \\
+			&= 3r_{1_k} r_{1_l}  q_1 +  3r_{2_k} r_{2_l}  q_2 +  3r_{3_k} r_{3_l}  q_3 +  3r_{4_k} r_{4_l}  q_4 \\
+		\end{align*}
+		da bei $ r_1, r_2, r_3, r_4 $ nur eine Komponente nicht null ist, ist $ r_{i_k} = 0 $ oder $ r_{i_l} = 0 $.\\
+		also $ Q_{kl} = 3 \cdot 0 q_1 + 3 \cdot 0 q_2 + 3 \cdot 0 q_3 + 3 \cdot 0 q_4 = 0 $ für $ k \neq l $.
+
+		Für $ k = l = x $:
+		\begin{align*}
+			Q_{xx} &= \int _V (3r_x^2 - \delta_{xx}r^2)\rho(\vec r) \dd ^3 r \\
+			&= \int _V (3r_x^2 - r^2)\rho(\vec r) \dd^3 r \\
+			&= \int _V (3r_x^2 - r^2) q_1 \delta(\vec r - \vec r_1) \dd^3 r + \int _V (3r_x^2 - r^2) q_2 \delta(\vec r - \vec r_2) \dd^3 r \\
+			&\quad + \int _V (3r_x^2 - r^2) q_3 \delta(\vec r - \vec r_3) \dd^3 r + \int _V (3r_x^2 - r^2) q_4 \delta(\vec r - \vec r_4) \dd^3 r \\
+			&= (3 r_{1_x} ^2 - r_1^2) q_1 + (3 r_{2_x} ^2 - r_2^2) q_2 + (3 r_{3_x} ^2 - r_3^2) q_3 + (3 r_{4_x} ^2 - r_4^2) q_4  \\
+			&= (3 a^2 - a^2) q_1 + (3 \cdot 0^2 - a^2) q_2 + (3 (-a) ^2 - a^2) q_3 + (3 \cdot 0 ^2 - a^2) q_4  \\
+			&= 2 a^2 q_1 - a^2 q_2 + 2a^2 q_3 - a^2 q_4  \\
+			&= a^2 (2 q_1 - q_2 + 2 q_3 - q_4)  \\
+			&= a^2 (2 (q_1 + q_3) - (q_2 + q_4)) 
+		\end{align*}
+		
+		Für $ k = l = y $:
+		\begin{align*}
+			Q_{yy} &= \int _V (3r_y^2 - \delta_{yy}r^2)\rho(\vec r) \dd ^3 r \\
+			&= \int _V (3r_y^2 - r^2)\rho(\vec r) \dd^3 r \\
+			&= \int _V (3r_y^2 - r^2) q_1 \delta(\vec r - \vec r_1) \dd^3 r + \int _V (3r_y^2 - r^2) q_2 \delta(\vec r - \vec r_2) \dd^3 r \\
+			&\quad + \int _V (3r_y^2 - r^2) q_3 \delta(\vec r - \vec r_3) \dd^3 r + \int _V (3r_y^2 - r^2) q_4 \delta(\vec r - \vec r_4) \dd^3 r \\
+			&= (3 r_{1_y} ^2 - r_1^2) q_1 + (3 r_{2_y} ^2 - r_2^2) q_2 + (3 r_{3_y} ^2 - r_3^2) q_3 + (3 r_{4_y} ^2 - r_4^2) q_4  \\
+			&= (3 \cdot 0^2 - a^2) q_1 + (3 \cdot a^2 - a^2) q_2 + (3 \cdot 0 ^2 - a^2) q_3 + (3 \cdot (-a) ^2 - a^2) q_4  \\
+			&= -a^2 q_1 + 2a^2 q_2 - a^2 q_3 + 2a^2 q_4  \\
+			&= a^2 (- q_1 + 2q_2 - q_3 + 2 q_4)  \\
+			&= a^2 (2 (q_2 + q_4) - (q_1 + q_3)) 
+		\end{align*}
+
+		Für $ k = l = z $:
+		\begin{align*}
+			Q_{zz} &= \int _V (3r_z^2 - \delta_{zz}r^2)\rho(\vec r) \dd ^3 r \\
+			&= \int _V (3r_z^2 - r^2)\rho(\vec r) \dd^3 r \\
+			&= \int _V (3r_z^2 - r^2) q_1 \delta(\vec r - \vec r_1) \dd^3 r + \int _V (3r_z^2 - r^2) q_2 \delta(\vec r - \vec r_2) \dd^3 r \\
+			&\quad + \int _V (3r_z^2 - r^2) q_3 \delta(\vec r - \vec r_3) \dd^3 r + \int _V (3r_z^2 - r^2) q_4 \delta(\vec r - \vec r_4) \dd^3 r \\
+			&= (3 r_{1_z} ^2 - r_1^2) q_1 + (3 r_{2_z} ^2 - r_2^2) q_2 + (3 r_{3_y} ^2 - r_3^2) q_3 + (3 r_{4_y} ^2 - r_4^2) q_4  \\
+			&= (3 \cdot 0^2 - a^2) q_1 + (3 \cdot 0^2 - a^2) q_2 + (3 \cdot 0 ^2 - a^2) q_3 + (3 \cdot i_0^2 - a^2) q_4  \\
+			&= -a^2 q_1 - a^2 q_2 - a^2 q_3 - a^2 q_4  \\
+			&= a^2 (- q_1 - q_2 - q_3 - q_4)  \\
+			&= -a^2 (q_1 + q_2 + q_3 + q_4) 
+		\end{align*}
+
+		\[
+			a^2\begin{pmatrix} 
+				2 ( q_1 + q_3 ) - (q_2 + q_4) & 0 & 0\\
+				0 & 2 ( q_2 + q_4 ) - (q_1 + q_3) & 0\\
+				0 & 0 & -(q_1 + q_2 + q_3 + q_4) \\
+			\end{pmatrix} 
+		\]
+		
+		Damit alles Null:
+		\begin{align*}
+			-( q_1 + q_2 + q_3 + q_4 ) &= 0 \\
+			-(q_2 + q_4) &= (q_1 + q_3) \tag{1}
+		\end{align*}
+		und
+		\begin{align*}
+			2 (q_1 + q_3) - (q_2 + q_4) &= 0 \\
+			2 (q_1 + q_3) + (q_1 + q_3) &= 0 \\
+			3 (q_1 + q_3) &= 0 \\
+			q_1 + q_3 &= 0 \\
+			q_1 &= - q_3
+		\end{align*}
+		Also in (1) eingesetzt
+		\begin{align*}
+			-(q_2 + q_4) &= (q_1 + q_3) \\
+			-(q_2 + q_4) &= 0 \\
+			q_2 + q_4 &= 0 \\
+			q_2 &= -q_4
+		\end{align*}
+
+		Zum Überprüfen:
+		\begin{align*}
+			2 (q_2 + q_4) - (q_1 + q_3) &= 2 \cdot 0 + 0
+		\end{align*}
+		bascht
+		Also muss gelten $ q_1 = -q_3 $ und $ q_2 = -q_4 $
+
+	\item Aus a) muss folgen $ q_1 = q_3 $ und $ q_2 = q_4 $ wegen b) folgt aber auch $ q_1 = -q_3 \overset{a)}{=} -q_1 \implies q_1 = q_3 = 0 $ und $ q_2 = -q_4 \overset{a)}{=} -q_2 \implies q_2 = q_4 = 0 $
+		Also neeee nur für $ q_1 = q_2 = q_3 = q_4 = 0 $
+
+\end{enumerate}
+
+
+\end{document}

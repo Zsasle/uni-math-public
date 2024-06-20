@@ -1,0 +1,32 @@
+\documentclass[sectionformat = exercise]{gadsescript}
+
+\setsemester{Winter Semester 2023/2024}%
+\setuniversity{University of Konstanz}%
+\setfaculty{Faculty of Science\\(Computer Science)}%
+\settitle{Theory of Computing \& Parallel Computing I}
+
+\begin{document}
+\maketitle
+\section{Computability Theory}
+\begin{enumerate}[label=\roman*.]
+	\item \texttt{unkown}, because it might me that the Problem is also decidable, but it might also be, that there you cannot make a decidable Problem out of it.
+	\item \texttt{true}, because every decidable Problem can be transformed into an undecidable Problem, by just adding a loop, so that it endlessly iterates through the loop if the output would be false
+\end{enumerate}
+
+\section{Parallel Computing}
+A co-processor is a processor, that supplements the main processor, by e.g. computing floating point operations. An example would be the Motorola 68881
+
+\section{Parallelization}
+Data parallelism is when the data being processed can be spit up so that multiple processors can process them at the same time. That does not mean that the different processors must do the exact same operation at the same time.\\
+Task parallelism: Multiple processes/threads compute different steps/tasks of the same problem, and can but not have to use the same data. Often it involves exchanging some sort of results
+
+\section{Problem Complexity}
+\begin{enumerate}[label=\alph*)]
+	\item The numbers $ z_0, \dotsc, z_n $, can be put into an array of length $ n $ in a polynomial time. And then be sort the array non-descending, also in polynomial time with a reasonable sorting algorithm like Heapsort. After that just compare the $ i^{\text{th} }  $ element with the $ (i + 1)^{\text{th} }  $ element for $ 1 < i < n - 1 $, which results in a linear order. So over all $ A \in \mathcal{P}  $
+	\item $ A \in \mathcal{P} \subset \mathcal{NP} \implies A \in \mathcal{NP}  $
+	\item if $ B \in \mathcal{P}  $ would be true every $ \mathcal{NP}  $ problem would also be a $ \mathcal{P}  $ problem, because $ B $ is $ \mathcal{NP}  $-complete, so every $ \mathcal{NP}  $-problem can be projected onto $ B $. So $ B \centernot \in \mathcal{P}  $
+	\item $ B \in \mathcal{NP}  $ because $ B \in \mathcal{NP}  $-complete
+\end{enumerate}
+
+
+\end{document}

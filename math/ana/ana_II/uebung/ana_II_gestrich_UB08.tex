@@ -1,0 +1,122 @@
+\documentclass[sectionformat=aufgabe]{gadsescript}
+
+\setsemester{Summer Semester 2024}%
+\setuniversity{University of Konstanz}%
+\settitlelh{\today\\\semester\\Gruppe 3, Jonathan Weihing}
+\setfaculty{Faculty of Science\\(Mathematics and Statistics)}%
+\settitle{Übungsblatt 8}
+\setsubtitle{Elias Gestrich}
+\usepackage{subfig}
+
+\begin{document}
+\maketitle
+\section{Taylor-Entwicklung I}
+\[
+	\partial_x f = \frac{ 1(x + y) - (x - y) \cdot 1 }{ ( x + y)^2 } = \frac{ 2y }{ (x + y)^2 }
+\]
+\[
+	\partial_y f = \frac{ (-1)\cdot (x + y) - (x - y)\cdot 1 }{ ( x + y)^2 } = - \frac{ 2x }{ (x + y)^2 }
+\]
+\[
+	\partial_x^2 f = - \frac{4y}{ (x + y)^3 } 
+\]
+\[
+	\partial_y \partial_x f = \frac{2(x + y)^2 - 2y \cdot 2 \cdot (x + y)}{ (x + y)^4 } = \frac{ 2(x + y) - 4y }{ (x + y )^3 } = \frac{ 2(x - y) }{ (x + y)^3 } 
+\]
+\[
+	\partial_x \partial_y f = - \frac{2(x + y)^2 - 2x \cdot 2 \cdot (x + y)}{ (x + y)^4 } = -\frac{ 2(x + y) - 4x }{ (x + y )^3 } = -\frac{ 2(-x + y) }{ (x + y)^3 } = \frac{ 2(x - y) }{ ( x + y )^3 } 
+\]
+\[
+	\partial_y^2 f = \frac{4x}{ (x + y)^3 } 
+\]
+
+
+0. Glied:
+\[
+	\sum_{\left| \alpha \right| = 0}^{} \frac{ \partial^{\alpha} f(1, 1) }{ \alpha! } \xi^{\alpha} = f(1, 1) = 0
+\]
+
+1. Glied:
+\[
+	\sum_{\left| \alpha \right| = 1}^{} \frac{ \partial^{\alpha} f(1, 1) }{ \alpha! } \xi^{\alpha}
+	= \frac{ \partial_x f(1, 1) }{ 1! } \xi_x
+	+ \frac{ \partial_y f(1, 1) }{ 1! } \xi_y
+	= \frac{ 2 }{ 2^2 } \xi_x - \frac{2}{ 2^2 } \xi_y = \frac{ 1 }{ 2 } \xi_x - \frac{ 1 }{ 2 } \xi_y = \frac{ 1 }{ 2 } \left< (1, -1), \xi \right>
+\]
+
+2. Glied:
+\begin{align*}
+	\sum_{\left| \alpha \right| = 1}^{} \frac{ \partial^{\alpha} f(1, 1) }{ \alpha! } \xi^{\alpha}
+	&= \frac{ \partial_x^2 f(1, 1) }{ 2!0! } \xi_x^2
+	% + \frac{ \partial_y \partial_x f(1, 1) }{ 1!1! } \xi_x\xi_y
+	+ \frac{ \partial_x \partial_y f(1, 1) }{ 1!1! } \xi_x\xi_y
+	+ \frac{ \partial_y^2 f(1, 1) }{ 0!2! } \xi_x^2 \\
+	&= \frac{ \frac{ 4 }{ 2^3 } }{ 2 } \xi_x^2 + 0 + \frac{ \frac{ 4 }{ 2^3 } }{ 2 } \xi_y^2 \\
+	&= \frac{ 1 }{ 4 } \xi_x^2 + \frac{ 1 }{ 4 } \xi_y^2 \\
+	&= \frac{ 1 }{ 4 } \left< \xi, \xi \right> \\
+	&= \frac{ 1 }{ 4 } \left\| \xi \right\| _2^2
+\end{align*}
+
+Also ist die Taylor-Entwicklung der Funktion $ f $ im Punkt $ x_0 = (1, 1) $ bis einschließlich den Gliedern 2. Ordnung:
+\[
+	T_{x_0} f(x_0 + \xi) = 0 + \frac{ 1 }{ 2 } \left< (1, -1), \xi \right> + \frac{ 1 }{ 4 } \left\| \xi \right\| _2^2
+\]
+\[
+	T_{x_0} f(x) = 0 + \frac{ 1 }{ 2 } \left< (1, -1), (x - x_0) \right> + \frac{ 1 }{ 4 } \left\| (x - x_0) \right\| _2^2
+\]
+
+\section{Taylor-Entwicklung II}
+\[
+	\partial_x f = 0 + (y + \cos (y)) \cos (x)
+\]
+\[
+	\partial_y f = (1 - \sin (y)) \sin (x) + 0
+\]
+\[
+	\partial_x^2 f = - (y + \cos (y)) \sin (x)
+\]
+\[
+	\partial_y\partial_x f = (1 - \sin (y)) \cos (x)
+\]
+\[
+	\partial_x\partial_y f = (1 - \sin (y)) \cos (x)
+\]
+\[
+	\partial_y^2 f = - \cos (y) \sin (x)
+\]
+
+0. Glied:
+\[
+	\sum_{\left| \alpha \right| = 0}^{} \frac{ \partial^{\alpha} f\left( \frac{ \pi }{ 2 } , 0 \right)  }{ \alpha! } \xi^{\alpha} = f\left( \frac{ \pi }{ 2 } , 0 \right)  = (0 + 1) \cdot 1 = 1
+\]
+
+1. Glied:
+\[
+	\sum_{\left| \alpha \right| = 1}^{} \frac{ \partial^{\alpha} f\left( \frac{ \pi }{ 2 } , 0 \right)  }{ \alpha! } \xi^{\alpha}
+	= \frac{ \partial_x f\left( \frac{ \pi }{ 2 } , 0 \right) }{ 1! } \xi_x
+	+ \frac{ \partial_y f\left( \frac{ \pi }{ 2 } , 0 \right) }{ 1! } \xi_y
+	= (0 + 1) \cdot 0 \cdot \xi_x + (1 - 0) \cdot 1 \cdot \xi_y = \left< (0, 1), \xi \right>
+\]
+
+2. Glied:
+\begin{align*}
+	\sum_{\left| \alpha \right| = 2}^{} \frac{ \partial^{\alpha} f\left( \frac{ \pi }{ 2 } , 0 \right)  }{ \alpha! } \xi^{\alpha}
+	&= \frac{ \partial_x^2 f\left( \frac{ \pi }{ 2 } , 0 \right) }{ 2!0! } \xi_x^2
+	% + \frac{ \partial_y\partial_x f\left( \frac{ \pi }{ 2 } , 0 \right) }{ 1!1! } \xi_x\xi_y
+	+ \frac{ \partial_x\partial_y f\left( \frac{ \pi }{ 2 } , 0 \right) }{ 1!1! } \xi_x\xi_y
+	+ \frac{ \partial_y^2 f\left( \frac{ \pi }{ 2 } , 0 \right) }{ 0!2! } \xi_y^2 \\
+	&= \frac{ - (0 + 1) \cdot 1 }{ 2 } \xi_x^2 + (1 - 0) \cdot 0 \xi_x\xi_y - \frac{ 1 \cdot 1 }{ 2 } \xi_y^2 \\
+	&= -\frac{ 1 }{ 2 } \xi_x^2 - \frac{ 1 }{ 2 } \xi_y^2 \\
+	&= - \frac{ 1 }{ 2 } \left\| \xi \right\| _2^2
+\end{align*}
+
+Also ist die Taylor-Entwicklung der Funktion $ f $ im Punkt $ x_0 = \left( \frac{ \pi }{ 2 } , 0 \right)  $ bis einschließlich den Gliedern 2. Ordnung:
+\[
+	T_{x_0} f(x_0 + \xi) = 1 + \left< (0, 1), \xi \right> - \frac{ 1 }{ 2 } \left\| \xi \right\| _2^2
+\]
+\[
+	T_{x_0} f(x) = 1 + \left< (0, 1), (x - x_0) \right> - \frac{ 1 }{ 2 } \left\| (x - x_0) \right\| _2^2
+\]
+
+\end{document}
+

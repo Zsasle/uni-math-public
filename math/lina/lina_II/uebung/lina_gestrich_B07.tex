@@ -1,0 +1,186 @@
+\documentclass[sectionformat = aufgabe]{gadsescript}
+\settitlelh{\today\\\semester\\Gruppe 3, Briefkasten 11, Baiz}
+\setsemester{Summer Semester 2024}%
+\setuniversity{University of Konstanz}%
+\setfaculty{Faculty of Science\\(Mathematics and Statistics)}%
+\settitle{Übungsblatt 07}
+\setsubtitle{Elias Gestrich}
+%Salisha Baiz, salisha.baiz@uni-konstanz.de
+
+\begin{document}
+\maketitle
+\setcounter{section}{7}
+\subsection{}
+\begin{enumerate}[label=(\alph*)]
+	\item Zu zeigen für alle $ z = (z_1, \dotsc, z_n) \in \Z ^n $ gilt $ \sigma ( \tau f ) (z) = ( \sigma \tau ) f ( z )  $.
+		Hierfür gilt (Umformungen mithilfe Def 12.3 und Produkt von Permutationen)
+		\begin{align*}
+			\sigma (\tau f) (z) &= \sigma( (\tau f)(z) ) \\
+			~ &= \sigma \left( f \left( z_{\tau ( 1 ) } , \dotsc, z_{\tau (n)}  \right)  \right)  \\
+			~ &= f \left( z_{\sigma ( \tau (1) )} , \dotsc, z_{\sigma ( \tau ( n ) )}  \right)  \\
+			~ &= f \left( z_{\sigma \tau (1)} , \dotsc, z_{\sigma \tau (n)}  \right)  \\
+			~ &= (\sigma \tau) f (z) \qed
+		\end{align*}
+	\item Zu zeigen für alle $ z = (z_1, \dotsc, z_n) \in \Z ^n $ gilt $ ( \sigma ( f g ) ) (z) = ( ( \sigma f ) ( \sigma g ) ) ( z )  $.
+		Hierfür gilt (Umformungen mithilfe Def 12.3 und Produkt von Funktionen)
+		\begin{align*}
+			( \sigma ( f g ) ) (z) &= ( f g ) \left( z_{\sigma (1)} , \dotsc, z_{\sigma (n)}  \right)  \\
+			~ &= \left( f \left( z_{\sigma (1)} , \dotsc, z_{\sigma (n)}  \right) \right) \left( g \left( z_{\sigma(1)} , \dotsc, z_{\sigma (n)}  \right)  \right) \\
+			~ &= ( ( \sigma f ) (z) ) ( ( \sigma g ) ( z ) )\\
+			~ &= ( ( \sigma f ) ( \sigma g ) ) ( z ) \qed
+		\end{align*}
+\end{enumerate}
+
+\subsection{}
+\begin{enumerate}[label=(\alph*)]
+	\item Da $ S_n $ für alle $ n $ schon eine Gruppe ist, reicht es zu zeigen, dass $ S_n $ genau dann kommutativ, wenn $ n \leq 2 $
+		\begin{description}
+			\item[Fall 1 $ S_1 $:] Da $ S_1 = \left\{ \begin{pmatrix} 1 \end{pmatrix}  \right\}  $ gilt für alle $ \sigma, \tau $, dass $ \sigma \tau = \begin{pmatrix} 1 \end{pmatrix} \begin{pmatrix} 1 \end{pmatrix} = \tau \sigma $, wodurch die Kommutativität schon gezeigt ist
+			\item[Fall 2 $ S_2 $:] Da $ S_2 = \left\{ \begin{pmatrix} 1 \end{pmatrix}, \begin{pmatrix} 1 & 2 \end{pmatrix}   \right\}  $.
+				Für $ \sigma, \tau \in S_2 $ mit $ \sigma = \tau $ folgt direkt, dass $ \sigma \tau = \tau \sigma $.
+				Wenn $ \sigma \neq \tau $, dann ist entweder $ \sigma $, oder $ \tau $ das neutrale Element, und dann entsprechend entgegensetzt $ \tau $, oder $ \sigma $ gleich $ \begin{pmatrix} 1 & 2 \end{pmatrix}  $ ist, dadurch folgt $ \sigma \tau = \begin{pmatrix} 1 & 2 \end{pmatrix} = \tau \sigma $ 
+			\item[Fall 3 $ S_n $ mit $ n > 2 $:]
+				Für $ n > 2 $ gilt, $ \begin{pmatrix} 1 & 2 \end{pmatrix} , \begin{pmatrix} 1 & 3 \end{pmatrix} \in S_n $, für die gilt:
+				$ \begin{pmatrix} 1 & 2 \end{pmatrix} \begin{pmatrix} 1 & 3 \end{pmatrix} = \begin{pmatrix} 1 & 3 & 2 \end{pmatrix} \neq \begin{pmatrix} 1 & 2 & 3 \end{pmatrix} = \begin{pmatrix} 1 & 3 \end{pmatrix} \begin{pmatrix} 1 & 2 \end{pmatrix}  $
+
+				(Da nach Beweis von Satz 12.1 $ \begin{pmatrix} 1 & 3 & 2 \end{pmatrix} = \begin{pmatrix} 1 & 2 \end{pmatrix} \begin{pmatrix} 1 & 3 \end{pmatrix}  $ und $ \begin{pmatrix} 1 & 2 & 3 \end{pmatrix} = \begin{pmatrix} 1 & 3 \end{pmatrix} \begin{pmatrix} 1 & 2 \end{pmatrix}  $)
+		\end{description}
+
+	\item
+		Sei $ \sigma \in A_n $.\\
+		Für zwei Transpositionen $ \tau_1, \tau_2 \in S_n $ gilt, $ \tau_1 = \begin{pmatrix} i_1 & i_2 \end{pmatrix} , \tau_2 = \begin{pmatrix} i_3 & i_4 \end{pmatrix}  $.
+		Wenn also $ \tau_1 = \tau_2 $, dann gilt $ \tau_1 \tau_2 = \begin{pmatrix} 1 \end{pmatrix} = \begin{pmatrix} 1 & 2 & 3 \end{pmatrix} \begin{pmatrix} 1 & 3 & 2 \end{pmatrix}  $, also $ \tau_1 \tau_2 $ durch 3-Zyklen darstellbar.
+		Außerdem gilt im Allgemeinen $ \begin{pmatrix} a & b \end{pmatrix} = \begin{pmatrix} b & a \end{pmatrix} $, da für $ x \neq a, x \neq b $ gilt
+		\[
+			\begin{pmatrix} a & b \end{pmatrix} (x) = x = \begin{pmatrix} b & a \end{pmatrix}(x),
+		\]
+		\[
+			\begin{pmatrix} a & b \end{pmatrix} (a) = b = \begin{pmatrix} b & a \end{pmatrix} (a) \text{ und} 
+		\]
+		\[
+			\begin{pmatrix} a & b \end{pmatrix} (b) = a = \begin{pmatrix} b & a \end{pmatrix} (b)
+		\]
+		Es gibt also noch die Fälle, dass beide Transpositionen genau einen gemeinen nicht-Fixpunkt haben oder dass sie disjunkt sind. Denn Fall in dem die Transpositionen zwei gleiche nicht-Fix\-punkte haben, bedeutet, dass $ \tau_1 = \tau_2 $, da eine Transposition nur zwei nicht-Fixpunkte hat.
+		\begin{description}
+			\item[Fall 1:] Einen gemeinsamen nicht-Fixpunkt: \OE{} $ i_1 = i_3 $, also $ \tau_2 = \begin{pmatrix} i_1  & i_4 \end{pmatrix}  $.\\
+				Beh. $ \tau_1 \tau_2 = \begin{pmatrix} i_1 & i_4 & i_2 \end{pmatrix}  $, sei hierfür $ x \in \N _n $ beliebig.\\
+				Falls $ x \neq i_1, x\neq i_2, x \neq i_4 $, dann:
+				\[
+					\tau_1 \tau_2 (x) = x = \begin{pmatrix} i_1 & i_4 & i_2 \end{pmatrix} 
+				\]
+				Falls $ x = i_1 $:
+				\begin{align*}
+					\begin{pmatrix} i_1 & i_2 \end{pmatrix} \begin{pmatrix} i_1 & i_4 \end{pmatrix} (i_1) &= \begin{pmatrix} i_1 & i_2 \end{pmatrix} (i_4) \\
+							    &= i_4 \\
+							    &= \begin{pmatrix} i_1 & i_4 & i_2 \end{pmatrix} (i_1)
+				\end{align*}
+				
+				Falls $ x = i_2 $:
+				\begin{align*}
+					\begin{pmatrix} i_1 & i_2 \end{pmatrix} \begin{pmatrix} i_1 & i_4 \end{pmatrix} (i_2) &= \begin{pmatrix} i_1 & i_2 \end{pmatrix} (i_2) \\
+					~& = i_2 \\
+					~& = \begin{pmatrix} i_1 & i_4 & i_2 \end{pmatrix} (i_2)
+				\end{align*}
+				Falls $ x = i_4 $:
+				\begin{align*}
+					\begin{pmatrix} i_1 & i_2 \end{pmatrix} \begin{pmatrix} i_1 & i_4 \end{pmatrix} (i_4) &= \begin{pmatrix} i_1 & i_2 \end{pmatrix} (i_1) \\
+					~ & = i_2 \\
+					~ & = \begin{pmatrix} i_1 & i_4 & i_2 \end{pmatrix} (i_4)
+				\end{align*}
+			\item[Fall 2:] $ i_1, i_2, i_3, i_4 $ paarweise verschieden\\
+				Beh. $ \begin{pmatrix} i_1 & i_2 \end{pmatrix} \begin{pmatrix} i_3 & i_4 \end{pmatrix} = \begin{pmatrix} i_1 & i_3 & i_2 \end{pmatrix} \begin{pmatrix} i_1 & i_4 & i_3 \end{pmatrix}  $.\\
+				Bew. sei $ x \in \N _n $ 
+				Falls $ x \neq i_1, x\neq i_2, x \neq i_3, x \neq i_4 $, dann:
+				\[
+					\tau_1 \tau_2 (x) = x = \begin{pmatrix} i_1 & i_3 & i_2 \end{pmatrix} \begin{pmatrix} i_1 & i_4 & i_3 \end{pmatrix}  (x)
+				\]
+				Falls $ x = i_1 $:
+				\begin{align*}
+					\begin{pmatrix} i_1 & i_2 \end{pmatrix} \begin{pmatrix} i_3 & i_4 \end{pmatrix} (i_1) &= \begin{pmatrix} i_1 & i_2 \end{pmatrix} (i_1) \\
+					~ & = i_2 \\
+					~ & = \begin{pmatrix} i_1 & i_3 & i_2 \end{pmatrix} (i_3) \\
+					~ & = \begin{pmatrix} i_1 & i_3 & i_2 \end{pmatrix} \begin{pmatrix} i_1 & i_3 & i_4 \end{pmatrix} (i_1)
+				\end{align*}
+				Falls $ x = i_2 $:
+				\begin{align*}
+					\begin{pmatrix} i_1 & i_2 \end{pmatrix} \begin{pmatrix} i_3 & i_4 \end{pmatrix} (i_2) &= \begin{pmatrix} i_1 & i_2 \end{pmatrix} (i_2) \\
+					~ & = i_1 \\
+					~ & = \begin{pmatrix} i_1 & i_3 & i_2 \end{pmatrix} (i_2) \\
+					~ & = \begin{pmatrix} i_1 & i_3 & i_2 \end{pmatrix} \begin{pmatrix} i_1 & i_3 & i_4 \end{pmatrix} (i_2)
+				\end{align*}
+				Falls $ x = i_3 $:
+				\begin{align*}
+					\begin{pmatrix} i_1 & i_2 \end{pmatrix} \begin{pmatrix} i_3 & i_4 \end{pmatrix} (i_3) &= \begin{pmatrix} i_1 & i_2 \end{pmatrix} (i_4) \\
+					~ & = i_4 \\
+					~ & = \begin{pmatrix} i_1 & i_3 & i_2 \end{pmatrix} (i_4) \\
+					~ & = \begin{pmatrix} i_1 & i_3 & i_2 \end{pmatrix} \begin{pmatrix} i_1 & i_3 & i_4 \end{pmatrix} (i_3)
+				\end{align*}
+				Falls $ x = i_4 $:
+				\[
+					\begin{pmatrix} i_1 & i_2 \end{pmatrix} \begin{pmatrix} i_3 & i_4 \end{pmatrix} (i_4) = \begin{pmatrix} i_1 & i_2 \end{pmatrix} (i_3) = i_3 = \begin{pmatrix} i_1 & i_3 & i_2 \end{pmatrix} (i_1) = \begin{pmatrix} i_1 & i_3 & i_2 \end{pmatrix} \begin{pmatrix} i_1 & i_3 & i_4 \end{pmatrix} (i_4)
+				\]
+		\end{description}
+		Also lassen sich jewils zwei Transpositionen durch ein Produkt von 3-Zyklen darstellen.
+		Da $ \sigma $ alternierend existieren Transpositionen $ \tau_1, \tau_2, \dotsc \tau_{2j - 1}, \tau_{2j} $ mit $ j \in \N _0 $ sodass mit $ \sigma = \tau_1 \tau_2 \dotsb \tau_{2j - 1} \tau_{2j}  $, Sei $ \alpha_i = \tau_{2i - 1} \tau_{2i}  $ mit $ 1 \leq i \leq j $, so, dass $ \tau_1 \tau_2 \dotsb \tau_{2j - 1} \tau_{2j} = \alpha_1 \dotsb \alpha_j $.
+		Da jedes $ \alpha_i $ ein Produkt zweier Transpositionen, welche sich durch Produkt von 3-Zyklen darstellen lassen, lässt sich also auch $ \sigma $ durch ein Produkt von (Produkten von) 3-Zyklen darstellen.
+\end{enumerate}
+
+\subsection{}
+\begin{enumerate}[label=(\alph*)]
+	\item Sei $ \pi \in S_n $, dann gibt es $ \tau_1, \dotsc, \tau_m $ Transpositionen mit $ \tau_1 \dotsb \tau_m = \pi  $ und $ \Signum(\pi) = (-1)^{m}  $, da für $ m $ gerade $ \Signum(\pi ) = 1 $ nach Definition, aber auch $ (-1)^{m} = 1 $ gilt, und für $ m $ ungerade $ \Signum(\pi ) = -1 = (-1)^{m}  $ ebenfalls gilt.\\
+		Betrachte nun
+		\begin{align*}
+			\delta \left( z_{\pi (1)}, \dotsc, z_{\pi (n)}  \right) &= \delta \left( z_{\tau_1 \dotsb \tau_m (1)} , \dotsc, z_{\tau_1 \dotsb \tau_m (n)}  \right)  \\
+			~ &\overset{\text{Lem. 13.6.}}{=} (-1)^{1} \delta \left( z_{\tau_1 \dotsb \tau_{m - 1}  (1)} , \dotsc, z_{\tau_1 \dotsb \tau_{m - 1}  (n)}  \right)  \\
+			~ &\overset{\text{Lem. 13.6.}}{=} (-1)^{2} \delta \left( z_{\tau_1 \dotsb \tau_{m - 2}  (1)} , \dotsc, z_{\tau_1 \dotsb \tau_{m - 2}  (n)}  \right)  \\
+			~ & \quad \vdots \\
+			~ &\overset{\text{Lem. 13.6.} }{=} (-1)^{m} \delta ( z_1, \dotsc, z_n) \\
+			~ &= \Signum(\pi ) \delta( z_1, \dotsc, z_n) \\
+		\end{align*}
+	\item Sei $ z_1, \dotsc, z_n \in V $ gegeben.
+		\begin{description}
+			\item[``$ \implies  $'':] Sei $ \delta $ trivial zu zeigen $ \delta(\alpha_1, \dotsc, \alpha_n) = 0 $.
+				Es folgt unmittelbar $ \delta(\alpha_1, \dotsc, \alpha_n) = 0 $ 
+			\item[``$ \impliedby  $'':] Sei
+				\[
+					% \delta^\prime : K^{n \times n} \to K, \begin{pmatrix} a_1 \\ \vdots \\ a_n \end{pmatrix} \mapsto  \delta \left( \sum_{i=1}^{n} a_{1, i} \alpha_i, \sum_{i=1}^{n} a_{2, i} \alpha_i, \dotsc, \sum_{i=1}^{n} a_{n, i} \alpha_i \right)
+					\delta^\prime : K^{n \times n} \to K,
+				\]
+				mit
+				\[
+					\delta^\prime \left( \begin{pmatrix} [a_1]_\mathcal{B}  \\ \vdots \\ [a_n]_\mathcal{B}  \end{pmatrix} \right)
+					% = \delta \left( \sum_{i=1}^{n} ([a_1]_\mathcal{B} )_i \alpha_i, \sum_{i=1}^{n} ([a_2]_\mathcal{B})_i \alpha_i, \dotsc, \sum_{i=1}^{n} ([a_n]_\mathcal{B} )_i \alpha_i \right)
+					= \delta(a_1, \dotsc, a_n)
+				\]
+				Sei $ \delta(\alpha_1, \dotsc, \alpha_n) = 0 $, zu zeigen für alle $ z_1, \dotsc, z_n \in V : \delta(z_1, \dotsc, z_n) = 0 $.
+				Sei $ z_1, \dotsc, z_n \in V $ gegeben.\\
+				Es gilt, für
+				\[
+					B = \begin{pmatrix} [\alpha_1]_{\mathcal{B} } \\ \vdots \\ [\alpha_n]_{\mathcal{B} }  \end{pmatrix} = \Id,
+				\]
+				dass
+				\[
+					\delta^\prime (\Id) = \delta^\prime (B) = \delta(\alpha_1, \dotsc, \alpha_n) = 0
+				\]
+				nach Korollar 14.4 folgt daraus,
+				dass $ \delta^\prime = 0 $,
+				das heißt für alle $ z_1, \dotsc, z_n \in V $,
+				gilt
+				\[
+					\delta(z_1, \dotsc, z_n) = \delta^\prime \left( \begin{pmatrix} [z_1]_{\mathcal{B} } \\ \vdots, \\ [z_n]_\mathcal{B}  \end{pmatrix}  \right) = 0.\qed
+				\]
+		\end{description}
+\end{enumerate}
+
+\subsection{}
+
+$ \mathbb{A} \subset L^{(n)} \left( K^n \times  \dotsb \times K^n; K \right)  $ per Definition.\\
+Es reicht zu zeigen für alle $ c \in K, \delta_1, \delta_2 \in \mathbb{A} $ gilt $ \delta_1 + c\delta_2 \in \mathbb{A} $.
+Sei also $ c \in K, \delta_1, \delta_2 \in \mathbb{A} $ gegeben, zu zeigen $ \delta_1 + c\delta_2 \in \mathbb{A} $, also zu zeigen $ (\delta_1 + c\delta_2)(z_1, \dotsc, z_n) = 0 $, wenn $ i \neq j $ existieren mit $ z_i = z_j $.
+Sei also $ z_1, \dotsc, z_n $ gegeben, sodass $ 1 \leq i, j \leq n $ existieren mit $ i \neq j $ und $ z_i = z_j $, zu zeigen $ (\delta_1 + c\delta_2)(z_1, \dotsc, z_n) = 0 $.
+\begin{align*}
+	(\delta_1 + c\delta_2) (z_1, \dotsc, z_n) &\overset{def.}{=} \underbrace{ \delta_1(z_1, \dotsc, z_n) }_{\overset{\delta_1 \in \mathbb{A} }{=} 0} + c \underbrace{ \delta_2(z_1, \dotsc, z_n) }_{ \overset{\delta_2 \in \mathbb{A}}{=} 0} \\
+	~ &= 0 + c \cdot 0 \qed
+\end{align*}
+
+\end{document}

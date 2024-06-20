@@ -1,0 +1,59 @@
+\documentclass[sectionformat=aufgabe]{gadsescript}
+
+\setsemester{Winter Semester 2023/2024}%
+\setuniversity{University of Konstanz}%
+\setfaculty{Faculty of Science\\(Physics)}%
+\settitle{Übungsblatt 04}
+\setsubtitle{Davina Schmidt, Elias Gestrich}
+
+\sisetup{exponent-mode = input}
+\newcommand{\dd}{\text{d}}
+
+\begin{document}
+\maketitle
+
+\section{Satz von Stokes}
+\begin{align*}
+	\int_{S}^{} \vec \nabla \times \vec F \dd \vec f &= \int _S \begin{pmatrix} \frac{ \partial }{ \partial y } y^2z - \frac{ \partial }{ \partial z } yz^2 \\ \frac{ \partial }{ \partial z } y - \frac{ \partial }{ \partial x } y^2 z \\ \frac{ \partial }{ \partial x } yz^2 - \frac{\partial}{ \partial y } y \end{pmatrix} \dd \vec f \\
+	&= \int _S \begin{pmatrix} 0 \\ 0 \\ -1 \end{pmatrix} \cdot \frac{ 1 }{ R } \begin{pmatrix} x \\ y \\ z \end{pmatrix} \dd f \\
+	% &= \frac{ 1 }{ R } \int_{0}^{R} \int_{-\cos \frac{ z }{ R } }^{\cos \frac{ z }{ R } } -z \dd y \dd z \\
+	&= \int_{0}^{2 \pi } \int_{0}^{\frac{ \pi }{ 2 } } - \frac{ 1 }{ R } R \cos ( \theta ) R^2 \sin ( \theta )  \dd \theta \dd \varphi \\
+	&= R^2 \int_{0}^{2 \pi } \left[\frac{ 1 }{ 4 } \cos 2\theta\right]_{0} ^{\frac{ \pi }{ 2 } } \dd \varphi \\
+	&= R^2 \int_{0}^{2 \pi } - \frac{ 1 }{ 2 }  \dd \varphi \\
+	&= - \frac{ 1 }{ 2 } [\varphi]_{0} ^{2 \pi } R^2 \\
+	&= - \pi R^2 \\
+\end{align*}
+
+\begin{align*}
+	\oint_{C}^{} \vec F \cdot \dd \vec r &= \oint_{C}^{} \begin{pmatrix} y \\ yz^2 \\ y^2 z \end{pmatrix} \cdot \begin{pmatrix} -\sin \varphi \\ \cos \varphi \\ 0 \end{pmatrix}  \dd \varphi \\
+	&= - R^2 \int_{0}^{2 \pi } \sin ( \varphi ) \sin (\varphi) \dd \varphi \\
+	&= - R^2 \left[ \frac{ 1 }{ 2 } \varphi - \sin (2\varphi) \right]_{0} ^{2 \pi }  \\
+	&= - \pi R^2 \\
+\end{align*}
+
+\section{Satz von Gauß}
+
+\begin{alignat*}{3}
+	\oint_{S}^{} \vec A ( \vec r ) \cdot \dd \vec f &= %
+	\int_{0}^{a} \int_{0}^{b} \begin{pmatrix} 2x^2 \\ y \\ 0 \end{pmatrix} \cdot \begin{pmatrix} 0 \\ 0 \\ -1 \end{pmatrix} dx dy %
+	&&+ \int_{0}^{a} \int_{0}^{b} \begin{pmatrix} 2x^2 \\ y \\ c^2 \end{pmatrix} \cdot \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix} dx dy \\
+	& \quad + \int_{0}^{a} \int_{0}^{c} \begin{pmatrix} 2x^2 \\ 0 \\ z^2 \end{pmatrix} \cdot \begin{pmatrix} 0 \\ -1 \\ 0 \end{pmatrix} dx zy %
+	&&+ \int_{0}^{a} \int_{0}^{c} \begin{pmatrix} 2x^2 \\ b \\ z^2 \end{pmatrix} \cdot \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix} dx dz \\
+	& \quad + \int_{0}^{b} \int_{0}^{c} \begin{pmatrix} 0 \\ y \\ z^2 \end{pmatrix} \cdot \begin{pmatrix} -1 \\ 0 \\ 0 \end{pmatrix} dy zy %
+	&&+ \int_{0}^{b} \int_{0}^{c} \begin{pmatrix} 2a^2 \\ y \\ z^2 \end{pmatrix} \cdot \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix} dy dz \\
+	&= abc^2 + abc + 2a^2bc
+\end{alignat*}
+
+\begin{align*}
+	\int _V \Div \vec A (\vec r) \dd V &= \int_{V}^{} 4x + 1 + 2z \dd V \\
+	&= \int_{0}^{c} \int_{0}^{b} \int_{0}^{a} 4x + 1 + 2z \dd x \dd y \dd z \\
+	&= \int_{0}^{c} \int_{0}^{b} [2x^2 + x + 2xz]_{0} ^{a} \dd y \dd z \\
+	&= \int_{0}^{c} \int_{0}^{b} 2a^2 + a + 2az \dd y \dd z \\
+	&= \int_{0}^{c} [2a^2 y + a y + 2az y]_{0} ^{b}  \\
+	&= \int_{0}^{c} 2a^2b + ab + 2abz \dd z \\
+	&= [2a^2bz + abz + abz^2]_{0} ^{c}  \\
+	&= 2a^2bc + abc + abc^2
+\end{align*}
+
+
+\end{document}

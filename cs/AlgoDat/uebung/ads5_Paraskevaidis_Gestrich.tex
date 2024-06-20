@@ -1,0 +1,315 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{tabularray}
+
+\makeatletter
+\newcommand{\qed}{\@ifstar\@qedwhite\@qedblack}
+\DeclareRobustCommand{\@qedblack}{%
+        \ifmmode \tag*{$\blacksquare$}%
+        \else \leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill\quad\hbox{$\blacksquare$}%
+        \fi%
+}
+\DeclareRobustCommand{\qedwhite}{%
+        \ifmmode \tag*{$\Box$}%
+        \else \leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill\quad\hbox{$\Box$}%
+        \fi%
+}
+\makeatother
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+%====================================================================
+% SETZEN SIE HIER DIE NUMMER DES ÜBUNGSBLATTES UND IHRE(N) NAMEN EIN
+% FILL IN THE SHEET NUMBER AND YOUR NAME(S)
+%====================================================================
+\newcommand{\sheetNum}{5} % Nummer des Übungsblatt / Sheet number
+\newcommand{\studentOne}{Alexandros Paraskevaidis} % Name 1
+\newcommand{\studentTwo}{Elias Gestrich} % Name 2
+%====================================================================
+
+\setkomafont{sectioning}{\normalfont\normalcolor\bfseries}
+\usepackage[left=2.5cm,right=2.5cm,top=2.0cm,bottom=2.5cm]{geometry}
+
+% Hyperlinks
+\usepackage{hyperref}
+
+% Pseudocode
+\usepackage[german,vlined,longend,ruled,linesnumbered]{algorithm2e}
+\SetKw{KwDownTo}{downto}
+\SetKw{KwAnd}{and}
+\SetKw{KwOr}{or}
+\DontPrintSemicolon
+
+% Grafiken
+\usepackage{graphicx}
+\graphicspath{{img/}}
+\usepackage{tikz}
+
+% Makros für Aufgaben und Teilaufgaben
+\usepackage{marginnote}
+\reversemarginpar
+\setlength{\parindent}{0cm}
+\newcommand{\task}[1]{\subsubsection*{#1}}
+\newcommand{\subtask}[1]{\marginnote{#1)}}
+
+
+\begin{document}
+
+%====================================================================
+\begin{small}
+\begin{minipage}{0.5 \linewidth}
+  Algorithmen und Datenstrukturen\\
+  Sommersemester 2024
+\end{minipage}
+\begin{minipage}{0.5\linewidth}
+  \begin{flushright}
+    \studentOne\\
+    \studentTwo
+  \end{flushright}
+\end{minipage}
+\end{small}
+\begin{center}
+\begin{sffamily}\Large\bfseries \sheetNum. Übungsblatt\end{sffamily}
+\end{center}
+%====================================================================
+
+
+\task{Aufgabe 1 - Der Nächste bitte}
+\begin{enumerate}[label=\alph*)]
+	\item Um den nächst größeren Schlüssel zu einem Schlüssel $ x $ zu finden, muss man den kleinsten Schlüssel finde, der größer ist als $ x $.
+		Da wir einen Binärbaum haben, geht dies, indem wir $ x $ in der Laufzeit $ \mathcal{O} (\log n) $ finden.
+		Wenn $ x $ ein rechtes Kind hat, dann schaue nach dem linkesten Kind des rechten Kindes.
+		Sonst gehe zum Elternknoten und schaue ob dieser größer ist als $ x $, wenn er größer ist, dann ist dieser Schlüssel der nächstgrößere.
+		Wenn wir an der Wurzel angekommen sind, dann ist $ x $ der größte Schlüssel.
+		\begin{algorithm}
+			\caption{naechstgroesseren\_schluessel\_von(Schluessel x)}
+			\If{ x.right exists }{
+				y $ \leftarrow $ x.right\\
+				\For{y.left exists}{ y $ \leftarrow $ y.left}
+				\Return y
+			}
+			y $ \leftarrow $ x
+			\For{y $ \neq  $ root}{
+				\If{y $ < $ y.parent}{\Return y.parent}
+				y $ \leftarrow $ y.parent
+			}
+			\Return x
+		\end{algorithm}
+	\item Die Knoten $ w $ im Baum für die $ v $ auf dem Pfad von der Wurzel zu $ w $ liegt, sind genau die Knoten, die im Teilbaum von $ v $ liegen.
+		Um also die Anzahl solcher Knoten $ w $ zu berechnen müssen wir schauen wie viele Knoten im Teilbaum von $ v $ sind.
+		Um zu jedem Knoten also die Anzahl an Knoten im Teilbaum zu berechnen, reicht es zu wissen wie viele Knoten im Teilbaum von den Kindern liegt und diese zusammenrechnen und die Anzahl an Kinder dazu addieren.
+		Gehe dafür wie folgt vor:
+		von Ebene $ \left\lceil \log n \right\rceil  $ (maximale Höhe eines balancierten Binärsuchbaums) bis Ebene 0 tue:
+		Für alle $ x $ in der Ebene setze die Anzahl an Knoten im Teilbaum auf 0. Wenn das linke Kind existiert addiere zur Anzahl die Anzahl an Konten im Teilbaum des linken Kindes plus eins, wenn das rechte Kind existiert mache das selbe mit dem rechten Kind.
+		\begin{algorithm}
+			\caption{groesse\_teilbaeume(BST bst)}
+			\For{depth y $ \leftarrow \left\lceil \log n \right\rceil  $ \KwTo depth 0}{
+				\For{node x with depth y}{
+					x.result $ \leftarrow $ 0
+					\If{x.left}{
+						x.result $ \leftarrow $ x.result + x.left.result + 1
+					}
+					\If{x.right}{
+						x.result $ \leftarrow $ x.result + x.right.result + 1
+					}
+				}
+			}
+		\end{algorithm}
+\end{enumerate}
+
+\task{Aufgabe 2 - Verallgemeinerten AVL-Baum}
+\begin{enumerate}[label=\alph*)]
+	\item Für einen 0-balancierten AVL-Baum müssen alle Blätter auf der gleichen Höhe liegen, da sonst die Balanciertheit mindestens den Grad 1 hat.
+		Ein Baum der Höhe 3 kann $ 1 + 2 + 4 = 7 $ Knoten besitzen, der achte Knoten zerstört dann aber die 0-Balanciertheit
+	\item ~\\
+		\begin{tikzpicture}
+		[
+                        level distance=1cm,
+			level 1/.style={sibling distance=3.2cm},
+			level 2/.style={sibling distance=1.6cm},
+			level 3/.style={sibling distance=0.8cm},
+			level 4/.style={sibling distance=0.4cm},
+			level 5/.style={sibling distance=0.2cm},
+		]
+		\node{50}
+                	child{ node{25}
+				child{ node{12}
+					child{ node{6}
+						child{node{3}
+							child{ node{1}}
+							child[missing]{}
+						}
+						child[missing]{}
+					}
+					child{ node{18}}
+				}
+				child{ node{37}
+					child{ node{31}}
+					child{ node{43}}
+				}
+			}
+			child{ node{75}
+				child{ node {62}
+					child{ node{56}}
+					child{ node{68}}
+				}
+				child{ node {87}
+					child{ node{81}}
+					child{ node{93}}
+				}
+		};
+		\end{tikzpicture}
+	\item $ c = 1 $\\
+		\begin{tikzpicture}
+		[
+                        level distance=1cm,
+			level 1/.style={sibling distance=1.6cm},
+			level 2/.style={sibling distance=0.8cm},
+		]
+		\node{$ \square $}
+			child{ node{$ \square $}
+				child{ node{$ \square $}}
+				child[missing]{ node{$ \square $}}
+			}
+			child{ node{$ \square $}
+				child[missing]{ node{$ \square $}}
+				child[missing]{ node{$ \square $}}
+			};
+		\end{tikzpicture}
+		\begin{tikzpicture}
+		[
+                        level distance=1cm,
+			level 1/.style={sibling distance=1.6cm},
+			level 2/.style={sibling distance=0.8cm},
+		]
+		\node{$ \square $}
+			child{ node{$ \square $}
+				child{ node{$ \square $}}
+				child{ node{$ \square $}}
+			}
+			child{ node{$ \square $}
+				child[missing]{ node{$ \square $}}
+				child[missing]{ node{$ \square $}}
+			};
+		\end{tikzpicture}
+		\begin{tikzpicture}
+		[
+                        level distance=1cm,
+			level 1/.style={sibling distance=1.6cm},
+			level 2/.style={sibling distance=0.8cm},
+		]
+		\node{$ \square $}
+			child{ node{$ \square $}
+				child{ node{$ \square $}}
+				child[missing]{ node{$ \square $}}
+			}
+			child{ node{$ \square $}
+				child{ node{$ \square $}}
+				child[missing]{ node{$ \square $}}
+			};
+		\end{tikzpicture}
+		\begin{tikzpicture}
+		[
+                        level distance=1cm,
+			level 1/.style={sibling distance=1.6cm},
+			level 2/.style={sibling distance=0.8cm},
+		]
+		\node{$ \square $}
+			child{ node{$ \square $}
+				child{ node{$ \square $}}
+				child{ node{$ \square $}}
+			}
+			child{ node{$ \square $}
+				child{ node{$ \square $}}
+				child[missing]{ node{$ \square $}}
+			};
+		\end{tikzpicture}\\
+		\begin{tikzpicture}
+		[
+                        level distance=1cm,
+			level 1/.style={sibling distance=1.6cm},
+			level 2/.style={sibling distance=0.8cm},
+		]
+		\node{$ \square $}
+			child{ node{$ \square $}
+				child{ node{$ \square $}}
+				child{ node{$ \square $}}
+			}
+			child{ node{$ \square $}
+				child{ node{$ \square $}}
+				child{ node{$ \square $}}
+			};
+		\end{tikzpicture}\\
+		$ c = 2 $, die, die auch für $ c = 1 $ gehen plus:\\
+		\begin{tikzpicture}
+		[
+                        level distance=1cm,
+			level 1/.style={sibling distance=1.6cm},
+			level 2/.style={sibling distance=0.8cm},
+		]
+		\node{$ \square $}
+			child{ node{$ \square $}
+				child{ node{$ \square $}}
+				child[missing]{ node{$ \square $}}
+			}
+			child[missing]{ node{$ \square $}
+				child[missing]{ node{$ \square $}}
+				child[missing]{ node{$ \square $}}
+			};
+		\end{tikzpicture}
+		\begin{tikzpicture}
+		[
+                        level distance=1cm,
+			level 1/.style={sibling distance=1.6cm},
+			level 2/.style={sibling distance=0.8cm},
+		]
+		\node{$ \square $}
+			child{ node{$ \square $}
+				child{ node{$ \square $}}
+				child{ node{$ \square $}}
+			}
+			child[missing]{ node{$ \square $}
+				child[missing]{ node{$ \square $}}
+				child[missing]{ node{$ \square $}}
+			};
+		\end{tikzpicture}
+\end{enumerate}
+
+\task{Aufgabe 3 - Reverse Hashing}
+\begin{enumerate}[label=\alph*)]
+	\item 
+		\begin{itemize}
+			\item insert(8)
+			\item insert(9)
+			\item insert(26)
+			\item insert(27)
+			\item insert(1)
+			\item insert(90)
+			\item insert(14)
+			\item insert(89)
+			\item insert(23)
+		\end{itemize}
+	\item $ a = 2 $, $ c = 4 $
+\end{enumerate}
+
+\task{Aufgabe 4 - Offene Rechnung}
+\begin{enumerate}[label=\alph*)]
+	\item 
+		Für insert(0), insert(15), insert(30), insert(45) würde 45 keinen neuen Platz finden, obwohl es noch einige freie Plätze gibt.
+		Um dies zu vermeiden muss $ \operatorname{ggT}(h^\prime(u), m) = 1 $ gelten, damit man immer einen freien Platz findet, solange es einen gibt.
+		Ein Beispiel für $ h^\prime  $ wäre zum beispiel $ h^\prime (u) = 7 + ( u \mod 2) $
+	\item Ja ganz doof wäre zum Beispiel
+		$ H_i(u) = ( h(u) + d_i ) \mod m = ( h(u) + i \cdot m) \mod m $, oder
+		$ H_i(u) = ( h(u) + d_i ) \mod m = ( h(u) + i^2 \cdot m) \mod m $.
+		Hier würde durch das sondiern nichts passieren.
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,335 @@
+\section{\mathsec{\C}{C} und trigonometrische Funktionen}
+\subsection{Komplexe Zahlen \mathsec{\C}{C}}
+\begin{subdefinition}
+	Wir definieren den \textbf{Körper $ \C $} der \textbf{komplexen Zahlen} als Menge aller Tupel $ (a, b) $ mit $ a, b \in \R  $ so, dass:
+	\begin{itemize}
+		\item $ (a, b) + (c, d) \coloneqq (a + c, b + d) $ 
+		\item $ (a, b) \cdot (c, d) \coloneqq (ac - bd, ad + bc) $, für alle $ a, b, c, d \in \R  $.
+	\end{itemize}
+	Das \textbf{Nullelement} ist gegeben durch $ (0, 0) $, und die Eins in $ \C $ durch $ (1, 0) $.
+	Wir nennen $ i \coloneqq (0, 1) $ die \textbf{imaginäre Einheit}.
+	Letztlich nennen wir für $ z = (a, b) \in \C $\\
+	$ \Real(z) \coloneqq a $ den \textbf{Realteil} von $ z $ und $ \Imaginary(z) \coloneqq b $ den \textbf{Imaginärteil} von $ z $.
+	$ (a, b) = a \underbrace{(1, 0)}_{1} + b \underbrace{(0, 1)}_{i} {\color{gadse-yellow}= a + bi} $\\
+	``Gaußebene''
+	\begin{itemize}
+		\item $ i^2 = (0, 1) \cdot (0, 1) = (-1, 0) = -1 \cdot (1, 0) = -1 $ 
+		\item $ \R \ni x \mapsto (x, 0)(=x + i\cdot 0) \in \C $\\
+			``$ \R \to \C $'' \textbf{kanonische Einbettung}
+	\end{itemize}
+\end{subdefinition}
+\textbf{Längenfunktion/Betrag auf $ \C  $}
+\begin{subdefinition}
+	Der Betrag von $ z = (a, b) \in \C  $ ist gegeben durch $ \left| z \right| \coloneqq \sqrt{a^2 + b^2}  $.
+\end{subdefinition}
+
+\begin{sublemma}
+	Der Betrag ist eine Norm auf $ \C  $ 
+	\begin{enumerate}[label=(\roman*)]
+		\item $ \left| \cdot  \right| \to [0, \infty) $ 
+		\item $ \forall x \in \C : \left| x \right| = 0 \iff x = 0 $ 
+		\item $ \forall \lambda \in \C \forall x \in \C : \left| \lambda x \right| = \left| \lambda \right| \cdot \left| x \right|  $ 
+		\item $ \forall x, y \in \C : \left| x + y \right| \leq \left| x \right| + \left| y \right|  $.
+	\end{enumerate}
+\end{sublemma}
+
+\begin{subdefinition}
+	Für $ z = a + bi \in \C  $ nennen wir $ \overline{z} \coloneqq a - bi $ die $ z $ \textbf{komplex konjugierte Zahl}.
+\end{subdefinition}
+
+\begin{sublemma}
+	$ \forall z \in \C : z \cdot \overline{z} \in \R_{\geq 0} $\\
+	$ \left| z \right| = \sqrt{z \cdot \overline{z} } , \frac{ 1 }{ z } \coloneqq \frac{\overline{z}}{ \left| z \right|^2 } (z \neq 0) $\\
+	Beweis: ausrechnen
+\end{sublemma}
+
+\subsection{Konvergenz in \mathsec{\C}{C}}
+Eine komplexwertige Folge $ (z_n) $ (geschrieben $ (z_n) \subset \C  $) ist wie im Reellen eine Abbildung $ z : \N \to \C  $. Der Begriff der Konvergenz komplexer folgen ist wie im Reelen erklärt:
+Nämlich sagen wir, dass $ (z_n) \subset \C  $ gegen ein $ z \in \C  $ (in $ \C  $) \textbf{konvergiert}, falls
+\[
+	\forall \varepsilon > 0 : \exists N \in \N : \forall n \geq N : \left| z - z_n \right| < \varepsilon .
+\]
+Dies ist natürlich in Übereinstimmung mit Definition \ref{8.2.2}. Analog sagen wir, dass $ (z_n) $ eine \textbf{Cauchyfolge} in $ \C  $ ist, falls
+\[
+	\forall \varepsilon > 0 : \exists N \in \N : \forall n, m \geq N : \left| z_n - z_m \right| < \varepsilon .
+\]
+Wir studieren nun, wie wir diese Eigenschaften auf die entsprechende Eigenschaften der Real- und Imaginärteile uzrückführen können. Da Real- und Imaginärteile reelle Zahlen sind, führen wir damit die Konvergenz bzw. Cauchyeigenschaft komplexer Folgen auf die entsprechenden Begriffe für reelle Folfen zurück.
+
+\begin{sublemma}
+	Seien $ z, z_1, z_2, \dotsc \in \C  $. Dann ist die Folge $ (z_n) $ 
+	\begin{enumerate}[label=(\roman*)]
+		\item genau dann gegen $ z $ in $ \C  $ konvergent, falls $ \Real(z_n) \to \Real(z) $ und $ \Imaginary(z_n) \to \Imaginary(z) $ in $ \R  $ konvergieren,
+		\item genau dann Cauchyfolge in $ \C  $, fall sowohl $ (\Real(z_n)) $ als auch $ (\Imaginary(z_n)) $ Cauchyfolgen in $ \R  $ sind,
+		\item genau dann gegen $ z $ konvergent, falls $ (\overline{z_n} ) $ gegen $ \overline{z}  $ konvergiert.
+	\end{enumerate}
+\end{sublemma}
+\begin{subproof*}[Lemma \ref{10.2.1}]
+	Sei $ \xi \in \C  $. Dann gilt
+	\[
+		\max \left\{ \left| \Real(\xi) \right| , \left| \Imaginary(\xi) \right| \right\} \leq \left| \xi \right| \leq \sqrt{2} \max \left\{ \left| \Real(\xi) \right| , \left| \Imaginary(\xi) \right|  \right\} . 
+	\]
+	Wenden wir diese Ungleichung auf $ \xi = z_n - z $ an, so folgt die Behauptung. \qed
+\end{subproof*}
+Da $ \R  $ mit dem Betrag auf den reellen Zahlen vollständig ist, erhalten wir damit sofort:
+\begin{subcorollary}
+	$ (\C , \left| \cdot  \right| ) $ ist \textbf{vollständing}: Jede Cauchyfolge in $ \C  $ konvergiert in $ \C  $.
+\end{subcorollary}
+Wie im Reellen nennen wir für eine Folge $ (z_n)_{n \in \N_0} \subset \C  $ die Reihe
+\[
+	\sum_{n=0}^{\infty} z_n
+\]
+\textbf{konvergent} in $ \C  $, falls die Folge $ \left( \sum_{n=0}^{N} z_n \right)_{N \in \N_0}  $ in $ \C  $ konvergiert. Wir nennen wie weiter \textbf{absolut konvergent}, falls
+\[
+	\sum_{n=0}^{\infty} \left| z_n \right| 
+\]
+in $ \R  $ konvergiert. Mittels Lemma \ref{10.2.1} sehen wir dann, dass
+\begin{itemize}
+	\item jede in $ \C  $ absolut konvergente Reihe in $ \C  $ konvergiert,
+	\item und dass sowohl das Quotienten- als auch das Wurzelkriterium mit den offensichtlichen Änderungen auch in diesem neuen Kontex Gültigkeit behalten.
+\end{itemize}
+Hiermit können wir wie im Reellen die \textbf{komplexe Exponentialfunktion} $ \exp : \C \to \C  $ definieren. Wir setzen für $ z \in \C  $ 
+\[
+	\exp (z) \coloneqq \sum_{n=0}^{\infty} \frac{ z_n }{ n! } ,
+\]
+und definieren direkte $ e^z \coloneqq \exp (z) $. Wie aus dem Beweis der entsprechenden Eigenschaften für ide reelle Exponentialfunktion ersichtlich ist, aben wir auch hier die \textbf{Funktinalgleichung} der Exponentialfunktion, nämlich
+\[
+	\exp (z_1 + z_2) = \exp (z_1) \exp (z_2) \quad \text{für alle } z_1, z_2 \in \C .
+\]
+Für das nachfolgende Kapitel notieren wir noch, dass
+\begin{equation}
+	\label{eq:10.2.1}
+	\overline{e^z} = \overline{\exp (z)} = \exp (\overline{z} ) \quad \text{für alle } z \in \C 
+\end{equation}
+gilt. Damit gilt speziell
+\begin{equation}
+	\label{eq:10.2.2}
+	\overline{e^{ix} } = e^{-ix} \quad \text{für alle } x \in \R .
+\end{equation}
+
+\begin{task}
+	Zeigen Sie \eqref{eq:10.2.2}. Beachten Sie hierbei, dass für alle $ z_1, \dotsb, z_N \in \C  $ die Gleichheit $ \overline{z_1 + \dotsb + z_N} = \overline{z_1} + \dotsb + \overline{z_N}  $ gilt, und verwenden Sie Lemma \ref{10.2.1}. \qed
+\end{task}
+
+\subsection{Trigonometrische Funktionen}
+In diesem Abschnitt führen wir die trigonometrischen Funktionen ein, und damit speziell Sinus und Cosinus. Wir beginntn direkt mir der Definition:
+\begin{subdefinition}[Sinus, Cosinus]
+	Für $ x \in \R  $ definieren wir den \textbf{Sinus} und den \textbf{Cosinus} von $ x $ durch
+	\begin{align*}
+		\sin (x) & \coloneqq \Imaginary(e^{ix} ), \\
+		\cos (x) & \coloneqq \Real(e^{ix} ). \\
+	\end{align*}
+\end{subdefinition}
+Damit gilt per Definition die \textbf{Eulersche Formel}
+\[
+	e^{ix} = \cos (x) + i \sin (x), \quad x \in \R .
+\]
+Wir wollen nun auch für Sinus und Cosinus eine Reihendarstellung herleiten. Hierzu bemerken wir die folgende 4-\textbf{er-Periodizität} der Potenzen $ i^n $ für $ n \in \N  $:
+\[
+	i^n = \begin{cases}
+		1 &\quad \text{falls } n = 4k, k \in \N_0,\\
+		i &\quad \text{falls } n = 4k + 1, k \in \N_0,\\
+		-1 &\quad \text{falls } n = 4k + 2, k \in \N_0,\\
+		-i &\quad \text{falls } n = 4k + 3, k \in \N_0.\\
+	\end{cases}
+\]
+Basierend auf Definition \ref{10.3.1} erhalten wir dann die Potenzreihendarstellung
+\begin{equation}
+	\label{eq:10.3.1}
+	\sin (x) = \sum_{n=0}^{\infty} (-1)^n \frac{ x^{2n + 1} }{ (2n + 1)! } 
+\end{equation}
+und
+\begin{equation}
+	\label{eq:10.3.2}
+	\sin (x) = \sum_{n=0}^{\infty} (-1)^n \frac{ x^{2n} }{ (2n)! } 
+\end{equation}
+Beide Potenzreihen haben den Konvergenzradius $ R = \infty $, und damit sind $ \sin  $ und $ \cos  $ stetige Funktionen auf $ \R  $. Wir beginnen nun mit einer elementaren Feststellung:
+\begin{sublemma}
+	Für alle $ x \in \R  $ gilt $ \left| e^{ix}  \right| = 1 $ und speziell $ \sin^2(x) + \cos^2(x) = 1 $.
+\end{sublemma}
+\begin{subproof*}[Lemma \ref{10.3.2}]
+	Es ist für alle $ x \in \R  $ 
+	\[
+		\left| e^{ix}  \right|^2 = e^{ix} \overline{e^{ix} } = e^{ix} e^{-ix} = e^0 = 1.
+	\]
+	Also folgt $ \left| e^{ix}  \right| = 1 $. Nun ist nach Definition
+	\[
+		\sin^2(x) + \cos^2(x) = \Imaginary(e^{ix})^2 + \Real(e^{ix} )^2 = \left| e^{ix}  \right|^2 = 1.
+	\]
+	Damit ist der Beweis vollständig.\qed
+\end{subproof*}
+
+\begin{task}
+	Geben Sie einen Beweis der vorausgegangenen Lemmata, der ausschließlich auf der Cauchy\-schen Produktformel beruht.
+\end{task}
+
+\begin{subtheorem}[Additionstheoreme]
+	Für alle $ x, y \in \R  $ gilt:
+	\begin{enumerate}[label=(\roman*)]
+		\item $ \sin (x + y) = \sin (x) \cos (y) + \sin (y) \cos (x) $,
+		\item $ \cos (x + y) = \cos (x) \cos (y) - \sin (x) \sin (y) $,
+		\item $ \sin (x) - \sin (y) = 2\cos \left( \frac{ x + y }{ 2 }  \right)\sin \left( \frac{ x - y }{ 2 }  \right) $
+		\item $ \cos (x) - \cos (y) = -2\sin \left( \frac{ x + y }{ 2 }  \right)\sin \left( \frac{ x - y }{ 2 }  \right) $
+	\end{enumerate}
+\end{subtheorem}
+\begin{subproof*}[Theorem \ref{10.3.3}]
+	Es ist für $ x, y \in \R  $ 
+	\begin{align*}
+		\sin (x + y) &= \Imaginary \left( e^{i(x + y)}  \right) \\
+		~&= \Imaginary \left( e^{ix} e^{iy}  \right) \\
+		~&= \Imaginary \left( (\cos (x) + i \sin (x) ) ( \cos (y) + i \sin (y) \right) \\
+		~&= \Imaginary \left( \cos (x)\cos (y) - \sin (x)\sin (y) + i (\sin (x) \cos (y) + \sin (y)\cos (x) \right) \\
+		~&= \sin (x) \cos (y) + \sin (y)\cos (x).\\
+	\end{align*}
+	Die anderen aussagen (ii)-(iv) zeigen wir analog.\qed
+\end{subproof*}
+Wir wollen uns nun der annalytischen Definition der Kreiszahl $ \pi  $ zuwenden.
+Diese wird gewöhnlich als das Doppete der kleinsten positiven Nullstelle des Cosinus eingeführt, und hierfür benötigen wir das nachfolgende Lemma:
+\begin{sublemma}
+	Die Cosinusfunktion besitzt eine kleinste Nullstelle in $ \R_{\geq 0}  $.
+\end{sublemma}
+\begin{subproof*}[Lemma \ref{10.3.4}]
+	Wir haben oben bereits gesehen, dass $ \cos : \R \to \R  $ eine stetige Funktion ist. Nun ist $ \cos (0) = 1 $ nach \eqref{eq:10.3.2}. Andererseits ist
+	\[
+		\cos (2) = \left( 1 - \frac{ 2^2 }{ 2! } + \frac{ 2^4 }{ 4! }  \right) + \left( - \frac{ 2^6 }{ 6! } + \frac{ 2^8 }{ 8! }  \right) + \dotsb
+	\]
+	Die erste Klammer hat den Wert $ - \frac{ 1 }{ 3 }  $, und alle darauffolgende Klammern sind negativ.
+	Also folgt $ \cos (2) < - \frac{ 1 }{ 3 } < 0 $. Damit erhalten wir nach dem Zwischenwertsatz (Satz \ref{7.4.1}), dass es ein $ x_0 \in (0, 2) $ mit $ \cos (x_0) = 0 $ gibt. Dies zeigt, dass $ \cos  $ eine Nullstelle in $ (0, 2) $ besitzt. Wir zeigen nun, dass es genau eine Nullstelle in $ (0,2) $gibt und weisen hierfür nach, dass $ cos $ auf $ (0, 2) $ monoton fallend ist. Seien also, $ x, y \in (0, 2) $ mit $ x < y $. Dann gilt nach Satz \ref{10.3.3} (iv):
+	\[
+		\cos (x) - \cos (y) = -2 \sin \left(  \frac{ x + y }{ 2 } \right) \sin \left( \frac{ x - y }{ 2 }  \right).
+	\]
+	Für $ \xi \in (0,2) $ ist
+	\begin{align*}
+		\sin (\xi) &= \xi - \frac{\xi^3}{ 3! } + \frac{ \xi^5 }{ 5! } - \frac{ \xi^7 }{ 7! } + \dotsb \\
+		~&= \xi \left( 1- \frac{\xi^2}{ 3 \cdot 2 } \right) + \frac{ \xi^5}{ 5! } \left( 1 - \frac{ \xi^2 }{ 7 \cdot 6 }  \right) + \dotsb \\,
+	\end{align*}
+	womit alle Klammern positiv sind. Also folgt $ \sin (\xi) > 0 $ und damit $ \sin \left( \frac{ x + y }{ 2 }  \right) > 0 $. Andererseits ist $ \sin (\xi) = - \sin ( -\xi) $, womit $ \cos (x) - \cos (y) > 0 $ folgt. Damit ist $ \cos  $ auf $ (0, 2) $ streng monoton fallend. Damit ist die Aussage bewiesen.\qed
+\end{subproof*}
+
+Lemma \ref{10.3.4} erlaubt uns jetzt, die Kreiszahl $ \pi  $ wie folgt zu definieren:
+
+\begin{subdefinition}[Kreiszahl $ pi $]
+	Die \textbf{Kreiszahl} $ \pi  $ ist definiert durch die Doppelte der kleinsten Nullstelle der Cosinusfunktion auf $ \R_{\geq 0}  $.
+\end{subdefinition}
+
+\begin{subtheorem}
+	Es gilt $ \exp i \frac{ \pi }{ 2 } = 1 $ und somit $ \exp i \pi = -1, \dotsc $
+\end{subtheorem}
+
+\begin{subproof}[Satz \ref{10.3.6}]
+	z.z. $ \exp i \frac{ \pi }{ 2 } = i $. Hierzu: $ \cos ( \frac{ \pi }{ 2 } = 0 $. Aber $ 1 = \sin^2\left(\frac{ \pi }{ 2 }\right) + \cos^2\left( \frac{ \pi }{ 2 } \right) = \sin^2\left( \frac{ \pi }{ 2 } \right) \implies \sin \left( \frac{ \pi }{ 2 } \right) \in \left\{ -1, 1 \right\}  $\\
+	Aber auch $ \sin \left( \frac{ \pi }{ 2 } \right) > 0 $, also $ \sin \left( \frac{ \pi }{ 2 } \right) = 1 $. Nach Euler:\\
+	$ \exp i \frac{ \pi }{ 2 } = \cos\frac{ \pi }{ 2 } + i \sin\frac{ \pi }{ 2 } = i $.\\
+	Damit folgt der Rest.
+\end{subproof}
+
+\begin{subcorollary}[Periodizität]
+	$ \forall x \in \R  $:
+	\begin{enumerate}[label=(\roman*)]
+		\item $ \cos x + 2\pi  = \cos x, \sin x = \sin x + 2\pi  $ 
+		\item $ \cos x + \pi = - \cos x, \sin x + \pi = - \sin x $ 
+		\item $ \cos x = \sin \frac{ \pi }{ 2 } - x, \sin x = \cos \frac{ \pi }{ 2 } -x $.
+	\end{enumerate}
+\end{subcorollary}
+\begin{subproof*}[Korollar \ref{10.3.7}]
+	$ \exp i(x + 2\pi ) = \exp (ix)\cdot \exp (i\cdot 2\pi) = \exp ix, \dotsc  $
+\end{subproof*}
+
+\begin{subcorollary}
+	$ \sin^{-1} (\{0\}) = \pi \Z = \left\{ k \pi : k \in \Z  \right\}  $\\
+	$ \cos^{-1} (\{0\}) = \frac{ \pi }{ 2 } + \pi \Z = \left\{ \frac{ \pi }{ 2 } + k \pi : k \in \Z  \right\}  $
+\end{subcorollary}
+\begin{subproof*}[Korollar \ref{10.3.8}]
+	$ \sin(k\pi) = 0 \quad \forall k \in \Z  $ (direkte Rechnung/Theorem \ref{10.3.6})\\
+	\textbf{Beh.:} $ \sin x > 0 $ für $ x \in (0, \pi) $. Hierzu:\\
+	Nach Korollar \ref{10.3.7} (iii): $ \sin( (0, \pi) = \cos\left( \left(-\frac{ \pi }{ 2 } , \frac{ \pi }{ 2 } \right) \right) $.\\
+	Nun $ \cos 0 = 1 $ und $ \cos : (0, \frac{ \pi }{ 2 }) \to \R  $ SMF., $ \cos \frac{ \pi }{ 2 } = 0 $.\\
+	$ \implies \forall x \in [0, \frac{ \pi }{ 2 } ) : \cos x > 0. \overset{\cos \text{ gerade}}{\implies} \forall x \in (-\frac{ \pi }{ 2 } , \frac{ \pi }{ 2 } : \cos x > 0 \implies  \forall x \in (0, \pi ) : \sin x > 0 \overset{\sin \text{ ung} }{\implies } \forall x \in (-\pi, 0) \cup (0, \pi): \sin x \neq 0  $. Aber nach Korollar \ref{10.3.2} ist $ \sin  $ $ 2\pi  $-periodisch $ \implies  $ Beh. für Sinus. Für $ \cos  $ verwende Korollar \ref{10.3.7} (iii).
+\end{subproof*}
+
+\begin{subdefinition}
+	Für $ x \in \R \setminus \left(\frac{ \pi }{ 2 } + \pi \Z \right) $ definiere
+	\[
+		\tan(x) \coloneqq \frac{ \sin x }{ \cos x } 
+	\]
+	(``Tangens''). Für $ x \in \R \setminus \pi \Z  $ definiere
+	\[
+		\cot (x) \coloneqq \frac{ \cos x }{ \sin x } 
+	\]
+	(``Cotangens'')
+\end{subdefinition}
+
+\subsection{Arcusfunktionen}
+\textbf{Ziel:} Umkehrbarkeit trigonometrischer Funktionen wegen Periodizität schwiereig.
+\begin{sublemma}
+	Die Funktionen
+	\begin{enumerate}[label=(\roman*)]
+		\item $ \cos : [0, \pi] \to [-1, 1], $ 
+		\item $ \sin : \left[-\frac{ \pi }{ 2 } , \frac{ \pi }{ 2 } \right] \to [-1, 1] $ und
+		\item $ \tan : \left(-\frac{ \pi }{ 2 } , \frac{ \pi }{ 2 } \right) \to \R  $
+	\end{enumerate}
+	sind stetige Bijektionen.
+\end{sublemma}
+\begin{subproof*}[Lemma \ref{10.4.1}]
+	$ \cos  $ ist auf $ [0, \frac{ \pi }{ 2 }] $ streng mon. fallend, also $ -\sin  $ auf $ \left( -\frac{ \pi }{ 2 } , 0 \right) $. Aber $ -\sin  $ ungerade, also $ -\sin  $ auf $ \left( -\frac{ \pi }{ 2 } , \frac{ \pi }{ 2 } \right) $ streng monoton fallend, also folgt, dass $ \cos  $ nach Korollar \ref{10.3.7} auf $ [0, \pi]  $ streng monoton fallend ist. Aber $ \cos  $ stetig, $ \cos 0 = 1 $ und $ \cos \pi = -1 $ nach Theorem \ref{10.3.6}, also (i) nach Zwischenwertsatz.
+
+	Für $ \sin  $ (ii) und $ \tan $ (iii) analog (streng monoton wachsend). Weiter:\\
+	$ \forall x \in \left( -\frac{ \pi }{ 2 } , \frac{ \pi }{ 2 } \right): \tan -x = \frac{ \sin -x }{ \cos  -x } = \frac{ -\sin x }{ \cos x } = -\tan x $.\\
+	Aber $ \tan  $ stetig, also $ \tan : \left( - \frac{ \pi }{ 2 } , \frac{ \pi }{ 2 }\right) \to \R  $ streng monoton wachsend, also injektiv.\\
+	\textbf{Beh.:} $ \tan 0 = 0 $ und $ \lim_{x \nearrow \frac{ \pi }{ 2 } } \tan x = +\infty $.
+	\[
+		\lim_{x \nearrow \frac{ \pi }{ 2 } } \frac{ \sin x }{ \cos x } = +\infty
+	\]
+	\begin{itemize}
+		\item $ \sin  $ stetig und $ \sin \frac{ \pi }{ 2 } = 1 $ (Satz \ref{10.3.6}) $ \implies \lim_{x \to \frac{ \pi }{ 2 } } \sin x = 1. $ 
+		\item $ \cos  $ stetig, pos auf $ \left[0, \frac{ \pi }{ 2 } \right) $, $ \cos  $ neg auf $ \left( \frac{ \pi }{ 2 } , 2\pi  \right] $, also $ \lim_{x \nearrow \frac{ \pi }{ 2 } } = +0 $
+	\end{itemize}
+\end{subproof*}
+
+\begin{subdefinition}
+	Die Umkehrfunktionen der in Lemma \ref{10.4.1} defiierten Einschränkungen von $ \sin , \cos , \tan  $ heißen \textbf{Arcussinus, Arcuscosinus, Arcustangens}. [$ \arcsin , \arccos , \arctan $]
+\end{subdefinition}
+
+\newpage
+\subsection{Polardarstellung komplexer Zahlen}
+\begin{subtheorem}[Polardarstellung]
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[
+				width = 10cm,
+				height = 10cm,
+				xmin= -2, xmax= 2,
+				ymin= -2, ymax = 2,
+				axis lines = middle,
+			]
+				\addplot[domain=-1:1, samples=100]{sqrt(1 - x^2)};
+				\addplot[domain=-1:1, samples=100]{-sqrt(1 - x^2)};
+				\draw[->] (0,0) -- (0.7, 0.7);
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Polardarstellung 1}
+		\label{Polardarstellung 1}
+	\end{figure}
+	Zu jeder komplexen Zahl $ z \in \C \setminus \left\{ 0 \right\}  $ gibt es eindeutig bestimmte $ r > 0, \varphi \in [0, 2\pi ) $ mit
+	\[
+		z = r \exp i\varphi.
+	\]
+	$ \varphi $ heißt \textbf{Winkel/Argument} von $ z $.
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{10.5.1}]
+	\OE $ \left| z \right| = 1 $.
+	Dann $ z = \exp i \varphi $, und falls $ \xi \in \C \setminus \left\{ 0 \right\}  $ allgemein, so ist $ \xi = \left| \xi \right| \cdot \frac{ \xi }{ \left| \xi \right|  }  $ und damit reicht es aus, $ \left| z \right| = 1 $ zu betrachten.
+	Weiter \OE $ \left| z \right| = 1 $ und $ \Imaginary z > 0 $.
+	Schreibe $ z = a + bi $, damit $ a^2 + b^2 = 1 $, also $ a \in [-1, 1] $.
+	Nach Lemma \ref{10.3.1} (i) $ \exists ! \varphi \in [0, \pi ]: \cos \varphi = a \implies \sin^2\varphi + \cos^2\varphi = 1 = \cos^2\varphi + b^2 \implies b^2 = \sin^2\varphi \implies b = \sin\varphi $.\\
+	Damit $ z = a + ib = \cos \varphi + i \sin \varphi = \exp i\varphi $. Für $ b \leq 0 $ analog. \qed
+\end{subproof*}
+
+\begin{itemize}
+	\item $ z_1 = \exp i\varphi_1, z_2 = \exp i\varphi_2 $\\
+		$ z_1z_2 = \exp i\left( \varphi_1 + \varphi_2 \right) $
+	\item $ z_1 = r_1\exp i\varphi_1, z_2 = r_2\exp i\varphi_2 $\\
+		$ z_1z_2 = \underbrace{r_1r_2}_{\text{Streckung}} \underbrace{\exp i\left( \varphi_1 + \varphi_2 \right)}_{\text{Drehung}}  $
+\end{itemize}
+
+

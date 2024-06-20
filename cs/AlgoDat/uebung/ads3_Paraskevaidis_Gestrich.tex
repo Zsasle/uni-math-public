@@ -1,0 +1,166 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{tabularray}
+
+\makeatletter
+\newcommand{\qed}{\@ifstar\@qedwhite\@qedblack}
+\DeclareRobustCommand{\@qedblack}{%
+        \ifmmode \tag*{$\blacksquare$}%
+        \else \leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill\quad\hbox{$\blacksquare$}%
+        \fi%
+}
+\DeclareRobustCommand{\qedwhite}{%
+        \ifmmode \tag*{$\Box$}%
+        \else \leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill\quad\hbox{$\Box$}%
+        \fi%
+}
+\makeatother
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+%====================================================================
+% SETZEN SIE HIER DIE NUMMER DES ÜBUNGSBLATTES UND IHRE(N) NAMEN EIN
+% FILL IN THE SHEET NUMBER AND YOUR NAME(S)
+%====================================================================
+\newcommand{\sheetNum}{3} % Nummer des Übungsblatt / Sheet number
+\newcommand{\studentOne}{Alexandros Paraskevaidis} % Name 1
+\newcommand{\studentTwo}{Elias Gestrich} % Name 2
+%====================================================================
+
+\setkomafont{sectioning}{\normalfont\normalcolor\bfseries}
+\usepackage[left=2.5cm,right=2.5cm,top=2.0cm,bottom=2.5cm]{geometry}
+
+% Hyperlinks
+\usepackage{hyperref}
+
+% Pseudocode
+\usepackage[german,vlined,longend,ruled,linesnumbered]{algorithm2e}
+\SetKw{KwDownTo}{downto}
+\SetKw{KwAnd}{and}
+\SetKw{KwOr}{or}
+\DontPrintSemicolon
+
+% Grafiken
+\usepackage{graphicx}
+\graphicspath{{img/}}
+\usepackage{tikz}
+
+% Makros für Aufgaben und Teilaufgaben
+\usepackage{marginnote}
+\reversemarginpar
+\setlength{\parindent}{0cm}
+\newcommand{\task}[1]{\subsubsection*{#1}}
+\newcommand{\subtask}[1]{\marginnote{#1)}}
+
+
+\begin{document}
+
+%====================================================================
+\begin{small}
+\begin{minipage}{0.5 \linewidth}
+  Algorithmen und Datenstrukturen\\
+  Sommersemester 2024
+\end{minipage}
+\begin{minipage}{0.5\linewidth}
+  \begin{flushright}
+    \studentOne\\
+    \studentTwo
+  \end{flushright}
+\end{minipage}
+\end{small}
+\begin{center}
+\begin{sffamily}\Large\bfseries \sheetNum. Übungsblatt\end{sffamily}
+\end{center}
+%====================================================================
+
+
+\task{Aufgabe 1 - MultiSort}
+\begin{enumerate}[label=\alph*)]
+	\item $ T(\operatorname{MultiSort}(\operatorname{int}[] A)) \in \Theta( n(n + n + n)) \in \Theta(n^2) $, da die äußere Schleife in $ \Theta(n - 1) $ liegt und die inneren \verb|for|-Schleifen in $ \Theta(n) $ mal laufen und MySort in $ \Theta(n) $ Zeit braucht um ein Element in eine sortierte Liste einzufügen.
+	\item $ T(\operatorname{MultiSort}\left( \operatorname{int}[] A \right)) \in \Theta(n ( n + n^2 + n)) \in \Theta(n^3) $, da im Best-Case die Laufzeit von QuickSort $ \Theta (n^2) $, da $ B[1\dotsc i-1] $ schon sortiert, also $ i-1 $-mal jedes Element verglichen wird und das einzufügende Element schon an der richtigen Stelle steht.
+	\item $ T ( \operatorname{MultiSort}\left( \operatorname{int}[] A \right)) \in \Theta(n ( n + n \log n + n)) \in \Theta(n^2 \log n) $, da im erwarteten Fall Quicksort in $ \Theta(n \log n) $ liegt.
+\end{enumerate}
+
+\task{Aufgabe 2 - Heap Heap Hurra}
+\begin{minipage}{0.3\textwidth}
+insert(WT $ 4 $):\\
+$ [4, -, -, -, -, -] $\\
+insert(WT $ 2 $):\\
+$ [4, 2, -, -, -, -] $\\
+insert(WT $ 9 $):\\
+$ [4, 2, 9, -, -, -] $\\
+$ [9, 2, 4, -, -, -] $\\
+insert(WT $ 6 $):\\
+$ [9, 2, 4, 6, -, -] $\\
+$ [9, 6, 4, 2, -, -] $
+\end{minipage}
+\begin{minipage}{0.3\textwidth}
+insert(WT $ 10 $):\\
+$ [9, 6, 4, 2, 10, -] $\\
+$ [9, 10, 4, 2, 6, -] $\\
+$ [10, 9, 4, 2, 6, -] $\\
+insert(WT $ 3 $):\\
+$ [10, 9, 4, 2, 6, 3] $\\
+\begin{tikzpicture}
+		[
+			level distance=1cm,
+			level 1/.style={sibling distance=1.2cm},
+			level 2/.style={sibling distance=0.8cm},
+		]
+	\node{10}
+		child{node{9} child{node{2}} child{node{6}}}
+		child{node{4} child{node {3}} child[missing]{}}
+				;
+\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.3\textwidth}
+extractMax():\\
+$ [3, 9, 4, 2, 6, -] $\\
+$ [9, 3, 4, 2, 6, -] $\\
+$ [9, 6, 4, 2, 3, -] $\\
+extractMax():\\
+$ [3, 6, 4, 2, -, -] $\\
+$ [6, 3, 4, 2, -, -] $\\
+extractMax():\\
+$ [2, 3, 4, -, -, -] $\\
+$ [4, 3, 2, -, -, -] $\\
+extractMax():\\
+$ [2, 3, -, -, -, -] $\\
+$ [3, 2, -, -, -, -] $
+\end{minipage}
+
+\task{Aufgabe 3 - Qual der Wahl}
+\begin{enumerate}[label=\alph*)]
+	\item Für einen Sortieralgorithmus mit einer Worst-Case-Laufzeit von $ \Theta(n \log n) $:
+		Bucketsort: $ \Theta(n \log n) $ aus Vorlesung.\\
+		CountingSort: $ \Theta(n^4) $.\\
+		RadixSort: $ \Theta(s(n + d)) = \Theta(\log_d(n^4) (n + d)) = \Theta(4 \log _d(n)(n + d)) \in \Theta(n \log (n)) $, also unabhängig von der Basis
+	\item Man kann mit BucketSort die Zahlen rausfischen, die größer sind als $ 10^6 \cdot n $, diese mithilfe eines beliebigen Algorithmuses sortieren und für die restlichen CountingSort verwenden.
+\end{enumerate}
+
+\task{Aufgabe 4 - Basiswörter}
+man gibt jeden Buchstaben eine Zahl von 1 bis 26 mit $ a = 1, b = 2, \dotsc, z = 26 $ und dem Leerzeichen als 0, wobei Wörter mit drei Buchstaben ein Leerzeichen am Ende eingefügt wird, und sortiert dann die Wörter als wären sie vierstellige 27-äre Zahlen:
+\begin{table}[h]
+	\centering
+	\scalebox{0.6}{
+		\begin{tblr}{c|[dashed]c|[dashed]c|[dashed]c|[dashed]c|[dashed]c|[dashed]c|[dashed]c|[dashed]c|[dashed]c}
+			ice & car & map & pen & crab & frog & duck & lion & nest & boat \\
+			$ [9, 3, 5, 0] $ & $ [3, 1, 18, 0] $ & $ [13, 1, 16, 0] $ & $ [16, 5, 14, 0] $ & $ [3, 18, 1, 2] $ & $ [6, 18, 15, 7] $ & $ [4, 21, 3, 11] $ & $ [12, 9, 15, 14] $ & $ [14, 5, 19, 20] $ & $ [2, 15, 1, 20] $\\\hline[dashed]
+			crab & boat & duck & ice & pen & frog & lion & map & car & nest \\
+			$ [3, 18, 1, 2] $ & $ [2, 15, 1, 20] $ & $ [4, 21, 3, 11] $ & $ [9, 3, 5, 0] $ & $ [16, 5, 14, 0] $ & $ [6, 18, 15, 7] $ & $ [12, 9, 15, 14] $ & $ [13, 1, 16, 0] $ & $ [3, 1, 18, 0] $ & $ [14, 5, 19, 20] $\\\hline[dashed]
+			map & car & ice & pen & nest & lion & boat & crab & frog & duck\\
+			$ [13, 1, 16, 0] $ & $ [3, 1, 18, 0] $ & $ [9, 3, 5, 0] $ & $ [16, 5, 14, 0] $& $ [14, 5, 19, 20] $ & $ [12, 9, 15, 14] $ & $ [2, 15, 1, 20] $ & $ [3, 18, 1, 2] $ & $ [6, 18, 15, 7] $ & $ [4, 21, 3, 11] $\\\hline[dashed]
+			boat & car & crab & duck & frog & ice & lion & map & nest & pen \\
+			$ [2, 15, 1, 20] $ & $ [3, 1, 18, 0] $ & $ [3, 18, 1, 2] $ & $ [4, 21, 3, 11] $ & $ [6, 18, 15, 7] $ & $ [9, 3, 5, 0] $ & $ [12, 9, 15, 14] $ & $ [13, 1, 16, 0] $ & $ [14, 5, 19, 20] $ & $ [16, 5, 14, 0] $
+		\end{tblr}
+	}
+\end{table}
+\end{document}

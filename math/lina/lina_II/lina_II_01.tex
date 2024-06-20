@@ -1,0 +1,695 @@
+\section{Polynomalgebren}
+\setcounter{subsection}{5}
+\subsection{Skript 6}
+\subsubsection{Algebren}
+\textbf{Erinnerung:} Sei $ K $ ein Körper Eine K-Algebra $ \mathcal{A}  $ ist ein $ K $-Vektorraum, versehen mit Verknüpfung ``Multiplikation von Vektoren''
+\[
+	\mathcal{A} \times \mathcal{A} \to \mathcal{A} , (\alpha, \beta) \mapsto \alpha\beta
+\]
+$ \forall \alpha, \beta, \gamma \in \mathcal{A}  $ und $ c \in K $ 
+\begin{enumerate}[label=(\alph*)]
+	\item $ \alpha(\beta \gamma) = (\alpha \beta) \gamma $ 
+	\item $ \alpha(\beta + \gamma) = \alpha\beta + \alpha\gamma $ und $ (\alpha + \beta)\gamma = \alpha\gamma + \beta\gamma $ 
+	\item $ c(\alpha \beta) = (c\alpha) \beta = \alpha (c\beta) $
+\end{enumerate}
+Wenn es ein $ 1 \in \mathcal{A}  $ so dass $ 1 \cdot \alpha = \alpha \cdot 1 = \alpha \quad \forall \alpha \in \mathcal{A}  $ gilt, dann heißt $ \mathcal{A}  $ eine Algebra mit Einheit. Wenn $ \alpha \beta = \beta \alpha \quad \alpha, \beta \in \mathcal{A}  $, dann ist $ \mathcal{A}  $ eine kommutative Algebra
+
+\begin{subexample}
+	$ \mathcal{A} \coloneqq M_{n \times n} (K) $ mit Matrixprodukt, nicht kommutativ, Einheit $ I_n $
+\end{subexample}
+\begin{subexample}
+	$ \mathcal{A} \coloneqq L(V, V) $ versehen mit $ T_1, T_2 \implies T_1 \cdot T_2 = T_1 \circ T_2  $ nicht kommutative Einheit $ \Id $
+\end{subexample}
+
+\begin{subexample}[Potenzreihen Algebra]
+	Sei $ K^{\N _0} : \left\{ f, f : \N _0 \to K, f \text{Abbildung}  \right\}  $ 
+	Für ein $ f \in K^{\N _0}  $ werden wir auch als Folge in $ K $ schreiben, $ f = (f_n)_{n \in \N } = (f_0, f_1, \dotsc, f_n, \dotsc) $ wobei $ f_n \coloneqq f(n) $
+	\begin{itemize}
+		\item Summe: $ \forall n \in \N _0 : (f + g)_n \coloneqq f_n + g_n $ 
+		\item Skalarmultiplikation: $ \forall C \in K, f \in K^{\N _0} (cf)_n \coloneqq c(f_n) $ 
+	\end{itemize}
+	Damit ist $ V \coloneqq \left(K^{\N _0} , + , \cdot _c\right) $ ist ein $ K $-Vektorraum, $ \dim V = \infty $.\\
+	Wir definieren nun eine weiter Verknüpfung\\
+	Produkt: $ \forall f, g \in K^{\N _0}  $ definiere
+	\[
+		(fg)_n \coloneqq  \sum_{i=0}^{n} f_i g_{n - i} \quad \forall n \in \N _0
+	\]
+\end{subexample}
+
+\begin{subproposition}
+	Setze $ \mathcal{A} \coloneqq \left( K^{\N _0} , + , \cdot _c, \cdot  \right)  $ ist eine kommutative Algebra mit Einheit.
+\end{subproposition}
+\begin{subproof*}[Proposition \ref{1.6.4}]
+	Wir prüfen hier Kommutativität, die Einheit (andere Axiome werden im ÜB vorkommen)
+	\begin{itemize}
+		\item Seien $ f, g \in \mathcal{A}  $ zu zeigen $ fg = gf $ 
+		\item Sei $ n \in \N _0 $ berechne:
+			\begin{align*}
+				(gf)_n &= \sum_{i=0}^{n} g_i f_{n - i}  \\
+				       &= \sum_{i=0}^{n} g_{n-i} f_i \\
+				       &= \sum_{i=0}^{n} f_{i} g_{n - i}  \\
+				       &= (fg)_n
+			\end{align*}
+		\item Einheit: Zu prüfen: $ x^0 = 1 \coloneqq (1, 0, 0, \dotsc, 0, \dotsc) $ ÜA \qed
+			\begin{itemize}
+				\item Ca.: Zu zeigen $ (1 \cdot g)_n = g_n $ für alle $ n \in \N _0 $:
+					\begin{align*}
+						(1 \cdot g)_n &= \sum_{i=0}^{n} 1_i g_{n - i}   \\
+							      &= 1 \cdot g_n \\
+							      &= g_n
+					\end{align*}
+			\end{itemize}
+	\end{itemize}
+\end{subproof*}
+
+Bemerke die Folgen der Gestalt:
+$ (1, 0, \dotsc, 0, \dotsc) = 1, (0, 1, 0, \dotsc, 0, \dotsc) , (0, 0, 1, 0, \dotsc, 0, \dotsc), \dotsc $ unendlich viele linear unabhängige Elemente aus $ \mathcal{A}  $, deshalb ist $ \dim \mathcal{A} = \infty $.
+
+\textbf{Bezeichnung:} $ x = x^1 \coloneqq (0, 1, 0, \dotsc, 0, \dotsc) $\\
+\textbf{Notation:} $ n \in \N , x \in \mathcal{A} , x^n \coloneqq \underbrace{x \cdot x \cdot \dotsc \cdot x}_{\N \ni n \text{-mal} } $
+
+\begin{subproposition}
+	Es ist für alle $ k \in \N  $
+	\begin{enumerate}[label=(\arabic*)]
+		\item $ x^k = (0, \dotsc, 0, \underbrace{1}_{k \text{-te Stelle} }, 0, \dotsc, 0, \dotsc) $ 
+		\item $ X \coloneqq \left\{ x^k, k \in \N _0 \right\}  $ ist linear unabhängig
+			{\color{gadse-red} 
+			\begin{itemize}
+				\item ÜB: ist $ X $ erzeugend? ist $ \Span(X) = \mathcal{A} ? $
+				\item Was ist $ \Span X $?
+			\end{itemize}
+			}
+	\end{enumerate}
+\end{subproposition}
+
+\begin{subdefinition}[und Bezeichnung]
+	$ \mathcal{A} = \left( K^{\N _0} , + , \cdot _c , \cdot  \right)  $ heißt die Algebra der Potenzreihen über $ K $.\\
+	Warum Potenzreihen:
+	$ f \in \mathcal{A}  $ schreibe
+	\[
+		f = \sum_{n=0}^{\infty} f_n x^n
+	\]
+	\textbf{Bezeichnung:} $ K\llbracket x \rrbracket $
+\end{subdefinition}
+
+\subsubsection{Polynomalgebra}
+\textbf{Definition und Notation}
+$ \Span(X) \coloneqq K[x] $, ist die Algebra der Polynome über $ K $ 
+\begin{itemize}
+	\item $ f \in K[x] $ ist ein Polynom über $ K $ 
+	\item $ f \in K\llbracket x \rrbracket, f \neq 0 $. Es gilt $ f \in K[x] $ gedau dann wenn es genau ein $ n \in \N _0 $ gibt wofür $ f_n \neq 0 $, aber $ f_k = 0 $ für $ k > 0 $
+		Wir setzen
+		$ \deg f := n $ Grad von $ f $. d.h. wenn $ f \neq 0 $ $ \deg f = n $ ist $ f = f_0 x^0 + f_1 x^1 + f_2 x^2 + \dotsb + f_n x^n, f \neq 0 $
+	\item Sei $ f \in K \llbracket x \rrbracket $, definiere
+		\[
+			\support f \coloneqq \left\{ n \in \N _0 : f_n \neq 0 \right\} 
+		\]
+		\begin{enumerate}[label=(\roman*)]
+			\item $ \support f = \OO \iff  f = 0 $ 
+			\item $ \support f $ ist endlich $ \iff f \in K[x] $ 
+			\item Sei $ f \neq 0, f \in K[x] $, dann ist 
+				\[
+					\max \support f = \deg f.
+				\]
+		\end{enumerate}
+\end{itemize}
+
+\subsection{Skript 7}
+\begin{subtheorem}
+	Seien $ f, g \in K[x], f, g \neq 0 $ Es gilt:
+	\begin{enumerate}[label=(\roman*)]
+		\item $ f g \neq 0 $
+		\item $ \deg (fg) = \deg f + \deg g $ 
+		\item $ f g $ ist normiert wenn $ f $ und $ g $ normiert sind
+		\item $ f g  $ ist Skalarpolynom $ \iff f, g  $ sind Skalarpolynom
+		\item Falls $ f  g \neq 0 $, gilt $ \deg (f + g) \leq \max( \deg f, \deg g)  $
+	\end{enumerate}
+\end{subtheorem}
+
+\begin{subcorollary}
+	$ K[x] $ ist eine kommutative Algebra mit Einheit.
+\end{subcorollary}
+
+\begin{subcorollary}
+	$ K[x] $ ist ein Integer Ring.
+	Es gilt $ \forall f, g, h \in K[x] $.
+	Aus $ fg = fh $ folgt $ g = h $\\
+	\textbf{Beweis:} $ fg - fh = 0 \implies f(g - h) = 0 \implies (g - h) = 0 \implies g = h $\qed
+\end{subcorollary}
+
+\begin{subdefinition}
+	Sei $ f : K \to K, y \mapsto f(y) $ eine Abbildung.
+	$ f $ ist polynomiale Funktion, falls wir zu $ f $ endlich viele Skalare aus $ K $ finden können, so dass $ f(y) = c_0 + c_1y + \dotsb + c_n y^n \quad \forall y \in K $.
+\end{subdefinition}
+
+Satz über Existenz von Basis eines Vektorraumes gilt für alle Vektorräume, auch unendlich-di\-mensional, dafür benötigt man aber das Auswahlaxiom, bzw. den Satz von Zorn (Zorn's Lemma).
+
+\begin{subdefinition}[und Notation]
+	Sei $ \mathcal{A}  $ eine $ K $-Algebra mit Einheit.
+	Sei $ f \in K[x] $, und $ \alpha \in \mathcal{A}  $.
+	Definiere
+	\[
+		f(\alpha) \coloneqq \underbrace{\sum_{i=0}^{n} \underbrace{ f_i \alpha^i}_{\in \mathcal{A} }}_{\in \mathcal{A} }
+	\]
+	wobei $ f = \sum_{i=0}^{n} f_i x^i $ und $ \alpha^0 \coloneqq 1 $
+\end{subdefinition}
+
+\begin{subtheorem}
+	Seien $ \mathcal{A}  $ eine $ K $-Algebra, $ f, g \in K[x] $ und $ \alpha \in \mathcal{A}  $ und $ c \in K $.
+	Es gelten:
+	\begin{enumerate}[label=(\roman*)]
+		\item $ (cf + g)(\alpha) \overset{\text{\ref{1.7.5}} }{=} cf(\alpha) + g(\alpha) $
+		\item $ (f g)(\alpha) \overset{\text{\ref{1.7.5}} }{=} f(\alpha) g(\alpha) $. Beweis ÜA
+	\end{enumerate}
+\end{subtheorem}
+
+\begin{subexample}
+	Sei $ \mathcal{A} = K $ ist eine $ K $-Algebra mit Einheit. 
+	Sei $ f \in K[x] $, dann definiert \ref{1.7.5} eine Polynomfunktion $ \tilde{f} : K \to K, a \mapsto f(a) $ 
+	\[
+		f = \sum_{i=0}^{n} f_i x^i \qquad \tilde{f} \text{ ist bestimmt durch } f_0, \dotsc, f_n \in K.
+	\]
+\end{subexample}
+
+\begin{subexample}
+	Sei $ \mathcal{A}  = M_{2 \times 2} (K) $.
+	Sei $ B = \begin{pmatrix} 1 & 0 \\ -1 & 2 \end{pmatrix} \in \mathcal{A} , f \in K[x], f = 2 x^0 + x^2 $ 
+	\[
+		f(B) = 2 B^0 + B^2 = 2 \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} + \begin{pmatrix} 1 & 0 \\ -1 & 2 \end{pmatrix} \begin{pmatrix} 1 & 0 \\ -1 & 2 \end{pmatrix} 
+	\]
+\end{subexample}
+~\par
+Wir wollen die Eigenschaften von Polynomfunktionen zusammenfassen.
+
+\setcounter{subenvironmentnumber}{9}
+\begin{subtheorem}
+	Sei $ V $ der $ K $-Vektorraum Polynomfunktionen.
+	Wir versehen $ V $ mit punktweise Multiplikation: $ h_1, h_2 \in V $ und $ t \in K $ 
+	\[
+		(h_1 h_2)(t) = h_1(t) h_2(t)
+	\]
+	Dann ist damit die $ K $-Algebra der Polynomfunktionen erklärt.
+	Diese ist eine kommutative Algebra mit Einheit (die Einheit ist die Polynomfunktion $ K \to K , a \mapsto 1 $)
+\end{subtheorem}
+
+\begin{subexample}
+	$ K = \F_p $ für eine Primzahl $ p $.
+	Betrachte $ f = (x^p - x) \in K[x] = \F_p[x] $ $ f \neq 0 $.
+	Aber $ \tilde{f} : \F_p \to \F_p $ die zugehörige Polynomfunktion ist die Nullabbildung.\\
+	z.B. $ p = 3 $, $ f = x^3 - x = x^3 + 2x \in \F_3 $ $ f \neq 0 $.\\
+	Berechnen $ \tilde{f} : \F_3 \to \F_3 $\\
+	$ \tilde{f}(0) = 0 = \tilde{f}(1) = 0 =  \tilde{f}(2) = 0 $
+\end{subexample}
+
+\subsection{Skript 8}
+\setcounter{subenvironmentnumber}{-1}
+\begin{subdefinition}[Bezeichnung]
+	Sei $ K[x]^{\sim} \coloneqq \left\{ h | h : K \to K \text{ ist eine Polynomfunktion}  \right\}  $
+	Also ist $ \left( K[x]^\sim, + , \cdot _c, \cdot  \right)  $ ist eine kommutative $ K $-Algebra mit Einheit.
+\end{subdefinition}
+
+\begin{subdefinition}[Homomorphismus und Isomorphismus]
+	Seien $ \mathcal{A}  $ und $ \mathcal{A} ^\prime  $ $ K $-Algebren.
+	\begin{enumerate}[label=(\roman*)]
+		\item Eine lineare Abbildung
+			\[
+				\Phi : \mathcal{A} \to \mathcal{A}^\prime 
+			\]
+			Ist eine $ K $-Algebren \textbf{Homomorphismus}, wenn darüber hinuas gilt $ \forall  a, b \in \mathcal{A}  $:
+			\[
+				\Phi(ab) = \Phi(a) \Phi(b)
+			\]
+		\item $ \Phi $ heißt $ K $-Algebren \textbf{Isomorphismus}, wenn $ \Kern \Phi = \left\{ 0 \right\}  $
+	\end{enumerate}
+\end{subdefinition}
+
+\begin{subtheorem}
+	\begin{enumerate}[label=(\roman*)]
+		\item Die Abbildung
+			\[
+				\Phi : K[x] \to K[x]^\sim, f \mapsto \tilde{f}
+			\]
+			ist ein surjektiver $ K $-Algebren Homomorphismus
+		\item Wenn $ K $ unendlich ist, ist $ \Phi $ ein $ K $-Algebren Isomorphismus (d.h. $ K $ unendlich $ \implies  \Kern \Phi = \left\{ 0 \right\}  $)
+	\end{enumerate}
+\end{subtheorem}
+
+\begin{subproof*}[Satz \ref{1.8.2}]
+	$ \Phi $ lineare Abbildung
+	\begin{enumerate}[label=(\roman*)]
+		\item $ \tilde{c f + g} = c \tilde{f} + \tilde{g} \quad \forall f, g \in K[x], c \in K$.
+			Es gilt außerdem, dass: $ \tilde{fg} = \tilde{f} \tilde{g} $.
+			Also ist $ \Phi $ ein $ K $-Algebren Homomorphismus.
+			Sei $ h \in K[x]^\sim $, dann ist $ h $ eine Polynomialfunktion, d.h. $ \exists n \in \N _0 : \exists c_0, \dotsc, c_n \in K $ so dass $ h(a) = c_0 a^0 + \dotsb + c_n a^n \quad \forall a \in K $.\\
+			Setze $ f(x) = \sum_{i=0}^{n} c_i x^i \in K[x] $ Wir berechnen $ \Phi(f) = \tilde{f} \overset{!}{=} h $ ist $ \Phi $ surjektiv!
+		\item Zum Beweis brauchen wir Lagrange Interpolationssatz
+	\end{enumerate}
+\end{subproof*}~\par
+
+\textbf{Erinnerung LA I:}\\
+Sei $ n \in N $ und $ V \coloneqq K[x]_{\leq n}  $ der $ K $-Vektorraum der Polynome $ f $ von $ \deg f \leq n $ oder $ f = 0 $.
+Wir haben $ \dim V = n + 1 $, weil z.B. $ \left\{ x^0, \dotsc, x^n \right\}  $ eine Basis bildet.
+
+\begin{subtheorem*}[Lagrange Interpolationssatz]
+
+	\makeatletter\def\@currentlabel{Lagrange Interpolationssatz}\makeatother
+	\label{Lagrange Interpolationssatz}
+	Sei $ n \in N $, $ t_0, \dotsc, t_n $ $ n+1 $ {\color{gadse-red}verschiedene} Elemente aus $ K $.
+	Für jedes $ 0 \leq i \leq n $, $ L_i \in V^* $ definiere durch $ \forall f \in V $:
+	\[
+		L_i(f) \coloneqq  f(t_i)
+	\]
+	Dann ist $ \mathcal{L} \coloneqq (L_0, L\dotsc, L_n) $ eine Basis für $ V^* $
+\end{subtheorem*}
+
+\begin{subproof*}[\ref{Lagrange Interpolationssatz}]
+	Es genügt dafür eine Dualbasis zu $ \mathcal{L}  $ zu finden, d.h. eine geordnete Basis
+	\[
+		\mathcal{B} = (P_0, \dotsc, P_n) \text{ von } V, 
+	\]
+	s.d. $ L_j(P_i) = \delta_{ij} \quad \forall i,j = 0, \dotsc, n $\\
+	Definiere Insbesondere (Satz 22.9 LA I) $ f = \sum_{i=0}^{n} f(t_i) P_i $
+	\[
+		P_i \coloneqq  \prod_{j \neq  i} \left( \frac{x - t_j}{ t_i - t_j }  \right) 
+	\]
+	Prüfe dass $ L_j(P_i) = \delta_{ij}  \quad \forall i,j = 0, \dotsc, n $ erfüllt ist
+	\[
+		L_j(P_i) = \delta_{ij} \qed
+	\]
+	Seien $ (P_0, \dotsc, P_n) $ LIF und $ f = \sum_{i=0}^{n} f(t_i) P_i $, wenn $ \tilde{f} = 0 $ dann ist $ f(t_i) = 0 \quad \forall i = 0, \dotsc, n $.
+	Aus $ f = \sum_{i=0}^{n} f(t_i)P_i $ folgt $ f = 0 $\qed
+\end{subproof*}
+
+
+\subsubsection{Divisionsalgorithmus}
+%\setcounter{subenvironmentnumber}{2}
+
+\begin{sublemma}
+	Seien $ f, d \neq 0, \quad f, d \in K[x] $ mit $ \deg d \leq \deg f $. Es gibt $ g \in K[x] $, so dass entweder ist $ f - dg = 0 $ oder $ \deg \left( f - dg \right) < \deg f $.
+\end{sublemma}
+
+\begin{subproof*}[Lemma \ref{1.8.3}]
+	Schreibe $ \deg f \coloneqq m \geq \deg d \coloneqq n $.\\
+	Schreibe $ f = a_m x^m + \sum_{i=0}^{m - 1} a_i x^i $, $ a = b_n x^n + \sum_{i=0}^{n - 1} b_ix^i $, für $ a_m \in K^x, a_i \in K, b_n \in K^x, b_i \in K $\\
+	Betrachte $ \frac{ a_m }{ b_n } x^{m - n} d = \frac{a_m}{ b_n } x^{m - n} \left( b_n x^n + \sum_{i=0}^{n - 1} b_i x^i \right) = a_m x^m + \dotsb $\\
+	Also entweder $ \left( f - \frac{ a_m }{ b_n } x^{m - n} d \right) = 0 $ oder $ \deg \left( f - \frac{a_m }{ b_n } x^{m -  n} d \right) < \deg f $.\\
+	Also setze $ g \coloneqq \frac{ a_m }{ b_n } x^{m - n}  $\qed
+\end{subproof*}
+
+\begin{subtheorem}[Divisionsalgorithmus in $ {K[x]} $]
+	Seien $ f, d \in K[x], f, d \neq 0 $, so dass $ \deg d \leq  \deg f $.
+	Dann gibt es $ q, r \in K[x] $, so dass
+	\begin{enumerate}[label=(\roman*)]
+		\item $ f = dq + r $, wobei
+		\item $ r = 0 $, oder $ \deg r < \deg d $
+	\end{enumerate}
+	Ferner sind $ q, r $ eindeutig durch (i) und (ii) bestimmt.
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{1.8.4}]
+	$ f \neq 0 $ und $ \deg d \leq f $. Lemma \ref{1.8.3} ergibt, dass es $ g \in K[x] $ gibt, so dass $ f - d g = 0 $, oder $ \deg(f - dg) < \deg f $\\
+	 Wenn $ f - dg \neq 0 $ und $ \deg (f - dg) \geq \deg d $,
+	 dann ergibt Lemma \ref{1.8.3} $ h \in K[x] $, so dass $ (f - dg) - dh = 0 $, oder $ \deg (f - d(g + h)) < \deg (f - dg) $\\
+	 Der $ \deg $ Abstieg ist aber endlich, das heißt, nach er endlich vielen Schritten anhalten muss.\\
+	 die Prozedur ergibt $ q \in K[x] $ und ein $ r = 0 $, oder $ \deg r < d $, und $ f = dq + r $\\~\\
+	 \textbf{Eindeutigkeit:} Sei $ f = dq_1 + r_1 = dq + r $ (wobei $ r $ und $ r_1 $ (ii) erfüllen)\\
+	 Es folgt daraus: $ d( q - q_1) = r_1 - r $.
+	 Zum Widerspruch nehmen wir an, dass $ q - q_1 \neq 0 $, dann haben wir $ \deg (r_1 - r) = \deg( d (q - q_1)) = \deg d + \deg (q - q_1) \geq \deg d $. Jedoch ist $ \deg (r_1 - r) \leq \max \left( \deg r_1, \deg r \right) < \deg d \bot $\\
+	 Also ist $ q - q_1 = 0 $, daraus folgt $ (r_1 - r) = 0 $, also $ q_1 = q $ und $ r_1 = r $\qed
+\end{subproof*}
+
+\begin{subdefinition}
+	Seien $ f, d \neq 0 $, $ f, d \in K[x] $
+	\begin{enumerate}[label=(\roman*)]
+		\item 
+			Wir sagen \textbf{$ d $ teilt $ f $ in $ K[x] $}, oder $ f $ \textbf{ist durch $ d $ teilbar in $ K[x] $}, oder \textbf{$ f $ ist ein Vielfaches von $ d $ in $ K[x] $}, wenn $ r = 0 $ in Divisionsalgorithmus (DA), d.h.
+			\[
+				f = dq + 0
+			\]
+		\item In diesem Fall ist $ q $ der Quotient
+	\end{enumerate}
+	
+	
+\end{subdefinition}
+
+\subsection{Skript 9}
+\begin{subcorollary}
+	Seien $ f \in K[x] $, und $ c \in K $.
+	Es gilt: $ (x - c) $ teilt $ f $ in $ K[x] $ genau dann, wenn $ f(c) = 0 $.
+\end{subcorollary}
+\begin{subproof*}[Korollar \ref{1.9.1}]
+	Divisionsalgorithmus $ \implies \exists ! q, r \in K[x] $, so dass $ f = ( x - c )q + r $, wobei $ r = 0 $ oder $ r < 1 $, i.e. $ \deg r = 0 $.
+	Also ist $ r $ ein Skalarpolynom und $ f(c) = r $. Insbesondere ist $ r = 0 \iff f(c) = 0 $\qed
+\end{subproof*}
+
+\begin{subdefinition}
+	Sei $ f \in K[x], c \in K $, dann ist $ c  $ eine \textbf{Nullstelle von $ f $ in $ K $}, wenn $ f(c) = 0 $
+	Abkürzung: ``$ c $ ist NS von $ f $ in $ K $''
+\end{subdefinition}
+
+\begin{subcorollary}
+	Sei $ f \in K[x], \deg f \eqcolon n $,
+	dann hat $ f $ höchstens $ n $ Nullstellen in $ K $
+\end{subcorollary}
+\begin{subproof*}[Korollar \ref{1.9.3}]
+	Wir beweisen per Induktion nach $ n \in \N _0 $.
+	\begin{description}
+		\item[I.A.:] $ n = 0 $: $ f = c \neq 0 $, gar keine NS,\\
+			wenn $ n = 1 $: dann ist $ f = ax + c $ für $ a \neq 0, ac \in K $ Klar gilt: $ ax + c = 0 \iff x = \frac{-c}{ a }  $. Also ist $ \frac{ - a }{ c }  $ die einzige NS.
+		\item[I.Annahme:] Die Aussage gilt für $ \forall h \in K[x] : \deg h \leq n - 1 $ 
+		\item[I.S.:] $ \deg f = n $, sei $ a $ eine NS von $ f $ in $ K $. Dann $ \exists q \in K[x] $, so dass $  f = ( x - a ) q $.
+			Also $ \deg f = \deg (x - a) + \deg q \implies \deg q = \deg f - \deg (x - a) = n - 1 $.
+			Sei $ b \in K $, dann ist $ f(b) = 0 \iff (b - a) = 0 $ oder $ q(b) = 0 $.
+			I.Annahme $ \implies q $ hat höchstens $ n - 1 $ NS in $ K $.
+			Daraus folgt: $ f $ hat höchstens $ 1 + n - 1 = n $ NS in $ K $
+	\end{description}
+	
+\end{subproof*}
+
+\subsubsection{Formale Ableitung}
+%\setcounter{subsection}{9}
+%\setcounter{subenvironmentnumber}{3}
+Notation (Erinnerung): Sei $ f = c_0 + c_1 x + c_2 x^2 + \dotsb + c_n x^n $ $ c_i \in K $\\
+\textbf{Setze:} $ f^{(0)} = f = D^0 f $ (Konvention),
+dann $ f^{(1)} \coloneqq f^\prime = c_1 + 2c_2 x + 3c_3 x^2 + \dotsb + nc_n x^{n - 1} = D^1 f $\\
+$ f^{(2)} \coloneqq f^{\prime\prime} = D^2 f \coloneqq D^1\left( D^1 (f) \right)  $
+
+\begin{subnote}
+        Für $ f, g \in K[x] $ und $ c \in K $ gilt $ D^1(f + cg) = D^1(f) + c D^1(g) $, d.h. $ D^1 : K[x] \to K[x] $ ist ein linearer Operator.
+        In der Tat gilt $ \forall k \in \N : D^k \coloneqq \underbrace{D \circ \dotsb \circ D}_{k \text{-mal} } $ ist $ D^k $ ein linearer Operator (s. ÜB 10, LA I)
+\end{subnote}
+ 
+\begin{subtheorem}[Taylor's Formel]
+	Seien $ \Char(K) = 0 $. $ n \in \N _0, a \in K $, $ p \in K[x] $ und $ \deg p \leq n $.\\
+	\textbf{Es gilt:} 
+	\begin{equation}
+		\label{eq:1.9.5 Taylor's Formel}
+		p = \sum_{i=0}^{n} p^{(i)} (a) \frac{ ( x - a )^{i} }{ i! } 
+	\end{equation}
+	Darüber hinaus sind die Koeffizienten $ \frac{ p^{(i)} (a) }{ i! }   $ eindeutig
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{1.9.5}]
+	Sei $ V = K[x] \leq n $.
+	Für $ i = 0, \dotsc, n $ definiere
+	\[
+		l_i : V \to K, l_i \in V^*
+	\]
+	durch
+	\[
+		l_i(p) \coloneqq p^{(i)} (a) (\in K)
+	\]
+	setzte $ p_i \coloneqq  \frac{ 1 }{ i! } (x - a)^{i} \in V $\\
+	\textbf{Beh.}\\
+	Es gilt $ \forall i, j = 0, \dotsc, n $.
+	\[
+		l_j(p_i) = S_{ij} \quad\text{(ÜB 5)} 
+	\]
+	Also sind
+	\[
+		(l_0, \dotsc, l_n) \text{ und} 
+	\]
+	\[
+		(p_0, \dotsc, p_n) 
+	\]
+	Dualbasen von $ V, V^* $.\\
+	Es folgt nun aus Satz 22.8 LA I, dass
+	\[
+		\forall p \in V : p = \sum_{i=0}^{n} l_i(p) p_i\qed
+	\]
+\end{subproof*}
+
+\begin{subnote}
+	\begin{enumerate}[label=(\arabic*)]
+		\item $ 1, (x - a), \dotsc, (x - a)^n $ sind linear unabhängig, deshalb sind die Koeffizienten in \eqref{eq:1.9.5 Taylor's Formel} eindeutig
+		\item $ \Char(K) = 0 $ wird vorausgesetzt, damit $ i! \neq 0 \quad \forall i = 0, \dotsc, n $.\\
+			Wir wollen nun Taylor's Formel ausnutzen um die Nullstellen von Polynomen weiter zu untersuchen!
+	\end{enumerate}
+\end{subnote}
+
+\begin{subdefinition}
+	Seien $ f \in K[x], f\neq 0, c \in K $ eine Nullstelle von $ f $.\\
+	Die \textbf{Vielfachheit von $ c $} ist die größte $ \mu \in \N  $ wofür gilt: $ (x - c)^{\mu} $ teilt $ f $.\\
+	\textbf{Bemerke:} $ 1 \leq \mu \leq \deg f $ (u.a. Korollar \ref{1.9.3}),
+	weil: $ f = (x - c)^{\mu} g $ für geignetes $ g \in K[x] $. $ \deg f = \mu + \deg g $.
+\end{subdefinition}
+
+\begin{subtheorem}[Ableitungstest zur Berechnung der Vielfachheit einer Nullstelle]
+	Seien $ \Char(K) = 0 $ $ f \neq 0 $, $ \deg f \leq n $, und $ c \in K $ eine Nullstelle von $ f $.\\
+	\textbf{Es gilt:} $ c $ hat die Vielfachheit $ \mu $ genau dann wenn
+	\[
+		\begin{cases}
+			f^{(k)} (c) = 0 &\quad \text{für $ 0 \leq k \leq \mu - 1 $ und} \\
+			f^{(\mu)} \neq 0
+		\end{cases}
+	\]
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{1.9.8}]
+	\begin{description}
+		\item[``$ \implies  $''] $ (x - c)^{\mu}  $ teilt $ f $, aber $ (x - c)^{\mu + 1}  $ teilt $ f $ nicht.\\
+			Es gibt also $ g \neq 0 $, so dass $ f = (x - c)^{\mu} g $.
+			Bemerke $ \deg g\leq n - \mu $ und $ g(c) \neq 0 $.
+			Die Taylorformel liefert für $ g $
+			\[
+				f = (x - c)^{\mu} \left( \sum_{m=0}^{n - \mu} g^{(m)} (c) \frac{ ( x - c)^{m}  }{ m! } \right)
+			\]
+			Also:
+			\[
+				f = \sum_{m=0}^{n - \mu} g^{(m)} (c) \frac{ ( x - c )^{\mu + m} }{ m! } 
+			\]
+			Da die Koeffizienten von $ f $ als l. K. von $ (x - c)^k $ $ (0 \leq  k \leq n) $ eindeutig sind, ergibt der Vergleich:
+			\begin{align*}
+				f &= \sum_{k=0}^{n} f^{(k)} (c) \frac{ (x - c)^k }{ k! } \\
+				\sum_{m=0}^{n - \mu} g^{(m)} (c) \frac{ ( x - c )^{\mu + m} }{ m! } 
+				& = \sum_{k=0}^{n} f^{(k)} (c) \frac{ (x - c)^k }{ k! } \\
+				g^{(0)} (c) \frac{ (x - c)^{\mu} }{ 0! } + \dotsb + g^{(n - \mu)} (c) \frac{ (x - c)^{n} }{ ( n - \mu )! } &= \underbrace{\frac{ f^{(0)} (c) }{ 0! } + \dotsb + \frac{ f^{(\mu - 1)} (c) }{ ( \mu - 1 )! } }_{ = 0 } + \dotsb \\
+			\end{align*}
+			Also
+			\[ \frac{ f^{(k)} (c) }{ k! } = 0 \]
+			für $ 0 \leq k \leq \mu - 1 $ und 
+			\[
+				\frac{ f^{(k)} (c) }{ k! } = \frac{ g^{( k - \mu)} (c) }{ ( k - \mu)! } 
+			\]
+			für $ \mu \leq k \leq n $ 
+			Insbesondere für $ k = \mu $ erhalten wir $ f^{(\mu)} (c) = g(c) \neq 0 $
+		\item[``$ \impliedby $''] Wir haben
+			\[
+				f = \sum_{k=\mu}^{n} f^{(k)} (c) \frac{ (x - c)^{k} }{ k! } 
+			\]
+			Also
+			\[
+				f = (x - c)^{\mu} \underbrace{\left[ \frac{ f^{(\mu)} (c) }{ \mu! } + \frac{ f^{(\mu + 1)} (c) }{ ( \mu + 1)! } (x - c) + \dotsb + \frac{ f^{(n)} (c) }{ n! } (x - c)^{n - \mu} \right]}_{ \coloneqq g}
+			\]
+			Also $ g(c) = \frac{ f^{(\mu)} (c) }{ \mu! } \neq 0 $\\
+			Also gilt
+			\[
+				f = (x - c)^{\mu} g
+			\]
+			mit $ g(c) \neq 0 $, also $ ( x - c)^{\mu} $ teilt $ f $.
+			Wir müssen noch zeigen $ ( x - c )^{\mu + 1}  $ teilt $ f $ nicht!\\
+			Zum Widerspruch:\\
+			$ \exists h \in K[x] : h \neq 0 $ so dass $ f = ( x - c )^{\mu + 1} h $, also
+			\[
+				f = ( x - c )^{\mu + 1} h  ( x - c) ^{\mu} (x - c) h = (x - c)^{\mu} g
+			\]
+			$ K[x] $ Integer $ \implies g = ( x - c )h $, also $ g(c) = 0 \bot $ \qed
+	\end{description}
+\end{subproof*}
+
+\subsection{Skript 10}
+
+\begin{subdefinition}
+	Ein $ K $-Unterraum $ M \subseteq K[x] $ ist ein \textbf{Ideal} wenn gilt: $ \forall f \in K[x] $ und $ g \in M $ ist $ fg \in M $.
+\end{subdefinition}
+
+\begin{subexample}
+	Sei $ d \in K[x] $, setzte $ M \coloneqq d K[x] = \left\{ df : f \in K[x] \right\}  $.
+	Es gilt $ d K[x] $ ist ein Ideal.
+	\begin{itemize}
+		\item $ df \in M, dg \in M, c \in K $ $ c(df) + dg = d(\underbrace{cf + g}_{\in K[x]}) $
+		\item $ f \in K[x], dg \in M = f(dg) = d(\underbrace{fg}_{\in K[x]}) \in M $.
+	\end{itemize}
+\end{subexample}
+
+\begin{subdefinition}
+	$ \langle d \rangle \coloneqq dK[x] $ heißt Hauptideal mit Erzeuger $ d $
+\end{subdefinition}
+
+\begin{subexample}
+	$ \langle 1 \rangle = K[x] $, und $ \langle 0 \rangle = \left\{ 0 \right\} $
+\end{subexample}
+
+\begin{subexample}
+	Seien $ d_1, \dotsc, d_l \in K[x] $, setze
+	\[
+		M \coloneqq d_1K[x] + \dotsb + d_l K[x]
+	\]
+	ist ein Ideal:
+	\begin{itemize}
+		\item $ M $ ist ein Unterraum  
+		\item Sei $ p \in M, f \in K[x], p = d_1f_1 + \dotsb + d_l f_l \implies pf = d_1(\underbrace{f_1f}_{\in K[x]}) + \dotsb + d_l(\underbrace{f_lf}_{\in K[x]}) $
+	\end{itemize}
+\end{subexample}
+
+\begin{subdefinition}
+	Das Ideal $ d_1K[x] + \dotsb + d_lK[x] \coloneqq \left< d_1, \dotsc, d_l \right> $ ist ein \textbf{endlich erzeugtes Ideal} mit Erzeugern $ d_1, \dotsc, d_l $.
+\end{subdefinition}
+
+\begin{subdefinition}
+	Seien $ p_1, \dotsc, p_l \in K[x] $.
+	Ein Polynom $ d \in K[x] $ ist der \textbf{größte gemeinsame Teiler} von $ p_1, \dotsc, p_l $, bezeichnet mit $ \ggT(p_1, \dotsc, p_l) $ wenn gelten
+	\begin{enumerate}[label=(\arabic*)]
+		\item $ \forall i : 1 \leq i \leq l : d | p_i $
+		\item wenn auch $ d_0 \in K[x] $ (1) erfüllt, dann $ d_0 | d $
+	\end{enumerate}
+\end{subdefinition}
+
+\begin{subdefinition}
+	die Polynome $ p_1, \dotsc, p_l $ sind relativprim wenn $ \ggT(p_1, \dotsc, p_l) = 1 $
+\end{subdefinition}
+
+\begin{subtheorem}
+	Sei $ 0 \neq M \subseteq K[x] $ ein Ideal.
+	Dann $ \exists ! d \in K[x] $ normiert, so dass $ M = \left< d \right> $.
+	Das heißt $ K[x] $ ist ein Hauptidealring.
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{1.10.9}]
+	\begin{description}
+		\item[Existenz:] Wähle $ d \in M $ so, dass: $ d \neq 0, \deg d $ ist minimal und \OE{} $ d $ ist normiert.
+			\begin{description}
+				\item[Beh.:] $ d $ erzeugt $ M $ 
+				\item[Begründung:] Sei $ f \in M $, DA ergibt: $ f = dq + r $, wobei $ q, r \in K[x] $ und entweder $ r = 0 $ oder $ \deg r < \deg d $.
+					Aber
+					\[
+						r = \underbrace{\underbrace{f}_{\in M} - \underbrace{dq}_{\in M}}_{\in M}
+					\]
+					also muss $ r = 0 $ (sonst würe $ r \neq 0, r \in M, \deg r < \deg d \bot $).
+					Also ist $ f = dq $.
+					Also ist $ f \in \left<d \right> $, also $ M = \left< d \right> $.
+			\end{description}
+		\item[Eindeutigkeit:]
+			Sei $ g \in K[x], g \neq 0 $ $ g $ normiert so, dass $ M = gK[x] $.
+			Aber $ d,g \in M $, also $ \exists 0 \neq p, q \in K[x] $ so, dass
+			\begin{align*}
+				d &= g p \text{ und}  \\
+				g &= d q,
+			\end{align*}
+			es folgt, $ d = eqp $.
+			Daraus folgt $ \deg d = \deg d + \deg q + \deg p $.
+			Also sind $ \deg p = \deg q = 0, pq $ sind Skalarppolynome.
+			Da $ g, d $ beide normiert sind, folgt $ p = q = 1 $.
+			Also gilt $ d = g $\qed
+	\end{description}
+	
+\end{subproof*}
+
+
+\begin{subcorollary}
+	Sei $ 0 \neq M = \left<p_1, \dotsc, p_l \right> $ endlich erzeugtes Ideal von $ K[x] $ ist
+	\begin{enumerate}[label=(\arabic*)]
+		\item Der normierte Erzeuger $ d $ von $ M $ ist
+			\[
+				d = \ggT \left< p_1, \dotsc, p_l \right>
+			\]
+		\item Insbesondere wenn $ p_1, \dotsc, p_l $ relativprim sind, dann ist $ \left< p_1, \dotsc, p_l \right> = K[x] $
+	\end{enumerate}
+\end{subcorollary}
+\begin{subproof*}[Korollar \ref{1.10.10}]
+	\begin{enumerate}[label=(\arabic*)]
+		\item Da $ \left< d \right> = d K[x] = \left< p_1, \dotsc, p_l \right> $ und $ p_i \in \left< d \right> \quad \forall i = 1, \dotsc, l $ folgt $ d | p_i \quad \forall i = 1, \dotsc, l $. Also $ d $ ist $ \operatorname{gT} $.
+
+			Sei $ d_0 \in K[x] $ so dass $ d_0 | p_i \quad i = 1, \dotsc, l $.
+			Es folgt $ \exists g_i \in K[x], \forall i = 1, \dotsc, l $ so, dass
+			\[
+				p_i = d_0 g_i
+			\]
+			Nun ist $ d \in \left< p_1, \dotsc, p_l \right> $, also $ d = p_1 q_1 + \dotsb + p_lq_l $ für geeignete $ q_i \in K[x] $.
+			Also $ d = d_0g_1q_1 + \dotsb + d_0 g_l q_l = d_0 \underbrace{\left[ g_1q_1 + \dotsb + g_l q_l \right]}_{\in K[x].} $ 
+			Also $ d_0 | d $.
+			Also $ d = \ggT (p_1, \dotsc, p_l) $\qed
+		\item folgt unmittelbar aus (1)
+	\end{enumerate}
+\end{subproof*}
+
+
+
+\setcounter{subsubsection}{4}
+\subsubsection{Primzerlegung (Faktorisierung)}
+%\setcounter{subsection}{10}
+%\setcounter{subenvironmentnumber}{10}
+
+\begin{subdefinition}
+	Sei $ f \in K[x] $ ist \textbf{reduzibel über $ K $} (oder \textbf{reduzibel in $ K[x] $}) wenn es $ g, h \in K[x] $ gibt mit $ \deg g \geq  1 $, $ \deg h \geq 1 $ und $ f = gh $.
+	Sonst ist $ f $ \textbf{irreduzibel} über $ K $. 
+	Wenn irredzibel und $ \deg f \geq 1 $, nennen wir $ f $ \textbf{Primpolynom}
+\end{subdefinition}
+
+\begin{subnote*}
+	$ f $ reduzibel $ \implies \deg f \geq 2 $
+\end{subnote*}
+
+\begin{subexample}
+	$ f = x^2 + 1 $, $ f $ ist irreduzibel über $ \R  $ (über $ \Q  $) (weil $ f $ keine reele Nullstellen hat), aber reduzibel über $ \C  $.
+	Weil $ \sqrt{-1} , - \sqrt{-1} \in \C  $ bzw. $ i, -i \in \C  $ sind komplexe Nullstellen.
+\end{subexample}
+
+\begin{subtheorem}
+	Seien $ p, f,g \in K[x] $ und $ p $ ist Primpolynom.
+	Aus $ p | fg \implies p | f \vee p | g $.
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{1.10.13}]
+	Setze $ d \coloneqq  \ggT (f, p) $. \OE{} ist $ p $ normiert.
+	Außerdem ist $ p $ irreduzibel.
+	Es folgt die einzigen normierten Teiler von $ p $ sind $ 1 $ oder $ p $.
+	Insbesondere $ d = 1 $ oder $ d = p $
+	Aus Korollar \ref{1.10.10} folgt außerdem, dass $ \exists p_0, f_0 \in K[x] $ so, dass $ d = p_0 p + f_0 f $.
+	\begin{description}
+		\item[$ d = p $:] dann $ d | f $, da $ d = \ggT (f, p) $ 
+		\item[$ d = 1 $:] dann ist $ 1 = p_0p + f_0f $, also $ g = p (p_0g) + f_0 (fg) $
+			Es gilt: $ p | p(p_0g) $ und $ p | fg $ (per Def.). Also $ p | g $.\qed
+	\end{description}
+\end{subproof*}
+
+\begin{subcorollary}
+	Seien $ f_1, \dotsc, f_l \in K[x] $ sei $ p $ Primpolynom.
+	Wenn $ p | f_1 \dotsb f_l \implies \exists i \in \left\{ 1, \dotsc, l \right\}  $ so, dass $ p | f_i $.
+\end{subcorollary}
+\begin{subproof*}[Korollar \ref{1.10.14}]
+	Induktion nach $ l $.
+	$ l = 2 $ folgt aus Satz \ref{1.10.13}.
+	Induktionsannahme für $ l - 1 $.
+	Induktionsschritt: $  p | (f_1 \dotsb f_{l - 1} ) f_l \implies p | (f_1 \dotsb f_{l - 1}  $ oder $ p | f_l \implies \dotsc $\qed
+\end{subproof*}
+
+\begin{subtheorem}
+	Sei $ f \in K[x] $, $ f $ normiert, $ \deg f \geq 1 $. Dann ist $ f $ ein Produkt von normierten Primpolynomen.
+	Die  Darstellung ist eindeutig (bis auf Umnummerierung).
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{1.10.15}]
+	\begin{description}
+		\item[Existenz:] Sei $ \deg f = n $, Induktion nach $ n $ 
+			\begin{description}
+				\item[I.A.:] $ \deg f = 1 \implies f $ irreduzibel.
+					Es ist nichts weiter zu zeigen.
+				\item[I.S.:] $ n > 1 $, ist $ f $ irreduzibel, dann ist nichts weiter zu zeigen.
+					Ist $ f $ reduzibel, $ f = gh $ $ \deg g \geq 1, \deg h \geq 1 $, also $ \deg g < n $ und $ \deg h < n $.
+					Induktionsannahme gilt für $ g $ und $ h $ 
+					\[
+						f = \underbrace{g}_{\text{Prod. v. Prim.} } \underbrace{h}_{\text{Prod. v. Prim.} }
+					\]
+			\end{description}
+		\item[Eindeutigkeit:] Sei $ f = p_1 \dotsb p_l = q_1 \dotsb q_s $, $ p_i, q_i $ alle normierte Primpolynome.
+			Außerdem $ p_l | q_1 \dotsb q_s $.
+			Es folgt aus Kor. \ref{1.10.14} $ \exists j \in \left\{ 1, \dotsc, s \right\}  $ so dass $ P_l | q_j $.
+			Aber $ p_l, q_j $ sind beide numerierte Primpolynome, es folgt $ p_l = q_j $.
+			\OE{} nach Umnommerierung $ p_l = q_s $ 
+			Betrachte
+			\[
+				P \coloneqq p_1 \dotsb p_{l - 1}  = q_1 \dotsb q_{s - 1} 
+			\]
+			Aber $ \deg(P) < n $\\
+			I.A. $ \implies p_1, \dotsc, p_{l - 1}  $ sind eine Umnummerierung der $ q_1, \dotsc, q_{s - 1}  $ (insbesondere $  l = s $).\qed
+	\end{description}
+	
+\end{subproof*}
+
+
+

@@ -1,0 +1,82 @@
+\documentclass[sectionformat = aufgabe]{gadsescript}
+
+\setsemester{Winter Semester 2023/2024}%
+\setuniversity{University of Konstanz}%
+\setfaculty{Faculty of Science\\(Mathematics and Statistics)}%
+\settitle{Übungsblatt 02}
+\setsubtitle{Elias Gestrich}
+%Salisha Baiz, salisha.baiz@uni-konstanz.de
+
+\begin{document}
+\maketitle
+\setcounter{section}{2}
+\subsection{}
+\begin{proof*}
+	\begin{description}
+		\item[``$ \implies  $''] Sei $ A $ invertierbar, zu zeigen $ A^t $ ist invertierbar mit $ (A^t)^{-1} = \left( A^{-1}  \right) ^t $. Dazu gilt zu zeigen, dass 
+			\[
+				\left( A^t \left( A^{-1}  \right) ^t \right)_{ij} = (I_n)_{ij} 
+				= \begin{cases}
+					1, & i = j\\
+					0, & \text{sonst} 
+				\end{cases}
+			\]
+			\begin{align*}
+				\left( A^t \left( A^{-1}  \right) ^t \right)_{ij} %
+				&= \sum_{k=1}^{n} A^t_{ik} \left( A^{-1}  \right) ^t_{kj}  \\
+				&= \sum_{k=1}^{n} A_{ki} A^{-1} _{jk}  \\
+				&= \sum_{k=1}^{n} A^{-1}_{jk} A_{ki} \\
+				&= \left( A^{-1} A \right) _{ji}  \\
+				&= (I_n)_{ji} \\
+				&= \begin{cases}
+					1, & i = j\\
+					0, & \text{sonst} 
+				\end{cases}
+			\end{align*}
+			Was zu zeigen war
+		\item[``$ \impliedby  $''] Sei $ A^t $ invertierbar, zu zeigen $ A $ ist invertierbar mit $ A^{-1} = \left( \left( A^t \right) ^{-1}  \right) ^{t}  $.
+			Wir betrachten dazu $ (\left( A^t \right) ^t)_{ij}  = A^{t} _{ji} = A_{ij}  $, also $ \left( A^t \right) ^t = A $.
+			Es gilt aus der Hinrichtung, dass wenn $ (A^t) $ invertierbar ist, dann auch $ (A^t)^t $ mit $ A^{-1} = \left( \left( A^t \right) ^t \right) ^{-1} = \left( \left( A^t \right) ^{-1}  \right) ^t $\qed
+	\end{description}
+\end{proof*}
+
+\subsection{}
+\begin{enumerate}[label=(\alph*)]
+	\item $ g(x_1, x_2) = T^t(f)(x_1, x_2) = (f \circ T)(x_1, x_2) = f(T(x_1, x_2)) = f(x_1, 0) = ax_1 + 0 = ax_1 $
+	\item $ g(x_1, x_2) = T^t(f)(x_1, x_2) = (f \circ T)(x_1, x_2) = f(T(x_1, x_2)) = f(-x_2, x_1) = - ax_2 + bx_1 = bx_1 - ax_2 $
+	\item $ g(x_1, x_2) = T^t(f)(x_1, x_2) = (f \circ T)(x_1, x_2) = f(T(x_1, x_2)) = f(x_1-x_2, x_1 + x_2) = a(x_1 - x_2) + b(x_1 + x_2) = (a + b)x_1 - (a - b) x_2 $
+\end{enumerate}
+
+\subsection{}
+Zu zeigen die folgenden Axiome für alle $ a, b \in K, \alpha, \beta, \gamma \in V $:
+\begin{enumerate}[label=(V\arabic*)]
+	\item Zu zeigen $ \left( \overline{\alpha} + \overline{\beta}  \right) + \overline{\gamma} = \overline{\alpha} + \left( \overline{\beta} + \overline{\gamma}  \right)   $:
+		\begin{align*}
+			\left( \overline{\alpha} + \overline{\beta} \right) + \overline{\gamma}
+				&= \overline{\alpha + \beta} + \overline{\gamma} \\
+				&= \overline{\alpha + \beta + \gamma}  \\
+				&= \overline{\alpha} + \overline{\beta + \gamma}  \\
+				&= \overline{\alpha} + \left( \overline{\beta} + \overline{\gamma} \right)
+		\end{align*}
+	\item Zu zeigen $ \overline{0}  + \overline{\alpha} = \overline{\alpha} + \overline{0}  = \overline{\alpha} $ mit:\\
+		$ \overline{0} + \overline{\alpha} = \overline{0 + \alpha} = \overline{\alpha} = \overline{\alpha + 0} = \overline{\alpha} + \overline{0} $
+	\item Zu zeigen $ \overline{\alpha} + \overline{-\alpha} = \overline{-\alpha} + \overline{\alpha} = 0 $:\\
+		$ \overline{\alpha} + \overline{-\alpha} = \overline{\alpha - \alpha} = \overline{-\alpha + \alpha} = \overline{-\alpha} + \overline{\alpha} = \overline{-\alpha + \alpha} = \overline{0} $
+	\item Zu zeigen $ \overline{\alpha} + \overline{\beta} = \overline{\beta} + \overline{\alpha} $:\\
+		$ \overline{\alpha} + \overline{\beta} = \overline{\alpha + \beta} = \overline{\beta + \alpha} = \overline{\beta} + \overline{\alpha}  $
+\end{enumerate}
+und
+\begin{enumerate}[label=(S\arabic*)]
+	\item Zu zeigen $ a\left( \overline{\alpha} + \overline{\beta}  \right) = a \overline{\alpha} + a \overline{\beta}  $:\\
+		$ a \left( \overline{\alpha} + \overline{\beta}  \right) = a \overline{\alpha + \beta} = \overline{a(\alpha + \beta)} = \overline{a\alpha + a\beta} = \overline{a\alpha} + \overline{a\beta} = a \overline{\alpha} + a \overline{\beta}  $ 
+	\item Zu zeigen $ (a + b) \overline{\alpha} = a \overline{\alpha} + b \overline{\alpha}  $:\\
+		$ ( a + b) \overline{\alpha} = \overline{(a + b)\alpha} = \overline{a\alpha + b\alpha)} = a \overline{\alpha} + a \overline{\alpha}  $ 
+	\item Zu zeigen $ (a \cdot  b) \overline{\alpha} = a \left( b \overline{\alpha}\right) $:\\
+		$ ( a \cdot  b) \overline{\alpha} = \overline{(a \cdot  b)\alpha} = \overline{a\left(b\alpha\right) )} = a \overline{b \alpha} = a \left( b \overline{\alpha}  \right) $ 
+	\item Zu zeigen $ 1 \cdot \overline{\alpha} = \overline{\alpha}  $:\\
+		$ 1 \cdot \overline{\alpha} = \overline{1 \cdot \alpha} = \overline{\alpha}  $\qed
+\end{enumerate}
+
+
+
+\end{document}

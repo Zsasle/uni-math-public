@@ -1,0 +1,646 @@
+\section{Topologische Strukturen}
+\subsection{Metrische Räume}
+\textbf{Ziel/Idee} Räume, in denen wir Abstände messen können.
+$ X $ Menge, $ d: X \times X \ni (x, y) \mapsto \underbrace{d(x, y)}_{\text{``Abstand''} } $ 
+\begin{enumerate}[label=(\roman*)]
+	\item Abstand nicht-negativ
+	\item Abstand $ 0 \iff  $ Objekte dieselben
+	\item Abstand von $ x $ zu $ y =  $ Abstand von $ y $ zu $ x $.
+	\item Gehen wir über Zwischenpunkte, so machen wir einen Umweg
+\end{enumerate}
+
+\begin{subdefinition}[Metrik, Metrischer Raum]
+	Sei $ X $ eine Menge und $ d: X \times X \to \R _{\geq 0}  $. Wir nennen $ d $ eine \textbf{Metrik} \& $ (X, d) $ einen \textbf{metrischen Raum}, falls:
+	\begin{enumerate}[label=(\alph*)]
+		\item Pos. Definitheit: $ \forall x, y \in X: d(x, y) = 0 \iff x = y $.
+		\item Symmetrie: $ \forall x, y \in X : d(x, y) = d(y, x) $.
+		\item \textbf{Dreiecksungleichung}: $ \forall x, y, z \in X : d(x, y) \leq  d(x, z) + d(z, y) $
+	\end{enumerate}
+\end{subdefinition}
+
+\begin{subexample}[Triviale Metrik]
+	$ X $ nichtleere Menge. \textbf{Triviale Metrik:}
+	$ d(x, y) \coloneqq \begin{cases}
+		0, & x = y\\
+		1, & \text{sonst} 
+	\end{cases} $ 
+	(kein Vektorraum)
+\end{subexample}
+
+\begin{subexample}[Normierter Vektorraum \& Metriken]
+	Sei $ (X, \left\| \cdot  \right\| ) $ ein Vektorraum mit Norm:
+	\[
+		\left\| \cdot  \right\| : X \to \R _{\geq 0} 
+	\]
+	mit 
+	\begin{enumerate}[label=(N\arabic*)]
+		\item $ \forall x \in X : \left\| x \right\| = 0 \iff  x = 0. $. (0 Nullvektor in $ X $)
+		\item $ \forall x \in X : \forall \lambda \in \R : \left\| \lambda x \right\| = \left| \lambda \right| \cdot \left\| x \right\|  $.
+		\item $ \forall x, y \in X : \left\| x + y \right\| \leq \left\| x \right\| + \left| y \right|  $.
+	\end{enumerate}
+	Wir definieren die kanonische Metrik in $ (X, \left\| \cdot  \right\| ) $ via
+	\[
+		d(x, y) \coloneqq \left\| x - y \right\| , \quad x, y \in X.
+	\]
+	
+\end{subexample}
+
+\begin{subexample}[$ \R^n $, Normen]
+	$ \left\| (x_1, x_2, x_3) \right\|_{2}  \coloneqq \sqrt{x_1^2 + x_2^2 + x_3^2}  $\\
+	Sei $ 1 \leq p \leq  \infty $, und für $ x = (x_1, \dotsc, x_n) \in \R ^n $ definieren
+	\begin{align*}
+		\left\| x \right\| _p &\coloneqq \left( \sum_{j=1}^{n} \left| x_j \right| ^p \right)^{\frac{ 1 }{ p } } , && 1 \leq  p < \infty \\
+		\left\| x \right\| _\infty & \coloneqq \max \left| x_j \right| , && p = \infty
+	\end{align*}
+	Dann ist $ \left\| \cdot  \right\| _p  $ eine \textbf{Norm auf $ \R ^n $} (``$ p $-Norm'')
+	\begin{itemize}
+		\item Nichtnegativ klar. Positiv Definiert \& Homogenität (N2): klar.
+		\item Für Dreiecksungleichung: \textbf{Youngsche Ungleichung:} $ \forall 1 \leq p < \infty : \forall \forall a, b \in \R : \left| ab \right| \leq \frac{ 1 }{ p } \left| a \right| ^p + \frac{ 1 }{ p^\prime  } \left| b \right| ^{p^\prime } , p^\prime \coloneqq \frac{ p }{ p - 1 }  $\\
+			\textbf{Hölderexponent von $ p $}, $ \frac{ 1 }{ p } + \frac{ 1 }{ p^\prime  } = 1 $
+		\item $ \exp  $ konvex: $ \forall \lambda \in [0, 1] : \forall x, y \in \R : \exp (\lambda x + (1 - \lambda) y) \leq \lambda \exp (x) + (1 - \lambda) \exp (y) $ 
+		\item \OE{} $ a, b \in \R \setminus \left\{ 0 \right\} $. Dann:
+			\begin{align*}
+				\left| ab \right| &= \exp ( \log \left( \left| ab \right|  \right)  \\
+				~ &= \exp \left( \log \left| a \right| + \log \left| b \right|  \right)  \\
+				~ &= \exp \left( \frac{ 1 }{ p } \log \left| a \right| ^p + \frac{ 1 }{ p^\prime  } \log \left| b \right| ^{p^\prime }  \right) \\
+				~ &\leq  \frac{ 1 }{ p } \exp \log \left| a \right| ^p + \frac{ 1 }{ p^\prime  } \exp \log \left| b \right| ^{p^\prime }  \\
+			\end{align*}
+	\end{itemize}
+	Zur Dreiecksungleichung: \textbf{Höldersche Ungleichung:} $ 1 \leq p < \infty, x, y \in \R ^n $,
+	\[
+		\sum_{j=1}^{n} \left| x_j y_j \right| \leq \left\| x \right\| _p \cdot \left\| y \right\| _{p^\prime } 
+	\]
+	\OE{} erst $ \left\| x \right\| _p = \left\| y \right\| _{p^\prime } = 1 $.
+	\begin{itemize}
+		\item $ \sum_{j=1}^{n} \left| x_j y_j \right| \leq \frac{ 1 }{ p } \underbrace{\sum_{j=1}^{n} \left| x_j \right| ^p}_{1} + \frac{ 1 }{ p^\prime  } \underbrace{\sum_{j=1}^{n} \left| y_j \right| ^{p^\prime } }_{1} = \frac{ 1 }{ p } + \frac{ 1 }{ p^\prime  } = 1 $.
+	\end{itemize}
+	Für $ x, y \in \R ^n \setminus \left\{ 0 \right\}  $ so $ \tilde{x} \coloneqq \frac{ x }{ \left\| x \right\| _p } , \tilde{y} \coloneqq \frac{ y }{ \left\| y \right\| _{p^\prime }  }  $.\\
+	Also
+	\[
+		\sum_{j=1}^{n} \left| \tilde{x}_j \tilde{y}_j \right| \leq \left\| \tilde{x} \right\| _p \left\| \tilde{y}_{p^\prime }  \right\| = 1 \implies \sum_{j=1}^{n} \left| x_j y_j \right| \leq \left\| x \right\| _p \left\| y \right\| _{p^\prime } .
+	\]
+	$ x, y \in \R ^n $ 
+	\begin{align*}
+		\left\| x + y \right\| _p^p &= \sum_{j=1}^{n} \left| x_j + y_j \right| ^p \\
+		~ &= \sum_{j=1}^{n} \left| x_j + y_j \right| ^{p - 1} \left| x_j + y_j \right|  \\
+		~ &\leq \sum_{j=1}^{n} \underbrace{\left| x_j + y_j \right| ^{p - 1} }_{a_j} \underbrace{\left| x_j \right|}_{b_j}  + \sum_{j=1}^{n} \left| x_j + y_j \right| ^{p -1} \left| y_j \right| \\
+		~ & \leq \left( \sum_{j=1}^{n} \left| x_j + y_j \right| ^{( p - 1) p^\prime }  \right) ^{\frac{ 1 }{ p^\prime  } } \left( \left( \sum_{j=1}^{n} \left| x_j \right| ^p \right) ^{\frac{ 1 }{ p } } + \left( \sum_{j=1}^{n} \left| y_j \right| ^p \right) ^{\frac{ 1 }{ p } }  \right) \\
+		  ~ &= \left( \sum_{j=1}^{n} \left| x_j + y_j \right| ^p \right) ^{\frac{ p - 1 }{ p } } \left( \dotsc \right)  \\
+		  ~ &= \left\| x + y \right\| _p ^{p - 1} \left( \left\| x \right\| _p + \left\| y \right\| _p \right) .
+	\end{align*}
+	\[
+		  \implies \left\| x + y \right\| _p \leq  \left\| x \right\| _p + \left\| y \right\| _p
+	\]
+\end{subexample}
+
+\textbf{Ziel:} Konvergenz auf metrischen Räumen.\\
+Ana I : \[ \forall \varepsilon > 0 : \exists N \in N : \forall j \geq N : \underbrace{\left| x_j - x \right| }_{= \left\| x_j - x \right\| _2} < \varepsilon . \]
+
+\begin{subdefinition}
+	Sei $ (X, d) $ ein metrischer Raum. Eine Folge $ (x_j) \subset X $ \textbf{konvergiert gegen $ x $} (bzgl. $ d $), falls
+	\[
+		\forall \varepsilon > 0: \exists N \in \N : \forall j \geq N: d(x_j, x) < \varepsilon .
+	\]
+	Wir nennen $ (x_j) $ \textbf{Cauchy} (bzgl. $ d $), falls
+	\[
+		\forall \varepsilon > 0 : \exists N \in \N : \forall i, j \geq N : d(x_i, x_j) < \varepsilon .
+	\]
+	Wir nennen $ (X, d) $ \textbf{vollständig}, falls jede $ d $-Cachyfolge bezüglich $ d $ konvergiert.
+\end{subdefinition}
+
+$ r > 0 , x \in X : B_{r}(x) \coloneqq \left\{ y \in X : d(x, y) < r \right\}  $ ``offener Ball''.
+\begin{itemize}
+	\item  $ U \subset X $ \textbf{offen} bezüglich $ d \iff \forall x \in U : \exists r > 0 : B_{r}(x) \subset U $ 
+	\item $ U $ abgeschlossen $ \iff X \setminus U $ offen
+\end{itemize}
+
+\textbf{Hausdorff, Brief ``\ldots das Ende nicht \ldots''}
+\blockquote{
+	Lieber Freund Wollstein!
+
+	Wenn Sie diese Zeilen erhalten, haben wir drei das Problem auf andere Weise gelöst – auf die Weise, von der Sie uns beständig abzubringen versucht haben. Das Gefühl der Geborgenheit, das Sie uns vorausgesagt haben, wenn wir erst einmal die Schwierigkeiten des Umzugs überwunden hätten, will sich durchaus nicht einstellen, im Gegenteil:
+	{\center Auch Endenich\\Ist noch vielleicht das Ende nich!\par}
+
+	Was in den letzten Monaten gegen die Juden geschehen ist, erweckt begründete Angst, dass man uns einen für uns erträglichen Zustand nicht mehr erleben lassen wird.
+
+	Sagen Sie Philippsons, was Sie für gut halten, nebst dem Dank für ihre Freundschaft (der vor allem aber Ihnen gilt). Sagen Sie auch Herrn Mayer unseren herzlichen Dank für alles, was er für uns getan hat und gegebenenfalls noch getan haben würde; wir haben seine organisatorischen Leistungen und Erfolge aufrichtig bewundert und hätten uns, wäre jene Angst nicht, gern in seine Obhut gegeben, die ja ein Gefühl relativer Sicherheit mit sich gebracht hätte, – leider nur einer relativen.
+
+	Wir haben mit Testament vom 10. Okt. 1941 unseren Schwiegersohn Dr. Arthur König, Jena, Reichartsteig 14, zum Erben eingesetzt. Helfen Sie ihm, soweit Sie können, lieber Freund! helfen Sie auch unserer Hausangestellten Minna Nickol oder wer sonst Sie darum bittet; unseren Dank müssen wir ins Grab mitnehmen. Vielleicht können nun die Möbel, Bücher usw. noch über den 29. Jan. (unseren Umzugstermin) im Haus bleiben; vielleicht kann auch Frau Nickol noch bleiben, um die laufenden Verbindlichkeiten (Rechnung der Stadtwerke u. s. w.) abzuwickeln. – Steuerakten, Bankkorrespondenz u. dgl., was Arthur braucht, befindet sich in meinem Arbeitszimmer.
+
+	Wenn es geht, wünschen wir mit Feuer bestattet zu werden und legen Ihnen drei Erklärungen dies Inhalts bei. Wenn nicht, dann muss wohl Herr Mayer oder Herr Goldschmidt das Notwendige veranlassen. Für Bestreitung der Kosten werden wir, so gut es geht, sorgen; meine Frau war übrigens in einer evangelischen Sterbekasse – die Unterlagen dazu befinden sich in ihrem Schlafzimmer. Was augenblicklich an der Kostendeckung noch fehlt wird unser Erbe oder Nora übernehmen.
+
+	Verzeihen Sie, dass wir Ihnen über den Tod hinaus noch Mühe verursachen; ich bin ü\-ber\-zeugt, dass Sie tun, was Sie tun \underline{können} (und was vielleicht nicht sehr viel ist). Verzeihen Sie uns auch unsere Desertion! Wir wünschen Ihnen und allen unseren Freunden, noch bessere Zeiten zu erleben.
+	{\center Ihr treu ergebener\\}
+	\indent~\hfill{\raggedleft \textbf{- Felix Hausdorff}}
+}
+
+\begin{sublemma*}[Hausdorfffeigenschaft metrische Räume]
+	Ist $ (X, d) $ ein metrischer Raum, so gibt es für $ x, y \in X, x \neq y $ offene Mengen $ U, V $ mit $ x \in U, y \in V \& U \cap V = \OO  $	
+\end{sublemma*}
+
+\begin{subtheorem}
+	Sei $ (X, d) $ vollständiger metrischer Raum, $ U \subset X $. Dann sind äquivalent:
+	\begin{enumerate}[label=(\roman*)]
+		\item $ (U, d) $ vollständig.
+		\item $ U $ ist bezüglich $ d $ abgeschlossen
+	\end{enumerate}
+\end{subtheorem}
+
+\begin{subproof*}[Theorem \ref{2.1.6}]
+	\begin{description}
+		\item[``$ \implies  $''] Hierzu folgende Charakterisierung der Abgeschlossenheit:
+			$ U \subset X $ abgeschlossen $ \iff U \subset X $ folgenabgeschlossen $ \vcentcolon\iff (x_j) \subset U $ Folge mit $ d(x_j, x) \to 0, j \to \infty $, so $ x \in U $.
+			\textbf{Bew. (Zwischenbehauptung)}
+			\begin{description}
+				\item[``$ \implies  $''] Sei $ (x_j) \subset U $ konvergent mit $ d(x_j, x) \to 0, x \in X\setminus U $. $ U $ abgeschlossen $ \implies X\setminus U $ offen $ \implies \exists r \geq : B_{r}(x) \subset X \setminus U. $ Aber $ \exists N \in \N : \forall j \geq N : x_j B_{r}(x) \subset X \setminus U $. Aber $ (x_j) \subset U \bot $ 
+				\item[``$ \impliedby  $''] Angenommen, $ U $ nicht abgeschlossen, also $ X \setminus U $ nicht offen. $ \implies \exists x \in X \setminus U : \forall r > 0 : B_{r}(x) \not \subset X \setminus U $, also $ B_{r}(x) \cap U \neq \OO  $\\
+					$ \implies  $ also $ \forall j \in \N : \forall x_j \in B_{\frac{ 1 }{ j } }(x) \cap U $. Dann $ (x_j) \subset U $ \& $ d(x_j, x) \to 0 $, aber $ x \in X \setminus U $. Also $ U $ nicht folg.ab., also Beh. gez. \qed
+			\end{description}
+		\textbf{Nun:} (i) $ \implies  $ (ii) Sei $ (x_j) \subset U $ mit $ d(x_j, x) \to 0, x \in X $. Dann ist $ (x_j) $ $ d $-Cauchy (da konvergent), also $ \exists y \in U: d(x_j, x) \to 0, j \to \infty $ ( $ (X, d) $ VMR).\\
+		Nach Lemma (Hausdorff) $ x = y $, also (ii)
+	\item[``(ii) $ \implies  $ (i)''] Sei $ x_j \subset U $ $ d $-Cauchy, Wegen $ (X, d) $ VMR, $ \exists x \in X : d(x_j, x) \to  $\\
+		Aber da $ U $ folgen abgeschlossen $ x \in U $ Also $ (U, d) $ VMR \qed
+	\end{description}
+\end{subproof*}
+
+\begin{subexample}
+	Sei $ U \subset  \R ^n $ offen, und sei $ C_b(U) \coloneqq \left\{ u : U \to \R : u \text{ stetig und \textbf{beschränkt}}  \right\}  $ $ \left\| u \right\| _{C(U)} \coloneqq \sup_{x \in U} \left| u(x) \right|  $ ist Norm auf $ C_{b} (U) $ (keine Norm auf $ C(U) \hat{=}  $ stetige Funktionen auf $ U $.)\\
+	$ \left\| \cdot  \right\| _{C(U)}  $ ind. Metrik $ d(u, v) \coloneqq \left\| u - v \right\| _{C(U)}  $.\\
+	\textbf{Beh.:} $ ( C_b(U), d) $ ist \textbf{vollständig}.\\
+	Sei $ (u_j) $ Cauchyfolge in $ (C_b(U), d) $, d.h., $ \lim_{j, l \to \infty} \left\| u_j - u_l \right\| _{C(U)}  $= 0.\\
+	Für jedes $ x \in U: \left| u_j(x) - u_l(x) \right| \overset{\text{Def} }{\leq } \left\| u_j - u_l \right\| _{C(U)} \overset{j, l \to \infty}{\longrightarrow} 0. $\\
+	$ \implies (u_j(x)) $ Cauchy in $ (\R , \left| \cdot  \right| ) $. $ (\R , \left| \cdot  \right| ) $ vollständig $ \implies \exists u(x) \in \R : u_j(x) \to u(x), j \to \infty $. Zu zeigen: $ u \in C_b(U) \& \left\| u_j - u \right\| _{C(U)} \to 0 $.\\
+	Für letzteres:
+	\[
+		\forall x \in U: \forall j\in \N : \left| u(x) - u_j(x) \right| = \lim_{l \to \infty} \left| u_l(x) - u_j(x) \right| \leq \lim_{j \to \infty} \left\| u_j - u_l \right\| _{C(U)},
+	\]
+	also
+	\[
+		\left\| u - u_j \right\| _{C(U)} \leq  \lim_{l \to \infty} \left\| u_l - u_j \right\| _{C(U)},
+	\]
+	also
+	\[
+		\lim_{j \to \infty} \left\| u - u_j \right\| _{C(U)} \leq \lim_{j, l \to \infty} \left\| u_j - u_l \right\| _{C(U)} = 0.
+	\]
+	Konvergenz bezüglich $ d $ ist gleichmäßige Konvergenz, und da alle $ u_j $'s stetig, folgt $ u \in C(U) $ nach Analysis I.
+	Genauer: z. z. $ u $ stetig.
+	Sei $ x \in U $ und $ \varepsilon > 0 $ beliebig.
+	Hierzu $ \left| u(x) - u_j(y) \right| \leq \underbrace{\left| u(x) - u_j(x) \right| }_{} + \left| u_j(x) - u_j(y) \right| + \underbrace{\left| u_j(y) - u(y) \right|}_{} \quad \forall y \in U $.\\
+	Wähle zuerst $ j \in \N  $ mit $ \left\| u_j - u \right\| _{C(U)} < \frac{ \varepsilon }{ 3 }  $, und dann wegen $ u_j $ stetig $ \delta > 0 : \left| x - y \right| < \delta \implies \left| u_j(x) - u_j(y) \right| < \frac{ \varepsilon }{ 3 }  $.
+	Nach obiger Abschätzung $ \left| u(x) - u(y) \right| < \varepsilon  $, also $ u $ stetig.
+	Für Beschränktheit von $ u $:
+	Wähle $ j \in \N : \left\| u - u_j \right\| _{C(U)} \leq 1 $. Dann $ \forall x \in U: \left| u(x) \right| \leq \left| u_j(x) - u(x) \right| + \left| u_j(x) \right| \leq \underbrace{\left\| u_j - u \right\| _{C(U)} }_{\leq 1} + \underbrace{\left\| u_j \right\| _{C(U)} }_{<\infty} \implies u $ beschränkt
+\end{subexample}
+
+\begin{subexample}
+	Betrachte $ C_b([0, 2]) $ mit \textbf{Norm}
+	\[
+		\left\| u \right\| _{\mathcal{L} ^1([0, 2])} \coloneqq \int_{0}^{2} \left| u(x) \right| dx.
+	\]
+	Zu positiver Definitheit: $ \left\| u \right\| _{\mathcal{L} ^1([0, 2])} = 0 $.
+	Angenommen, $ u \equiv 0  $, so $ \exists x_0 \in [0, 2]: \left| u(x_0) \right| > 0 $. Dann, für $ \varepsilon \coloneqq \frac{ \left| u(x_0) \right| }{ 2 } : \exists \delta > 0 : \left| x_0 - x \right| < \delta \implies \left| u(x) - u(x_0) \right| < \frac{ \left| u(x_0) \right| }{ 2 } \implies \left| u(x) \right| - \left| u(x_0) \right| > -\frac{ \left| u(x_0) \right| }{ 2 } \implies \left| u(x) \right| > \frac{ \left| u(x_0) \right| }{ 2 } \implies \left\| u \right\| _{\mathcal{L} ^1([0, 2]) } \geq \int_{0}^{2} 1_{B_\delta} (x_0) \left| u(x) \right| dx \geq \frac{ \left| u(x_0) \right| }{ 2 } \delta $\\
+	\textbf{Beh.:} Ist $ d $ die durch $ \left\| \cdot  \right\| _{\mathcal{L} ^1([0, 2])}  $ ind. Metrik, so ist $ (C_b([0, 2]), d) $ \textbf{nicht vollständig}: Definiere
+	\[
+		u_j(x) \coloneqq \begin{cases}
+			x^j, & x \in [0, 1)\\
+			1, & \text{sonst} 
+		\end{cases}
+	\]
+	Dann: $ (u_j) $ $ d $-Cauchy:\\
+	$ \left\| u_j - u_l \right\| _{\mathcal{L} ^1([a, b])} = \int_{0}^{1} \left| x^j - x^l \right| dx \leq \int_{0}^{1} x^j dx + \int_{0}^{1}x^ldx = \frac{ 1 }{ j + 1 } + \frac{ 1 }{ l + 1 } \overset{j, l \to \infty}{\longrightarrow} 0 $, Cauchyeigenschaft.
+	\begin{itemize}
+		\item Gäbe es ein $ u: [0, 2] \to \R  $ mit $ d(u_j, u) \to 0 $, so notwendigerweise $ u = 0 $ auf $ [0, 1) \& u = 1 $ auf $ (1, 2] $. Dann aber $ u $ unstetig - $ (C_b([0, 2]), d) $ \textbf{nicht} vollständig.
+	\end{itemize}
+\end{subexample}
+
+\begin{subexample}
+	$ R^n = \left\{ (x_1, \dotsc, x_{n}) : x_j \in \R , 1 \leq  j \leq n  \right\}  $, für $ 1 \leq  p \leq  \infty $ sei $ d_p $ die durch $ \left\| \cdot  \right\| _p $ ind. Metrik. Dann ist $ (\R ^n, d_p) $ \textbf{vollständig}. Denn:\\
+	Ist $ (x_j) \subset \R ^n $ eine Cauchyfolge bezüglich $ d_p $, so sind die einzelnen Koordinatenfolgen Cauchy in $ \R  $.\\
+	$ a = (a_1, \dotsc, a_n) \in \R ^n : \forall i \in \left\{ 1, \dotsc, n \right\} : $ 
+	\begin{align*}
+		\left| a_i \right| &= \left( \left| a_i \right| ^p \right) ^{\frac{ 1 }{ p } }  \\
+				   &\leq \left( \sum_{k=1}^{n} \left| a_k \right| ^p \right) ^{\frac{ 1 }{ p } } \\
+				   &\leq \left( n \left\| a \right\| _{\infty} ^p \right) ^{\frac{ 1 }{ p } } \\
+				   &= n^{\frac{ 1 }{ p } } \left\| a \right\| _{\infty} .
+	\end{align*}
+	\[ \implies \forall p \in [1, \infty) : \underbrace{\left\| a \right\| _{\infty} }_{\max_{i = 1, \dotsc, n} \left| a_i \right| } \leq \underbrace{\left\| a \right\| _p}_{\left( \sum_{k=1}^{n} \left| a_k \right| ^p \right) ^{\frac{ 1 }{ p } } } \leq n^{\frac{ 1 }{ p } } \left\| a \right\| _{\infty}  {\color{gadse-red} \implies \left| a \right| _{\infty} = \lim_{p \to \infty} \left\| a \right\| _p = 1} \]
+
+	Für $ 1 \leq p \leq \infty $ sei $ \mathbb{B}_p \coloneqq \left\{ (x_1, x_2) \in \R ^2 : \left\| x_1, x_2 \right\| _p \leq  1 \right\}  $ \textbf{Bälle} bezüglich $ d_p $.\\
+	(Für $ p = 1 $ Quadrat mit Ecken $ (1, 0), (0, 1), (-1, 0), (0, -1) $., für $ 1 < p < 2 $ nähert sich zu einem Kreis mit Radius $ 1 $, für $ p = 2 $ Kreis, für $ 2 < p < \infty $ nähert sich Quadrat mit Seitenlänge 2, parallel zu Koordinatenachsen, für $ p = \infty $ Quadrat)
+\end{subexample}
+
+\begin{subdefinition}
+	Seien $ (X, d_X) \& (Y, d_Y) $ zwei metrische Räume \& $ f: X \to Y $ eine Abbildung.
+	Wir nennen $ f $ \textbf{stetig in $ x_0  \in X $}, falls gilt:
+	Ist $ W \subset Y $ offen (bezüglich $ Y $) mit $ f(x_0) \in W $, so ist $ f^{-1} (W) $ offen bezüglich $ d_X $. $ f $ heißt \textbf{stetig} wenn $ f $ stetig in jedem $ x_0 \in X $ ist.
+\end{subdefinition}
+
+\begin{itemize}
+	\item \textbf{Warnung:} Das heißt \textbf{NICHT}, dass Bilder offener Mengen offen sind!\\
+		\textbf{Bsp.:} $ \sin : \underbrace{\R }_{\text{offen} }\to \R  $, aber $ \sin (\R ) = [-1, 1] \leftarrow $ abgeschlossen
+\end{itemize}
+
+\begin{subtheorem}
+	Seien $ (X, d_X), (Y, d_Y) $ metrische Räume. Dann ist für $ f: X \to Y $ äquivalent:
+	\begin{enumerate}[label=(\roman*)]
+		\item $ f $ stetig in $ x_0 $.
+		\item $ \forall \varepsilon > 0: \exists \delta > 0 : \forall x \in  X : d_{X} (x, x_0) < \delta \implies d_Y(f(x), f(x_0)) < \varepsilon  $
+		\item Ist $ (x_j) \subset X $ eine Folge mit $ d_X(x_j, x) \to 0 $, so $ d_Y(f(x_j), f(x_0)) \to 0, j \to \infty. $
+	\end{enumerate}
+\end{subtheorem}
+
+\begin{subproof*}[Theorem \ref{2.1.11}]
+	\begin{description}
+		\item[(i) $ \implies  $ (ii):] Sei $ \varepsilon > 0 $, also $ B_{\varepsilon}(f(x_0)) ( \eqcolon W) $ offen in $ Y $. Da $ f $ stetig, $ f^{-1} (B_{\varepsilon}(f(x_0) )) $ offen in $ X $. Aber wegen $ x_0 \in f^{-1} (W) $ gibt es ein $ \delta > 0 : B_{\varepsilon}(x_0) \subset f^{-1} (W) $, also $ f(B_{\delta}(x_0) ) \subset W $. Damit folgt (ii).
+		\item[(ii) $ \implies  $ (iii):] Sei $ \varepsilon > 0 $, dann wegen (ii) $ \exists \delta > 0 : d_X(x, x_0) < \delta \implies d_Y(f(x), f(x_0)) < \varepsilon  $.\\
+			Da $ d_X(x, x_j) \to 0, \exists N \in \N : \forall j \geq N: d_X(x, x_j) < \delta $, also auch $ f(x_j) \in B_{\varepsilon}(f(x_0)) \implies  $ (iii)
+		\item[$ \neg $(ii) $ \implies \neg $(iii):] $ \exists \varepsilon > 0: \forall j \in \N : \exists x_j \in X: d_X(x, x_j) < \frac{ 1 }{ j }  $, aber $ d_Y(f(x_0), f(x_j)) > \varepsilon \implies f $ nicht folgenstetig, also $ \neg $(iii)
+		\item[(ii) $ \implies  $ (i):] $ f $ stetig in $ x_0 \iff $  Ist $ W \subset Y $ offen, $ f(x_0) \in W $, so $ f^{-1} (W) $ offen. Sei also $ W \subset Y $ offen mit $ f(x_0) \in W $. Also $ \exists \varepsilon : B_{\varepsilon}(f(x_0)) \subset W $. $ f $ $ \varepsilon $-$ \delta $-Stetigkeit, also $ \exists \delta > 0 : B_{\delta}(x_0) \subset f^{-1} \left( B_{\varepsilon}(f(x_0))  \right)  $. Also $ f^{-1} (W) $ offen, d.h. $ f $ stetig. \qed
+	\end{description}
+\end{subproof*}
+
+\begin{subexample}
+	Ist $ p(x_1, \dotsc, x_n) = \sum_{\left| \alpha \right| \leq k}^{} a_{\alpha} x^{\alpha} $ ein Polynom wobei $ \alpha \coloneqq (\alpha_1, \dotsc, \alpha_n) \in \N _0^n $ ein \textbf{Multiinex}, \& für $ x = (x_1, \dotsc, x_n) $ $ x^\alpha \coloneqq x_1^{\alpha_1} \cdot \dotsb \cdot x_n^{\alpha_n}  $. Dann ist $ p: \R ^n \to \R  $ stetig, wobei $ \R ^n $ mit euklidischer Metrik ausgestattet.
+\end{subexample}
+
+\begin{subexample}
+	$ \R ^{n \times n} \hat{=} (n \times n) $-Matrizen. Norm auf $ \R ^{n \times n} : A= (a_{ij} )_{i, j = 1, \dotsc, n} , \left\| A \right\| _2 \coloneqq \left( \sum_{i, j=1}^{n} \left\| a_{ij} \right\|^2  \right) ^{\frac{ 1 }{ 2 } }  $. Setze:
+	\[
+		\operatorname{GL}(n;\R ) \coloneqq \left\{ A \in \R ^{n \times n} \text{ invertierbar}  \right\} .
+	\]
+	\textbf{Frage: Ist $ \operatorname{GL}(n;\R ) $ offen?} Ja.
+	\[
+		\operatorname{GL}(n, \R ) = \operatorname{det}^{-1}  (\R \setminus \left\{ 0 \right\} ).
+	\]
+	$ \det(A) $ ist ein Polynom der Einträge von $ A $. Also ist $ \det: \R ^{n \times n} \to \R  $ stetig.
+	Aber $ \R \setminus \left\{ 0 \right\}  $ offen in $ \R  $, \& damit $ \operatorname{GL}(n;\R ) = \det ^{-1} \left( \R \setminus \left\{ 0 \right\}  \right)  $ \textbf{offen}.\\
+	\textbf{Konsequenz:} Ist $ A $ inv., so lassen sich die Einträge von $ A $ stets so ``gering'' abändern, dass wir wieder eine inv. Matrix erhalten.
+\end{subexample}
+
+\begin{subtheorem}
+	Sei $ (X, d) $ vollständiger metrischer Raum \& $ T: X \to X $ eine \textbf{Kontraktion:}
+	\[
+		\exists 0 \leq L < 1 : \forall x, y \in X : d_X(T_x, T_y) \leq L d(x, y).
+	\]
+	Dann $ \exists ! x_0 \in X : T_{x_0} = x_0 $ (``$ x_0 $ Fixpunkt''). [Banach]
+\end{subtheorem}
+
+\begin{subproof*}[Theorem \ref{2.1.14}]
+	$ T $ \textbf{stetig}: Ist $ \varepsilon > 0 $, so wähle $ \delta \coloneqq \frac{ \varepsilon }{ L }  $, und wende $ \varepsilon $-$ \delta $-Charakterisierung der Stetigkeit an. \textbf{$ T $ eindeutig:} Seien $ x, y \in X $ zwei Fixpunkte: $ T_x = x \& T_y = y $. Dann $ d(x, y) = d(T_x, T_y) \overset{\text{Kontraktion} }{\leq } L d(x, y) \overset{0 \leq L < 1}{\implies } d(x, y) = 0 \implies x = y $.\\
+	\textbf{Existenz:} Sei $ x \in X $ beliebig, definiere
+	\[
+		x_{j+1} \coloneqq T_{x_j} , j \in \N , x_1 \coloneqq x.
+	\]
+	Zu zeigen: $ (x_j) $ konvergiert gegen einen \textbf{Fixpunkt}.\\
+	\textbf{Vorbemerkung:} $ d(x_{k + 1} , x_k) \overset{\text{Def} }{=} d\left(T_{x_k} , T_{x_{k - 1} } \right) \overset{T\text{ Kont.} }{\leq } L d\left( x_k, x_{k - 1}  \right) \overset{\text{Def} }{=} L d\left( T_{x_{k - 1} } , T_{x_{k-2} }  \right) \overset{\text{Kontr.} }{\leq } L^2 d\left( x_{k-1} , x_{k-2}  \right) \leq \dotsb \leq L^{k-1} d(x_2, x_1) $.
+	Zu zeigen: $ (x_j) $ \textbf{Cauchy}.\\
+	Seien $ j < l, j, l \in \N  $.
+	\begin{align*}
+		d(x_j, x_l) &\leq \sum_{k=j}^{l - 1} d\left( x_{k + 1} , x_k \right) \\
+			    &\leq d(x_2, x_1) \sum_{k=j}^{l - 1} L^{k} \overset{j,l \to \infty}{\longrightarrow} 0,
+	\end{align*}
+	da
+	\[
+		\sum_{k=1}^{\infty} L^k \overset{0 \leq L < 1}{<} \infty \text{ (geom. Reihe)} .
+	\]
+	Also: $ (x_j) $ Cauchy $ \overset{(X, d) \text{ VMR} }{\implies } (x_j) $ konvergiert gegen $ x_0 \in X $.
+	\textbf{Zu zeigen:} $ x_0 $ Fixpunkt.
+
+	$ d(x_0, T_{x_0} ) = \lim_{j \to \infty} d(\underbrace{x_j}_{T_{x_{j - 1} } }, T_{x_{j-1} } ) $.
+	Damit $ x_0 = T_{x_0}  $.
+\end{subproof*}
+
+$ X \hat{=}  $ Stadtgebiet von Konstanz. $ T: $ bildet Konst. auf Landkarte von Konstanz ab, Landkarte wir \textbf{in Konstanz} hingelegt: $ X \to X $. $ L < 1 \hat{=}  $ Landkarte ansonsten Unsinn.
+
+\begin{subexample}
+	Alle Bedingungen wichtig:
+	\begin{enumerate}[label=(\roman*)]
+		\item $ X $ vollständig: $ (0, 1) \subset \R , T_x \coloneqq \frac{ 1 }{ 4 } x^2 $ 
+			\begin{itemize}
+				\item $ \left| T_x - T_y \right| = \frac{ 1 }{ 4 } \underbrace{\left( \left| x \right| + \left| y \right|  \right) }_{\leq 2} \left| x - y \right| \leq \underbrace{\frac{ 1 }{ 2 } }_{L < 1} \left| x - y \right| , \quad x, y \in (0, 1) $,
+				\item $ T: (0,1) \to (0, 1) $,
+				\item $ \left( (0, 1), d_{\text{Eukl.} }  \right)  $ nicht vollst.
+			\end{itemize}
+		\item $ \exp : \R \to \R  $ ist keine Kontraktion, $ \exp x = x $ hat keine Lösung.
+	\end{enumerate}
+\end{subexample}
+
+\rule{2cm}{0.4pt}\\
+$ f(x) = 0, \underbrace{f(x) + x }_{T_x} = x $ \\
+$ T : [0, 1] \to [0, 1] $ stetig, dann hat $ T $ einen Fixpunkt.
+
+\textbf{Anwendung:} Gewöhnliche Differentialgleichungen
+\[
+	T > 0, f : [0, T] \times \R \to \R :
+\]
+\begin{equation}
+	\label{eq:2.1 Gew. Diff.}
+	\begin{cases}
+		u^\prime (t) = f(t, u(t)), 0 < t \leq T.\\
+		u(0) = u_0. \quad u_0 \in \R 
+	\end{cases}
+\end{equation}
+
+\textbf{Beispiel:}
+\[
+	\begin{cases}
+		u^\prime (t) = u(t), t \in [0, 1]\\
+		u(0) = 1
+	\end{cases}
+\]
+\fbox{\textsc{Annahme:}} $ \exists L > 0 : \forall  t \in [0, T] : \forall x, y \in \R : \left| f(t, x) - f(t, y) \right| \leq L \left| x - y \right| . $\\
+\textbf{Beh.:} Unter dieser Annahme existiert genau eine Funktion $ u \in C^1 ([0, T]) $ die \ref{eq:2.1 Gew. Diff.} lößt. (Variante des Satzes von \textbf{Picard-Lindelöf})
+\[
+	T: C([0, T]) \to C([0, T]), \left\| a \right\| _{\sim} \coloneqq \max_{t \in [0, T]} \exp (-2 L t) \left| u(t) \right| .
+\]
+\[
+	\exp -2LT \leq \exp -2LT \leq 1 \quad \forall t \in [0, T],
+\]
+also 
+\begin{equation}
+	\label{eq:2.1 2}
+	\exists c = c(T) > 0 : \frac{ 1 }{ c } \left\| u \right\| _{\sim} \leq  \left\| u \right\| _{C([0, T])} \leq c \left\| u \right\| _{\sim} .
+\end{equation}
+
+\textbf{Definiere:}
+\[
+	$ \fbox{ $
+		T u(t) \coloneqq u_0 + \int_{0}^{t} f(s, u(s)) ds
+	$ } $
+\]
+$ u \in C([0, T]) $, so $ T u \in C^1([0, T]) $. $ T u(0) = u_0 $.
+\[
+	u^\prime (t) \overset{u \text{ FP} }{=} (Tu)^\prime (t) = f(t, u(t)).
+\]
+Zu zeigen: $ T $ hat Fixpunkt, denn Fixpunkte von $ T $ sind die Lösungen von \ref{eq:2.1 Gew. Diff.}.
+\textbf{$ T $ Konstraktion:} $ u, v \in C([0, 1]) : \forall t \in [0, T] : $
+\begin{align*}
+	\exp (-2Lt) \left| Tu(t) - Tv(t) \right| &\overset{\text{Def} }{=} \exp (-2Lt) \left| \int_{0}^{t}f(s, u(s)) - f(s, v(s)) ds \right| \\
+	~ & \overset{Lip.}{\leq } L \exp (-2Lt) \int_{0}^{t} \underbrace{\left( \left| u(s) - v(s) \right| \exp -2Ls \right) }_{\leq \left\| u - v \right\| _{N} } \exp (2Ls) ds \\
+	  & \leq  L \exp (-2Lt) \left\| u - v \right\| _{\sim} \frac{ 1 }{ 2L } \underbrace{\left( \exp (2Lt) - 1 \right) }_{\leq \exp 2Lt} \\
+	  &\leq \frac{ 1 }{ 2 } \left\| u - v \right\| _{\sim} .
+\end{align*}
+$ \implies \left\| T_u - T_v \right\| _{\sim} \leq \frac{ 1 }{ 2 } \left\| u - v \right\| _{\sim}  $\\
+Wegen \ref{eq:2.1 2} ist $ C([0, T]) $ mit der durch $ \left\| \cdot  \right\| _{\sim}  $ induzierten Metrik vollständig $ \overset{\text{Banach} }{\implies } $\qed
+
+\subsection{Kompaktheit}
+
+\begin{itemize}
+	\item \textbf{Ana I:} $ \underbrace{A \subset \R   \text{\textbf{ kompakt}}}_{\overset{\text{bezüglich Metrik,}}{\text{ die von $ \left| \cdot  \right| $ auf $ \R  $ induziert}} }  \iff  A $ abgeschlossen und beschränkt
+\end{itemize}
+
+
+\begin{subdefinition}[Kompaktheit]
+	Sei $ (X, d) $ ein metrischer Raum. Wir nennen $ U \subset  X $ \textbf{kompakt} genau dann wenn:\\
+	Ist $ (U_i)_{i \in I}  $ eine \textbf{Familie von offenen Mengen} mit $ U \subset \bigcup_{i \in  I}  U_i $ (``$ (U_i)_{i \in I}  $ überdeckt $ U $'').
+	Dann gilbt es \textbf{endlich viele}
+	\[ i_1 \dotsc, i_N \in I $ mit $ U \subset \bigcup_{j = 1} ^N U_{i_j} . \]
+	{\color{gadse-red}[Das muss für beliebige Familien mit obiger Eigenschaft gelten]}\\
+	\textbf{D.h.: kompakt} $ \iff  $ jede offene Überdeckung besitzt endliche Teilüberdeckung
+	\begin{itemize}
+		\item Kompaktheit bedeutet \textbf{nicht}, dass es eine endliche Überdeckung durch offene Mengen gibt.\\
+			{[Überdecke $ U \subset X $ durch $ X $, und $ X $ ist offen]}
+	\end{itemize}
+\end{subdefinition}
+
+\begin{subexample}
+	$ \R  $, $ d $  $\widehat{-}  $ Metrik durch $ \left| \cdot  \right|  $ induziert.\\
+	$ (0, 1) $ \textbf{kompakt}?
+	Betrachte für $ i \in \N _{\geq 3} : U_i \coloneqq \left(\frac{ 1 }{ i } , 1 - \frac{ 1 }{ i } \right) $.
+	Dann $ (0, 1) = \bigcup_{i \in \N } U_i $. Angenommen, es gäbe endlich viele $ i_1, \dotsc, i_N \in \N $ mit $ (0, 1) = \bigcup_{j = 1} ^N U_{i_j}  $.
+	\OE{} $ i_1 < \dotsc < i_N $, dann $ U_{i_1} \subset \dotsb \subset U_{i_N}  $, also
+	\[ 
+		\bigcup_{j = 1} ^N U_{i_j} = U_{i_N} = \left( \frac{ 1 }{ N } , 1 - \frac{ 1 }{ N }  \right) \subsetneqq (0, 1) .
+	\]
+\end{subexample}
+
+\begin{subexample}
+	$ X $ Menge, $ d(x, y) \coloneqq \begin{cases}
+		0, & x = y\\ 1, & x \neq y.
+	\end{cases} $\\
+	$ U \subset X $ kompakt. Offene Überdeckung: $ 0 < \varepsilon < 1 $. Für $ x \in U: B_{\varepsilon}(x)  $ ist offen. Dann $ B_{\varepsilon}(x)  = \left\{ x \right\} $.
+	Dann $ U \subset \bigcup_{x \in U} B_{\varepsilon}(x)  $. Mit $ U $ kompakt:
+	\[ \exists x_1, \dotsc, x_N \in U : U \subset \bigcup_{j = 1} ^N \underbrace{B_{\varepsilon}(x_j) }_{\left\{ x_j \right\} } = \left\{ x_1, \dotsc, xN \right\}  .\]
+	$ \implies  $ Kompakte Mengen sind hier notwendigerweise endlich.\\
+	\textbf{Hier:} $ U $ kompakt $ \iff  $ $ U $ endlich.
+\end{subexample}
+
+\begin{subdefinition}[Relative \& Präkompaktheit]
+	Sei $ (X, d) $ metrischer Raum.
+	Wir nennen $ U \subset X $ 
+	\begin{enumerate}[label=(\roman*)]
+		\item \textbf{relativ kompakt}, falls $ \bar{U}  $ kompakt.
+			Hier ist
+			\[
+				\bar{U} \coloneqq \bigcap_{} \left\{ V: V \text{ abg. } \& U \subset V \right\} 
+			\]
+			der Abschluss von $ U $.
+		\item \textbf{präkompakt} (oder \textbf{totalbeschränkt})\\
+			Für jedes $ \varepsilon > 0 $ existieren endlich viele $ x_1, \dotsc, x_N \in U $ so, dass 
+			\[
+				U \subset \bigcup_{j = 1} ^N B_{\varepsilon}(x_j) .
+			\]
+	\end{enumerate}
+	
+\end{subdefinition}
+
+\begin{itemize}
+	\item Kompaktheit $ \implies  $ Präkompaktheit.\\
+		$ U $ kompakt, $ \varepsilon > 0 \implies U \subset \bigcup_{x \in U} B_{\varepsilon}(x)  $, also
+		\[
+			\exists x_1, \dotsc, x_N \in U : U \subset \bigcup_{j = 1} ^N B_{\varepsilon}(x_j) \implies U \text{ präkompakt} .
+		\]
+		$ \implies  $ \fbox{\textsc{Frage:}} Worin besteht der Unterschied zwischen Präkompaktheit und Kompaktheit?
+\end{itemize}
+
+\begin{subtheorem}
+	Sei $ (X, d) $ vollständiger metrischer Raum \& $ U \subset X $.
+	Dann sind äquivalent:
+	\begin{enumerate}[label=(\roman*)]
+		\item $ U $ kompakt.
+		\item $ U $ ist \textbf{folgenkompakt}: Ist $ (x_j) \subset  U $ eine Folge, so besitzt $ (x_j) $ eine Teilfolge $ (x_{j_k} ) $, die bezüglich $ d $ gegen ein $ x \in U $ konvergiert.
+		\item $ U $ ist präkompakt und abgeschlossen.
+	\end{enumerate}
+\end{subtheorem}
+
+\begin{subproof*}[Theorem \ref{2.2.5}]
+	\begin{description}
+		\item[(i) $ \implies  $ (ii):] Angenommen, $ U $ kompakt, aber nicht folgenkompakt.\\
+			Also $ \exists (x_j) \subset U :  $ keine Teilfolge konvergiert gegen in $ U $.\\
+			Damit $ \left| \left\{ x_j : j \in \N  \right\}  \right| = +\infty $ Wenn endlich, dann existiert mind. ein $ x \in \left\{ x_j : j \in \N  \right\} $, welches unendlich oft angenommen wird, dann gäbe es aber eine Teilfolge, die diesen Wert unendlich oft annähme.\\
+			Weiter: $ \forall x \in U : \exists  \varepsilon > 0 : $ es gibt nur endlich viele $ x_j $'s in $ B_{\varepsilon}(x)  $.\\
+			Damit ist $ \left( B_{\varepsilon}(x)  \right) _{x \in U}  $ offene Überdeckung von $ U \overset{U \text{komp.} }{\implies } \exists \tilde x_1, \dotsc, \tilde x_N \in U $.
+			\[
+				\underbrace{U}_{\text{alle $ x_j $'s}} \subset \bigcup_{j = 1} ^N \underbrace{B_{\varepsilon}(\tilde x_j) }_{\text{endlich viele $ x_j $'s} }.
+			\]
+			Aber $ (x_j) \subset U $,
+			Also liegen unendlich viele $ x_j $'s in einem dieser Bälle - Widerspruch.
+		\item[(ii) $ \implies  $ (iii):] \textbf{$ U $ abgeschlossen:} $ U $ abgeschlossen $ \iff (x_j) \subset U $ mit $ x_j \to x \in X $, so $ x \in U $.
+			Sei also $ (x_j) \subset U $ mit $ x_j \to x \in X $. zu zeigen $ x \in U $.\\
+			Folgenkompaktheit aus (ii) $ \implies \exists (x_{j_k} ) \subset (x_j) : \exists y \in U : x_{j_k} \to y $.
+			Aber auch $ x_{j_k} \to x, k \to \infty $. Aber $ (X, d) $ Hausdorff, also sind Grenzwerte eindeutig,
+			also \fbox{$ x = y $.}
+			Also $ x \in U $; $ U $ ist abgeschlossen.\\
+			Zur \textbf{Präkompaktheit}:
+			Angenommen, $ U $ sei folgenkompakt, aber nicht präkompakt.\\
+			D.h. $ U $ lässt sich nicht durch endlich viele in $ U $ zentrierte offene $ \varepsilon  $-Bälle überdecken.\\
+			Sei $ \varepsilon > 0 $ so, dass diese Eigenschaft gibt.
+			Für $ x_1 \in U $ beliebig betrachte $ B_{\varepsilon}(x_1)  $.
+			Dann $ \exists x_2 \in U \setminus B_{\varepsilon}(x_1)  $.
+			Dann $ \exists x_3 \in U \setminus \left( B_{\varepsilon}(x_1) \cup B_{\varepsilon}(x_2)  \right)  $.
+			Iteriere dies - da $ U $ nicht präkompakt, bricht dies nie ab da $ U $ nicht präkompakt.\\
+			Dann ist $ (x_j) \subset U $ eine Folge mit $ j \neq l \implies d(x_j, x_l) \geq \varepsilon  $.
+			Damit ist \textbf{keine} Teilfolge von $ (x_j) $ Cauchy $ \implies  $ keine \textbf{Teilfolge} kann konvergent sein $ \implies (x_j) $ hat konvergente Teilfolgen $\bot $ - Widerspruch
+		\item[(iii) $ \implies  $ (i):]~\\
+			---~\\
+			Angenommen $ U $ nicht kompakt. Damit $ \exists (U_i)_{i \in I}  $ offene Überdeckung von $ U $, die keine endliche Teilüberdeckung zulässt.\\
+			Wir verwenden die Präkompaktheit wie folgt: Sei $ \varepsilon = 1 $.
+			Dann 
+			\[
+				\exists B^1 \coloneqq B_1 (\tilde x_1), \dotsc, B^N = B_N (\tilde x_N) : U \subset \bigcup_{j=1} ^N B^j.
+			\]
+			Damit existiert Ball (\OE) $ B^1 $ so, dass $ U \cap B^1 $ nicht durch endlich viele der $ U_i $'s überdeckt werden kann.
+			Nun Präkompaktheit mit $ \varepsilon \frac{ 1 }{ 2 }  $.
+			Dann gibt es einen $ \varepsilon = \frac{ 1 }{ 2 }  $-Ball $ B^{(2)}  $ so, dass $ U \cap B^1 \cap B^2 \neq \OO ~\&~ U \cap B^{(1)} \cap B^{(2)}  $ nicht durch endlich viele $ U_i $'s überdeckt werden kann.
+			---~\\
+			Angenommen $ U $ nicht kompakt.
+			Dann $ \exists  $ offenene Überdeckung $ (U_i)_{i \in I}  $ von $ U $:
+			es gibt keine endliche Teilüberdeckung.
+			Für $ \varepsilon = 1 $ überdecke $ U $ via Präkompaktheit durch $ 1 $-Bälle $ B^{(1)} , \dotsc, B^{(N)}  $.
+			Sei \OE{} $ B^1 \coloneqq B^{(1)}  $ der ein Ball so, dass $ B^1 \cap U $ nicht durch endlich viele $ U_i $'s überdeckt wird.
+			Schreibe $ B^1 \coloneqq B_1 (x_1) $. Überdecke nun mit Präkompaktheit $ U $ mit endlich vielen Bällen $ \tilde{B}^{(1)} , \dotsc, \tilde{B}^{(M)}  $.
+			Unter denjenigen Bällen, die nichtleeren Schnitt mit $ U \cap B^1 $ haben, gibt es einen Ball $ B^2 $, so, dass $ U\cap B^2 $ nicht endlich viele $ U_i $'s überdeckt werden kann.
+			Schreibe $ B^2 = B_{\frac{ 1 }{ 2 }} (x_2) $.
+			Setze dies induktiv fort.
+			Erhalte $ B^{j} \coloneqq B_{2^{-j + 1} } (x_j) $ so, dass $ d(x_j, x_{j + 1} )\leq 2^{-j + 2} ~ \forall j \in \N  $, und kein $ U\cap B^j $ kann durch endliche viele $ U_i $'s überdeckt werden.
+			Damit $ \forall j , l \in \N  $, $ j> l $.
+			\[
+				d(x_l, x_j) \leq \sum_{i=l}^{j - 1} d(x_i, x_{i+1)} \leq \sum_{i=l}^{j - 1} 2^{-i + 2} \overset{j, l \to \infty}{\longrightarrow} 0. \text{ (geom. Reihe)} 
+			\]
+			$ \implies (x_j) $ Cauchy, $ (X, d) $ Vollständiger metrischer Raum $ \implies \exists x \in X : x_j \to x $. Aber nach (iii) $ U $ abgeschlossen, also $ x \in U $.
+			Damit $ \exists i_0 \in I : x \in U_{i_0}  $: $ U_{i_0} $ offen $ \implies \exists r > 0 : B_{r}(x) \subset U_{i_0}  $.
+			Da $ x_j \to x $, $ \exists j_0 \in \N : \forall j \geq j_{0} : B_{2^{-j + 1} }(x_j) \subset B_{1}(x) \subset U_{i_0}  $.
+			Damit kann ab $ j = j_0 $ jeder Ball $ B_{2^{-j + 1} }(x_j)  $ durch \textbf{endlich viele} $ U_i $'s überdeckt werden - Widerspruch.
+	\end{description}
+\end{subproof*}
+
+\begin{subexample*}
+	\[
+		l^2(\N ) \coloneqq \left\{ (x_j) : \left\| (x_j) \right\| _{l^2(\N )} \coloneqq \left( \sum_{j=1}^{\infty} \left| x_j \right| ^2 \right) ^{\frac{ 1 }{ 2 } } < \infty \right\} 
+	\]
+	\[
+		\mathdollar \coloneqq \left\{ (x_j) \in l^2(\N ) : \left\| (x_j) \right\| _{l^2(\N )} = 1 \right\} .
+	\]
+	Für $ i \in \N : e_i \coloneqq \left( \delta_{ij}  \right) _{j \in \N }  $. 
+	Dann $ \forall i \in \N : e_i \in \mathdollar $.\\
+	Angenommen, $ (e_i) $ hätte konvergente (bzgl. der durch $ \left\| \cdot  \right\| _{l^2(\N )}  $ induzierte Metrik) Teilfolge.
+	Das im Widerspruch zu
+	$ \forall  i \neq l : \left\| e_i - e_l \right\| _{l^2(\N )} = \sqrt{2}  $ - also kann keine Teilfolge Cauchy, und schon gar nicht konvergent sein.
+	\[
+		\left\| e_i - e_l \right\| _{l^2(\N )} = \left( \left| 0 \right|^2 + \dotsb + \underbrace{\left| 1 \right| ^2}_{i\text{-ter Eintrag} } + \left| 0 \right|^2 + \dotsb + \left| 0 \right|^2  + \underbrace{\left| 1 \right| ^2}_{l\text{-ter Eintrag} } + \left| 0 \right| ^2 + \dotsc \right) ^{\frac{ 1 }{ 2 } } = \sqrt{2} 
+	\]
+	{\color{gadse-red}\textsc{Diese Pathologien gibt es im endlichdimensionalen nicht!}} (dass beschränkte Folgen keine konvergente Teilfolgen haben \textbf{müssen})
+\end{subexample*}
+
+\subsection{Spezielle Rolle von \mathsec{\R ^n}{R\^{}n}}
+$ \left( \R ^n, \left\| \cdot  \right\| _2 \right)  $ (wobei $ \left\| (x_1, \dotsc, x_n) \right\| _2 \coloneqq \left( \sum_{j=1}^{n} \left| x_j \right| ^2 \right) ^{\frac{ 1 }{ 2 } }  $) ist ein \textbf{Banachraum}: $ \R ^n $ ist mit der durch $ \left\| \cdot  \right\| _2 $ induzierten Metrik vollständig.
+
+Was ist gelb und gekrümmt? -- der Bananachraum
+
+\begin{subtheorem}
+	Eine Menge $ U \subset \R ^n $ ist bezüglich der durch $ \left\| \cdot  \right\| _2 $ induzierten Metrik genau dann kompakt, wenn sie abgeschlossen und beschränkt ist. {[Heine - Borel]}\\
+	(Hierbei bedeutet $ U $ beschränkt $ \iff  \exists R > 0 : U \subset B_{R}(0)  $)
+\end{subtheorem}
+
+\begin{subproof*}[Theorem \ref{2.3.1}]
+	\begin{description}
+		\item[``$ \implies  $'':] Ist $ U $ kompakt, so abgeschlossen. Weiter ist hier die Kompaktheit zur Folgenkompaktheit äquivalent.
+			Angenommen, $ U $ nicht beschränkt $ \implies \forall j \in \N : \exists x_j \in U : \left\| x_j \right\| _2 \geq j $.
+			Dann besitzt $ (x_j) $ keine konvergente Teilfolge.
+			Also ist $ U $ doch nicht beschränkt
+		\item[``$ \impliedby  $'':] Sei $ (x_j) \subset U $ eine Folge, zu zeigen $ (x_j) $ hat konvergente Teilfolgen.
+			Schreibe $ x_j = \left( x_j^{(1)} , \dotsc, x_j^{(n)}  \right)  $.
+			Da $ U $ beschränkt, $ \exists C > 0 : \forall j \in \N : \forall i \in \left\{ 1, \dotsc, n \right\} : \left| x_j^{(i)}  \right| \leq \left\| x_j \right\| _2 \leq C $.
+
+			\begin{description}
+				\item[Ana I:] Jede beschränkte Folge $ (a_j) \subset \R  $ hat konvergente Teilfolge.
+			\end{description}
+					$ \implies \left( x_j^{(1)}  \right) \subset \R  $ hat konvergente Teilfolge $ \left( x_{j_1, (l)} ^{(1)}  \right) _{l \in \N }  $.\\
+					$ \implies \left( x_{j_1(l)} ^{(2)}  \right) \subset \R  $ hat konvergente Teilfolge $ \left( x_{j_2, (l)} ^{(2)}  \right) _{l \in \N }  $.\\
+					\vdots\\
+					$ \implies \left( x_{j_{n-1}(l) } ^{(n)}  \right) \subset \R  $ hat konvergente Teilfolge $ \left( x_{j_n, (l)} ^{(n)}  \right) _{l \in \N }  $.\\
+					$ \implies \forall i \in \left\{ 1, \dotsc, n \right\} : \left( x_{j_n(l)} ^{(i)}  \right) _{l \in \N }  $ konvergent\\
+					$ \implies \left( x_{j_n(l)} \right) _{l \in \N }  $ konvergent bezüglich $ \left\| \cdot  \right\| _{2}  $ in $ \R ^n $.
+					Aber $  U $ ist abgeschlossen, also ist der Limes von $ \left( x_{j_n(l)}  \right) _{l \in \N }  $.
+					Also $ U $ folgenkompakt, also komapkt. \qed
+	\end{description}
+\end{subproof*}
+
+\begin{subdefinition}
+	Zwei Normen $ \left\| \cdot  \right\| , | | | \cdot | | | $ auf einem Vektorraum $ X $ heißen \textbf{äquivalent}, falls $ \exists c \geq 1 : \forall x \in X : \frac{ 1 }{ c } | | | x | | | \leq \left\| x \right\| \leq c | | | x | | | $.
+	\begin{itemize}
+		\item $ (x_j) $ Konvergenz bezüglich $ \left\| \cdot  \right\| \iff (x_j) $ konvergiert bezüglich $ | | | \cdot | | | $
+	\end{itemize}
+\end{subdefinition}
+
+\begin{subtheorem}
+	Auf $ \R ^n $ sind alle Normen \textbf{äquivalent}.
+\end{subtheorem}
+
+\begin{subproof*}[Theorem \ref{2.3.3}]
+	Normenäquivalenz ist transitiv $ \implies  $ zu zeigen bel. Norm $ \left\| \cdot  \right\| $ zu $ \left\| \cdot  \right\| _2 $ äquivalent.
+	Für $ x \in \R ^n : x = \sum_{i=1}^{n} x_i e_i $, hierbei $ e_i = (\delta_{ij})_{j \in \left\{ 1, \dotsc, n \right\} }   $.
+	Da $ \left\| \cdot  \right\|  $ Norm, 
+	\[
+		\left\| x \right\| \leq \sum_{i=1}^{n} \left| x_i \right| \underbrace{\left\| e_i \right\| }_{\leq \max_{i \in \left\{ 1, \dotsc, n \right\} \left\| e_i \right\| } \leq  \left( \max_{i= 1, \dotsc, n} \left\| e_i \right\|  \right) \underbrace{\sum_{i=1}^{n} \left| x_i \right|}_{n \cdot \left\| x \right\| _2}} = C\left\| x \right\| _2.
+	\]
+	Hierbei $ C = n \max_{i = 1, \dotsc, n} \left\| e_i \right\|  $.\\
+	Für andere Richtung: 
+	\[
+		\left\| x \right\| = \underbrace{\left\| \frac{ x }{ \left\| x \right\| _2 }  \right\| }_{\geq \tilde c} \left\| x \right\| _2 \geq \tilde c \left\| x \right\| _2.
+	\]
+	Für jedes $ x \in \R ^n\setminus \left\{ 0 \right\} : \frac{ x }{ \left\| x \right\| _2 } \in \mathdollar ^{n - 1} \coloneqq \left\{ y \in \R ^n : \left\| y \right\| _2 = 1 \right\}  $.
+	$ \mathdollar ^{n - 1}  $ kompakt, $ \left\| \cdot  \right\|  $.
+	$ \mathdollar ^{n - 1} \to \R _{\geq 0}  $ stetig und $ \left\| \cdot  \right\| (\mathdollar ^{n - 1} ) $ kompakt,
+	also $ \tilde c \coloneqq \min_{z \in \mathdollar ^{n - 1} } \left\| z \right\|  $.
+	Da $ \left\| \cdot  \right\| $ Norm, $ \tilde c > 0 $. Damit $ \tilde c \left\| x \right\| _2 \leq \left\| x \right\|  $.\qed
+\end{subproof*}
+
+\begin{itemize}
+	\item Auf $ \R ^n $ sind jeweils zwei Normen \textbf{äquivalent}.\\
+		$ \left\| \cdot  \right\|, \vertiii{ \cdot } : \exists c  > 0 : \forall x \in \R ^n : \frac{ 1 }{ c } \left\| x \right\| \leq \vertiii{x} \leq c \left\| x \right\| $.\\
+		\textbf{Wichtig, weil:} Bei Äquivalenz: $ \exists \delta > 0 : B_{1}^{\left\| \cdot  \right\| } (0) \leq B_{\delta}^{\vertiii{\cdot }} (0)   $ 
+		\textbf{also:} Folgen konvergieren bezüglich $ \left\| \cdot  \right\| \iff  $ Folgen konvergieren bezüglich $ \vertiii{\cdot } $.
+		\OE{} $ \vertiii{\cdot } = \left\| \cdot  \right\| _2 $.
+		Schreibe $ x = \sum_{i=1}^{n} x_ie_i = \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix}  $
+		\[
+			\left\| x \right\| \leq \sum_{i=1}^{n} \left\| x_i e_i \right\| \overset{\text{Hom.} }{=} \sum_{i=1}^{n} \underbrace{\left| x_i \right| }_{\leq \left\| x \right\| _2}\left\| e_i \right\| \leq \underbrace{\left( \sum_{i=1}^{n} \left\| e_i \right\|  \right) }_{\eqcolon C} \left\| x \right\| _2
+		\]
+		\[
+		 	\left| x_i \right| = \left( \left| x_i \right| ^2 \right) ^{\frac{ 1 }{ 2 } } \leq \left( \sum_{k=1}^{n} \left| x_k \right| ^2 \right) ^{\frac{ 1 }{ 2 } } = \left\| x \right\| _2
+		 \]
+	 \item $ \left\| x \right\| \geq \tilde c \left\| x \right\| _2 $ \fbox{$ \left\| \frac{ x }{ \left\| x \right\| _2 }  \right\| \geq \tilde c $}.\\
+			 $ \frac{ x }{ \left\| x \right\| _2 } \in \mathdollar^{n-1} = \underbrace{\left\{ z \in \R ^n : \left\| z \right\| _2 = 1 \right\} }_{\text{kompakt, da abg. \& beschränkt} } $
+		 \item $ \left\| \cdot  \right\|  $ bezüglich $ \left\| \cdot  \right\| _2 $ stetig.
+			 \[
+			 	\left| \left\| x \right\| - \left\| y \right\|  \right| \leq \left\| x - y \right\| \leq C \left\| x - y \right\| _2,
+			 \]
+			 also ist $ \left\| \cdot  \right\|  $ bezüglich $ \left\| \cdot  \right\| _2 $ (Lipschitz) stetig.
+			 Also nimmt $ \left\| \cdot  \right\|  $ auf $ \mathdollar^{n - 1}  $ (stetige Funktionen auf Kompakta) Minimum an:
+			 \[
+			 	m \coloneqq \min_{\mathdollar^{n - 1} } \left\| \cdot  \right\| > 0.
+			 \]
+			 Nun setze $ \tilde c \coloneqq m $.\qed
+\end{itemize}
+
+\begin{subnote*}
+	Die Äquivalenz aller Normen gilt nur in endlich dimensionalen Räumen.\\
+	Gesehen: $ \left( C([0, 2]), \left\| \cdot  \right\| _{\infty; [0, 2]} \right) $ ist vollständig/Banach.\\
+	$ \left( C([0, 2]), \left\| \cdot  \right\| _1 \right)  $ ist nicht vollständig/Banach.\\
+	$ \left\| f \right\| _1 \coloneqq \int_{0}^{2}\left| f(x) \right| \dd x $. Angenommen $ \left\| \cdot  \right\| _1 $ und $ \left\| \cdot  \right\| _{\infty; [0, 2]}  $ äquivalent.
+	Wir wissen: $ \exists (f_j) : (f_j) $ $ \left\| \cdot  \right\| _1 $-Cauchy, nicht bezüglich $ \left\| \cdot  \right\| _1 $ konvergent.\\
+	$ \overset{\text{Äq. d. Normen} }{\implies } (f_j) $ $ \left\| \cdot  \right\| _{\infty;[0, 2]}  $-Cauchy $ \overset{\text{Banach} }{\implies } (f_j) $ konvergiert bezüglich $ \left\| \cdot  \right\| _{\infty;[0, 2]}  $\\
+	$ \overset{\text{Alle Normen äq.} }{\implies } (f_j) $ konvergiert bezüglich $ \left\| \cdot  \right\| _1 $, und das ist ein \textbf{Widerspruch}.\qed
+\end{subnote*}
+
+

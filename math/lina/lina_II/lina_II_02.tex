@@ -1,0 +1,1198 @@
+\section{Multilinearformen und Determinanten}
+\setcounter{subsection}{10}
+\subsection{Skript 11}
+\setcounter{subenvironmentnumber}{-1}
+
+\setcounter{subsubsection}{5}
+\subsubsection{Die symmetrischen Gruppen \mathsec{S_n}{Sn}}
+
+\begin{subdefinition}[Notation]
+	für $ n \in \N  $, setze $ \N _n \coloneqq \left\{ 1, \dotsc, n \right\}  $
+\end{subdefinition}
+
+\begin{subdefinition}
+	Sei $ n \in \N  $. Eine \textbf{Permutation} auf $ \N _n $ ist eine Bijektion $ \alpha : \N _n \to \N _n $.
+	Wir setzen $ S_n \coloneqq \left\{ \alpha : \alpha \text{ ist eine Permutation auf $ \N _n $}  \right\}  $.
+	Wir versehen $ S_n $ mit Verknüpfung:
+	\[
+		\circ : S_n \times S_n \to S_n, (\alpha, \beta) \mapsto \alpha \circ \beta
+	\]
+	(s. ÜB LAI (wohldefiniert))\\
+	\textbf{Bezeichnungen:}
+	\begin{enumerate}[label=(\roman*)]
+		\item $ \alpha \beta = \alpha \circ \beta $ 
+		\item $ \alpha \in S_n $ schreibe
+			\[
+				\alpha \coloneqq \begin{pmatrix} 1 & \dotsc & n \\ \alpha(1) & \dotsc & \alpha(n) \end{pmatrix} 
+			\]
+			``Zwei Zeilen Darstellung'' einer Permutation
+		\item $ (S_n, \circ) $ heißt die Symmetrische Gruppe auf $ n $ Elemente \\
+			Warum ist $ (S_n, \circ) $ eine Gruppe?
+			\begin{itemize}
+				\item Die Identitätsabbildung $ \varepsilon \N _n \to \N _n  $ definiert durch $ \varepsilon (i) = i $.
+					$ \varepsilon \in S_n $ ist das neutrale Element für $ (S_n, \circ) $.
+				\item $ (\alpha \circ \beta) \circ \gamma = \alpha \circ (\beta \circ \gamma) $, also $ (\alpha \beta) \gamma = \alpha(\beta\gamma) $ $ \forall \alpha, \beta, \gamma \in S_n $.
+				\item Bijektive Abbildungen sind invertierbar, d.h.
+					$ \forall  \alpha \in S_n \exists \beta = \alpha ^{-1}  $ so, dass $ \alpha\beta = \beta\alpha = \varepsilon  $.
+			\end{itemize}
+	\end{enumerate}
+\end{subdefinition}
+
+\begin{subexample}
+	Die Permutatio $ \alpha \in S_n $ mit $ \alpha(1) = 3, \alpha(2) = 5, \alpha(3) = 4, \alpha(4) = 1, \alpha(5) = 2 $
+	\[
+		\alpha =
+		\begin{pmatrix} 
+			1 & 2 & 3 & 4  & 5\\
+			3 & 5 & 4 & 1 & 2\\
+		\end{pmatrix} 
+	\]
+	\[
+		\alpha =
+		\begin{pmatrix} 
+			1 & 2 & 3 & 4 & 5\\
+			4 & 5 & 1 & 3 & 2
+		\end{pmatrix} 
+	\]
+\end{subexample}
+
+\begin{subdefinition}
+	\begin{enumerate}[label=(\roman*)]
+		\item 
+			Sei $ \alpha \in S_5 $.
+			Wenn es $ a_1, \dotsc, a_m \in \N _n $ (verschiedene Elemente) gibt so, dass
+			\begin{enumerate}[label=(\roman*)]
+				\item $ \alpha(a_i) = a_{i + 1}  $ $ \forall 1 \leq i \leq m - 1 $ 
+				\item $ \alpha(a_m) = a_1 $ und
+				\item $ \alpha(x) = x $ $ \forall x \not\in \left\{ a_1, \dotsc, a_m \right\} , x \in \N _n $
+			\end{enumerate}
+			dann heißt $ \alpha $ ein $ m $-Zyklus\\
+			\textbf{Notation:} In diesem Fall schreiben wir $ \alpha = \begin{pmatrix} a_1 & a_2 & \dotsc & a_m \end{pmatrix}  $ Zyklus Notation
+			``Ein-zeilige Bezeichnung''
+		\item Sonderbezeichung: $ \varepsilon = (1) $ 
+		\item Ein $ 2- $ Zyklus heißt eine Transposition.
+	\end{enumerate}
+\end{subdefinition}
+
+\begin{subexample}
+	\begin{enumerate}[label=(\roman*)]
+		\item 
+			\[
+				\alpha =
+				\begin{pmatrix} 
+					1 & 2 & 3 & 4\\
+					4 & 1 & 3 & 2
+				\end{pmatrix} 
+			\]
+			Zwei Zeilen Notation
+			$ \alpha = \begin{pmatrix} 1 & 4 & 2 \end{pmatrix}  $
+		\item $ \alpha \in S_{10} $, $ \alpha = \begin{pmatrix} 1 & 4 & 2 \end{pmatrix}  $.
+			Für $ i = \left\{ 3, 5, 6, 7, 8, 9, 10 \right\}  $ gilt $ \alpha(i) = i $
+	\end{enumerate}
+\end{subexample}
+
+\begin{subdefinition}
+	\begin{enumerate}[label=(\roman*)]
+		\item 
+			Sei $ i \in \N _n, \alpha \in S_n $ so, dass \[ \alpha(i) = i . \]
+			Dann heißt $ i $ ein \textbf{Fixpunkt} für $ \alpha $
+		\item Sei $ \alpha, \beta \in S_n $ sind disjunkt, wenn 
+			\[
+				\left\{ x: x \in \N _n : \alpha(x) \neq x \right\} \cap \left\{ x : x \in \N _n : \beta(x) \neq x \right\} = \OO 
+			\]
+	\end{enumerate}
+\end{subdefinition}
+
+\begin{subexample}
+	$ \sigma, \tau, \gamma \in S_4 $
+	\[
+		\sigma \coloneqq  \begin{pmatrix} 1 & 2 & 3 & 4\\ 2 & 1 & 3 & 4 \end{pmatrix} = \begin{pmatrix} 1 & 2 \end{pmatrix} 
+	\]
+	eine Transposition
+	\[
+		\tau \coloneqq \begin{pmatrix} 1 & 2 & 3 & 4 \\ 1 & 2 & 4 & 3 \end{pmatrix} = \begin{pmatrix} 3 & 4 \end{pmatrix} 
+	\]
+	eine Transposition
+	\[
+		\gamma \coloneqq \begin{pmatrix} 1 & 2 & 3 & 4 \\ 1 & 3 & 2 & 4 \end{pmatrix} = \begin{pmatrix} 2 & 3 \end{pmatrix} 
+	\]
+	eine Transposition.\\
+	$ \sigma, \tau $ disjunkt\\
+	$ \sigma, \gamma $ nicht disjunkt\\
+	$ \tau, \gamma $ nicht disjunkt
+\end{subexample}
+
+\begin{sublemma}
+	Seien $ \alpha_1, \dotsc, \alpha_k \in S_n $ paarweise disjunkt, und $ \tau \in S_n $.
+	Dann sind die Permutationen $ \left( \alpha_1 \dotsb \alpha_k \right)  $ und $ \tau $ disjunkt genau dann, wenn $ \forall i = 1, \dotsc, k $ ist $ \alpha_i $ und $ \tau $ disjunkt
+\end{sublemma}
+
+\begin{subtheorem}
+	Jede Permutation $ \sigma \in S_n $ hat eine Darstellung als Produkt $ \sigma = \alpha_1 \dotsb \alpha_m $, wobei $ \alpha_1 \dotsb \alpha_m \in S_n $ sind paarweise disjunkte Zyklen
+\end{subtheorem}
+\begin{subproof*}
+	Wir werden die Aussage per Induktion nach $ \Gamma(\sigma) \coloneqq \left| \left\{ a \in \N _n : \sigma (a) \neq a \right\}  \right|  $
+	($ \Gamma(\sigma) \in \N _0 $)
+	\begin{description}
+		\item[I.A.] $ \Gamma(\sigma) = 0 $, dann ist $ \sigma = \begin{pmatrix} 1 \end{pmatrix}  $. passt
+		\item[I.V.] die Aussage gelte für alle Permutationen $ \beta \in S_n $ wofür $ \Gamma(\beta) < k $
+		\item[I.S.] Setze $ k \coloneqq \Gamma(\sigma) > 0$.
+			Sei $ i_0 \in \N _n $ so, dass $ \sigma(i_0) \neq i_0 $\\
+			\textbf{Erinnerung an Notation:} Für $ s \in \N  $, $ \sigma \in S_n $, schreibe $ \sigma^s = \underbrace{\sigma \dotsb \sigma}_{s\text{-mal} } = \underbrace{\sigma \circ \dotsb \circ \sigma}_{s\text{-mal} } $\\
+			Für $ s \in \N  $ setze
+			\[
+				i_s \coloneqq \sigma^s(i_0)
+			\]
+			Da $ \left\{ i_s : s \in \N  \right\} \subset \N _n $ ist die Menge endlich.
+			Folglich gibt es $ p < q \in \N  $ so, dass $ i_p = i_q $, insbesondere gilt
+			\[
+				\sigma^{q - p} (i_0) = i_0
+			\]
+			(da $ \sigma^p(i_0) = \sigma^q(i_0) \implies \sigma^0(i_0) = \sigma ^{q - p} (i_0) $) \\
+			Also ist $ \left\{ l \in \N , \sigma^{l} (i_0) = i_0 \right\} \neq \OO  $.
+			Sei $ \rho \geq 2 $ das kleinste Element davon.
+			Setze \fbox{$ r \coloneqq \rho - 1 $}.
+			Die Minimalität von $ \rho $ impliziert, dass $ \left| i_0, \dotsc, i_r \right| = \rho $ (weil $ i_j = i_l $ für $ 0 \leq j < l \leq r $ dann wäre $ \sigma^{l - j} (i_0) = i_0 $ also $ l - j < p $ -- Widerpruch).
+			Analog gilt: 
+			\begin{equation}
+				\label{eq:2.11.8.1}
+				\forall a \in \left\{ i_0, \dotsc, i_r \right\}  $ gilt $ \sigma (a) \neq a.
+			\end{equation}
+			Betrachte den Zyklus $ \tau \coloneqq \begin{pmatrix} i_0 & \dotsc & i_r \end{pmatrix}  $.
+			d.h.
+			\begin{equation}
+				\label{eq:2.11.8.2}
+				\tau(i_l) = \sigma(i_l) \text{ für } 0 \leq l \leq r.
+			\end{equation}
+			Außerdem
+			\begin{equation}
+				\label{eq:2.11.8.3}
+				\forall a \in \N _a $ gilt : $ \tau(a) = a \iff a \not\in \left\{ i_0, \dotsc, i_r \right\}.
+			\end{equation}
+			Aus \eqref{eq:2.11.8.1} folgt 
+			\begin{equation}
+				\label{eq:2.11.8.4}
+				\forall a \in \N _n: \sigma(a) = a \implies a \not\in \left\{ i_0, \dotsc, i_r \right\}
+			\end{equation}
+			Aus \eqref{eq:2.11.8.2}, \eqref{eq:2.11.8.3}, \eqref{eq:2.11.8.4} folgt
+			\begin{equation}
+				\label{eq:2.11.8.5}
+				\left\{ a \in \N _n , \tau^{-1} \sigma(a) = a \right\} = \left\{ a \in \N _n : \sigma(a) = a \right\} \cup \left\{ i_0, \dotsc, i_r \right\} 
+			\end{equation}
+			Also $ \Gamma(\tau ^{-1} \sigma) < \Gamma(\sigma) $.\\
+			I.V. anwenden auf $ \tau ^{-1} \sigma $.
+			\[
+				\tau ^{-1} \sigma = \alpha_1 \dotsb \alpha_m \implies \sigma = \tau \cdot \alpha_1 \dotsb \alpha_m
+			\]
+			$ \forall i = 1, \dotsc, m $ $ \alpha_i $ Zyklus\qed
+			
+	\end{description}
+\end{subproof*}
+
+\subsection{Skript 12}
+\setcounter{subenvironmentnumber}{-1}
+\begin{subexample}
+	\[
+		\sigma =
+		\begin{pmatrix} 1 & 2 & 3 & 4 & 5 \\ 3 & 5 & 4 & 1 & 2 \end{pmatrix} 
+		= \begin{pmatrix} 1 & 3 & 4 \end{pmatrix} \begin{pmatrix} 2 & 5 \end{pmatrix} 
+	\]
+	$ \sigma \in S_5 $ 
+	\[
+		\tau =
+		\begin{pmatrix} 1 & 2 & 3 & 4 & 5 \\ 3 & 2 & 4 & 1 & 5 \end{pmatrix} 
+		= \begin{pmatrix} 1 & 3 & 4 \end{pmatrix} 
+	\]
+\end{subexample}
+
+\begin{subtheorem}
+	Jede Permutation $ \sigma \in S_n , n \geq 2$ ist Produkt von Transpositionen.\\
+	\textbf{Bemerke:} $ n = 1 $ $ S_1 = \left\{ \begin{pmatrix} 1 \end{pmatrix}  \right\}  $.
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{2.12.1}]
+	Das neutrale Element $ \begin{pmatrix} 1 \end{pmatrix} = \begin{pmatrix} 1 & 2 \end{pmatrix} \begin{pmatrix} 2 & 1 \end{pmatrix}  $.\\
+	Sei nun $ \sigma \neq \begin{pmatrix} 1 \end{pmatrix} , \sigma \in S_n $ wegen Satz \ref{2.11.8} genügt es zu zeigen dass ein Zyklus ein Produkt von Transpositionen, also \OE{} $ \sigma = \begin{pmatrix} i_1 & \hdots & i_r \end{pmatrix}  $ mit $ r \geq 2 $.\\
+	Wenn $ r = 2 $, passt.\\
+	Jetzt $ r > 2 $.
+	\begin{description}
+		\item[Beh.:] $ \begin{pmatrix} i_1 & i_2 & \hdots & i_r \end{pmatrix} = \begin{pmatrix} i_1 & i_r \end{pmatrix} \begin{pmatrix} i_1 & i_{r - 1}   \end{pmatrix} \dotsb \begin{pmatrix} i_1 & i_3 \end{pmatrix} \begin{pmatrix} i_1 & i_2 \end{pmatrix}  $.
+		\item[Bew.:] Wir berechnen
+			\[
+				\Big(\begin{pmatrix} i_1 & i_r \end{pmatrix} \underbrace{\begin{pmatrix} i_1 & i_{r - 1}  \end{pmatrix} \dotsb \begin{pmatrix} i_1 & i_3 \end{pmatrix} \underbrace{\begin{pmatrix} i_1 & i_2 \end{pmatrix}\Big)(i_r)}_{=i_r}}_{=i_r}
+				= \begin{pmatrix} i_1 & i_r \end{pmatrix} (i_r)\\
+			\]
+			Für $ i_s $ mit $ 1 \leq  s < r $ gilt:
+			\begin{align*}
+				&\begin{pmatrix} i_1 & i_r \end{pmatrix} \begin{pmatrix} i_1 & i_{r - 1}  \end{pmatrix} \dotsb \begin{pmatrix} i_1 & i_s \end{pmatrix} (i_s)\\
+				=& \begin{pmatrix} i_1 & i_r \end{pmatrix} \begin{pmatrix} i_1 & i_{r - 1}  \end{pmatrix} \dotsb \begin{pmatrix} i_1 & i_{s+1}  \end{pmatrix} \underbrace{\begin{pmatrix} i_1 & i_s \end{pmatrix} (i_s)}_{= i_1}\\
+				=& \begin{pmatrix} i_1 & i_r \end{pmatrix} \begin{pmatrix} i_1 & i_{r - 1}  \end{pmatrix} \dotsb \underbrace{\begin{pmatrix} i_1 & i_{s + 1}  \end{pmatrix} (i_1)}_{=i_{s + 1} }\\
+				=& \begin{pmatrix} i_1 & i_r \end{pmatrix} \begin{pmatrix} i_1 & i_{r - 1}  \end{pmatrix} \dotsb \begin{pmatrix} i_1 & i_{s + 2}  \end{pmatrix} i_{s + 1} \\
+				=& i_{s + 1} 
+			\end{align*}
+	\end{description}
+\end{subproof*}
+
+\begin{subexample}
+	\[
+		\begin{pmatrix} 1 & 2 & 3 \end{pmatrix} \in S_4
+	\]
+	\[
+		\begin{pmatrix} 1 & 2 & 3 \end{pmatrix} = \begin{pmatrix} 1 & 3 \end{pmatrix} \begin{pmatrix} 1 & 2 \end{pmatrix} 
+	\]
+	aber auch gilt
+	\[
+		\begin{pmatrix} 1 & 2 & 3 \end{pmatrix} = \begin{pmatrix} 1 & 3 \end{pmatrix} \begin{pmatrix} 4 & 2 \end{pmatrix} \begin{pmatrix} 1 & 2 \end{pmatrix} \begin{pmatrix} 1 & 4 \end{pmatrix} 
+	\]
+	$ \implies  $ Parität eindeutig.
+\end{subexample}
+
+Wir werden zeigen, dass die Parität der Darstellung eindeutig ist!
+Dafür brauchen wir
+
+\begin{subdefinition}
+	Sei $ b \in S_n $ und $ f : \Z ^n \to \Z $ eine Abbildung.
+	Wir definieren $ \sigma f : \Z ^n \to \Z $ folgend:
+	\[
+		(\sigma f) (x_1, \dotsc, x_n) \coloneqq f( x_{\sigma(1)} , \dotsc, x_{\sigma(n)} )
+	\]
+\end{subdefinition}
+
+\begin{subexample}
+	$ f : \Z ^3 \to \Z  $ definiert durch
+	\[
+		f\left( x_1, x_2, x_3 \right) \coloneqq x_1x_2 + x_3, \sigma \in S_3 \quad \sigma \coloneqq \begin{pmatrix} 1 & 2 & 3 \end{pmatrix} .
+	\]
+	\[
+		\sigma f : \Z ^3 \to \Z , \sigma f\left( x_1, x_2, x_3 \right) = f\left( x_2, x_3, x_1 \right) = x_2 x_3 + x_1
+	\]
+\end{subexample}
+
+\begin{sublemma}
+	Sei $ \sigma, \tau \in S_n, f, g : \Z ^n \to \Z $ ($ f, g $ Abbildungen).\\
+	Es gelten:
+	\begin{enumerate}[label=(\roman*)]
+		\item $ \sigma( \tau f ) = (\sigma \tau) f $
+		\item $ \sigma (f g) = (\sigma f) (\sigma g) $.
+	\end{enumerate}
+	\textbf{Bew.:} ÜA.
+\end{sublemma}
+
+\begin{subtheorem}[Eindeutigkeit der Parität]
+	Es gibt eine wohldefinierte Abbildung
+	\[
+		\Signum: S_n \to \left\{ 1, -1 \right\} 
+	\]
+	so, dass:
+	\begin{enumerate}[label=(\alph*)]
+		\item Für jede Transposition $ \tau \in S_n $ gilt $ \Signum(\tau) = -1 $ 
+		\item Für alle $ \sigma, \tau \in S_n $ gilt
+			\[
+				\Signum(\sigma \tau) = \Signum(\sigma) \Signum(\tau)
+			\]
+	\end{enumerate}
+	Diese Abbildung ist eindeutig.
+	Darüber hinaus gilt $ \forall  \sigma \in S_n : \Signum(\sigma) = 1 $ genau dann, wenn $ \sigma $ ist Produkt von $ m $ Transpositionen mit $ m $ gerade, und
+	\[
+		\Signum(\sigma) =  - 1
+	\]
+	genau dann, wenn $ \sigma  $ ist Produkt von $ m $ Transpositionen mit $ m $ ungerade.
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{2.12.6}]
+	Sei $ \Delta : \Z ^n \to \Z  $ die Abbildung
+	\begin{equation}
+		\label{eq:2.12.6.1}
+		\Delta(x_1, \dotsc, x_n) \coloneqq \prod_{1 \leq i < j \leq n} (x_j - x_i)
+	\end{equation}
+	\begin{description}
+		\item[Beh.:] Für eine Transposition $ \tau \in S_n $ gilt
+			\[
+				\tau \Delta = -\Delta
+			\]
+		\item[Bew.:] In der Tat, sei $ \tau = (rs) $ $ r < s $.
+			Aus Lemma \ref{2.12.5} (ii) folgt
+			\begin{equation}
+				\label{eq:2.12.6.2}
+				\tau \Delta (x_1, \dotsc, x_n) = \prod_{1 \leq  i < j \leq n}  \tau(x_j - x_i)
+			\end{equation}
+			\begin{itemize}
+				\item Offensichtlich, wenn $ i, j \not\in \left\{ r, s \right\}  $ ist
+					\[
+						\tau (x_j - x_i) = (x_{\tau(j)} - x_{\tau(i)} ) = (x_{j} - x_i)
+					\]
+				\item Für den Faktor $ (x_s - x_r) $ gilt
+					\[
+						\tau(x_s - x_r) = (x_r - x_s) = -(x_s - x_r)
+					\]
+				\item Die anderen Faktoren können wir paaren wie folgt:
+					\begin{align*}
+						(x_k - x_s)(x_k - x_r) &\quad \text{wenn $ k > s $ }\\
+						(x_s - x_k)(x_k - x_r) &\quad \text{wenn $ r < k < s $ }\\
+						(x_s - x_k)(x_r - x_k) &\quad \text{wenn $ k < r $ }
+					\end{align*}
+					Jedes Produkt ist von $ \tau $ unberührt.
+					Alles zusammen ein Vergleich der Faktoren in \eqref{eq:2.12.6.1} bzw. \eqref{eq:2.12.6.2} ergibt
+					\[
+						\tau \Delta = - \Delta \qed
+					\]
+			\end{itemize}
+	\end{description}
+	Sei $ \sigma \in S_n $ wegen Satz \ref{2.12.1} schreibe $ \sigma = \tau_1 \dotsb \tau_m $ als Produkt von Transpositionen.
+	Aus Lemma \ref{2.12.5} (i) folgt
+	\[
+		\sigma \Delta = (\tau_1 \dotsb \tau_m) \Delta = \tau_1 \left( \tau_2 \left( \dotsb \left( \tau_m \Delta \right)  \right)  \right) 
+	\]
+	Ferner folgt aus der Behauptung, dass
+	\[
+		\tau_1 \left( \tau_2 \left( \dotsb \left( \tau_m \Delta \right)  \right)  \right) = (-1)^m \Delta
+	\]
+	Wir sehen also:
+	entweder
+	\begin{align*}
+		\sigma\Delta = \Delta &\quad \text{genau dann, wenn $ m $ gerade} \\
+		\sigma\Delta = -\Delta &\quad \text{genau dann, wenn $ m $ ungerade} 
+	\end{align*}
+	Für $ \sigma \in S_n $ setze
+	\[
+		\Signum(\sigma) = 1
+	\]
+	wenn $ \sigma \Delta = \Delta $.\\
+	$ \sigma \in S_n $ setze 
+	\[
+		\Signum(\sigma) = -1
+	\]
+	wenn $ \sigma \Delta = - \Delta $\qed
+\end{subproof*}
+
+\begin{subdefinition}
+	Wir nennen $ \sigma $ genau dann gerade, wenn $ \Signum(\sigma) = 1 $, bzw, wir nennen $ \sigma $ genau dann ungerade, wenn $ \Signum(\sigma) = -1 $
+\end{subdefinition}
+
+Betrachte folgende Untermenge von $ S_n $.
+\[
+	A_n \coloneqq \left\{ \sigma : \sigma \text{ ist eine gerade Permutation}  \right\} 
+\]
+
+\setcounter{subenvironmentnumber}{8}
+\begin{subcorollary}
+	$ A_n $ ist eine Untergruppe und
+	\[
+		\left| A_n \right| = \frac{ \left| S_n \right| }{ 2 } = \frac{ n! }{ 2 } 
+	\]
+\end{subcorollary}
+\begin{subproof*}[Korollar \ref{2.12.9}]
+	$ \begin{pmatrix} 1 \end{pmatrix} \in A_n $.
+	\begin{itemize}
+		\item Seien $ \sigma, \tau \in A_n $ zu zeigen $ \sigma \tau \in A_n $:\\
+			Wir berechnen:
+			\[
+				\Signum ( \sigma \tau ) \overset{\text{Satz \ref{2.12.6} b)}}{=} \Signum ( \sigma ) \Signum ( \tau ) = 1 \cdot 1 = 1
+			\]
+		\item Sei $ \sigma \in A_n $ 
+			\[
+				\sigma = \tau_1 \dotsb \tau_m
+			\]
+			wobei $ m $ gerade ist.\\
+			Wir berechnen:
+			\[
+				\sigma^{-1} = \tau_m^{-1} \dotsb \tau_1^{-1} 
+			\]
+			Nun ist die Inverse von einer Transposition wieder eine Transposition (weil $ \tau = \begin{pmatrix} i_1 & i_2 \end{pmatrix} \implies \tau^{-1} \begin{pmatrix} i_2 & i_1 \end{pmatrix} , i_1, i_2 \in \N _n $\\
+			2. Beweis
+			\[
+				\sigma = \tau_1 \dotsb \tau_m
+			\]
+			$ m $ gerade.
+			\[
+				1 = \Signum \begin{pmatrix} 1 \end{pmatrix} = \Signum(\sigma \sigma^{-1} ) = \Signum(\sigma) \Signum(\sigma^{-1} ) = \Signum(\sigma^{-1} )
+			\]
+	\end{itemize}
+	Wir wissen
+	\[
+		S_n = A_n \cupdot U \quad \left( X \cupdot Y = X \cup Y, X \cupdot Y \implies \left| X \cap Y \right| = 0  \right) 
+	\]
+	wobei $ U = \left\{  \sigma : \sigma \text{ ist ungerade}  \right\}  $ 
+	\[
+		\left| S_n \right| = \left| A_n \right| + \left| U \right| 
+	\]
+	Wir zeigen $ \left| A_n \right| = \left| U \right|  $:
+	Betrachte die Abbildung
+	\[
+		A_n \to U, \sigma \mapsto \underbrace{\begin{pmatrix} 1 & 2 \end{pmatrix}  \sigma}_{\Signum \begin{pmatrix} 1 & 2 \end{pmatrix} = -1}
+	\]
+	Diese Abbildung ist bijektiv, also
+	\[
+		\left| A_n \right| = \left| U \right| . \qed
+	\]
+\end{subproof*}
+
+\begin{subdefinition}
+	Wir nennen $ A_n $ die alternierende Gruppe.
+\end{subdefinition}
+
+\subsection{Skript 13}
+\setcounter{subsubsection}{6}
+\subsubsection{Multilinear Formen}
+
+Sei $ K $ ein Körper und $ U $ und $ V $ $ K $-Vektorräume
+\[
+	\beta : U \times V \to K, (x, y) \mapsto \beta(x, y)
+\]
+Die Abbildung $ \beta $ ist eine bilineare Funktionale (Form) falls gelten.\\
+$ \forall x, x_1, x_2 \in U, \forall y, y_1, y_2 \in V, \forall c_1, c_2, d_1, d_2 \in K $
+\begin{enumerate}[label=(\arabic*)]
+	\item $ \beta(c_1x_1 + c_2x_2, y) = c_1 \beta(x_1, y) + c_2 \beta(x_2, y)  $
+	\item $ \beta(x, d_1 y_2 + d_2 y_2) = d_1 \beta(x, y_1) + d_2 \beta(x, y_2)  $
+\end{enumerate}
+
+\setcounter{subenvironmentnumber}{1}
+\begin{subexample}
+	Betrachte
+	\[
+		V \times V^* \to K, (x, f) \mapsto [x, f] \coloneqq f(x)
+	\]
+	ist bilineare
+\end{subexample}
+
+\begin{subdefinition*}[Notation]
+	$ L^{(2)} \left( U \times V, K \right) = $ der $ K $-Vektorraum der bilinearen Formen auf $ U \times V $ versehen mit den Verknüpfungen
+	\[
+		( \underbrace{c_1 \beta_1 + c_2 \beta_2}_{\in L^{(2)} } ) \underbrace{(x, y)}_{\in U \times V} \coloneqq c_1 \beta_1 (x, y) + c_2 \beta_2 (x, y)
+	\]
+	wie üblich \qed
+\end{subdefinition*}
+
+\begin{subdefinition}
+	Seien $ m \in \N  $, $ V_1, \dotsc, V_m $ $ K $-VR.
+	Eine Abbildung
+	\[
+		\mu: V_1 \times \dotsb \times V_m \to K
+	\]
+	ist eine \textbf{$ m $-lineare Funktionale} (\textbf{$ m $-lineare Form} oder \textbf{multilineare Funktionale vom Grad $ m $})
+	Wenn $ \forall i \in \left\{ 1, \dotsc, m \right\}  $ gilt $ \forall \alpha_i, \gamma_i \in V_i, c \in K $
+	\[
+		\mu (\alpha_1, \dotsc, c\alpha_i + \gamma_i, \dotsc, \alpha_m) = c \mu(\alpha_1, \dotsc, \alpha_i, \dotsc, \alpha_m) + \mu(\alpha_1, \dotsc, \gamma_i, \dotsc, \alpha_m)
+	\]
+\end{subdefinition}
+
+\begin{subdefinition*}[Notation]
+	$ L^{(m)} \left( V_1 \times \dotsb \times V_m, K \right) = $ $ K $-VR der $ m $-linearen Formen.
+\end{subdefinition*}
+
+\begin{subnote}
+	Ansatz wie oben, wenn $ \mu $ multilinear ist, dann gilt
+	\[
+		\mu(\alpha_1, \dotsc, \alpha_i, \dotsc, \alpha_m) = 0
+	\]
+	falls $ \alpha_i = 0 $
+\end{subnote}
+
+\subsubsection{Alternierende Multilineare Formen auf \mathsec{K^n}{K\^n}}
+
+\begin{subdefinition}
+	Sei $ n \in \N  $ und $ V = K^n $ Eine $ n $-lineare Form auf
+	\[
+		\delta : \underbrace{K^n \times  \dotsb \times K^n}_{n\text{-mal} } \to K
+	\]
+	ist \textbf{alternierend}, wenn: $ i, j \in \left\{ 1, \dotsc, n \right\}  $ mit $ i \neq j $ existieren mit $ Z_i = Z_j $, dann $ \delta(z_1, \dotsc, z_n) = 0 $ (für $ z_1, \dotsc, z_n \in K^n $)
+\end{subdefinition}
+
+\begin{subdefinition*}[Konvention]:
+	$ \delta $ wird auch als Abbildung auf $ K^{n \times n} = \operatorname{Mat}_{n \times n} (K) $ $ \delta(A) = \delta(z_1, \dotsc, z_{n} ) $\\
+	$ A \in M_{n \times n} (K) $ wobei
+	\[
+		A = \begin{pmatrix} z_1 \\ \vdots \\ z_n \end{pmatrix} 
+	\]
+\end{subdefinition*}
+
+\begin{sublemma}
+	Sei $ \delta $ alternierend. Es gilt
+	\begin{enumerate}[label=(\roman*)]
+		\item $ z_1, \dotsc, z_n $ sind linear abhängig $ \implies \delta (z_1, \dotsc, z_n) = 0 $ 
+		\item $ \delta(z_1, \dotsc, z_i, \dotsc, z_j, \dotsc, z_n) = - \delta( z_1, \dotsc, z_j, \dotsc, z_i, \dotsc, z_n) $
+		\item Allgemeiner gilt
+			\[
+				\delta\left( z_{\pi (1)} , \dotsc, z_{\pi (n)}  \right) = \Signum(\pi) \delta(z_1, \dotsc, z_n)
+			\]
+			mit $ \pi  \in S_n $
+	\end{enumerate}
+\end{sublemma}
+\begin{subproof*}[Lemma \ref{2.13.6}]
+	\begin{enumerate}[label=(\roman*)]
+		\item \OE{} nehmen wir an lineare Abhängigkeit
+			\[
+				\implies z_n = \sum_{i=1}^{n - 1} c_i z_i
+			\]
+			für $ c_1, \dotsc, c_{n - 1} \in K $.
+			Wir berechnen
+			\[
+				\delta\left( z_1, \dotsc, z_{n - 1} , \sum_{i=1}^{n - 1} c_i z_i \right) = \sum_{i=1}^{n - 1} c_i \delta(z_1, \dotsc, z_{n - 1}, z_n) = 0
+			\]
+		\item wir berechnen
+			\begin{align*}
+				0 &= \delta\left( z_1, \dotsc, z_i + z_j, \dotsc, z_j + z_i, \dotsc, z_n \right) \\
+				  &= \delta\left( z_1, \dotsc, z_i, \dotsc, z_j + z_i, \dotsc, z_n \right) + \delta\left( z_1, \dotsc, z_j, \dotsc, z_j + z_i, \dotsc, z_n \right) \\
+				  &= \delta\left( z_1, \dotsc, z_i, \dotsc, z_j, \dotsc, z_n \right)
+				  + \underbrace{\delta\left( z_1, \dotsc, z_i, \dotsc, z_i, \dotsc, z_n \right)}_{ = 0} \\
+				  &\quad+ \underbrace{\delta\left( z_1, \dotsc, z_j, \dotsc, z_j, \dotsc, z_n \right)}_{ = 0}
+				  + \delta\left( z_1, \dotsc, z_j, \dotsc, z_i, \dotsc, z_n \right) \\
+				  &= \delta\left( z_1, \dotsc, z_i, \dotsc, z_j, \dotsc, z_n \right) + \delta\left( z_1, \dotsc, z_j, \dotsc, z_i, \dotsc, z_n \right) \qed
+			\end{align*}
+	\end{enumerate}
+\end{subproof*}
+
+\begin{subnote}
+	\begin{enumerate}[label=(\arabic*)]
+		\item $ \Char(K) \neq 2 $ dann gilt:
+			Sei $ \delta $ eine $ m $-lineare Form auf $ K^n $ so, dass Lemma \ref{2.13.6} (ii) gilt, dann ist $ \delta $ alternierend.
+		\item $ \Char(K) = 2 $ $ \delta: \F_2 \to \F_2, \delta\left( (a, b), (c, d) \right) \coloneqq ac + bd $ ist ein Gegenbeispiel!
+	\end{enumerate}
+	
+\end{subnote}
+
+\subsection{Skript 14}
+Sei $ \delta $ eine alternierende lineare Form auf $ K^n $ (laut Def \ref{2.13.5} auch als $ \delta : M_{n \times n} (K) \to K $ auffassen).
+Sei $ A \in M_{n \times n} (K) $ 
+\[
+	A = \begin{pmatrix} z_1 \\ \hdots \\ \vdots \\ \hdots \\ z_n \end{pmatrix} 
+\]
+
+\begin{sublemma}
+	Sei $ e $ eine elementare Zeilenumformung
+	Es gelten
+	\begin{enumerate}[label=(\roman*)]
+		\item $ \delta ( e (A) ) = - \delta(A) $, wenn $ e $ von Typ 1 ist.
+		\item $ \delta( e (A) ) = c \delta(A) $, wenn $ e $ von Typ 2 ist.
+		\item $ \delta ( e(A)) = \delta(A) $, wenn $ e $ von Typ 3 ist.
+		\item Allgemeiner gilt: $ \forall c \in K : \delta (cA) = c^{n} \delta(A) $
+	\end{enumerate}
+\end{sublemma}
+\begin{subproof*}[Lemma \ref{2.14.1}]
+	Wir berechnen $ \delta( e ( A ) ) $:
+	\begin{enumerate}[label=(\roman*)]
+		\item $ \delta( z_1 + cz_2, z_2, \dotsc, z_n) = \delta(z_1, z_2, \dotsc, z_n) + c \delta( z_2, z_2, z_3, z_4, \dotsc, z_n) = \delta(z_1, \dotsc, z_n) $
+		\item Folgt aus Lemma \ref{2.13.6}
+		\item Folgt aus $ n $-Linearität
+		\item $ \delta(c z_1, \dotsc, c z_n) = c \delta(z_1, cz_2, \dotsc, cz_n) = c^2 \delta(z_1, z_2, cz_3, \dotsc, cz_n) = \dotsb = c^n \delta(z_1, \dotsc, z_n) $
+	\end{enumerate}
+\end{subproof*}
+
+\begin{sublemma}
+	Für jede Matrix $ A \in M_{n \times n} (K) $ gibt es $ \triangle_A \in K^{x} $, $ \triangle_A $ hngt nur von $ A $ ab, so dass
+	\[
+		\delta(A) = \triangle_A \delta(\operatorname{r.z.s.F.} (A))
+	\]
+\end{sublemma}
+\begin{subproof*}[Lemma \ref{2.14.2}]
+	$ \triangle_A $ ergibt sich durch wiederholte Anwendung von Lemma \ref{2.14.1}.
+	Wir bekommen $ \triangle_A $ ist ein Produkt der Gestalt
+	\[
+		(-1)^{l} c_1 \dotsb c_k
+	\]
+	für geeignete $ l, k \in \N _0 $ und $ c_1, \dotsc, c_k \in K^x $\qed
+\end{subproof*}
+
+\begin{subnote}
+	(Erinnerung: Skript 7 LA I Bemerkng 7.3)\\
+	Für $ A \in M_{n \times n} (K) $ 
+	Dann gilt: Entweder
+	\begin{description}
+		\item[Fall 1:] $ \operatorname{r.Z.S.F.} (A) $ hat eine Null Zeile, oder
+		\item[Fall 2:] $ \operatorname{r.Z.S.F.} (A) = I_n $.
+	\end{description}
+	Also erhalten wir auch iher eine Dichotomie:\\
+	Entweder
+	\begin{description}
+		\item[Fall 1:] $ \delta(A) = \triangle_A \cdot 0 = 0 $, oder
+		\item[Fall 2:] $ \delta(A) = \triangle_A \delta(I_n) $
+	\end{description}
+\end{subnote}
+
+\begin{subcorollary}
+	$ \delta \neq 0 $ genau dann, wenn $ \delta(I_n) \neq 0 $
+\end{subcorollary}
+\begin{subproof*}[Korollar \ref{2.14.4}]
+	\begin{description}
+		\item[``$ \impliedby  $'':] klar
+		\item[``$ \implies  $'':] $ \delta(I_n) = 0 \implies \delta(A) = 0 $ in \textbf{Fall 1 und Fall 2} in Bemerkung $ \ref{2.14.3} $
+	\end{description}
+\end{subproof*}
+
+\begin{subcorollary}
+	Wir nehmen an, dass $ \delta \neq 0 $.
+	Sei $ A \in M_{n \times n} (K) $\\
+	Es gilt: $ \delta(A) \neq  0 $ genau dann, wenn $ A $ invertierbar ist.
+\end{subcorollary}
+\begin{subproof*}[Korollar \ref{2.14.5}]
+	Folgt aus Lemma \ref{2.14.2} und Korollar \ref{2.14.4}: weil $ A $ invertierbar $ \iff \operatorname{r.Z.S.F.} (A) = I_n $ (Skript 9 LA I, Satz 9.8)\qed
+\end{subproof*}
+
+\begin{subdefinition}[Definition und Notation]
+	$ \mathbb{A} \coloneqq \operatorname{alt}^{(n)} \left( K^n \right) \coloneqq   $ der Unterraum von $ L^{(n)} \left( K^n \times \dotsb \times K^n, K \right)  $ von \textbf{$ n $-linear} alternierenden Formen auf $ K^n $
+	\[
+		\mathbb{A} = \left\{ \delta : \delta n \text{-linear alt. auf $ K^n $}  \right\} \subseteq L^{(n)} \left( K^n \times \dotsb \times K^n, K \right) 
+	\]
+\end{subdefinition}
+
+\setcounter{subenvironmentnumber}{7}
+\begin{subcorollary}
+	Seien $ \delta_1, \delta_2 \in \mathbb{A} $.
+	Es gilt: $ \delta_1 = \delta_2 $ genau dann, wenn
+	\[
+		\delta_1 (I_n) = \delta_2 (I_n)
+	\]
+	(ooder $ \delta_1(e_1, \dotsc, e_n) = \delta_2(e_1, \dotsc, e_n) $
+\end{subcorollary}
+\begin{subproof*}[Korollar \ref{2.14.8}]
+	Sei $ \delta_1(I_n) = \delta_2(I_n) $, so dass
+	\[
+		\left( \delta_1 - \delta_2 \right) (I_n) = \delta_1(I_n) - \delta_2(I_n) = 0
+	\]
+	Es folgt nun aus Kor. \ref{2.14.4}, dass
+	\[
+		\delta_1 - \delta_2 = 0
+	\]
+	also
+	\[
+		\delta_1 = \delta_2 \qed
+	\]
+\end{subproof*}
+
+\begin{subcorollary}
+	$ \dim \left( \mathbb{A} \right) \leq 1 $
+\end{subcorollary}
+\begin{subproof*}[Korollar \ref{2.14.9}]
+	$ \dim \left( \mathbb{A} \right) = 0 $, passt\\
+	Ansonsten $ \delta_1 \neq 0, \delta_1 \in \mathbb{A} $, wir nehmen $ \delta_1 $ fest.\\
+	Sei $ \delta_2 \in \mathbb{A} $, Sei $ A \in M_{n \times n} (K) $ wie im Fall 2 von Bemerkung \ref{2.14.3}.
+	Wir berechnen
+	\begin{equation}
+		\label{eq:2.14.9.1}
+		\tag{$ * $}
+		\delta(A) = \triangle_A \delta_2 (I_n) = \triangle_A \frac{ \delta_2(I_n) }{ \delta_1 (I_n) } \delta_1(I_n)
+	\end{equation}
+	Setze $ d \coloneqq \frac{\delta_2 (I_n) }{ \delta_1 (I_n) } \in K $\\
+	Es folgt:
+	\[
+		\delta_2(A) = d \left( \triangle_A \delta_1(I_n) \right) = d \delta_1(A), d \in K \qed
+	\]
+\end{subproof*}
+
+{
+	\color{gadse-dark-blue}
+	Wir werden nun zeigen, dass es $ \delta \in \mathbb{A} $ gibt mit $ \delta(I_n) = 1 $ wegen Korollar \ref{2.14.8} ist dann diese $ \delta $ notwendig eindeutig.
+	Sobald wir $ \delta $ gefunden haben, wissen wir
+	\[
+		\dim \left( \mathbb{A} \right) = 1
+	\]
+	
+}
+
+\textbf{Ziel:} zu zeigen $ \exists \delta \in \mathbb{A} $ so, dass $ \delta\left( I_n \right) = 1 $.\\
+\textbf{Formelberechnung:}\\
+Sei \fbox{$ \delta\in \mathbb{A} $} und $ A \in M_{n \times n} (K) $ schreiben
+\[
+	A = \left( a_{ij}  \right) _{1 \leq i \leq n, 1 \leq j \leq n} 
+\]
+\[
+	a_{ij} \in K \forall i, j
+\]
+\[
+	A = \begin{pmatrix} z_1 \\ \hdots \\ \vdots \\ \hdots \\ z_n \end{pmatrix} 
+\]
+wobei, $ \forall i : 1 \leq  i \leq n $, $ z_i $ die $ i $-te Zeile der Matrix $ A $.
+
+Sei $ e_1, \dotsc, e_n $ die Standard Basis von $ K^n $.
+Sir schreiben $ \forall i : 1 \leq i \leq n $ 
+\[
+	z_i \coloneqq \sum_{j_i=1}^{n} a_{ij_i} e_{j_i} 
+\]
+(die eindeutige Darstellung von $ z_i $ in der Standardbasis).
+Wir berechnen:
+\begin{equation}
+	\label{eq:2.14.1}
+	\tag{$ ** $}
+	\delta(A) = \delta\left( \sum_{j_1=1}^{n} a_{ij_1} e_{j_1} , \dotsc, \sum_{j_n=1}^{n} a_{nj_n} e_{j_n}  \right) = \sum_{j_1, \dotsc, j_n=1}^{n} a_{1j_1} \dotsb a_{nj_n} 
+\end{equation}
+Prüfen!!
+
+Für jeden Summand in \eqref{eq:2.14.1} betrachte die Abbildung
+\[
+	\left\{ 1, \dotsc, n \right\} \to \left\{ 1, \dotsc, n \right\} , i \mapsto j_i
+\]
+\begin{itemize}
+	\item Wenn solch eine Abbliidung \textbf{nicht} injektiv ist, dann gibt es eine Widerholung in $ \left( j_1, \dotsc, j_n \right) $ und entsprechend ist der Summand $ = 0 $ (weil $ \delta $ alternierend ist!)
+	\item Die abbildung (für einen gegebenen Summand in \eqref{eq:2.14.1}) ist injektiv, dann ist sie eine Permutation $ \pi \in S_n $ und damit im Summand in \eqref{eq:2.14.1} erhalten wir:
+		\[
+			\delta(e_{j_1} , \dotsc, e_{j_n} ) = \delta\left( e_{\pi (1)} , \dotsc, e_{\pi (n)}  \right) \overset{Lem.\ref{2.13.6}}{=} \Signum\left( \pi  \right) \delta\left( e_1, \dotsc, 1_n \right) .
+		\]
+		Also können wir nun \eqref{eq:2.14.1} umschreiben:
+		\begin{align*}
+			\text{\eqref{eq:2.14.1}} &= \sum_{\pi \in S_n}^{} \Signum(\pi ) a_{1 \pi (1)} \dotsb a_{n \pi (n)} \delta(I_n) \\
+						 &= \delta(I_n) \sum_{\pi  \in S_n} \Signum(\pi )a_{1 \pi (1)} \dotsb a_{n \pi (n)} 
+		\end{align*}
+		Wir sehen also dass wenn wir $ \delta(I_n) = 1 $ setzen, dann bekommen wir
+		\[
+			\fbox{
+				$ \delta(A)  = \Signum(\pi ) \prod_{i=1}^{n} a_{i \pi (i)}  {\color{gadse-red} \det} $
+			}
+		\]
+		Wir müssen nur noch prüfen, dass {\color{gadse-red}$ \det $} eine $ n $-lineare alternierende Form definiert!
+\end{itemize}
+
+\begin{subdefinition*}[Notation]
+	\[
+		A = \begin{pmatrix} z_1 \\ \vdots \\ z_n \end{pmatrix} 
+	\]
+	\[
+		\delta : K^n \times \dotsb \times  K^n 
+	\]
+	$ \delta(z_1, \dotsc, z_n) $\\
+	$ \delta\left(z_1 + dz_1^\prime , z_2, \dotsc, z_n\right) $ $ d \in K $
+	\[
+		A^\prime = \begin{pmatrix} z_1^\prime \\ \vdots \\z_n^\prime  \end{pmatrix} 
+	\]
+\end{subdefinition*}
+
+\begin{subtheorem}
+	Die Formel ($ \mathbf{\det} $) definiert eine $ n $-lineare alternierende Form $ \delta $ mit $ \delta(I_n) = 1 $.
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{2.14.10}]
+	\OE{} $ n \geq 2 $.
+	\begin{itemize}
+		\item $ n $-linear?\\
+			$ z_1 + dz_1^\prime  = [ a_{11}  + d a_{11}^\prime \dotsb a_{1n} + d a_{1n} ^\prime   $.
+			Also müssen wir berechnen
+			\begin{align*}
+				  & \Signum(\pi ) \left( \left( a_{1 \pi (1)} + d a_{1 \pi (1)} ^\prime  \right) a_{2 \pi (1)} \dotsb a_{n \pi (n)}  \right) \\
+				= & \Signum(\pi ) \left( \left( a_{1 \pi (1)} \dotsb a_{n \pi (n)}  \right) + d\left( a_{1 \pi (1)} ^\prime a_{2 \pi (2)} \dotsb a_{n \pi (n)}  \right)  \right) 
+			\end{align*}
+			usw. ÜB
+		\item alternierend? Sei $ z_1 = z_2 $, zu zeigen $ \delta(A) = 0 $
+			$ z_1 = z_2 $ i.e. $ a_{1j} = a_{2j}   $ $ \forall i \leq j \leq n $, i.e. $ a_{i \pi(j) } = a_{2 \pi (j)}   $ $ \forall \pi  \in S_n $.
+			Wir berechnen $ \delta(A) $ (Wie in der Formel ($ \det $))
+			(mithilfe der Angambe $ S_n = A_n \cupdot A_n \begin{pmatrix} 1 & 2 \end{pmatrix}  $) $ \begin{pmatrix} 1 & 2 \end{pmatrix} \in S_n $ 
+			\begin{align*}
+				\delta(A) &= \underbrace{\sum_{\pi \in A_n} \Signum \left( \pi  \right) \left( a_{1 \pi (1)} a_{2 \pi (2)} \dotsb a_{n \pi (n)}  \right) }_{I} \\
+					  &\quad + \underbrace{\sum_{\pi  \in A_n} \underbrace{ \Signum\left( \pi  \begin{pmatrix} 1 & 2 \end{pmatrix}  \right) }_{=-1} \left( 
+						a_{1 \pi \begin{pmatrix} 1 & 2 \end{pmatrix} (1)} a_{2 \pi \begin{pmatrix} 1 & 2 \end{pmatrix} (2)} \dotsb a_{n \pi \begin{pmatrix} 1 & 2 \end{pmatrix} (n)} 
+					  \right) }_{II}\\
+					  &= I + II \\
+					  &= 0
+			\end{align*}
+		\item zu zeigen $ \delta(I_n) = 1 $.
+			Sei $ A $ diagonal, also $ i \neq j \implies a_{ij} = 0 $.
+			Die $ \forall i, j = 1, \dotsc, n $ einzige $ \pi \in S_n $,
+			wofür der Summand in der $ (\det) $ Formel $ \neq  0 $, ist $ \pi (i) = i $ $ \forall i = 1, \dotsc, n $ also $ \pi = \begin{pmatrix} 1 \end{pmatrix}  \in S_n $ 
+			also $ \delta(A) = a_{11} \dotsb a_{nn}  $ 
+			Insbesondere $ \delta(I_n) $
+	\end{itemize}
+\end{subproof*}
+
+\begin{subdefinition*}[Bezeichung]
+	$ \delta(A) $ die $ \delta $ $ (\det) $ erfüllt werden wird $ \det(A) $ genannt
+\end{subdefinition*}
+
+\begin{subcorollary}
+	$ \dim (\mathbb{A}) = 1 $.
+	Insbesondere gilt: $ \forall \delta \in \operatorname{alt}^{(n)} (K^n) $ und $ A in M_{n \times n} (K) $ gilt $ \delta(A) = \det(A) \delta(I_n) $
+\end{subcorollary}
+\begin{subproof*}[Korollar \ref{2.14.11}]
+	$ \det \in \mathbb{A} $, $ \det \neq 0 $ $ \forall \delta \in \mathbb{A} : \exists d \in K $ so teilt $ \delta = d \det $ 
+	i.e. $ \forall A \in M_{n \times n} (K) $
+	\[
+		\delta(A) = d \det(A),
+	\]
+	Insbesondere $ A = I_n $, i.e.
+	\begin{align*}
+		\delta(I_n) &= d \det (I_n)\\
+		\delta(I_n) &= d 
+	\end{align*}
+	i.e. $ \delta(A) = \delta(I_n) \det (A) $
+\end{subproof*}
+
+\subsection{Skript 15}
+\begin{subcorollary}
+	Für alle $ \delta \in A, \delta \neq 0 $ $ \forall A \in M_{n \times n} (K) $ gilt: $ \delta(A) = \det(A) \delta(I_n) $
+\end{subcorollary}
+
+\begin{subnote}
+	Sei $ R $ kommutativer Ring 1, $ \delta \in \operatorname{alt}^{(n)} \left( R^n \right)  $ können analog definieren!
+	Der Hauptsatz \ref{2.14.10} gilt:
+	$ A \in M_{n \times  n} \left( R \right) , A = \left( a_{ij}  \right) _{i, j}  $, definiere
+	\[
+		\det(A) = \sum_{\pi \in S_n}^{} \Signum \pi  a_{1 \pi (1)} \dotsb a_{n \pi (n)} \underbrace{\det(I_n)}_{=1}
+	\]
+\end{subnote}
+
+\begin{subexample}
+	Setze $ R \coloneqq K[x] $ und
+	\[
+		A =
+		\begin{pmatrix}
+			x & 0 & -x   \\
+			0 & 1 &  0   \\
+			1 & 0 &  x^3 \\
+		\end{pmatrix} 
+	\]
+	\[
+		\det(A) = x^4 + x^2\qed
+	\]
+\end{subexample}
+
+\begin{subtheorem}
+	Sei $ A \in M_{n \times n} (R) $.
+	Es gilt:
+	\[
+		\det (A) = \det \left( A^t \right) 
+	\]
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{2.15.4}]
+	Betrachte:
+	\[
+		\prod_{i=1}^{n} a_i \pi (i) = \prod_{i = 1, j = \pi (i)}^{n}  a_{ij} = \prod_{j = 1, i = \pi ^{-1} (j)}^{\infty} a_{ij} = \prod_{j=1}^{n} a_{\pi ^{-1} (j) j}   = \prod_{j = 1}^{n} a_{j \pi ^{-1} (j)} ^t
+	\]
+	Daraus folgt:
+	\[
+		\det(A) = \sum_{\pi \in S_n}^{} \Signum \pi \prod_{i = 1}^{n} a_{i \pi (i)} = \sum_{\pi ^{-1} S_n}^{} \Signum \left( \pi ^{-1}  \right) \prod_{j = 1}^{n} a_{j \pi ^{-1} (j)} ^t  = \det \left( A^{t}  \right) \qed
+	\]
+\end{subproof*}
+
+\begin{subtheorem}
+	$ \forall A, B \in M_{n\times n} (R) $ gilt:
+	\[
+		\det(AB) = \det (A) \cdot \det (B)
+	\]
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{2.15.5}]
+	Sei $ B $ fest und $ A = \begin{pmatrix} z_1 \\ \vdots \\ z_n \end{pmatrix}  $.
+	Definiere
+	\[
+		\delta_B (A) \coloneqq \det (AB) = \delta_B \left( z_1, \dotsc, z_n \right) = \det\left( z_1 B, \dotsc, z_nB \right) 
+	\]
+	(Bmk 7.6 L.A.I)\\
+	\textbf{Beh.:} $ \delta_B $ ist $ n $-linear und alternierend (ÜB).\\
+	Also
+	\[
+		\delta_B \in \operatorname{alt}^{(n)} \left( R^n \right)
+	\]
+	Korollar \ref{2.15.1} $ \implies \delta_B (A) = \det (A) \delta_B(I_n) = \det(A) \det(B) $\qed
+\end{subproof*}
+
+\begin{subcorollary}
+	Sei $ A $ invertierbar.
+	Es gilt 
+	\[
+		\det \left( A^{-1}  \right) = \left( \det \left( A \right)  \right) ^{-1} 
+	\]
+\end{subcorollary}
+
+\begin{subdefinition*}[Notation (Erinnerung)]
+	Sei $ A \in M_{n \times n} (R), i, j \in \left\{ 1, \dotsc, n \right\}  $.
+	Wir $ A[i | j] $ (entfernen von $ A $ die $ i $-te Zeile und $ j $-te Spalte).
+	\[
+		D_{ij} (A) \coloneqq \det\left( A[i | j] \right) 
+	\]
+\end{subdefinition*}
+
+\begin{subtheorem}
+	Sei $ j, 1 \leq j \leq n $ fest.
+	Setze
+	\[
+		\delta(A) \coloneqq \sum_{i = 1}^{n} (-1)^{i + j} a_{ij} D_{ij} (A)
+	\]
+	Dann ist $ \delta \in \operatorname{alt}^{(n)} \left( R^n \right)  $ und $ \delta(I_n) = 1 $
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{2.15.7}]
+	Siehe Skript 15 S.2, S.3\\
+	\textbf{Details} und gegebenenfalls die Plenumsübung \qed
+\end{subproof*}
+
+\begin{subcorollary}
+	Sei $ A \in M_{n \times  n} (R) $.
+	Für jedes $ 1 \leq j \leq n $ gilt:
+	\[
+		\det (A) = \sum_{i=1}^{n} (-1)^{i + j} a_{ij} D_{ij} (A)
+	\]
+	
+\end{subcorollary}
+
+\subsection{Skript 16}
+$ A \in M_{n \times n} \left( R \right)  $ 
+
+\begin{subnote}[Erinnerung]
+	\[
+		C_{ij} = (-1)^{i + j} D_{ij} 
+	\]
+	der $ ij $-te Kofaktor von $ A $.
+\end{subnote}
+
+\begin{sublemma}[Hilfslemma]
+	$ \forall k, j = 1, \dotsc, n $ 
+	\[
+		k \neq j \implies \sum_{i=1}^{n} A_{ik} C_{ij} = 0
+	\]
+\end{sublemma}
+\begin{subproof*}[Hilfslemma \ref{2.16.2}]
+	Ersetze die $ j $-te Spalte von $ A $ durch ihre $ k $-te Spalte, nenne die so erhaltene Matrix $ B $,
+	weil $ B $ zwei Wiederholte Spalten hat, ist $ \det B = 0 $.
+	Nun ist
+	\[
+		B[i|j] = A[i|j]
+	\]
+	Also berechnen wir
+	\begin{align*}
+		0 &= \det B \\
+		  &= \sum_{i=1}^{n} (-1)^{i + j} B_{ij} \det B[i|j] \\
+		  &= \sum_{i=1}^{n} (-1)^{i + j} A_{ik} \det A[i|j] \\
+		  &= \sum_{i=1}^{n} A_{ik} C_{ij}  \qed
+	\end{align*}
+\end{subproof*}
+
+Wir fassen zusammen:
+\begin{subcorollary}
+	\begin{enumerate}[label=(\alph*)]
+		\item 
+			\[
+				\det A = \sum_{i=1}^{n} A_{ij} C_{ij} 
+			\]
+		\item
+			\begin{equation}
+				\label{eq:2.16.3.1}
+				\tag{$ * $}
+				\sum_{i=1}^{n} A_{ik} C_{ij} = \begin{cases} \det A & j = k\\ 0 & j \neq k \end{cases}
+			\end{equation}
+			\qed
+	\end{enumerate}
+\end{subcorollary}
+
+\begin{subdefinition}[Notation (Erinnerung)]
+	Sei $ A \in M_{n \times n} (R), i, j \in \left\{ 1, \dotsc, n \right\}  $.
+	Wir $ A[i | j] $ (entfernen von $ A $ die $ i $-te Zeile und $ j $-te Spalte)..
+	\[
+		D_{ij} (A) \coloneqq \det\left( A[i | j] \right) 
+	\]
+\end{subdefinition}
+
+\begin{subnote*}[Erinnerung]
+	\[
+		\left( \operatorname{adj} A \right)_{ij} \coloneqq C_{ji} = (-1)^{-1} \det A[j|i]
+	\]
+\end{subnote*}
+
+\begin{subcorollary}
+	\begin{equation}
+		\label{eq:2.16.5.1}
+		\tag{$ * * $}
+		\left( \adj A \right) (A) = \det(A) I_n
+	\end{equation}
+\end{subcorollary}
+\begin{subproof*}[Korollar \ref{2.16.5}]
+	Matrixprodukt + \eqref{eq:2.16.3.1} \qed
+\end{subproof*}
+
+Wir zeigen jetzt umgekehrt:
+\begin{sublemma}
+	$ A\left( \adj A \right) = \det\left( A \right) I_n $
+\end{sublemma}
+\begin{subproof*}[Lemma \ref{2.16.6}]
+	gleich
+\end{subproof*}
+
+\begin{subproof*}[Lemma \ref{2.16.6}]
+	Es gilt
+	\[
+		A^t[i|j] = A[j|i]^t
+	\]
+	$ \forall i, j = 1, \dotsc, n $ 
+	Satz \ref{2.15.4} $ \implies $ $ ij $-te Kofaktor von $ A^t = ji $-te Kofaktor.
+	Also
+	\begin{equation}
+		\label{eq:2.16.6.1}
+		\tag{$ * * * $}
+		\adj\left( A^t \right) = \adj\left( A \right) ^t
+	\end{equation}
+	Nun impliziert \eqref{eq:2.16.5.1} für $ A^t $:
+	\[
+		\left( \adj A^t \right) A^t = \left( \det A^t \right) I_n = \left( \det A \right) I_n
+	\]
+	zusammen mit \eqref{eq:2.16.6.1} erhalten wir
+	\[
+		\left( \adj A \right) ^t A^t = \left[ A \left( \adj A \right)  \right]^t = \left( \det A \right) I_n = A \left( \adj A \right) .\qed
+	\]
+\end{subproof*}
+
+\begin{subcorollary}
+	\[
+		A \left( \adj A \right) = \det(A) I_n
+	\]
+	und
+	\begin{equation}
+		\label{eq:2.16.7.1}
+		\tag{$ \dag $}
+		\left( \adj A \right) A = \det(A) I_n
+	\end{equation}
+	Insbesondere wenn $ A $, $ \det A \neq 0 $, folgt $ A^{-1} = \det\left( A \right) ^{-1} \adj(A) $\qed
+\end{subcorollary}
+
+\begin{subtheorem}
+	$ A \in M_{n \times n} (R) $ ist über $ R $ invertierbar genau dann, wenn $ \det(A) \in R^x $ (eine Einheit in $ R $).
+	Insbesondere wenn $ R = K $ ein Körper ist, dann ist $ A $ invertierbar genau dann wenn $ \det(A) \neq 0 $.
+	Wenn $ R = K[x] $, dann ist $ A $ invertierbar geau dann wenn $ \det(A) \in K^x $.
+	Ist $ A $ invertierbar, so ist
+	\[
+		A^{-1} = \left( \det A \right) ^{-1} \adj(A)
+	\]
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{2.16.8}]
+	aus \eqref{eq:2.16.7.1} sehen wir:
+	$ \det A $ invertierbar $ \implies A $ invertierbar mit
+	\[
+		A^{-1} = \left( \det A \right) ^{-1} \adj (A)
+	\]
+	umgekert:
+	$ A $ invertierbar über
+	\begin{align*}
+		R &\implies A A^{-1} = I_n \\
+		  &\implies \det\left( A A^{-1}  \right) = 1 \\
+		  &\implies \det\left( A \right) \det\left( A^{-1}  \right) = 1 \\
+		  &\implies \det(A) \in R^x
+	\end{align*}
+\end{subproof*}
+
+Wir berechnen $ \left( K[x] \right) ^\times  $ seien $ f, g \in K[x] $ 
+\[
+	fg = 1 \implies \deg f + \deg g = 0 \implies \deg f = \deg g = 0
+\]
+Also die Einheiten von $ K[x] $ sind die Skalarpolynome $ \neq 0 $, i.e $ K^x $\qed
+
+\begin{subexample}
+	\[
+		A =
+		\begin{pmatrix} 
+			a_{11} & a_{12} \\
+			a_{21} & a_{22}
+		\end{pmatrix} 
+	\]
+	\[
+		\det(A) = a_{11}a_{22} - a_{21}a_{12}
+	\]
+	\[
+		\adj(A) =
+		\begin{pmatrix} 
+			a_{22} & -a_{12} \\
+			- a_{21} & a_{11}
+		\end{pmatrix} 
+	\]
+	\[
+		A =
+		\begin{pmatrix} 
+			1 & 2 \\
+			3 & 4
+		\end{pmatrix} 
+		\in M_{2 \times 2} (\Z )
+	\]
+	\[
+		\det(A) = -1 \not\in \Z ^x,
+	\]
+	$ A $ ist nicht invertierbar über $ \Z  $.
+	$ -2 \in \Q ^{-1}  $, $ A^{-1} = -\frac{ 1 }{ 2 } \begin{pmatrix} 4 & -2 \\ -3 & 1 \end{pmatrix}  $
+\end{subexample}
+
+\begin{subexample}
+	$ R = \R [x] $ 
+	\[
+		A =
+		\begin{pmatrix} 
+			x^2 + x & x + 1 \\
+			x - 1 & 1
+		\end{pmatrix} 
+	\]
+	\[
+		B =
+		\begin{pmatrix} 
+			x^2 - 1 & x + 2 \\
+			x^2 - 2x + 3 & x
+		\end{pmatrix} 
+	\]
+	\[
+		\det (A) = x + 1,
+	\]
+	$ A $ ist \textbf{nicht} invertierbar
+	\[
+		\det(B) = -6
+	\]
+	$ B $ invertierbar
+\end{subexample}
+
+\begin{sublemma}
+	Ähnliche Matrizen haben gleiche Determinanten.
+\end{sublemma}
+\begin{subproof*}[Lemma \ref{2.16.11}]
+	Seien $ A, B \in M_{n \times n} (K) $ ähnlich, d.h. $ \exists P $ invertierbar so, dass
+	\[
+		B = P^{-1} A P
+	\]
+	Berechne:
+	\begin{align*}
+		\det B = \det \left( P^{-1} A P \right) \\
+		~ &= \det\left( P^{-1}  \right) \det\left( A \right) \det\left( P \right)  \\
+		~ &= \det\left( P \right) ^{-1} \det(A) \det(P) \\
+		~ &= \det A \qed
+	\end{align*}
+\end{subproof*}
+
+\begin{subdefinition}
+	Sei $ K $ ein Körper $ V $ ein $ K $-Vektorraum, $ \dim V = n $, und
+	\[
+		T : V \to V
+	\]
+	ein linearer Operator iwr definieren
+	\[
+		\det(T) \coloneqq \det\left( [T]_{\mathcal{B} }  \right)
+	\]
+	wobei $ \mathcal{B}  $ eine beliebe geordnete Basis für $ V $ ist.
+\end{subdefinition}
+
+\begin{subtheorem}[Cramer's Regel]
+	Sei $ A \in M_{n \times n} (K) $ mit $ \det(A) \neq 0 $ 
+	und
+	\[
+		Y = \begin{pmatrix} y_1 \\ \vdots \\ y_n \end{pmatrix} \in K^{n \times 1} 
+	\]
+	Betrachte das LGS:
+	\[
+		(S) AX = Y
+	\]
+	wobei
+	\[
+		X = \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix} 
+	\]
+	Dann können wir die eindeutige Lösung von (S)
+	\[
+		X = A^{-1} Y
+	\]
+	so beischreiben:
+	$ \forall j = 1, \dotsc, n $ $ x_j = \det\left( B_j \right) \left( \det(A) \right) ^{-1}  $ 
+	wobei $ B_j $ die $ n \times n $ Matrix ist, die man erhält, wenn man die $ j $-te Spalte von $ A $ durch $ Y $ ersetzt.
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{2.16.13}]
+	Multiplizieren mit $ \adj(A) $ ergibt
+	\begin{align*}
+		\underbrace{\left( \adj(A) A \right)}_{\det(A) I_n} X &= \adj(A) Y \\
+		\overset{\text{Kor. \ref{2.16.7}}}{\implies} \det(A) X = \adj(A) Y
+	\end{align*}
+	Also
+	\[
+		\det(A) x_j = \sum_{i=1}^{n} \left( \adj A \right) _{ji} y_i
+	\]
+	Also gilt $ \forall j = 1, \dotsc, n $ (laut Definition \ref{2.16.4}
+	\begin{align*}
+		\det(A) x_j &= \sum_{i=1}^{n} (-1)^{i + j} \det(A[i|j]) y_i \\
+		~ &= \sum_{i=1}^{n} (-1)^{i + j} y_i \det A[i|j] \\
+		~ &= \sum_{i=1}^{n} (-1)^{i + j} y_j \det B_j[i|j] \\
+		~ &\overset{\text{Kor \ref{2.15.8}} }{=} \det B_j \\
+	\end{align*}
+	
+\end{subproof*}
+
+

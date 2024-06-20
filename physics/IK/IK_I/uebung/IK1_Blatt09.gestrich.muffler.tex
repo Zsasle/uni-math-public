@@ -1,0 +1,83 @@
+\documentclass[sectionformat=aufgabe]{gadsescript}
+
+\setsemester{Winter Semester 2023/2024}%
+\setuniversity{University of Konstanz}%
+\setfaculty{Faculty of Science\\(physics)}%
+\settitle{Übungsblatt Nr. 9}
+
+\begin{document}
+\maketitle
+\section{Gradient, Divergenz, Rotation}
+\begin{enumerate}[label=\alph*)]
+	\item $ \grad \varphi = \left( \frac{ 3x^2y }{ z^2 }, \frac{ x^3 }{ z^2 }, \frac{ 1 }{ 2 } \cdot \frac{ x^3 y }{ z^3 }\right) $
+	\item $ \nabla \cdot \vec A = 4x^3y - 4y\sqrt{1-z^2} + 2z \exp(x^2+z^2)  $
+	\item $ \nabla \times \vec A = \left( - \frac{ 4yz }{ \sqrt{1 - z^2}  }, - 2x \exp(x^2 + z^2), -x^4\right) $
+\end{enumerate}
+
+\section{Linienintegrale}
+\begin{enumerate}[label=\alph*)]
+	\item mit $ \gamma : [0, 1] \to \R^3, t \mapsto (t, t, t) $, also $ x = t, y = t, z = t^3 $
+		\begin{align*}
+			\int_{\gamma} \vec A \cdot d\vec r &= \int_{0}^{1} \vec A \cdot \frac{d\vec r}{ dt } dt\\
+			~&= \int_{0}^{1} \begin{pmatrix} 2t + t * t\\ 3 t^2 - 6 t \cdot t\\ 1 - 4 t \cdot t \cdot t^2 \end{pmatrix}  \cdot \begin{pmatrix} 1\\1\\1 \end{pmatrix} dt \\
+			~&= \int_{0}^{1} 2t + t^2 + 3 t^2 - 6 t^2 + 1 - 4 t^4  dt \\
+			~&= \int_{0}^{1} - 4 t^4 - 2t^2 + 2 t + 1 dt \\
+			~&= \left[ - \frac{ 4 }{ 5 }  t^5 - \frac{ 2 }{ 3 } t^3 + t^2 + t\right]_0^1 \\
+			~&= - \frac{ 4 }{ 5 } - \frac{ 2 }{ 3 } + 1 + 1 \\
+			~&= - \frac{ 12 }{ 15 } - \frac{ 10 }{ 15 } + \frac{ 30 }{ 15 }  \\
+			~&= \frac{ 8 }{ 15 } \\
+		\end{align*}
+	\item mit $ \gamma : [0, 1] \to \R^3, t \mapsto (t^2, t, t^3) $, also $ x = t^2, y = t, z = t^3 $
+		\begin{align*}
+			\int_{\gamma} \vec A \cdot d\vec r &= \int_{0}^{1} \vec A \cdot \frac{d\vec r}{ dt } dt\\
+			~&= \int_{0}^{1} \begin{pmatrix} 2t^2 + t * t^3\\ 3 t^2 - 6 t^2 \cdot t^3\\ 1 - 4 t^2 \cdot t \cdot t^6 \end{pmatrix}  \cdot \begin{pmatrix} 2t\\1\\3t^2 \end{pmatrix} dt \\
+			~&= \int_{0}^{1} 2t(2t^2 + t^4) + 3 t^2 - 6 t^5 + 3t^2(1 - 4 t^9) dt \\
+			~&= \int_{0}^{1} 4t^3 + 2t^5 + 3 t^2 - 6 t^5 + 3t^2 - 12 t^11 dt \\
+			~&= \int_{0}^{1} 4t^3 + 6 t^2 - 4 t^5 - 12 t^11 dt \\
+			~&= \left[ - t^12 - \frac{ 2 }{ 3 } t^6 + t^4 + 2t^3 \right]_0^1 \\
+			~&= -1 - \frac{ 2 }{ 3 }  + 1 + 2 \\
+			~&= \frac{ 4 }{ 3 }  \\
+		\end{align*}
+	\item[c)-e)]
+		\begin{align*}
+			\nabla \times \vec B &= \Bigg( \frac{ 2yz }{ \sqrt{x^2 + y^2 + z^2}^5 } - \frac{ 2yz }{ \sqrt{x^2 + y^2 + z^2}^5 },\\
+			~&\quad\frac{ 2xz }{ \sqrt{x^2 + y^2 + z^2}^5 } - \frac{ 2xz }{ \sqrt{x^2 + y^2 + z^2}^5 },\\
+			~&\quad\frac{ 2xy }{ \sqrt{x^2 + y^2 + z^2}^5 } - \frac{ 2xy }{ \sqrt{x^2 + y^2 + z^2}^5 } \Bigg)\\
+			~&= (0, 0, 0) \\
+		\end{align*}
+		Also konservativ, da keine Wirbel Existieren, daher ist egal welchen Weg man nimmt und
+		es gibt so ein Potenzialfeld $ V = \frac{ 1 }{ 2\sqrt{x^2 + y^2 + z^2}  } $ mit $ -\grad(V) = \begin{pmatrix} \frac{ x }{ \sqrt{x^2 + y^2 + z^2}^3 }\\\frac{ y }{ \sqrt{x^2 + y^2 + z^2}^3 }\\\frac{ z }{ \sqrt{x^2 + y^2 + z^2}^3 }  \end{pmatrix} = \vec B $
+		weshalb also nach dem Skript
+		\begin{align*}
+			\int_{\gamma} \vec B \cdot dr = V(r_1) - V(r_2)
+		\end{align*}
+		also zwischen $ \begin{pmatrix} 1\\0\\0 \end{pmatrix} $ und $ \begin{pmatrix} -1\\0\\0 \end{pmatrix}  $ ergibt das Linienintegral
+		$ V(e_x) - V(-e_x) = \frac{ 1 }{ 2\sqrt{1^2 + 0^2 + 0^2} } - \frac{ 1 }{ 2\sqrt{(-1)^2 + 0^2 + 0^2}  } = 0 $ egal mit welchem Weg
+%	\item 
+%		mit $ \gamma : [0, 1] \to \R^3, t \mapsto (\cos(t), \sin(t), 0) $, also $ x = \cos (t), y = \sin(t), z = 0 $
+%		\begin{align*}
+%			\int_{\gamma} \vec B \cdot dr &= \int_{0}^{\pi } \frac{\vec r(t)}{ \left| \vec r \right|^3 } \cdot \frac{d\vec r(t)}{ dt } dt \\
+%			~&= \int_{0}^{\pi }\frac{ 1 }{ \sqrt{\cos^2(t) + \sin^2(t) + 0^2}^3  } \begin{pmatrix} \cos(t)\\\sin(t)\\0 \end{pmatrix} \cdot \begin{pmatrix} -\sin (t)\\ \cos(t)\\0 \end{pmatrix} dt \\
+%			~&= \int_{0}^{\pi }-\sin (t)\cos(t) + \cos(t)\sin(t) dt \\
+%			~&= \int_{0}^{\pi } 0 dt \\
+%			~&= 0 \\
+%		\end{align*}
+%	\item 
+%		da konservativ gilt also 
+%		\begin{align*}
+%			\int_{\gamma} \vec B \cdot dr &= V(r_1) - V(r_2)\\
+%			~&= V(\begin{pmatrix} \cos (0)\\ \sin (0)\\ 0 \end{pmatrix} - V(\begin{pmatrix} \cos (\pi )\\ \sin (\pi ) \\ 0 \end{pmatrix} )  \\
+%			~&= \frac{ 1 }{ \sqrt{1^2 + 0^2 + 0^2} } - \frac{ 1 }{ \sqrt{(-1)^2 + 0^2 + 0^2} } \\
+%			~&= 0
+%		\end{align*}
+%	\item 
+%		da konservativ gilt also 
+%		\begin{align*}
+%			\int_{\gamma} \vec B \cdot dr &= V(r_1) - V(r_2)\\
+%			~&= V(\begin{pmatrix} \tan (\frac{ \pi }{ 4 } )\\ 0 \\ 0 \end{pmatrix} - V(\begin{pmatrix} \tan (- \frac{ \pi }{ 4 }  )\\ 0 \\ 0 \end{pmatrix} )  \\
+%			~&= \frac{ 1 }{ \sqrt{1^2 + 0^2 + 0^2} } - \frac{ 1 }{ \sqrt{(-1)^2 + 0^2 + 0^2} } \\
+%			~&= 0
+%		\end{align*}
+\end{enumerate}
+
+\end{document}

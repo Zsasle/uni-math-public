@@ -1,0 +1,270 @@
+\section{Die Exponentialfunktion}
+\subsection{Die Exponentialfunktion}
+In diesem Abschnitt führen wir die für die gesamte Mathematik zentrale \textbf{Exponentialfunktion} ein. Diese ist als Potenzreihe definiert:
+\begin{subdefinition}[Exponentialreihe und -funktion]
+	Für $ x \in \R  $ definieren wir die \textbf{Exponentialreihe} durch
+	\[
+		\exp (x) \coloneqq \sum_{n=0}^{\infty} \frac{ x^{n} }{ n! } 
+	\]
+	und nennen $ \exp(x): \R \ni x \mapsto \exp (x) \in \R  $ die \textbf{Exponentialfunktion}.
+\end{subdefinition}
+
+Der Ausdruck $ \exp (x) $ ist in der Tat wohldefiniert, denn nach Quotientenkriterium ist die Exponentialreihe
+\[
+	\sum_{n=0}^{\infty} \frac{ x^{n} }{ n! } 
+\]
+für jedes $ x \in \R  $ absolut konvergent: Setzen wir $ q_n \coloneqq \frac{ x^{n} }{ n! }  $, so erhalten wir
+\[
+	\left| \frac{q_{n+1}}{ q_n }  \right| = \frac{ \left| x \right| }{ n + 1 } \to 0, \quad n \to \infty,
+\]
+und daraus folt die absolute Konvergenz. Damit ist der \textbf{Konvergenzradius} der Exponentialreihe $ R = \infty $.
+
+Im Folgenden wollen wir nun die zentralen Eigenschaften der Exponentialfunktion herausarbeiten. Hierzu benötigen wir als wichtiges Hilfmittel die nachfolgende Aussage von unabhängigem Interesse:
+
+\begin{subtheorem}[Satz vom Cauchy-Produkt]
+	Seien $ \sum_{n=0}^{\infty} a_n $ und $ \sum_{n=0}^{\infty} b_n $ zwei abolut konvergente Reihen. Dann gilt
+	\[
+		\left( \sum_{n=0}^{\infty} a_n \right) \left( \sum_{n=0}^{\infty} b_n \right) = \sum_{n=0}^{\infty} \sum_{k=0}^{n} a_kb_{n-k} =: \sum_{n=0}^{\infty} c_n,
+	\]
+	wobei auch letztere Reihe absolut konvergent ist.
+\end{subtheorem}
+\begin{subproof*}[Theorem \ref{9.1.2}]
+	Wir setzen für $ N \in \N  $ 
+	\[
+		A_N \coloneqq \sum_{n=0}^{N} a_n, A_N^* \coloneqq \sum_{n=0}^{N} \left| a_n \right|, B_N \coloneqq \sum_{n=0}^{N} b_n, B_N^* \coloneqq \sum_{n=0}^{N} \left| b_n \right| .
+	\]
+	Wir definieren
+	\[
+		\mathcal{Q}_N \coloneqq  \left\{ (k, l) \in \N_0^2: k, l \leq N \right\} , \Delta_N \coloneqq \left\{ (k,l) \in \N_0^2: k + l \leq N \right\} .
+	\]
+	Nun ist
+	\begin{align*}
+		\left| A_NB_N - C_N \right| &\leq \sum_{(k, l) \in \mathcal{Q}_N\setminus \Delta_N} \left| a_kb_l \right| \\
+		~&\leq \sum_{(k, l) \in \mathcal{Q}_N\setminus \mathcal{Q}_{\left\lfloor \frac{ N }{ 2 }  \right\rfloor} } \left| a_kb_l \right| \\
+		~&\leq A_N^*B_N^* - A_{\left\lfloor \frac{ N }{ 2 }  \right\rfloor}^*B_{\left\lfloor \frac{ N }{ 2 }  \right\rfloor}^*.
+	\end{align*}
+	Nun sind wegen der absoluten Konvergenz $ \left( A_N^* \right), \left( B_N^* \right) $ konvergent. Also konvergiert auch die Produktfolge $ \left( A_N^*B_N^* \right) $ und ist damit Cauchy. Sei also $ \varepsilon > 0 $. Dann gibt es ein $ N_0 \in \N  $ so, dass
+	\[
+		\left| A_N^*B_N^* - A_M^*B_M^* \right| < \varepsilon \quad \text{für alle } M, N \geq N_0
+	\]
+	gilt.
+	Speziell ist also $ A_N^*B_N^* - A_{\left\lfloor \frac{ N }{ 2 }  \right\rfloor}^*B_{\left\lfloor \frac{ N }{ 2 }  \right\rfloor} < \varepsilon $ für alle hinreichend großen $ N \in \N  $, und damit folgt $ \lim_{N \to \infty} \left| A_NB_N - C_N \right| = 0 $, und damit folgt die Behauptung hinsichtlich Konvergenz. Für die absolute Konvergenz argumentieren wir analog. \qed
+\end{subproof*}
+
+\begin{task}
+	Machen Sie sich klar, dass die Aussage des vorherigen Satzes \textit{nicht wahr bleibt}, wenn wir die absolute Konvergenz fallen lassen. Betrachten Sie hierzu
+	\[
+		a_n = b_n = \frac{ (-1)^n }{ \sqrt{n}  } , \quad n \in \N 
+	\]
+	und wiederholen Sie hierzudas Leibnizkriterium sowie die Divergenz der harmonischen Reihe.
+\end{task}
+Als wichtige Anwendung von Satz \ref{9.1.2} zeigen wir nun fundamentale Aussagen für die Exponentialfunktion. Hierzu ist es zweckmäßig, eine Funktioni $ f: A\to \R  $ 
+\begin{itemize}
+	\item \textbf{monoton wachsend} zu nennen, falls $ x, y \in A $ mit $ x < y $ impliziert, dass $ f(x) \leq f(y) $,
+	\item \textbf{streng monoton wachsend} zu nennen, falls $ x, y \in A $ mit $ x < y $ impliziert, dass $ f(x) < f(y) $,
+	\item \textbf{monoton fallend} zu nennen, falls $ x, y \in A $ mit $ x < y $ impliziert, dass $ f(x) \geq  f(y) $,
+	\item \textbf{streng monoton fallend} zu nennen, falls $ x, y \in A $ mit $ x < y $ impliziert, dass $ f(x) > f(y) $,
+\end{itemize}
+
+\begin{subtheorem}[Zentrale Eigenschaften der Exponentialfunktion]
+	Die Exponentialfunktion $ \exp  $ erfüllt die folgenden Eigenschaften:
+	\begin{enumerate}[label=(\roman*)]
+		\item Für alle $ x, y \in \R  $ gilt $ \exp (x + y) = \exp (x) \exp (y) $ sowie $ \exp (0) = 1 $. Diese Eigenschaft heißt Funktionalgleichung der Exponentialfunktion.
+		\item Es ist $ \exp : \R \to R_{>0}  $ und $ \exp (-x) = \frac{ 1 }{ \exp (x) }  $ für alle $ x \in \R  $.
+		\item $ \exp  $ ist stetig.
+		\item $ \exp  $ ist streng monoton wachsend mit $ \lim_{x \to -\infty} \exp (x) = 0 $ und $ \lim_{x \to \infty} \exp (x) = \infty $.
+	\end{enumerate}
+\end{subtheorem}
+\begin{subproof*}[Theorem \ref{9.1.3}]
+	Für (i) bemerken wir, dass $ \exp (x) $ und $ \exp (y) $ durch absolut konvergente Reihen definiert sind. Daher dürfen wir den Satz vom Cauchy-Produkt anwenden. Damit folt nach Satz \ref{9.1.2}, dass
+	\begin{align*}
+		\exp (x)\exp (y) &= \sum_{n=0}^{\infty} \sum_{k=0}^{n} \frac{ 1 }{ k!(n-k)! } x^ky^{n-k}  \\
+		~&= \sum_{n=0}^{\infty} \frac{ 1 }{ n! } \sum_{k=0}^{n} \frac{ n! }{ k!(n-k)! } x^ky^{n-k} \\
+		~&= \sum_{n=0}^{\infty} \frac{ 1 }{ n! } (x + y)^n \\
+		~&= \exp (x + y) \\
+	\end{align*}
+	Wobei wir den binomischen Lehrsatz (\hyperlink{section.1}{Kapitel 1}) verwendet haben. Da $ \exp (0) = 1 $ direkt aus der Definition folgt, erhalten wir also (i).
+
+	Für (ii) stellen wir zuerst fest, dass nach (i) $ 1 = \exp (0) = \exp (x - x) = \exp (x) \exp (-x) $ gilt. Direkt aus der Definition schließen wir, dass $ \exp (x) > 0 $ für $ x > 0 $ gilt, und diese Identität gibt uns dann $ \exp (-x) > 0 $. Damit ist $ \exp : \R \to \R_{ >0 } $, und weiter $ \exp (-x) = \frac{ 1 }{ \exp (x) }  $ für alle $ x \in \R  $.
+
+	Eigenschaft (iii) folgt sofort aus Korollar \ref{8.3.6}, da der Konvergenzradius der Exponentialreihe nach Definition $ R = \infty $ beträgt.
+
+	Für (iv) seien $ x < y $. Aus der Definition folgt sofort, dass $ \exp (z) \geq 1 $ für alle $ z \geq 0 $ und $ \exp (z) > 0 $ für alle $ z > 0 $ gilt. Also ist
+	\[
+		1 < \exp ( y - x ) = \exp (y) \exp (-x) = \frac{ \exp (y) }{ \exp (x) } ,
+	\]
+	woraus sofort die strenge Monotonie folgt. Für die Limiten beachten wir, dass für alle $ x > 0 $ die Ungleichung $ 1 + x \leq \exp (x) $ gilt. Hiermit ergibt sich direkt $ \lim_{x \to \infty} \exp (x) = \infty $. Aber
+	\[
+		\lim_{x \to -\infty} \exp (x) = \lim_{x \to \infty} (-x) = \lim_{x \to \infty} \frac{ 1 }{ \exp (x) } = 0,
+	\]
+	und damit folgt der Satz. \qed
+\end{subproof*}
+
+\begin{subtheorem}
+	Die Exponentialfunktion ist eine stetige Bijektin $ \exp : \R \to \R_{>0}  $.
+\end{subtheorem}
+\begin{subproof*}[Theorem \ref{9.1.4}]
+	Die Stetigkeit von $ \exp  $ wurde bereits in Theorem ref{9.1.3} festgehalten.Die Injektivität folgt sofort aus der strengen Monotonie von $ \exp  $, sie Theorem \ref{9.1.3} (iv).
+	Für die Surjektivität sei $ y_0 > 0 $.
+	Nach Theorem \ref{9.1.3} (iv) gilt $ \lim_{x \to -\infty} \exp (x) = 0 $ und $ \lim_{x \to \infty} \exp (x) = \infty $, womit es $ z_1, z_2 \in \R  $ gibt mit $ 0 < \exp (z_1) < y_0 < \exp (z_2) $.
+	Wir betrachten nun die Funktion $ g : x \mapsto \exp (x) - y_0 $. Dann gilt $ g(z_1) < 0 $ und $ g(z_2) > 0 $, und da $ \exp  $ stetig ist, gibt es nach dem Zwischenwertsatz, Theorem \ref{7.4.1}, ein $ x_0 \in \R  $ mit $ \exp (x) = y_0 $. Damit ist $ \exp  : \R \to \R_{>0}  $ eine bijektive Abbildung.\qed
+\end{subproof*}
+
+\subsection{Bijektivität, Monotonie und der Logarithmus}
+Basierend auf Theorem \ref{9.1.3} ist $ \exp : \R \to \R_{>0} bijektiv. $ Damit existiert die Umkehrfunktion von $ \exp  $ als Abbildung $ \R_{>0} \to \R  $. Aufgrund ihrer Wichtigkeit geben wir ihr einen eigenen Namen:
+\begin{subdefinition}[Logarithmus]
+	Die nach Satz \ref{9.1.4} wohldefinierte Umkehrfunktion der Exponentialfunktion $ \exp : \R \to \R_{>0}  $ wir der \textbf{(natürliche) Logarithmus} genannt. Wir notieren die natürliche Logarithmusfunktion mit $ \log : \R_{>0} \to \R  $.
+\end{subdefinition}
+Wir studieren nun elementare Eigenschaften der Logarithmusfunktion:
+\begin{subtheorem}
+	Die Logarithmusfunktion $ \log : \R_{>0} \to \R  $ ist stetig mit
+	\[
+		\lim_{x \searrow 0} \log (x) = -\infty \quad \text{und} \quad \lim_{x \to \infty} \log (x) = +\infty.
+	\]
+	Weiter erfüllt sie $ \log(1) = 0 $ und für alle $ x, y > 0 $ die \textbf{Funktionalgleichung}
+	\[
+		\log (xy) = \log (x) + \log (y).
+	\]
+	
+\end{subtheorem}
+\begin{subproof*}[Theorem \ref{9.2.2}]
+	Basierend auf Satz \ref{9.1.3} und \ref{9.1.4} müssen wir nur die Stetigkeit zeigen. Sei hierzu $ y_0 = \exp (x_0) \in \R_{>0}  $ und $ \varepsilon > 0 $ beliebig. Wir setzen $ y_1 < y_0 < y_2 $.
+	Weiter impliziert die Stetigkeit von $ \exp  $, dass $ \exp  $ das Intervall $ [x_0 - \varepsilon , x_0 + \varepsilon ] $ bijektiv auf das Intervall $ [y_1, y_2] $ abbildet.
+	Setzen wir $ \delta \coloneqq \min \left\{ y_0 - y_1, y_2 - y_0 \right\}  $, so folgt $ \exp^{-1} ((y_0 - \delta, y_0 + \delta)) \subset (x_0 - \varepsilon , x_0 + \varepsilon ) $, und damit folgt die Stetigkeit von $ \log  $ in $ x_0 $. Die restlichen Eigenschaften ergeben sich direkt hieraus und den entsprechenden Eigenschaften der Exponentialfunktion - beispielsweise ist für $ x, y > 0 $:
+	\[
+		\exp (\log (xy)) = xy \quad \text{und} \quad \exp (\log (x) + \log (y)) = \exp (\log (x)) \exp (\log (y)) = xy,
+	\]
+	womit nach Injektivität der Exponentialfunktion $ \log (xy) = \log (x) + \log (y) $ gelten muss.\qed
+\end{subproof*}
+
+\subsection{Allgemeine Potenzen und Exponentialfunktionen}
+Im vorliegenden Abschnitt wollen wir nun \textbf{Potenzen} zu allgemeinen nicht-negativen Basen einführen.
+Antizipieren wir  die aus der Schule bekannte Rechnung $ \log (a^x) = x \log (a) $ (die nun \textit{per Definition} gelten soll) und erinnern uns an $ \exp (\log (z)) = z $, so íst die Definition $ a^x \coloneqq \exp (x \log (a)) $ naheliegend:
+\begin{subdefinition}[Allgemeine Potenzen]
+	Sei $ a > 0 $. Wir definieren die x\textbf{-te Potenz zu Basis} a durch
+	\[
+		a^x \coloneqq \exp (x \log (a) ), \quad x \in \R .
+	\]
+	Wir schreiben dann auch $ \exp_a : \R \ni x \mapsto a^x \in \R  $ für die entsprechende Funktion.
+\end{subdefinition}
+
+\begin{sublemma}
+	Sei $ a > 0 $ und $ \exp_a : \R \to \R  $ wie in Definition \ref{9.3.1} Dann ist $ \exp_a $ stetig mit
+	\begin{equation}
+		\label{eq:9.3.2.1}
+		\exp_a \left( \frac{ p }{ q }  \right) = a^{\frac{ p }{ q } } \quad \text{für alle $ p \in \Z  $ und alle $ q \in \N  $ } .
+	\end{equation}
+\end{sublemma}
+Damit ist $ \exp_a $ die eindeutig bestimmte stetige Fortsetzung der Funktion $ \Q \ni x \mapsto a^x \in \R  $ nach $ \R  $.
+Das bedeuted: $ \exp_a: \R \to \R  $ ist stetig und erfüllt \eqref{eq:9.3.2.1}.
+
+\begin{subproof}[\ref{9.3.2}]
+	Die Stetigkeit von $ \exp_a $ folgt direkt aus den Stetigkeitseigenschaften von $ \exp  $ und $ \log  $ sowie Sätzen \ref{7.2.7} und \ref{7.2.9}. Um \eqref{eq:9.3.2.1} zu zeigen, gehen wir schrittweise vor. Wir behaupten zuerst, dass
+	\begin{equation}
+		\label{eq:9.3.2.2}
+		\exp_a(n) = a^n \quad \text{für alle} n \in \N_0
+	\end{equation}
+	gilt. Dies folgt aus nach der Funktionalgleichung $ \exp(x + y) = \exp(x) \exp (y) $ für $ x, y \in \R  $ und somit
+	\[
+		\exp_a(n) \overset{\text{Def}}{=}\exp (n \log (a)) = \exp \big( \underbrace{\log (a) + \dotsb + \log (a)}_{n\text{-mal} } \big) = \left( \exp (\log (a)) \right)^n = a^n,
+	\]
+	wobei wir im letzen Schritt die Identität $ \exp (\log (a)) = a $ ausgenutzt haben. In einem zweiten Schritt zeigen wir nun, dass sich die Identität für \eqref{eq:9.3.2.2} auf alle ganzen Zahlen $ n \in \Z  $ veralgemeinern lässt. Hierzu sei $ n \in \N_0 $. Dann ist mit der Funktionalgleichung der Exponentialfunktion
+	\[
+		1 = \exp (0) = \exp ( n \log (a) + (-n) \log (a)) = \exp (n\log (a))\exp (-n\log (a)),
+	\]
+	und damit folgt nach dem bereits Bewiesenen, dass
+	\[
+		a^{-n} = \frac{ 1 }{ a^{n}  } = \frac{ 1 }{ \exp (n \log (a)) } = \exp (-n\log (a)),
+	\]
+	und wir erhalten die Identität \eqref{eq:9.3.2.2} für alle ganzen Zahlen. Sei nun $ p \in \Z $ und $ q \in \N  $. Dann ist
+	\[
+		a^p =\exp \left( p \log (a) \right) = \exp \left( 1 \left( \frac{ p }{ q } \log (a) \right) \right) = \left( \exp \left( \frac{ p }{ q } \log (a) \right) \right)^q.
+	\]
+	Also ist $ \exp \left( \frac{ p }{ q } \log (a) \right)  $ die eindeutig bestimmte positive Lösung der Gleichung $ x^q = a^p $,
+	und dies bedeutet gerade \eqref{eq:9.3.2.1}. Nun reicht es zu realisieren, dass $ \exp_a $ stetig ist und $ \Q  $ gemäß Satz \ref{9.3.2} dicht in $ \R  $ liegt.\qed
+\end{subproof}
+
+Wir notiern an dieser Stelle die Rechenregeln für allgemeine Potenzen, die bereits aus der Schule bekannt sind, nun aber rigoros bewiesen werden können - siehe Übung \ref{9.2} unten.
+
+\begin{task}
+	Beweisen Sie die Rechenregeln aus Bemerkung \eqref{eq:9.3.2.2}.
+\end{task}
+
+
+
+\subsection{Grenzwerte}
+
+\textbf{Ziel:} Grenzverhalten der Exp.-\& Log.-Funktion verstehen
+\begin{equation}
+        \label{eq:9.1}
+        \forall k \in \N_0 : \lim_{x \to \infty} \frac{ \exp(x) }{ x^k } = +\infty.
+\end{equation}
+
+\[
+        \frac{ 1 }{ x^k } \exp(x) = \frac{ 1 }{ x^k } \left( \underbrace{1 + \dotsc + \frac{x^k}{ k! } }_{>0} + \frac{ x^{k+1} }{ (k+1)! } + \sum_{j=k+1}^{\infty} \frac{x^j}{ j! } \right) \geq \frac{x^{k+1}}{ (k+1)! } \cdot \frac{ 1 }{ x^k } = \frac{ x }{ (k+1)! } \overset{x\to \infty}{\infty}.
+\]
+somit \ref{eq:9.1}
+\begin{itemize}
+        \item
+                \begin{equation}
+                        \label{eq:9.2}
+                        \forall k \in \N_0 : \lim_{x \to \infty} x^k \exp(-x) = 0
+                \end{equation}
+
+\end{itemize}
+
+\[
+        x^k \exp(-x) = \frac{x^k}{ \exp(x) } = \left( \frac{ \exp(x) }{ x^k } \right)^{-1} \to 0
+\]
+
+\begin{itemize}
+        \item
+                \begin{equation}
+                        \label{eq:9.3}
+                        \forall a > 0 : \lim_{n \to \infty} \sqrt[n]{a} = 1.
+                \end{equation}
+\end{itemize}
+\[
+        \sqrt[n]{a} = a^{\frac{ 1 }{ n } } = \exp \left( \frac{ 1 }{ n } \log (a) \right) \to \exp (0) = 1
+\]
+\begin{itemize}
+        \item
+                \begin{equation*}
+                        \forall s >0 : \lim_{x \to \infty, x > 0} x^s = 0
+                \end{equation*}
+                \begin{equation*}
+                        \lim_{x \to \infty, x > 0} x^{-s} = +\infty
+                \end{equation*}
+\end{itemize}
+
+\begin{align*}
+        x^s &= \exp (s \log (x)). (x_n) \subset \R_{>0} \& x_n \to 0 \\
+        ~\implies s\log (x_n) \to  -\infty.\\
+        ~\implies x_n^s = \exp (s\log x_n) \to 0, n \to \infty.
+\end{align*}
+Weiter $ \forall n \in \N : x_n^s > 0 $. Damit
+\[
+        x_n^{-s} = \frac{ 1 }{ x_n^s } \to +\infty
+\]
+da $ x_n^s \to  0, x_n^s > 0 $.\\
+$ \forall s > 0 : \lim_{x \to \infty} \frac{\log(x)}{ x^s } = 0 $.
+Sei $ (x_n) \subset \R_{>0} $ mit $ x_n \to \infty, n \to \infty $. Schreibe $ \forall n \in \N : x_n = \exp (y_n) $. Dann $ y_n \to \infty, n\to \infty $.\\
+$ \implies \frac{\log (x_n)}{ x_n^s } = \frac{y_n}{ (\exp (y_n))^s } = \frac{ 1 }{ s } \cdot \frac{sy_n}{ \exp (sy_n) } \overset{z_n \coloneqq sy_n}{=} \frac{ 1 }{ s } \underbrace{\left( \frac{z_n}{ \exp (z_n) } \right)}_{\overset{n\to \infty}{\to }} \to 0, n\to \infty $
+
+\subsection{Landausymbolik}
+Zwei Symbole, um das Verhalten von Funktionen qualitativ zu fassen: $ \beta \in \R , f, g : (\beta, \infty) \to \R  $ 
+\begin{itemize}
+	\item $ f(x) = \mathcal{O}(g(x)), x \to \infty \vcentcolon\iff \exists C > 0 \exists R > \beta \forall x > R: |f(x)| \leq C|g(x)|.  $ (``$ f $ Groß-Oh-von $ g, \to \infty $'')
+	\item $ f(x) = o(g(x)), x \to \infty \vcentcolon\iff \forall \varepsilon  > 0 \exists R > \beta \forall x > R: |f(x)| \leq \varepsilon |g(x)|.  $ 
+\end{itemize}
+
+\begin{itemize}
+	\item $ \forall p : \R \to \R  $ Polynom: $ p(x) = \mathcal{O} (\exp (x)), x\to \infty $\\
+		$ p(x) = o(\exp(x)), x\to \infty $
+	\item $ \forall s>0 : \log (x) = o(x^s), x\to \infty $
+\end{itemize}
+
+$ \sqrt[n]{n} \overset{n\to \infty}{\to } 1 $\\
+$ \sqrt[n]{n} = n^{\frac{ 1 }{ n } }= \exp \left( \frac{ 1 }{ n } \log n \right) \to \exp 0 = 1 $.
+$ f(n)^{\frac{ 1 }{ n } } \overset{?}{\to } 1 $
+

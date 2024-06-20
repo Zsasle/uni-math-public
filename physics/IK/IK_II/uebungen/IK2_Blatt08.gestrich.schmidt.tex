@@ -1,0 +1,149 @@
+\documentclass[sectionformat=aufgabe]{gadsescript}
+
+\setsemester{Summer Semester 2024}%
+\setuniversity{University of Konstanz}%
+\setfaculty{Faculty of Science\\(Physics)}%
+\settitle{Übungsblatt 08}
+\setsubtitle{Davina Schmidt, Elias Gestrich}
+
+\sisetup{exponent-mode = input}
+
+\begin{document}
+\maketitle
+
+\section{Kondensatoren}
+\begin{enumerate}[label=\alph*)]
+	\item 
+		\[
+			C_1 = \varepsilon_0 \varepsilon_1 \frac{ A }{ 2d }
+		\]
+		\[
+			C_2 = \varepsilon _0 \varepsilon_2 \frac{ A }{ 2d } 
+		\]
+		\[
+			Q_1 = C_1 U_1 \iff  \frac{ Q_1 }{ C_1 } = U_1
+		\]
+		\[
+			Q_2 = C_2 U_2 \iff  \frac{ Q_2 }{ C_2 } = U_2
+		\]
+		\[
+			U_1 = U_2
+		\]
+		
+		\begin{align*}
+			\frac{ Q_1 }{ C_1 } = U_1 &= U_2 = \frac{ Q_2 }{ C_2 } \\
+			Q_2 &= \frac{ C_2 }{ C_1 } Q_1 \\
+			Q_2 &= \frac{ \varepsilon _0 \varepsilon _2 \frac{ A }{ 2d } }{ \varepsilon _0 \varepsilon 1 \frac{ A }{ 2d }  } Q_1 \\
+			Q_2 &= \frac{ \varepsilon _2 }{ \varepsilon 1 } Q_1
+		\end{align*}
+		\begin{align*}
+			Q &= Q_1 + Q_2 \\
+			~ &= Q_1 + \frac{ \varepsilon _2 }{ \varepsilon _1 } Q_1 \\
+			~ &= \left( 1 + \frac{ \varepsilon _2 }{ \varepsilon _1 }  \right) Q_1 \\
+			Q_1 &= \frac{ Q }{ 1 + \frac{ \varepsilon _2 }{ \varepsilon _1 }  }
+		\end{align*}
+		\begin{align*}
+			Q_2 &= \frac{ \varepsilon _2 }{ \varepsilon _1 } Q_1 \\
+			Q_2 &= \frac{ \varepsilon _2 }{ \varepsilon _1 } \cdot \frac{ Q }{ 1 + \frac{ \varepsilon _2 }{ \varepsilon _1 }  }  \\
+			Q_2 &= \frac{ 1 }{ \frac{ \varepsilon _2 }{ \varepsilon _1 } } \cdot \frac{ Q }{ 1 + \frac{ \varepsilon _2 }{ \varepsilon _1 }  }  \\
+			Q_2 &= \cdot \frac{ Q }{ \frac{ \varepsilon _1 }{ \varepsilon _2 } + 1  }
+		\end{align*}
+		\begin{align*}
+			Q &=  CU \\
+			C &= \frac{ Q }{ U }  \\
+			C &= \frac{ Q_1 + Q_2 }{ U }  \\
+			C &= \frac{ Q_1 }{ U } + \frac{ Q_2 }{ U }  \\
+			C &= \frac{ Q_1 }{ U_1 } + \frac{ Q_2 }{ U_2 }  \\
+			C &= \frac{ Q_1 }{ \frac{ Q_1 }{ C_1 }  } + \frac{ Q_2 }{ \frac{ Q_2 }{ C_2 }  }  \\
+			C &= C_1 + C_2 \\
+			C &= \varepsilon _0 \varepsilon _1 \frac{ A }{ 2d } + \varepsilon _0 \varepsilon _1 \frac{ A }{ 2d }  \\
+			C &= \varepsilon _0 \left(\varepsilon _1 + \varepsilon _2\right) \frac{ A }{ 2d }
+		\end{align*}
+	\item
+		\[
+			C_1 = \varepsilon_0 \varepsilon_1 \frac{ 2A }{ d }
+		\]
+		\[
+			C_2 = \varepsilon _0 \varepsilon_2 \frac{ 2A }{ d } 
+		\]
+		\[
+			Q_1 = C_1 U_1 = \varepsilon _0 \varepsilon _1 \frac{ 2A }{ d } U_1
+		\]
+		\[
+			Q_2 = C_2 U_2 = \varepsilon _0 \varepsilon _2 \frac{ 2A }{ d } U_2
+		\]
+		Es gilt $ Q_1 = Q_2 $, da man sich vorstellen kann, dass man zwei Kondensatoren hat, die in Reihe geschaltet sind, und dann sind an beiden Kondensatorplatten die selbe Ladung
+		\begin{align*}
+			\varepsilon _0 \varepsilon _1 \frac{ 2A }{ d } U_1 = Q_1 &= Q_2 = \varepsilon _0 \varepsilon _2 \frac{ 2A }{ d } U_2 \\
+			U_2 &= \frac{ \varepsilon _1 }{ \varepsilon _2 } U_1
+		\end{align*}
+		\begin{align*}
+			U &= U_1 + U_2 \\
+			~ &= U_1 + \frac{ \varepsilon _1 }{ \varepsilon _2 } U_1 \\
+			~ &= \left( 1 + \frac{ \varepsilon _2 }{ \varepsilon _1 }  \right) U_1 \\
+			U_1 &= \frac{ U }{ 1 + \frac{ \varepsilon _1 }{ \varepsilon _2 }  }
+		\end{align*}
+		\begin{align*}
+			U_2 &= \frac{ \varepsilon _1 }{ \varepsilon _2 } U_1 \\
+			U_2 &= \frac{ \varepsilon _1 }{ \varepsilon _2 } \cdot \frac{ U }{ 1 + \frac{ \varepsilon _1 }{ \varepsilon _2 }  }  \\
+			U_2 &= \frac{ 1 }{ \frac{ \varepsilon _1 }{ \varepsilon _2 } } \cdot \frac{ U }{ 1 + \frac{ \varepsilon _1 }{ \varepsilon _2 }  }  \\
+			U_2 &= \cdot \frac{ U }{ \frac{ \varepsilon _2 }{ \varepsilon _1 } + 1  }
+		\end{align*}
+		\begin{align*}
+			Q &= CU \\
+			C &= \frac{ Q }{ U }  \\
+			C &= \frac{ 1 }{ \frac{ U_1 + U_2 }{ Q } } \\
+			C &= \frac{ 1 }{ \frac{ U_1 }{ Q_1 } + \frac{ U_2 }{ Q_2 } } \\
+			C &= \frac{ 1 }{ \frac{ 1 }{ C_1 } + \frac{ 1 }{ C_2 } } \\
+			C &= \frac{ 1 }{ \frac{ C_2 + C_1 }{ C_1C_2 } } \\
+			C &= \frac{ C_1C_2 }{ C_1 + C_2 }
+		\end{align*}
+		
+\end{enumerate}
+
+\section{Punktladung im Dielektrikum}
+Für das Feld innerhalb der Kugel gilt:
+\[
+	\vec E_{innen } = \frac{ \vec E_{vac} }{ \varepsilon _r } = \frac{ 1 }{ 4 \pi  \varepsilon _0 \varepsilon _r } \frac{ Q }{ r^3 } \vec r
+\]
+Außerhalb:
+\[
+	\vec E_{aussen} = \frac{ 1 }{ 4 \pi \varepsilon _0 } \frac{ Q }{ r^3 } \vec r
+\]
+Da die Ladung außen an der Kugel die der Ladung innen in der Kugel ausgleicht (so wie bei einer  Holkugel bei der Gravitation es von außen gleich ist, wie wenn die Masse im Zentrum wäre. Dann gleicht die Ladung auf der ``Hohlkugel'' der Kugeloberfläche die Ladung die an der Punktladung $ Q $ ansitzt aus)\\
+Potenzial:
+\[
+	\varphi_{innen}  = \frac{ 1 }{ 4 \pi \varepsilon _0 \varepsilon _r } \frac{ Q }{ \left| r \right|  } + C_1
+\]
+\[
+	\varphi_{aussen}  = \frac{ 1 }{ 4 \pi \varepsilon _0 } \frac{ Q }{ \left| r \right|  } + C_2
+\]
+Denn dann ist jeweils
+\[
+	-\grad \varphi_{innen} = \vec E_{innen} 
+\]
+\[
+	-\grad \varphi_{aussen} = \vec E_{aussen} 
+\]
+Bestimmung von $ C_1 $ und $ C_2 $, dafür $ \varphi \overset{r \to \infty}{\longrightarrow} 0 $.
+Also $ C_2 = 0 $.
+Stetigkeit an der Kugeloberfläche, also für $ r = R $ muss gelten $ \varphi_{innen} (R) = \varphi_{aussen} (R) $:
+\begin{align*}
+	\varphi_{innen} (R) &=  \varphi_{aussen} (R) \\
+	\frac{ 1 }{ 4 \pi  \varepsilon _0 \varepsilon_r } \frac{ Q }{ R } + C_1 &= \frac{ 1 }{ 4 \pi  \varepsilon _0 } \frac{ Q }{ R } + C_2 \\
+	C_1 &= \varepsilon _r \frac{ 1 }{ 4 \pi \varepsilon _0 \varepsilon _r } \frac{ Q }{ R } - \frac{ 1 }{ 4 \pi \varepsilon _0 \varepsilon _r } \frac{ Q }{ R } \\
+	C_1 &= (\varepsilon _r - 1) \frac{ 1 }{ 4 \pi  \varepsilon _0 \varepsilon _r } \frac{ Q }{ R }  \\
+\end{align*}
+
+Die Polarisationsladung lässt sich bestimmen durch
+$ \varepsilon _0 \left( E_{vac}(R) - E_{innen}(R)  \right) = \left| \vec P \right| = \frac{ Q_{pol}  }{ A }  $.
+Also
+\begin{align*}
+	Q_{pol}  &= A \left( \varepsilon _0 \left( \frac{ 1 }{ 4 \pi \varepsilon _0 } \frac{ Q }{ R^3 } R - \frac{ 1 }{ 4 \pi \varepsilon _0 \varepsilon _r } \frac{ Q }{ R^3 } R \right) \right)  \\
+	Q_{pol}  &= 4 \pi R^2 \left( (\varepsilon _r - 1) \frac{ 1 }{ 4 \pi \varepsilon _r } \frac{ Q }{ R^2 }  \right)  \\
+	Q_{pol}  &= \frac{ \varepsilon _r - 1 }{ \varepsilon _r } Q \\
+\end{align*}
+
+
+
+\end{document}

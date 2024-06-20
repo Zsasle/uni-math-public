@@ -1,0 +1,360 @@
+\section{Grenzprozesse: Differentiation \& Integration}
+\textbf{Wiederholung:} $ \Omega \subset \R  $ nichtleer, $ f, f_1, f_2, \dotsc : \Omega \to \R  $ 
+\begin{itemize}
+	\item $ f_j \to f $ \textbf{punktweise} $ \iff \forall x \in \Omega : f(x) = \lim_{j \to \infty} f_j (x) $.
+	\item $ f_j \to f $ \textbf{gleichmäßig} $ \iff \forall \varepsilon > 0 : \exists N \in \N : \forall j \geq N : \forall x \in \Omega : \left| f_j(x) - f(x) \right| < \varepsilon  $\\
+		$ \left( \iff \lim_{j \to \infty} \left\| f_j - f \right\| _{\infty, \Omega} = 0. \right) $
+\end{itemize}
+
+\textbf{Erinnerung:} Alle $ f_j $ stetig und $ f_j \to f $ gleichmäßig $ \implies f $ stetig.\\
+{
+\color{gadse-red}
+\textbf{Zwei zentrale Fragen:}
+\begin{enumerate}[label=(\alph*)]
+	\item Wann gilt $ f_j \overset{\text{geeignet} }{\to } f \overset{?}{\implies } \int_{a}^{b}\underbrace{f(x)}_{\lim_{j \to \infty} f_j(x)} dx = \lim_{j \to \infty} \int_{a}^{b} f_j(x)dx $ 
+	\item Wann vererbt sich Differenzierbarkeit?\\
+		(z.B. $ \left( \forall j : f_j\text{ diffbar}  \right)  $ und $ f_j \overset{\text{geeignet} }{\to } f \overset{?}{\implies } f \text{ diff.}  $)
+\end{enumerate}
+
+}
+
+\subsection{Integration \& Grenzprozesse}
+\begin{subexample}
+	$ \Omega = (0, 1), f_j : \Omega \ni x \mapsto j \I_{0, \frac{ 1 }{ j } } (x) $\\
+	Dann $ \cdot  $ konvergiert $ (f_j) $ punktweise gegen die Nullfunktion.\\
+	{[Archimedes: $ \forall x \in \Omega : \exists N \in \N : \frac{ 1 }{ x } < N $, so $ \forall j \geq N + 1 : f_j(x) = 0 $]}
+	\begin{itemize}
+		\item  $ \forall j \in \N : \int_{0}^{1}f_j(x) dx = j \int_{0}^{\frac{ 1 }{ j } }dx = j \cdot \frac{ 1 }{ j } = 1 $.
+		\item $ f \equiv $ (Grenzfunktion)
+	\end{itemize}
+	Also
+	\[
+		\int_{0}^{1}\lim_{j \to \infty} f_j(x) dx = \int_{0}^{1}f(x) dx = 0 \neq 1 = \lim_{j \to \infty} \int_{0}^{1} f_j(x) dx.
+	\]
+	\begin{itemize}
+		\item Punktweise Konvergenz ist \textbf{zu schwach}, im Integrale zu kontrollieren.
+	\end{itemize}
+	
+\end{subexample}
+
+\begin{subtheorem}
+	Sei $ -\infty < a < b < \infty $, sowie $ f, f_1, \dotsc : [a, b] \to \R  $ integrierbar mit $ f_j \to f $ gleichmäßig auf $ [a, b] $. Dann gilt
+	\[
+		\int_{a}^{b}f(x) dx = \lim_{j \to \infty} \int_{a}^{b}f_j (x) dx.
+	\]
+	
+\end{subtheorem}
+
+\begin{subproof*}[Theorem \ref{1.1.2}]
+	$ g: [a, b] \to \R  $ integrierbar, so 
+	\begin{align*}
+		\left| \int_{a}^{b} g(x) dx \right| \leq (b - a) \sup_{x \in [a, b]} \left| g(x) \right| &\overset{g = f_j - f}{\implies } \left| \int_{a}^{b} f_j(x) dx - \int_{a}^{b} f(x) dx \right| \\
+		&= \left| \int_{a}^{b} f_j(x) - f(x) dx \right|  \\
+		&\leq (b - a) \underbrace{\sup_{x \in [a,b]} \left| f_j(x) - f(x) \right| }_{\to 0, j\to \infty \text{ da gleichmäßige Konvergenz} } \to 0. \qed
+	\end{align*}
+\end{subproof*}
+
+\subsection{Differentiation \& Grenzprozesse}
+\begin{description}
+	\item[Grundfrage] Was misst die Supremumsnorm? $ \to  $ ``Größe'' einer Funktion $ \rightsquigarrow $ maximaler Wert der Beträge von $ f(x) $
+		\begin{itemize}
+			\item Angenommen., $ \left\| f \right\| _{\infty, \R } \leq a $
+		\end{itemize}
+\end{description}
+
+\begin{subexample}
+	$ \Omega = (0,1), f_j(x) \coloneqq \frac{ 1 }{ j } \sin (2\pi j x) $\\
+	$ \forall x \in (0,1) : \left| f_j(x) \right| \leq \frac{ 1 }{ j } \overset{j \to \infty}{\to }0 $.
+	Also: $ f \equiv 0 $ punktweise Grenzfunktion, Konvergenz sogar gleichmäßig!\\
+	Grenzfunktion $ f $ diffbar, Ableitung $ f^\prime \equiv 0 $\\
+	Aber. $ f_j^\prime(x) = 2\pi \cos (2\pi jx) $ mit $ \left| f_j^\prime \left( \frac{ 1 }{ 2 }  \right)  \right| = 2\pi : f_j^\prime \not \to f^\prime $ punktweise.
+\end{subexample}
+
+\begin{subexample}
+	$ \Omega = (-1, 1), f_j(x) \coloneqq \sqrt{x^2 + \frac{ 1 }{ j } } \to f(x) = \left| x \right|  $ 
+	\begin{itemize}
+		\item \textbf{Beh.:} $ f_j \to f $ gleichmäßig: $ \forall x \in (-1, 1): $
+			\begin{align*}
+				\left| f_j(x) - f(x) \right| &= \left| \sqrt{x^2} - \sqrt{x^2 + \frac{ 1 }{ j } }  \right|  \\
+				~&= \frac{ \frac{ 1 }{ j } }{ \sqrt{x^2} + \sqrt{x^2 + \frac{ 1 }{ j } }  }  \\
+				~&\leq \frac{ 1 }{ j } \cdot \frac{ 1 }{ \sqrt{\frac{ 1 }{ j } }  }  \\
+				~&= \frac{ 1 }{ \sqrt{j}  } \overset{j \to \infty}{0} \\
+			\end{align*}
+		\item \textbf{Damit:} Alle $ f_j $'s diffbar, aber $ f_j \to f $ gleichmäßig reicht nicht aus, um die Diffbarkeit von $ f $ zu sichern.
+	\end{itemize}
+\end{subexample}
+
+\begin{subtheorem}
+	Sei $ -\infty < a < b < \infty, (f_j) $ eine Folge stetig differenzierbarer Funktionen mit der folgenden Eigenschaft: Es konvergiert $ (f_j) $ punktweise gegen $ f:[a,b] \to \R \& (f_j^\prime) $ konvergiert gleichmäßig gegen ein $ g:[a,b] \to \R  $ Dann ist $ f $ diffbar mit $ f^\prime = g $.
+\end{subtheorem}
+
+\begin{subproof*}[Thorem \ref{1.2.3}]
+	Zuerst: $ g $ ist stetig. Nun ist $ \forall x \in [a, b] : f_j(x) \overset{\text{HDI} }{=} f_j(a) + \int_{a}^{x} f_j^\prime(t) dt \overset{\text{Theorem \ref{1.1.2}} }{\to } f(a) + \int_{a}^{x}g(t) dt \implies  \forall x \in [a, b] : f(x) = f(a) + \int_{a}^{x}g(t) dt $.
+	Aber $ x\mapsto \int_{a}^{x}g(t) dt $ stetig diffbar mit $ \left( \int_{a}^{x}g(t)dt \right) ^\prime = g(x) $, also auch $ f $, und es gilt $ f^\prime(x) = g(x) $ für alle $ x \in [a,b] $\qed 
+\end{subproof*}
+
+\textbf{Bemerkung:}
+Sei für $ f \in C^\prime([a, b]) = \left\{ g : [, b] \to \R : g \text{ einmal stetig differenzierbar}  \right\}  $ 
+\[
+	\left\| f \right\| _{1, \infty; [a, b]} \coloneqq \left\| f \right\| _{\infty;[a, b]} + \left\| f^\prime \right\| _{\infty;[a, b]} 
+\]
+Dann: $ \left\| f_j - f \right\| _{1, \infty; [a, b]} \overset{j\to \infty}{\to } 0 $ \& alle $ f_j  $ stetig diffbar $ \implies  f $ stetig diffbar
+
+\subsection{Potenzreihen revisited}
+Potenzreihe:
+\[
+	\sum_{j=1}^{\infty} \underbrace{a_j}_{\text{Koeffizienten} } \left( x - \underbrace{ x_0 }_{\text{Entwicklungspunkt} } \right)^j 
+\]
+
+\begin{itemize}
+	\item $ \sum_{j=1}^{\infty} a_j (x - x_0)^j = a_0 + a_1 (x - x_0) + \dotsc $\\
+		Solange wir nur bis zu einem endlichen Wert gehen ist die ``Potenzreihe'' unendlich differenzierbar
+\end{itemize}
+Wie vererbt sich Differenzierbarkeit von Polynomen auf Potenzreihen
+
+\textbf{Bemerkung:} (Thm. 8.3.3, Ana I) Weierstraß: $ A \subset \R , (f_j) $ Folge mit $ \sum_{j=0}^{\infty} \left\| f_j \right\| _{\infty;A} < \infty $. Dann konvergiert $ \sum_{j=0}^{\infty} f_j $ absolut und gleichmäßig auf $ A $. $ \left[ \text{AK} \iff \sum_{j=0}^{\infty} \left| f_j(x) \right| < \infty, \text{GLM} \iff \text{klar}  \right] $ 
+
+\begin{subtheorem}[Konvergenzverhalten von Potenzreihen]
+	Sei $ \left( a_j \right) _{j \in \N _0} \subset \R , x_0 \in \R  $ ein Entwicklungspunkt
+	\begin{enumerate}[label=(\roman*)]
+		\item Ist $ x_1 \in \R  $ so, dass $ \sum_{j=0}^{\infty} a_j (x_1 - x)^j $ konvergiert, so konvergiert $ \sum_{j=0}^{\infty} a_j ( x - x_0 )^j $ für alle $ x \in \R  $ mit $ \left| x - x_0 \right| < \left| x_1 - x_0 \right|  $.\\
+			Speziell konvergiert die Potenzreihe absolut und gleichmäßig auf allen Bällen $ B_{r}(x_0)  $ mit $ 0 < r < \left| x_1 - x_0 \right|  $.
+		\item Die \textbf{formal differenzierte} Potenzreihe $ \sum_{j=1}^{\infty} j a_j (x - x_0)^{j-1} $ hat genau dieselben Eigenschaften
+	\end{enumerate}
+\end{subtheorem}
+
+\begin{subproof*}[Theorem \ref{1.3.1}]
+	\begin{enumerate}[label=(\roman*)]
+		\item $ \sum_{j=0}^{\infty} a_j (x_1 - x_0)^j $ Konvergenz $ \implies \left( a_j (x_1 - x_0) \right) _j \text{ NF} $
+			\[
+				\implies M \coloneqq \sup_{j \in \N _0} \left| a_j (x_1 - x_0)^j \right| < \infty. \text{ Für } \left| x - x_0 \right| < \left| x_1 - x_0 \right|
+			\]
+			setze
+			\[
+				\theta \coloneqq \frac{ x - x_0 }{ x_1 - x_0 } < r < 1.
+			\]
+			Damit
+			\[
+				\left| a_j (x - x_0)^j \right| = \underbrace{\left( \left| a_j \right| \cdot \left| x_1 - x_0 \right| ^j \right) }_{\leq M} \left( \frac{ \left| x - x_0 \right| }{ \left| x_1 - x_0 \right| } \right)^j \leq  M \theta^j.
+			\]
+			Für
+			\[
+				x \in B_{r}(x_0) : \left\| f_j \right\| _{\infty; B_{r}(x_0) } \leq M \theta^j $, wobei $ f_j(x) = a_j(x - x_0)^j.
+			\]
+			Also:
+			\[
+				\sum_{j=0}^{\infty} \left\| f_j \right\| _{\infty; B_{r}(x_0) } < \infty
+			\]
+			nach geometrischer Reihe, Rest folgt mit Weierstraß. $ \implies  $ (i) folgt. Zu (ii): Analog
+	\end{enumerate}
+\end{subproof*}
+
+\textbf{Wiederholung}
+\[
+	\sum_{j=0}^{\infty} a_j(x - x_0)^j.
+\]
+Konvergenzradius
+\[
+	\rho = \sup \left\{ r > 0 : \sum_{j=0}^{\infty} a_j(x - x_0)^j \text{ konvergiert für alle $ x $ mit $ \left| x - x_0 \right| < r $}  \right\} 
+\]
+\begin{itemize}
+	\item Konvergenz von Potenzreihen immer auf Bällen
+\end{itemize}
+
+\begin{subcorollary}
+	Eine Potenzreihe $ \sum_{j=0}^{\infty} a_j (x-x_0)^j  $ mit Konvergenzradius $ \rho $ und Konvergenzball $ B_{\rho}(x_0)  $ stellt im \textbf{Inneren des Konvergenzballs} eine unendlich oft stetig differenzierbare Funktion dar (``$ C^\infty \left( B_{\rho}(x_0)  \right)  $''), die gliederweise differenziert werden darf: Auf $ B_{\rho}(x_0)  $ gilt:
+	\[
+		\left( \sum_{j=0}^{\infty} a_j (x - x_0)^j  \right) ^\prime = \sum_{j=0}^{\infty} ja_j (x - x_0)^{j-1}  
+	\]
+	
+\end{subcorollary}
+
+\begin{subproof*}[Corollary \ref{1.3.2}]
+	Nach Theorem \ref{1.3.1} konvergiert di Potenzreihe auf allen $ B_{r}(x_0)  $ mit $ 0 < r < \rho $ absolut und gleichmäßig. Hierfür bemerke, dass
+	\[
+		\sum_{j=0}^{\infty} a_j (x - x_0)^j \& \sum_{j=0}^{\infty} ja_j (x - x_0)^{j-1} 
+	\]
+	denselben Konvergenzradius haben:
+	\[
+		\rho = \frac{ 1 }{ \limsup_{j \to \infty} \sqrt[j]{\left| a_j \right| }  },
+	\]
+	\[
+		\frac{ 1 }{ \limsup_{j \to \infty} \sqrt[j]{j \left| a_j \right| }  } = \rho.
+	\]
+	Nun gilt:
+	\[
+		\forall N \in \N : \left( \sum_{j=0}^{\infty} a_j (x - x_0)^j  \right) ^\prime = \sum_{j=0}^{\infty} ja_j (x - x_0)^{j - 1} 
+	\]
+	
+	Einerseits konvergiert $ \sum_{j=0}^{\infty} a_j (x - x_0)^j  $ gleichmäßig (also auch punktweise) auf $ B_{r}(x_0)  $, und andererseits $ \sum_{j=0}^{\infty} ja_j (x - x_0)^{j - 1}   $ gleichmäßig auf $ B_{r}(x_0)  $.
+	Damit dürfen wir Limes und Ableitung vertauschen, und die Behauptung folgt nun induktiv \qed
+\end{subproof*}
+
+\textbf{Bemerkung:} Die vorausgegangenen Resultate vererben sich auf natürlich Art und Weise auf Funktionen $ f: \C \supset \Omega \to \C  $. (Mehr dazu in Funktionentheorie)
+
+\begin{subexample}[$ \exp, \sin, \cos $]
+	\begin{align*}
+		\exp ^\prime (x) &= \left( \sum_{j=0}^{\infty} \frac{ x^j }{ j! }  \right) ^\prime \\
+		~&= \left( \sum_{j=1}^{\infty} \frac{ x^{j - 1} }{ (j - 1)! } \right) \\
+		~&= \sum_{j=0}^{\infty} \frac{x^j}{ j! }  \\
+		~&= \exp (x).
+	\end{align*}
+	\begin{align*}
+		\sin ^\prime &= \left( \sum_{j=0}^{\infty} (-1)^j \frac{ x^{2j + 1} }{ (2j + 1)! }  \right)  \\
+		~&= \sum_{j=1}^{\infty} (-1)^j \frac{ 1 }{ (2j + 1)! } (2j + 1) x^{2j}  \\
+		~&= \sum_{j=0}^{\infty} (-1)^j \frac{ x^{2j} }{ (2j)!}  \\
+		~&= \cos (x)
+	\end{align*}
+\end{subexample}
+
+Zur Systematisierung:
+\begin{subdefinition}
+	Sei $ \Omega \subset \R  $ offen.
+	Wir nennen $ f: \Omega \to \R  $ \textbf{analytisch}, falls gilt: Für jedes $ x_0 \in \Omega $ gibt es ein $ r>0 $ mit $ B_{r}(x_0) \subset  \Omega $ so, dass $ f $ auf $ B_{r}(x_0)  $ mit einer in $ B_{r}(x_0)  $ konvergente Potenzreihe übereinstimmt.
+	Der Raum aller analytischen Funktionen auf $ \Omega $ wird $ C^{\omega} (\Omega) $ bezeichnet.
+\end{subdefinition}
+Differenzierbarkeit ist eine lokale Eigenschaft $ \overset{\text{Cor. \ref{1.3.2}} }{\implies } $ 
+\[
+	\underbrace{C^\omega(\Omega)}_{\text{analytisch} } \subsetneqq \underbrace{C^\infty(\Omega)}_{\infty-\text{oft stetig differenzierbar} }
+\]
+\textsc{Diese Inklusion ist strikt!} (Blatt 1 / Aufgabe 3)
+\[
+	f(x) = \begin{cases}
+		e^{-\frac{ 1 }{ x^2 }} , & x \neq 0 \\
+		0, & x = 0 \\
+	\end{cases}
+\]
+
+
+\subsection{Taylorreihen}
+\textbf{Grundfrage:} Wie ist eine Funktion durch Potenzfunktionen aufgebaut, oder anders: Wie lassen sich Funktionen durch Polynome approximieren?
+\begin{itemize}
+	\item approximieren $ \exp  $ um $ x_0 = 0 $ mit affin-linearen Funktion, quadratischen Funktionen, \ldots
+	\item \textbf{Wie} bekommen wir solche Approximationen?
+\end{itemize}
+
+Eine solche Approximationstrategie sollte/\textbf{muss} auch für Polynome funktionieren und irgendwann terminieren.\\
+Hierzu: 
+\[
+	p(x) = \sum_{j=0}^{N} a_j (x - x_0)^j = a_0 + a_1(x - x_0) + a_2(x-x_0)^2 + \dotsc
+\]
+\[
+	p^\prime(x) = a_1 + 2 a_2(x-x_0) + \dotsc
+\]
+
+\begin{itemize}
+	\item $ p(x_0) = a_0 $.
+	\item $ p^\prime(x_0) = a_1 \rightsquigarrow a_0 + a_1(x-x_0) = p(x_0) + p^\prime(x_0)(x-x_0)  $
+	\item $ p^{\prime\prime} (x_0) = 2a_2 $ 
+	\item $ p^{(k)} (x_0) = k! a_k $
+\end{itemize}
+\[
+	p(x) = \sum_{j=0}^{N} \frac{ p^{(j)} (x_0) }{ j! }  (x - x_0)^j
+\]
+
+\begin{subtheorem}
+	Sei $ I \subset \R  $ Intervall, $ x_0 \in  I  $ \& $ f: I \to \R (N+1) $-mal stetig differenzierbar. Dann gilt
+	\[
+		\forall x \in I: f(x) = {\color{gadse-red} \left( \sum_{k=0}^{N} \frac{ 1 }{ k! } f^{(k)} (x_0)(x - x_0)^k \right) } +  { \color{gadse-dark-blue} \left( \frac{ 1 }{ N! } \int_{x_0}^{x}(x-t)^N f^{(N + 1)} (t) dt \right)}.
+	\]
+	{\color{gadse-red} Taylorpolynom vom Grad $ N $ an/in $ x_0 $}\\
+	{\color{gadse-dark-blue} Restglied}
+\end{subtheorem}
+
+\begin{subproof*}[Theorem \ref{1.4.1}]
+	$ N = 0 : $\\
+	$ \forall  x \in I : f(x) = f(x_0) + \int_{x_0}^{x} f^\prime (t) dt $.
+	Gilt nach HDI.\\
+	$ N - 1 \curvearrowright N $. Nach IV gilt:
+	\[
+		f(x) = \sum_{k= 0}^{N-1} \frac{ 1 }{ k! } f^{(k)} (x_0) (x-x_0)^k + \frac{ 1 }{ ( N - 1)! } \int_{x_0}^{x} (x - t)^{N-1} f^{(N)} (t) dt.
+	\]
+	\[ \frac{ 1 }{ ( N - 1)! } \int_{x_0}^{x} (x - t)^{N-1} f^{(N)} (t) dt \]
+	\begin{align*}
+		~ &= - \int_{x_0}^{x} \frac{ d }{ dt } \left( \frac{ ( x - t) ^N }{ N! }  \right) f^{(N)} (t) dt \\
+		~ &= - \left[ \left[ \frac{ (x - t)^N }{ N! } f^{(N)} (t) \right]_{t = x_0}^{t = x} - \int_{x_0}^{x} \frac{ ( x - t )^N }{ N! } f^{(N+1)} (t) dt \right] \\
+		~ &= \frac{ (x - x_0)^N }{ N! } f^{(N)} (x_0) + \int_{x_0}^{x} \frac{ ( x - t )^N }{ N! } f^{(N+1)} (t) dt
+	\end{align*}
+\end{subproof*}
+
+\begin{subcorollary}
+	Sei $ I \subset \R $ ein Intervall, $ f: I \to \R $ $ ( N + 1)  $-mal stetig differenzierbar und gelte $ f^{(N+1)} (x) = 0 $ für alle $ x \in I $. Dann ist $ f $ ein Polynom vom Grad $ N $.
+\end{subcorollary}
+
+\begin{subtheorem}[Lagrange-Restglied]
+	In der Situation von Theorem \ref{1.4.1} gibt es für $ x, x_0 \in I $ ein $ \xi \in \left( \min \left\{ x, x_0 \right\} , \max \left\{ x, x_0 \right\}  \right)  $ so, dass
+	\[
+		f(x) = \sum_{k=0}^{N} \frac{ 1 }{ k! } f^{(k)} (x_0) (x - x_0)^k + \frac{ f^{(N+1)} (\xi) }{ ( N + 1)! } (x - x_0)^{N+1} 
+	\]
+\end{subtheorem}
+
+\textbf{Erinnerung:} (MWS der Integralrechnung)\\
+$ \varphi : [a, b] \to \R _{\geq 0}  $ regelint., $ f: [a, b] \to \R  $ stetig, so $ \exists \xi \in [a, b] : $ 
+\[
+	\int_{a}^{b}f(x) \varphi(x) dx = f(\xi)\int_{a}^{b}\varphi(x) dx.
+\]
+
+\begin{subproof*}[Theorem \ref{1.4.3}]
+	Nach Theorem \ref{1.4.1}:
+	\[
+		f(x) = \sum_{k=0}^{N} \frac{ 1 }{ k! } f^{(k)} (x_0) (x - x_0)^k + \frac{ 1 }{ N! } \int_{x_0}^{x} (x - t)^{N} f^{(N+1)} (t) dt
+	\]
+	\OE{} $ x > x_0 $. Wende MWS an auf $ \varphi(t) = (x - t)^{N}  $.\\
+$ \implies \exists \xi \in [x_0, x]: \int_{x_0}^{x} (x - t)^{N} f^{(N+1)} (t) dt = f^{(N+1)}(\xi) \underbrace{\int_{x_0}^{x}(x-t)^{N} dt}_{\left[ - \frac{ (x - t)^{N+1} }{ N+1 }  \right]_{t = x_0} ^{t = x} } = + f^{(N+1)} (\xi) \frac{ (x - x_0)^{N+1} }{ N + 1 } $.
+\end{subproof*}
+
+\textbf{Bemerkung:} (``Polynomialisierbarkeit'') Schicken wir $ x \to x_0 $, so auch $ \xi \to x_0 $, und damit ist der Approximierfehler von der Größenordnung eines Polynoms vom Grad $ N + 1 $.
+
+\begin{subdefinition}
+	Sei $ I \subset  \R  $ ein Intervall, $ x_0 \in I $ \& $ f: I \to \R  $ $ \infty $-oft stetig differenzierbar. Dann nennen wir
+	\[
+		T_{x_0}  f(x) \coloneqq \sum_{k=0}^{\infty} \frac{ f^{(k)} (x_0) }{ k! }  (x - x_0)^k 
+	\]
+	die \textbf{Taylorreihe} von $ f $ im \textbf{Entwicklungspunkt} $ x_0 $ 
+
+	Kann, muss aber nicht $ f $ darstellen: $ \exists r > 0 : \forall x \in ( x_0 - r, x_0 + r) \setminus \left\{ x_0 \right\} : f(x) \neq T_{x_0} f(x) $.
+\end{subdefinition}
+
+\begin{subexample}
+	\begin{itemize}
+		\item $ \exp : \R \to \R  $ ist $ C^{\infty} \& \exp ^{(k)} = \exp \quad \forall k \in \N _0 $ mit $ x_0 = 0 : T_0 \exp (x) = \sum_{k=0}^{\infty} \frac{ 1 }{ k! } x^k $.
+		\item $ \sin : \R \to \R  $ ist $ C^{\infty} $,
+			\begin{itemize}
+				\item $ \sin ^{(0)} (x) = \sin ^{(0)} (x) $
+				\item $ \sin ^{(1)} (x) = \cos (x) $
+				\item $ \sin ^{(2)} (x) = - \sin (x) $
+				\item $ \sin ^{(3)} (x) = - \cos (x) $
+			\end{itemize}
+			$ x_0 = 0 : k \in \N _0 : \sin ^{(4k)} (x_0) = 0 $, usw.
+			\[
+				T_0 \sin (x) = \sum_{k=0}^{\infty} \left( \frac{ 1 }{ (4k + 1)! } x^{4k + 1} - \frac{ 1 }{ (4k + 3)! } x^{4k + 3}  \right) 
+				= \sum_{j=0}^{\infty} (-1)^j \frac{ x^{2j + 1} }{ (2j + 1)! } 
+			\]
+			Analog für $ \cos  $
+	\end{itemize}
+\end{subexample}
+
+\begin{subexample}
+	$ f(x) = \log (1 + x) $ 
+	\begin{itemize}
+		\item $ f^{(0)} (x) = \log (1 + x) $
+		\item $ f^{(1)} (x) = (1 + x)^{-1}  $
+		\item $ f^{(2)} (x) = -(1 + x)^{-2}  $
+		\item $ f^{(3)} (x) = 2(1 + x)^{-3}  $ ind:
+		\item $ f^{(k)} (x) = (-1)^{k+1} (k-1)!(1 + x)^{-k}  $
+	\end{itemize}
+	\[
+		T_0 f(x) = \sum_{k=1}^{\infty} \frac{ 1 }{ k! } (k-1)! (-1)^{k + 1}  (x)^k = \sum_{k=1}^{\infty} \frac{ (-1)^{k + 1}  }{ k } x^k. 
+	\]
+	Falls $ \left| x \right| < 1 $, so konvergiert dies (Majorantenkriterium)
+	\begin{align*}
+		\log (1 + x) &= \int_{0}^{x} \frac{ dt }{ 1 + t } \\
+		~ &= \int_{0}^{x} \frac{ 1 }{ 1 + t } dt. &&\| \quad \underbrace{\sum_{n=0}^{\infty} q^n}_{s, } = \underbrace{\frac{ 1 }{ 1 - q } }_{sq = s - 1} \\
+		~ &= \int_{0}^{x} \sum_{k=0}^{\infty} ( -t )^k dt &&| \quad \text{Weierstraß} \\
+		~ &= \sum_{k=0}^{\infty} (-1)^k \int_{0}^{x}t^k dt \\
+		~ &= \sum_{k=0}^{\infty} (-1)^{k} \frac{ 1 }{ k+1 } x^{k+1}  \\
+		~ &= \sum_{k=1}^{\infty} \frac{ (-1)^{k-1}  }{ k }x^k.
+	\end{align*}
+	\textbf{Später:} $ \log (2) = \sum_{k=1}^{\infty} \frac{ (-1)^k }{ k }  $
+\end{subexample}
+

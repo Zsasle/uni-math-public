@@ -1,0 +1,479 @@
+\section{Normalformen}
+\setcounter{subsection}{16}
+\subsection{Skript 17}
+%\setcounter{subenvironmentnumber}{-1}
+
+\setcounter{subsubsection}{8}
+\subsubsection{Eigenwerte und Eigenvektoren}
+Sei $ V $ ein $ n $-dim $ K $-VR über
+
+\begin{subdefinition}
+	Sei $ T \in \mathcal{L(V, V)}  $ und $ c \in K $.
+	\begin{enumerate}[label=(\alph*)]
+		\item $ c $ ist ein Eigenwert für $ T $, falls $ \exists \alpha \in V $, $ \alpha \neq 0 $ so, dass
+			\[
+				T(\alpha) = c \alpha
+			\]
+		\item sei $ \alpha \in V $ so, dass
+			\[
+				T(\alpha) = c\alpha
+			\]
+			Dann ist $ \alpha $ \textbf{ein Eigenvektor}
+		\item $ W_c \coloneqq \left\{ \alpha \in V, T(\alpha) \right\}  $ 
+			der \textbf{Eigenraum} zu $ c $
+	\end{enumerate}
+\end{subdefinition}
+
+\begin{subnote}
+	\[
+		W_c = \Kern \left( cI - T \right) 
+	\]
+	weil
+	\[
+		W_c = \left\{ \alpha : c\alpha - T(\alpha) = 0 \right\} 
+	\]
+\end{subnote}
+
+\begin{subtheorem}
+	Wir folgern aus Satz \ref{2.16.8} und Bem. \ref{3.17.2} und Def. \ref{3.17.1}:\\
+	Sei $ T \in \mathcal{L} (V, V) $, $ c \in K $.
+	Folgende Aussagen sind äquivalent:
+	\begin{enumerate}[label=(\roman*)]
+		\item $ c $ ist ein Eigenwert von $ T $ 
+		\item $ \left( cI - T \right)  $ ist \textbf{nicht} invertierbar
+		\item $ \det\left( cI - T \right) = 0 $
+	\end{enumerate}
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{3.17.3}]
+	\begin{description}
+		\item[``(i) $ \implies  $ (ii)'':] wenn $ c $ Eigenwert von $ T $, dann existiert ein $ \alpha \in V $ mit $ \alpha \neq 0 $, so dass $ \left( cI - T \right) (\alpha) = 0 $, somit Kern nicht trivial, also $ \left( cI - T \right)  $ nicht invertierbar
+		\item[``(ii) $ \implies  $ (iii)'':] \ldots
+		\item[``(iii) $ \implies  $ (i)'':] $ \det\left( cI - T \right) = 0 $ bedeutet $ ( cI - T) $ nicht invertierbar, also Kern trivial, also existiert kein $ \alpha \in V $, \ldots vllt. auch einfacher mit Widerspruch \qed
+	\end{description}
+\end{subproof*}
+
+\begin{subtheorem}
+	$ \det\left( cI - T \right)  $ ist ein normiertes Polynom von Grad $ n $.
+	Die Eigenwerte von $ T $ sind also seine NS in $ K $.
+	Insbesondere hat $ T $ \textbf{höchstens} $ n $ Eigenwerte in $ K $
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{3.17.4}]
+	Sei $ \mathcal{B}  $ eine geordnete Basis für $ V $, $ A \coloneqq [T]_{\mathcal{B} }  $.
+	Es ist $ xI_n - A = \left[ xI - T \right]_{\mathcal{B} }  $ 
+	\begin{align*}
+		B &\coloneqq xI_n - A \\
+		~ &= \begin{pmatrix} x & 0 & \hdots & 0 \\ 0 & x & & \vdots \\ \vdots & & \ddots & 0 \\ 0 & \hdots & 0 & x \end{pmatrix} - A \\
+		~ &= \begin{pmatrix} x -a_{11} & \hdots & -a_{1n} \\ -a_{21} & \ddots & \vdots \\ \vdots & & x - a_{nn}  \end{pmatrix}  \\
+	\end{align*}
+	wobei $ A_{ij} = a_{ij}  $ 
+	Also $ b_{ii} = (x - a_{i i}) $, $ \deg b_{i i} = 1 $.
+	Die Einträge von $ B $ sind 0 Polynome, Polynome von Grad 0 oder 1.
+	Berechne
+	\[
+		\det B = \sum_{\tau \in S_n}^{} \Signum \tau b_{1 \tau(1)}  \dotsb b_{n \tau(n)} 
+	\]
+	\[
+		\deg\left( b_{1\tau(1)} \dotsb b_{n\tau(n)}  \right) = \left| \left\{ i \in \left\{ 1, \dotsc, n \right\} : \tau(i) = i \right\}  \right| 
+	\]
+	Also ist
+	\[
+		\prod_{i = 1}^{n} \left( x - a_{i i}  \right) 
+	\]
+	der \textbf{einzige} Term von Grad $ n $, und somit ist der \textbf{Hauptterm}!
+	Also
+	\[
+		\deg\left( \det B \right) = n
+	\]
+	und ist normiert \qed
+\end{subproof*}
+
+\begin{subdefinition}
+	Sei $ A \in M_{n \times n} (K) $ und $ c \in K $, $ c $ ist $ c $ ist ein \textbf{Eigenwert von $ A $} falls $ \det\left( cI - A \right) = 0 $.
+\end{subdefinition}
+
+\begin{subdefinition}
+	$ f(x) \coloneqq \det(xI_n - A) $ für $ A \in M_{n \times n} (K) $
+	heißt das \textbf{Charakteristische} Polynom von $ A $
+\end{subdefinition}
+
+\begin{sublemma}
+	Ähnliche Matrizen haben das gleiche charakteristische Polynom
+\end{sublemma}
+\begin{subproof*}[Lemma \ref{3.17.7}]
+	\[
+		B = P^{-1} A P
+	\]
+	\begin{align*}
+		\det\left( xI - B \right) &= \det\left( xI - P^{-1} A P \right)  \\
+		~& = \det \left( P^{-1} \left( xI - A \right) ^{P}  \right) \\
+		~& = \det P^{-1} \det\left( xI - A \right) \det \left( P \right) \\
+		~& = \det\left( xI - A \right) \qed
+	\end{align*}
+\end{subproof*}
+
+\begin{subdefinition}
+	Sei $ V $ endlich dimensional, $ T \in \mathcal{L} \left( V, V \right)  $ 
+	\[
+		\operatorname{Char Pol}(T) = \operatorname{Char Pol}\left( [T]_{\mathcal{B} }  \right) 
+	\]
+	für irgendeine geordnete Basis $ \mathcal{B}  $ von $ V $
+\end{subdefinition}
+
+\begin{subexample}
+	\begin{enumerate}[label=(\arabic*)]
+		\item 
+			\[
+				A = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} \in M_{2 \times 2} (\R ), \det\left( xI - A \right) = x^2 + 1
+			\]
+			hat keine reelle NS, also hat $ A $ keine reelle Eigenwerte
+		\item
+			\[
+				A = \begin{pmatrix} 3 & 1 & -1 \\ 2 & 2 & -1 \\ 2 & 2 & 0 \end{pmatrix} \in M_{3 \times 3} \left( \R  \right) 
+			\]
+			\[
+				\left| xI - A \right| = x^3 - 5x^2 + 8x - 4 = \left( x - 1 \right) \left( x - 2 \right) ^2
+			\]
+			Eigenwerte $ c = 1, c = 2 $\\
+			Berechne Eigenvektoren
+			\begin{itemize}
+				\item $ c = 1 $ 
+					$ \Kern \left( A - I \right) \coloneqq W_1 $ 
+					\[
+						\left( A - I \right) = \begin{pmatrix} 2 & 1 & -1 \\ 2 & 1 & -1 \\ 2 & 1 & -1 \end{pmatrix} 
+					\]
+					$ \implies \Rang(A) = 2, \dim W_1 = 1 $
+					Wir wollen eine Basis für $ W_1 $ finden, löse
+					\[
+						(A - 1) \begin{pmatrix} x_1 \\ x_2 \\x_3 \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix} 
+					\]
+					Hier $ \alpha_1 = \left( 1, 0, 2 \right) \neq 0 $ ist eine Lösung, und
+					$ \left\{ \alpha_1 \right\}  $ ist eine Basis für $ W_1 $ 
+				\item $ c = 2 $ $ W_2 $?
+					\[
+						\left( A - 2I \right) = \begin{pmatrix} 1 & 1 & -1 \\ 2 & 0 & -1 \\ 2 & 2 & -2 \end{pmatrix} 
+					\]
+					hat $ \Rang(A) = 2 $ $ \implies \dim W_2 = 1 $ 
+					Lösung wie oben
+					$ \alpha_2 = (1, 1, 2) \neq 0 $ und $ \left\{ \alpha_2 \right\}  $ eine Basis
+			\end{itemize}
+	\end{enumerate}
+\end{subexample}
+
+\begin{sublemma}
+	Sei $ T \in \mathcal{L} \left( V, V \right)  $ seien $ c_i $ für $ i = 1, \dotsc, k $ Eigenwerte von $ T $ (in $ K $) und $ \forall i \neq j $, $ i, j \in \left\{ 1, \dotsc, k \right\} : c_i \neq c_j $ 
+	Sei $ v_i \neq 0 $, $ v_i \in V $ Eigenvektor zum Eigenwert $ c_i $.
+	Dann ist $ \left\{ v_1, \dotsc, v_k \right\} $ linear Unabhängig
+\end{sublemma}
+\begin{subproof*}[Lemma \ref{3.17.10}]
+	Wir führen Induktion nach $ k $ 
+	\begin{description}
+		\item[I.A.] $ k = 2 $: wenn $ v_2 = cv_1 $ dann ist $ v_2 \in W_{c_1}  $, dann ist $ v_2 $ Eigenvektor zu $ c_1 $ $ \bot $
+		\item[I.V.] Für $ k -1 $ 
+		\item[I.S.] Seien $ v_1, \dotsc, v_k $ linear abhängig\\
+			\textbf{Bem.:} Sei $ v \in V $, $ v \neq 0 $ kann $ v $ \textbf{nicht} Eigenvektor sein zu verschiedenen Eigenwerten!\\
+			\OE{}
+			\[
+				v_k = \sum_{i=1}^{k - 1} v_i
+			\]
+			Wir berechnen
+			\[
+				T(v_k) = c_k v_k = c_k \sum_{i=1}^{k - 1} v_i
+			\]
+			\[
+				= T(v_k) = \sum_{i=1}^{k - 1} T(v_i) = \sum_{i=1}^{k - 1} c_i v_i
+			\]
+			\[
+				\implies c_k \sum_{i=1}^{k - 1} v_i = \sum_{i=1}^{k - 1} c_i v_i
+			\]
+			\[
+				\implies \sum_{i=1}^{k - 1} \left( c_k - c_i \right) v_i = 0.
+			\]
+			Aus I.V. folgt $ c_k - ci = 0 $ $ \forall i = 1, \dotsc, k - 1 $
+	\end{description}
+\end{subproof*}
+
+\begin{subcorollary}
+	 Sei $ \dim V = n $, $ T \in \mathcal{L} \left( V, V \right)  $.
+	 Wir nehmen an, dass $ T $ {\color{gadse-orange}$ n $ verschiedene} Eigenwerte $ d_1, \dotsc, d_n \in K $ hat.
+	 Dann hat $ V $ eine Basis $ \mathcal{D}  $ bestehend aus Eigenvektoren für $ T $.\qed
+\end{subcorollary}
+
+\begin{subdefinition}
+	Sei $ \dim V = n $, $ T \in \mathcal{L} \left( V, V \right)  $.
+	$ T $ ist \textbf{diagonalisierbar} über $ K $, falls $ V $ eine Basis, bestehend aus Eigenvektoren von $ T $ hat.
+\end{subdefinition}
+
+\begin{subnote}
+	$ d_1, \dotsc, d_n \in K $ $ n $-verschiedene Eigenwerte von $ T $, $ \mathcal{D}  $ die geordnete Basis wie im Korollar \ref{3.17.11}, dann ist
+	\[
+		[T]_{\mathcal{D} } = \begin{pmatrix} d_1 & & 0 \\ & \ddots & \\ 0 & & d_n \end{pmatrix} 
+	\]
+\end{subnote}
+
+\subsection{Skript 18}
+\begin{subcorollary}[Verallgemeinerung Lemma \ref{3.17.10}]
+$ \dim V = n $, $ T \in \mathcal{L} \left( V, V \right)  $, $ d_1, \dotsc, d_k \in K $ verschiedene Eigenwerte von $ T $ für $ i \in \left\{ 1, \dotsc, k \right\}  $ 
+Sei
+\[
+	\mathcal{B} _i \subseteq W_{d_i} 
+\]
+linear unabhängig.
+Dann ist $ \mathcal{B} = \bigcupdot_{i \in  I} B_i $
+\end{subcorollary}
+\begin{subproof*}[Korollar \ref{3.18.1}]
+	\[
+		L \coloneqq  \left\{ v_1, \dotsc, v_l \right\} \subseteq \mathcal{B} 
+	\]
+	Betrachte
+	\[
+		\sum_{j=1}^{l} c_j v_j
+	\]
+	Setze
+	\[
+		L_i \coloneqq  L \cap \mathcal{B} _i
+	\]
+	und setze
+	\begin{equation}
+		\label{eq:3.18.1.1}
+		\tag{$ * $}
+		\alpha_i \coloneqq \sum_{v_j \in L_i}^{} c_j v_j \in W_{d_i} 
+	\end{equation}
+	(Konvention falls $ L_i = \OO  $, setzte $ \alpha_i = 0 $).
+	Also wenn
+	\[
+		0 = \sum_{j=1}^{l} c_j v_j \implies \sum_{i=1}^{k} \alpha_i = 0
+	\]
+	\textbf{Beh.:}
+	Wenn 
+	\[
+		\sum_{i=1}^{k} \alpha_i = 0
+	\]
+	dann ist $ \alpha_i = 0 \quad \forall i = 1, \dotsc, k $\\
+	\textbf{Bew. der Beh.} sonst
+	\[
+		\alpha_i \neq 0,
+	\]
+	Eigenvektoren zu verschiedenen Eigenwerten und linear abhängig.
+	Widerspruch zu \ref{3.17.10} zurück in \eqref{eq:3.18.1.1} $ \alpha_1 = 0 \implies  $ 
+	\[
+		\sum_{v_j \in L_i}^{} c_j v_j = 0
+	\]
+	aber $ v_j $ sind per Annahme linear unabhängig.
+	Also $ c_j = 0 ~ \forall j = 1, \dotsc, k $\qed
+\end{subproof*}
+
+\begin{subtheorem}[Verallgemeinerung von Korollar \ref{3.17.11}]
+	Sei $ \dim V = n $, $ T \in \mathcal{L} \left( V, V \right) , d_1, \dotsc, d_k \in K $ die verschiedenen Eigenwerte von $ T $ in $ K $.\\
+	Es gilt:
+	$ T $ ist diagonalisierbar über $ K $ genau dann, wenn
+	\[
+		\sum_{j=1}^{k} \dim W_{d_j}  = n
+	\]
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{3.18.2}]
+	\begin{description}
+		\item[``$ \impliedby  $'':] Sei $ \mathcal{B} _j $ eine Basis für $ W_{d_j}  $ für jedes $ j = 1, \dotsc, k $ setze 
+			\[
+				B = \bigcupdot_{j = 1} ^{k} \mathcal{B} _j
+			\]
+			Korollar \ref{3.18.1} $ \implies  $ $ \mathcal{B}  $ linear unabängig
+		\item[``$ \implies  $'':]
+			Sei $ \mathcal{B}  $ eine Basis für $ V $ von Eigenvektoren von $ T $.
+			Setze $ \mathcal{B} _j = \mathcal{B} \cap W_{d_j}  $ Also ist
+			\[
+				\mathcal{B} = \bigcupdot_{j = 1} ^{k} B_j
+			\]
+			\[
+				\left| \mathcal{B}  \right| = n
+			\]
+			Setze 
+			\[
+				l_j = \left| \mathcal{B} _j \right| 
+			\]
+			also 
+			\[
+				n = \sum_{j=1}^{k} l_j
+			\]
+			\textbf{Beh.:}
+			$ l_j = \dim W_{d_j}  $ 
+			Es ist klar, dass
+			\[
+				l_j \leq \dim W_{d_j} 
+			\]
+			Wenn $ l_i < \dim W_{d_i}  $, dann $ \exists \beta \in W_{d_i}  $ so, dass
+			\[
+				\mathcal{B} _i^\prime = \mathcal{B} _i \cup \left\{ \beta \right\} 
+			\]
+			linear unabhängig ist.
+			Aber dann
+			\[
+				\mathcal{B} ^\prime = \mathcal{B} \cup \left\{ \beta \right\} 
+			\]
+			linear unabhängig!
+			Aber $ \left| \mathcal{B}^\prime \right| = n + 1 $ $ \bot $\qed
+	\end{description}
+\end{subproof*}
+
+Sei $ \mathcal{D}  $ die Basis
+\[
+	[T]_{\mathcal{D} } = \begin{pmatrix} d_1 \\ & \ddots \\ & & d_1 \\ &&& \ddots \end{pmatrix} 
+\]
+Wobei $ \forall i = 1, \dotsc, k $, $ d_i $ erscheint $ l_i \coloneqq \dim W_{d_i} $ mal
+
+Mit diesem Ansatz
+\begin{equation}
+	\label{eq:3.18.1}
+	\tag{$ \dag $}
+	\operatorname{Char Pol}(T) = \operatorname{Char Pol}\left( [T]_{\mathcal{D} }  \right) = \prod_{i = 1}^{k} \left( x - d_i \right) ^{l_i}  
+\end{equation}
+
+Umgekehrt, sei $ T \in \mathcal{L} \left( V, V \right) , \operatorname{Char Pol}(T) $ genau so, wie in \eqref{eq:3.18.1} ist, dann ist $ T $ diagonalisierbar (wegen Satz \ref{3.18.2}) wir haben bewiesen
+
+\begin{subtheorem}
+	Sei $ \dim V = n, T \in \mathcal{L} \left( V, V \right)  $.
+	Es gilt: $ T $ ist diagonalisierbar genau dann wenn $ \operatorname{Char Pol}(T) = \prod_{i = 1}^{k} (x - d_i)^{l_i}   $.
+
+	\textbf{Therminologie:} $ \dim W_d $ wird auch als $ d \in K $ Eigenwert \textbf{geometrische Vielfachheit} der Eigenwerte $ d $ genannt
+
+	$ T $ ist diagonalisierbar (über $ K $) genau dannw wenn $ \operatorname{Char Pol}(T) $ als Produkt von lin. Faktoren über $ K $ zerfüllt \textbf{und} die algebraische Vielfachheit jeder Nullstelle ist gleich geometrischer Vielfachheit jeder Eigenwerte
+\end{subtheorem}
+
+\begin{subtheorem}
+	Sei $ \dim V = n $, $ T \in \mathcal{L} \left( V, V \right)  $, $ d \in K $. Eigenwerte von $ T $ mit Vielfachheit $ \mu $.
+	Es gilt: $ l \coloneqq \dim \left( W_d \right) \leq \mu $
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{3.18.4}]
+	Sei $ \left( \alpha_1, \dotsc, \alpha_l \right)  $ eine Basis für $ W_d $, ergänze $ \mathcal{B} = \left( \alpha_1, \dotsc, \alpha_l, \alpha_{l + 1} , \dotsc, \alpha_n \right)  $ zur Basis von $ V $. Berechne
+	\[
+		A \coloneqq [T]_{\mathcal{B} }
+		= \begin{pmatrix} d & & 0 \\ & \ddots & & & B & ~ \\ 0 & & d \\ \\ & 0 & & & C \\ ~  \end{pmatrix} 
+	\]
+	\[
+		\det(xI - A)
+		= \begin{pmatrix} x - d & & 0 \\ & \ddots & & & -B & ~ \\ 0 & & x - d \\ \\ & 0 & & & xI -C \\ ~  \end{pmatrix} 
+		\overset{\text{ÜB} }{=} (x - d)^{l} \det (xI - c)
+	\]
+	Dies impliziert $ l \leq \mu $\qed
+\end{subproof*}
+
+\begin{subexample}
+	\[
+		A = \begin{pmatrix} 5 & - 6 & - 6 \\ -1 & 4 & 2 \\ 3 & - 6 & -4 \end{pmatrix} 
+	\]
+	über $ \R  $ 
+	$ \operatorname{Char Pol} = (x - 1)(x - 2)^2 $ 
+	\[
+		d_1 = 1
+	\]
+	\[
+		A = \begin{pmatrix} 4 & - 6 & - 6 \\ -1 & 3 & 2 \\ 3 & - 6 & -5 \end{pmatrix} 
+	\]
+	$ \Rang \left( A - I \right) = 2 $ 
+	\[
+		d_2 = 2
+	\]
+	\[
+		A = \begin{pmatrix} 3 & - 6 & - 6 \\ -2 & 3 & 2 \\ 3 & - 6 & -6 \end{pmatrix} 
+	\]
+	$ \Rang(A - 2I) = 1 $ 
+	Also $ \dim W_{d_1} = 1 $, $ \dim W_{d_2} = 2 $, also $ \dim W_{d_1} + \dim W_{d_2} = 3 $, also $ T $ diagonal und
+	\[
+		[T]_{\mathcal{D} } = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 2 \end{pmatrix} \qed
+	\]
+\end{subexample}
+
+\subsection{Skript 19}
+\setcounter{subsubsection}{9}
+\subsubsection{Annihilator Ideal}
+$ \dim V = n, T \in \mathcal{L} \left( V, V \right) , V $ $ K $-Vektorraum
+
+\begin{subproposition}
+	Es gelten
+	\begin{enumerate}[label=(\arabic*)]
+		\item $ \mathcal{A} (T) \coloneqq  \left\{ p \in K[x]; p(T) = 0 \right\}  $ ist ein Ideal
+		\item $ \mathcal{A} (T) \neq \left\{ 0 \right\}  $
+	\end{enumerate}
+\end{subproposition}
+\begin{subproof*}[Proposition \ref{3.19.1}]
+	\begin{enumerate}[label=(\arabic*)]
+		\item $ ( p + q ) (T) = p(T) + q(T) $ und $ \forall p, q \in K[x] $ $ (pq) (T) = p(T) q(T) $ (1) folgt.
+		\item Betrachte die $ n^2 + 1 $ Elemente in $ \mathcal{L} \left( V, V \right)  $.
+			\[
+				I, T, T^2, \dotsc, T^{n^2} \in \mathcal{L} (V, V)
+			\]
+			Aber $ \dim \mathcal{L} (V, V) = n^2 $ Also sind die linear abhängig\\
+			i.e. $ \exists c_0, \dotsc, c_{n^2} \in K $.
+			\[
+				c_0I + c_1T + \dotsb + c_{n^2} T^{n^2} = 0
+			\]
+			und die $ c_i $ sind \textbf{nicht}alle gleich 0.
+			Also das Polynom
+			\[
+				c_0 + c_1x + \dotsb + c_{n^2} x^{n^2} = g(x) \neq 0
+			\]
+			$ g(x) \in \mathcal{A} (T) $ \qed
+	\end{enumerate}
+\end{subproof*}
+
+\begin{subdefinition}
+	$ \mathcal{A} (T) $ ist \textbf{annihilator Ideal}.
+	Der (eindeutig bestimmte normierte Erzeuger von
+	$ \mathcal{A} (T) $ 
+	ist das \textbf{minimal Polynom von $ T $} und wird mit $ \operatorname{Min Pol} T $ bezeichnet.
+\end{subdefinition}
+
+\begin{subnote}
+	\begin{enumerate}[label=(\arabic*)]
+		\item $ \deg (\operatorname{Min Pol}(T)) \leq  n^2 $
+		\item $ p = \operatorname{Min Pol}(T) $ ist Charakterisiert durch
+			\begin{enumerate}[label=(\alph*)]
+				\item $ p \in K[x] $ 
+				\item $ p(T) = 0 $ 
+				\item $ \forall q \in K[x] : \deg q < \deg p \implies q(T) \neq 0  $
+			\end{enumerate}
+	\end{enumerate}
+\end{subnote}
+
+\begin{subdefinition}
+	für ein $ A \in Mat_{n \times n} (K) $ sind $ \mathcal{A} (A) $ und $ \operatorname{Min Pol}(A) $ analog definiert
+\end{subdefinition}
+
+\begin{subnote}
+	\begin{enumerate}[label=(\arabic*)]
+		\item Sei $ \mathcal{B}  $ eine geordnete Basis von $ V $ und $ f \in K[x] $.
+			Es gilt $ [f(T)]_{\mathcal{B} } = f\left( [T]_{\mathcal{B} }  \right)  $ 
+			Insbesondere für $ A = [T]_{\mathcal{B} }  $ gilt
+			\[
+				f(T) = 0 \iff f(A) = 0
+			\]
+		\item Es folgt: ähnliche Matrizen haben das gleiche minimale Polynom!
+	\end{enumerate}
+\end{subnote}
+
+\begin{subtheorem}
+	Sei $ T \in \mathcal{L} (V, V) $ (oder $ A \in Mat_{n \times n} (K) $.
+	Es gilt: $ \operatorname{Char Pol}(T)  $ und $ \operatorname{Min Pol}(T) $ haben, bis auf Vielfachheit, dieselben Nullstellen in $ K $
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{3.19.6}]
+	Sei $ p \coloneqq \operatorname{Min Pol}(T) $ und $ c \in K $.
+	Zu zeigen $ p(c) = 0 \iff c $ ist Eigenwert von $ T $ 
+	\begin{description}
+		\item[``$ \implies  $'':] $ p(c) = 0 \implies p = (x - c) q $.
+			\[
+				\deg q < \deg p
+			\]
+			Also ist $ q(T) \neq 0 $.
+			Also wähle $ \beta \in V $ so, dass $ \alpha \coloneqq  q(T) (\beta) \neq 0 $ 
+			Es gilt $ 0 = p(T)(\beta) = (T - cI)(qT)(\beta) = (T - cI)(\alpha) $
+			Also ist $ \alpha $ Eigenvektor und $ c $ Eigenwert
+		\item[``$ \impliedby  $'':] Sei $ T(\alpha) = c \alpha $, $ \alpha \neq 0, \alpha \in V, c \in K $ 
+			Nun gilt: $ p(T)(\alpha) \overset{\text{ÜB} }{=} p(c) \alpha = 0 $.
+			Da aber $ p(T) = 0 $ und $ \alpha \neq 0 $, folgt $ p(c) = 0 $\qed
+	\end{description}
+\end{subproof*}
+
+\begin{subproposition}
+	Sei $ T $ diagonalisierbar. Dann zerfällt das $ \operatorname{Min Pol}(T) $ (über $ K $) in verschiedene lineare Faktoren
+\end{subproposition}
+
+

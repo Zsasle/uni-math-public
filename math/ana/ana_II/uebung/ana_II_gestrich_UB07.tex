@@ -1,0 +1,74 @@
+\documentclass[sectionformat=aufgabe]{gadsescript}
+
+\setsemester{Summer Semester 2024}%
+\setuniversity{University of Konstanz}%
+\settitlelh{\today\\\semester\\Gruppe 3, Jonathan Weihing}
+\setfaculty{Faculty of Science\\(Mathematics and Statistics)}%
+\settitle{Übungsblatt 7}
+\setsubtitle{Elias Gestrich}
+\usepackage{subfig}
+
+\begin{document}
+\maketitle
+\begin{align*}
+	\partial_i \left\| x \right\| &= \partial_i \left( \sum_{i=1}^{n} x_i^2 \right) ^{\frac{ 1 }{ 2 } }   \\
+	~ &= \left( 2 x_i \right) \cdot \frac{ 1 }{ 2 } \left( \sum_{i=1}^{n} x_i^2 \right) ^{-\frac{ 1 }{ 2 } }   \\
+	~ &= \frac{ \left( x_i \right) }{ \left\| x \right\| }   \\
+\end{align*}
+
+\begin{align*}
+	\partial_i \left\| x \right\|^2 &= \partial_i \left( \left(\sum_{i=1}^{n} x_i^2\right)^{\frac{ 1 }{ 2 } } \right) ^2 \\
+	\partial_i \left\| x \right\|^2 &= \partial_i \sum_{i=1}^{n} x_i^2 \\
+	~ &= \left( 2 x_i \right)  \\
+\end{align*}
+
+\section{Wärmeleitungskern}
+\begin{align*}
+	\Delta F &= \sum_{i=1}^{n} \partial_i^2 F \\
+	~ &= \sum_{i=1}^{n} \partial_i^2 t^{- \frac{ n }{ 2 } } \exp \left( - \frac{ \left\| x \right\| ^2 }{ 4t }  \right)  \\
+	~ &= \sum_{i=1}^{n} \partial_i - \frac{2 x_i}{ 4t }  t ^{- \frac{ n }{ 2 } } \exp \left( - \frac{ \left\| x \right\| ^2 }{ 4t }  \right)  \\
+	~ &= \sum_{i=1}^{n}
+	\left( - \frac{ 2 }{ 4t } t ^{- \frac{ n }{ 2 } } \exp \left( - \frac{ \left\| x \right\| ^2 }{ 4t }  \right)  \right)
+	+
+	\left( \frac{ 4x_i^2 }{ 16t^2 } t ^{- \frac{ n }{ 2 } } \exp \left( - \frac{ \left\| x \right\| ^2 }{ 4t }  \right)   \right)  \\
+	~ &= \left( - \frac{ 1 }{ 2 } t ^{- \frac{ n }{ 2 } - 1 } \exp \left( - \frac{ \left\| x \right\| ^2 }{ 4t }  \right)  \right) \left( \sum_{i=1}^{n} 1 \right) 
+	+
+	\left( \frac{ 1 }{ 4 } t ^{- \frac{ n }{ 2 } - 2 } \exp \left( - \frac{ \left\| x \right\| ^2 }{ 4t }  \right)   \right) \sum_{i=1}^{n} x_i^2 \\
+	~ &= \left( - \frac{ n }{ 2 } t ^{- \frac{ n }{ 2 } - 1 } \exp \left( - \frac{ \left\| x \right\| ^2 }{ 4t }  \right)  \right) 
+	+
+	\left( \frac{ \left\| x \right\| ^2 }{ 4 } t ^{- \frac{ n }{ 2 } - 2 } \exp \left( - \frac{ \left\| x \right\| ^2 }{ 4t }  \right)   \right) \\
+	~ &= \left( \frac{ \left\| x \right\| ^2 t ^{-\frac{ n }{ 2 } - 2} }{ 4 } - \frac{ n t ^{-\frac{ n }{ 2 } -1} }{ 2 }  \right) \exp \left( - \frac{ \left\| x \right\| ^2 }{ 4t }  \right)  \\
+\end{align*}
+und
+\begin{align*}
+	\frac{ \partial F }{ \partial t } &= \left( - \frac{ n }{ 2 } t ^{-\frac{ n }{ 2 } -1} \exp \left( - \frac{ \left\| x \right\| ^2 }{ 4t }  \right) \right) - \left( \left(- \frac{ \left\| x \right\| ^2 }{ 4t^2 } \right) t^{-\frac{ n }{ 2 } } \exp \left( - \frac{\left\| x \right\| ^2 }{ 4t }  \right)  \right) \\
+	~ &= \left( \frac{ \left\| x \right\| ^2 t ^{-\frac{ n }{ 2 } - 2} }{ 4 } - \frac{ n t ^{-\frac{ n }{ 2 } -1} }{ 2 }  \right) \exp \left( - \frac{ \left\| x \right\| ^2 }{ 4t }  \right)  \\
+\end{align*}
+
+also $ \Delta F = \frac{ \partial F }{ \partial t }  $, also $ \Delta F - \frac{ \partial F }{ \partial t } = 0 $
+
+\section{Harmonische Funktionen}
+Für $ n = 2 $:
+\[
+	\sum_{i=1}^{2} \partial_i^2 \ln \left| x \right|
+	= \sum_{i=1}^{2} \partial_i \frac{ x_i }{ \left| x \right|  } \cdot \frac{ 1 }{ \left| x \right|  }
+	= \sum_{i=1}^{2} \partial_i \frac{x_i}{ \left| x \right| ^{2} }
+	= \sum_{i=1}^{2} \frac{1 \cdot \left| x \right| ^2 - x_i \cdot 2 x_i }{ \left| x \right| ^{4} }
+	= \frac{2 \cdot \left| x \right| ^2 - 2 \left| x \right| ^2}{ \left| x \right| ^{4} }
+	= 0
+\]
+
+Für $ n > 2 $ 
+\begin{align*}
+	\sum_{i=1}^{n} \partial_i^2 \left| x \right| ^{2 - n}
+	& = \sum_{i=1}^{n} \partial_i \frac{ x_i }{ \left| x \right|  } \left| x \right| ^{1 - n} \\
+	& = \sum_{i=1}^{n} \partial_i \frac{ x_i }{ \left| x \right|^{n} } \\
+	& = \sum_{i=1}^{n} \frac{ \left| x \right| ^n - x_i \cdot \frac{x_i}{ \left| x \right|  } \cdot n \left| x \right| ^{n - 1}  }{ \left| x \right|^{2n} } \\
+	& = \sum_{i=1}^{n} \frac{ \left| x \right| ^n - n x_i^2 \left| x \right| ^{n - 2}  }{ \left| x \right|^{2n} } \\
+	& = \frac{ n \left| x \right| ^n - n \left| x \right| ^2 \left| x \right| ^{n - 2}  }{ \left| x \right|^{2n} } \\
+	& = \frac{ n \left| x \right| ^n - n \left| x \right| ^{n}  }{ \left| x \right|^{2n} } \\
+	& = 0
+\end{align*}
+
+\end{document}
+

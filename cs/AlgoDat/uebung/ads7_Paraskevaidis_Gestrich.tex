@@ -1,0 +1,281 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{tabularray}
+
+\makeatletter
+\newcommand{\qed}{\@ifstar\@qedwhite\@qedblack}
+\DeclareRobustCommand{\@qedblack}{%
+        \ifmmode \tag*{$\blacksquare$}%
+        \else \leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill\quad\hbox{$\blacksquare$}%
+        \fi%
+}
+\DeclareRobustCommand{\qedwhite}{%
+        \ifmmode \tag*{$\Box$}%
+        \else \leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill\quad\hbox{$\Box$}%
+        \fi%
+}
+\makeatother
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+%====================================================================
+% SETZEN SIE HIER DIE NUMMER DES ÜBUNGSBLATTES UND IHRE(N) NAMEN EIN
+% FILL IN THE SHEET NUMBER AND YOUR NAME(S)
+%====================================================================
+\newcommand{\sheetNum}{7} % Nummer des Übungsblatt / Sheet number
+\newcommand{\studentOne}{Alexandros Paraskevaidis} % Name 1
+\newcommand{\studentTwo}{Elias Gestrich} % Name 2
+%====================================================================
+
+\setkomafont{sectioning}{\normalfont\normalcolor\bfseries}
+\usepackage[left=2.5cm,right=2.5cm,top=2.0cm,bottom=2.5cm]{geometry}
+
+% Hyperlinks
+\usepackage{hyperref}
+
+% Pseudocode
+\usepackage[german,vlined,longend,ruled,linesnumbered]{algorithm2e}
+\SetKw{KwDownTo}{downto}
+\SetKw{KwAnd}{and}
+\SetKw{KwOr}{or}
+\DontPrintSemicolon
+
+% Grafiken
+\usepackage{graphicx}
+\graphicspath{{img/}}
+\usepackage{tikz}
+
+% Makros für Aufgaben und Teilaufgaben
+\usepackage{marginnote}
+\reversemarginpar
+\setlength{\parindent}{0cm}
+\newcommand{\task}[1]{\subsubsection*{#1}}
+\newcommand{\subtask}[1]{\marginnote{#1)}}
+
+
+\begin{document}
+
+%====================================================================
+\begin{small}
+\begin{minipage}{0.5 \linewidth}
+  Algorithmen und Datenstrukturen\\
+  Sommersemester 2024
+\end{minipage}
+\begin{minipage}{0.5\linewidth}
+  \begin{flushright}
+    \studentOne\\
+    \studentTwo
+  \end{flushright}
+\end{minipage}
+\end{small}
+\begin{center}
+\begin{sffamily}\Large\bfseries \sheetNum. Übungsblatt\end{sffamily}
+\end{center}
+%====================================================================
+
+
+\task{Aufgabe 1 - Graph Zahl}
+\begin{itemize}
+	\item Es gibt einen ungerichteten, zusammenängenden Graph mit mehr als 5 Knoten, der keine Knoten mit demselben Grad hat.\\[2ex]
+		\begin{tikzpicture}
+			\filldraw ( 2,  0)	circle (2pt) node [anchor = west]	{5};
+			\filldraw ( 1,  1.732)	circle (2pt) node [anchor = south west]	{4};
+			\filldraw (-1,  1.732)	circle (2pt) node [anchor = south east]	{4};
+			\filldraw (-2,  0)	circle (2pt) node [anchor = east]	{3};
+			\filldraw (-1, -1.732)	circle (2pt) node [anchor = north east]	{3};
+			\filldraw ( 1, -1.732)	circle (2pt) node [anchor = north west]	{1};
+
+			\draw ( 2,  0)		-- (-1,  1.732);
+			\draw ( 2,  0)		-- ( 1,  1.732);
+			\draw ( 2,  0)		-- (-2,  0);
+			\draw ( 2,  0)		-- ( 1, -1.732);
+			\draw ( 2,  0)		-- (-1, -1.732);
+
+			\draw ( 1,  1.732)	-- (-1,  1.732);
+			\draw ( 1,  1.732)	-- (-2,  0);
+			\draw ( 1,  1.732)	-- (-1, -1.732);
+
+			\draw (-1,  1.732)	-- (-2,  0);
+			\draw (-1,  1.732)	-- (-1, -1.732);
+		\end{tikzpicture}
+	\item Das stimmt, da für eine starke Zusammenhangskomponente vorher galt, dass zu jedem Knoten $ v $ in der Zusammenhangskomponente auch einen gerichteten Pfad zu jedem Knoten $ w $ in der Zusammenhangskomponente. Wenn man jetzt die Kantenrichtungen umdreht, dann ist der Weg von einem Knoten $ v $ zu einem Knoten $ w $ der Weg von dem ursprünglichen Graphen von $ w $ nach $ v $, der aus Voraussetzung existiert.\\
+		Außerdem bleiben die starken Zusammenhangskomponenten gleich, denn wenn von $ v $ nach $ w $ im ursprünglichen Graphen kein gerichteter Pfad existiert hat, dann existiert im umgedrehten Graphen kein gerichteter Pfad von $ w $ nach $ v $ und umgekehrt.
+	\item Nein nehme folgendes Beispiel: \\[2ex]
+		\begin{tikzpicture}
+			\coordinate (0) at ( 0, -0.577);
+			\coordinate (1) at ( 1,  0);
+			\coordinate (2) at (-1,  0);
+			\coordinate (3) at ( 0, -1.732);
+			\coordinate (4) at ( 3,  0);
+			\coordinate (5) at ( 2,  1.732);
+			\coordinate (6) at (-2,  1.732);
+			\coordinate (7) at (-3,  0);
+			\coordinate (8) at (-1, -3.464);
+			\coordinate (9) at ( 1, -3.464);
+
+			\filldraw (0) 	circle (2pt) node [anchor = south]	{0};
+
+			\filldraw (4) 	circle (2pt) node [anchor = west]	{4};
+			\filldraw (5)	circle (2pt) node [anchor = south west]	{5};
+			\filldraw (1)	circle (2pt) node [anchor = south east]	{1};
+
+			\filldraw (6)	circle (2pt) node [anchor = south east]	{6};
+			\filldraw (7)	circle (2pt) node [anchor = east]	{7};
+			\filldraw (2)	circle (2pt) node [anchor = north east]	{2};
+
+			\filldraw (8)	circle (2pt) node [anchor = north east]	{8};
+			\filldraw (9)	circle (2pt) node [anchor = north west]	{9};
+			\filldraw (3)	circle (2pt) node [anchor = south west]	{3};
+
+			\draw (0) -- (1);
+			\draw (0) -- (2);
+			\draw (0) -- (3);
+
+			\draw (1) -- (4);
+			\draw (4) -- (5);
+			\draw (5) -- (1);
+
+			\draw (2) -- (6);
+			\draw (6) -- (7);
+			\draw (7) -- (2);
+
+			\draw (3) -- (8);
+			\draw (8) -- (9);
+			\draw (9) -- (3);
+		\end{tikzpicture}\\[2ex]
+		Wir nennen den Teilgraph mit den Knoten (4) und (5) $ A $, mit den Knoten (6), (7) $ B $, mit den Knoten (8), (9) $ C $ und der Teilgraph mit den Knoten (1), (2), (3) $ D $
+		Wenn alle Kanten von (1), (2) und (3) zu (0) Richtung (0) Zeigen, dann gibt es keinen gerichteten Pfad zwischen den Teilgraphen $ A $, $ B $ und $ C $.\\
+		Wenn zwei der Kanten von $ D $ nach (0)  in Richtung (0) zeigen und eine nicht, dann gilt aus Symmetriegründen, dass \OE{} die Kante von (0) nach (3) zu (3) zeigt.
+		Dann gibt es keinen gerichteten Pfad zwischen den Teilgraphen $ A $ und $ B $.
+		Wenn nur der Kanten von $ D $ nach (0) in Richtung (0) zeigt, (\OE{} ist dies die Kante von (1) nach (0)), dann gibt es keinen gerichteten Pfad zwischen den Teilgraphen $ B $ und $ C $.
+		Und schlussendlich wenn keine der Kanten von $ D $ nach (0) zeigt, dann gibt es wieder keinen gerichteten Pfad zwischen den Teilgraphen $ A, B $ und $ C $
+	\item das stimmt, da wenn alle Zusammenhangskomponenten nur 101 Knoten oder weniger hätten, dann könnte es insgesamt nur weniger als 2020 Knoten geben. (101 in jeder Zusammenhganskomponente)
+\end{itemize}
+
+\task{Aufgabe 2 - Zusammenhänge erkennen}
+\begin{enumerate}[label=(\alph*)]
+	\item ~
+		\begin{description}
+			\item[``1. $ \implies  $ 3.'':]
+				Vollständige Induktion:
+				\begin{description}
+					\item[I.A.] $ \left| V \right| = 1 $ dann ist $ G $ zusammenhängend und hat $ 0 = n - 1 $ Kanten.
+					\item[I.V.] Jeder  Baum mit $ \left| V \right| = n $ Knoten ist zusammenhängend und hat $ n - 1 $ Kanten
+					\item[I.S.] Wenn man einen Knoten $ v $ einem Baum hinzufügt, dann muss mindestens eine Kante zum Knoten $ w $ hinzukommen.
+						Würde noch eine weitere Kante zum Knoten $ u $ hinzukommen, dann gäbe es von $ v $ zu $ w $ zwei Wege und zwar der direkte Weg von $ v $ nach $ w $ und der Weg von $ v $ nach $ u $ nach $ w $.
+						Der Weg von $ u $ nach $ w $ existiert, da wenn er nicht existieren würde $ v $ und $ w $ keine Verbindung hätten und somit in verschiednen Zusammenhangskomponenten wären.
+				\end{description}
+			\item[``3. $ \implies  $ 4.'':]
+				Nach der Vorlesung gilt $ m \geq n - k $ mit $ m $ Anzahl der Kanten, $ n $ Anzahl der Knoten und $ k $ Anzahl der Zusammenhangskomponenten.
+				Also Angenommen man kann eine Kante entfernen so, dass es immer noch nur eine Zusammenhangskomponente gäbe, dann würde die Ungleichung $ n - 2 \geq n - 1 $ nicht gelten, was zu einem Widerspruch führt und jede Kante die entfernt wird, führt dazu das der Graph unzusammenhängend wird.
+			\item[``4. $ \implies  $ 5.'':]
+				Nehme an es gibt einen Zyklus, dann nehme zwei benachbarte Knoten $ v $ und $ w $ aus Zyklus und entferne die Kante $ (v, w) $, der Graph wäre immer noch zusammenhängend, da es immer noch einen Weg von $ v $ nach $ w $ gibt, also alle anderen Wege, die über $ (v, w) $ gingen durch den längeren weg über den Zyklus gehen können.
+				Noch zu zeigen maximal Kreisfrei.
+				Durch Kontraposition $ G $ kreisfrei, aber man kann eine Kante zwischen zwei Knoten $ v, w $ hinzufügen, so dass kein Kreis entsteht.
+				Zu zeigen $ G $ ist nicht zusammenhängend.
+				Angenommen $ G $ wäre zusammenhängend, dann gäbe es zwischen $ v $ und $ w $ eine Verbindung.
+				Daraus folgt aber auch, dass die Kante $ (v, w) $ einen Zyklus erzeugen würde. Da man von $ v $ nach $ w $ über die Verbindung in $ G $ und dann von $ w $ direkt zu $ v $ gehen kann.
+			\item[``5. $ \implies  $ 1.'':] Zu zeigen zusammenhängengend und kreisfrei.
+				Angenommen nicht zusammenhängend, das heißt es gibt zwei Knoten $ v, w $, die nicht durch einen Pfad verbunden sind.
+				Also wenn man eine Kante zwischen $ v $ und $ w $ hinzufügt wird, auch kein Kreis erzeugt.
+				Kreisfrei da maximal kreisfrei kreisfrei impliziert.
+		\end{description}
+		
+	\item ~
+		\begin{description}
+			\item[``$ \implies  $'':] Nach Definition von stark zusammenhängend gibt es zu jedem Knoten $ v $ einen gerichteten Pfad zu jedem $ w $ und von jedem solcher Knoten $ w $ gibt es zu jedem Knoten $ u $ einen gerichteten Pfad, also auch von $ w $ nach $ v $.
+			\item[``$ \impliedby  $'':] Zu zeigen es gibt zu jedem Knoten $ v $ einen Weg zu jedem Knoten $ w $.
+				Sei $ v $ ein Knoten in $ G(V, E) $, dann gibt es nach Voraussetzung einen gerichteten Pfad von $ v $ nach $ w $
+		\end{description}
+\end{enumerate}
+
+\task{Aufgabe 3 - Stabiler Kreislauf}
+\begin{enumerate}[label=(\alph*)]
+	\item 
+		\begin{algorithm}
+			\caption{BFS()}
+			let $ Q $ be a queue\;
+			\For{all nodes w with an edge from v to w}{
+				\If{w = v}{
+					$ w $.length = 1\;
+					$ w $.parent = $ v $\;
+					\Return\;
+				}
+				$ Q $.enqueue($ w $)\;
+			}
+			unlable $ v $ \tcp*{If $ v $ was labeled unlabel it}
+			\While{$ Q $ is not empty}{
+				$ w $ := $ Q $.dequeue()\;
+				\For{all nodes $ u $ with an edge from $ w $ to $ u $}{
+					\If{$ u $ is unlabeled}{
+						$ u $.length $ \leftarrow $ $ w $.length + 1\;
+						$ u $.parent $ \leftarrow $ $ w $\;
+						label $ u $ as explored\;
+						$ Q $.enqueue($ u $)\;
+					}
+					\If{u = v}{
+						\Return\;
+					}
+				}
+			}
+		\end{algorithm}
+		Die Länge ist dann $ v $.length und der Weg ist dann 
+		\begin{algorithm}
+			$ w \leftarrow v.parent $\;
+			let $ List $ be a list\;
+			$ List $.append($ v $)\;
+			\While{$ w $ is not $ v $}{
+				$ List $.append($ w $)\;
+				$ w \leftarrow w.parent $ \;
+			}
+			$ List $.append($ v $)\;
+			turn $ List $ around so that the first element is the last and the last is the first and vice versa\;
+			\Return $ List $\;
+		\end{algorithm}
+		Die List von vorne nach hinten.
+		Da der erste Algorithmus jeden Knoten nur höchstens einmal besucht, und jede Kante so nur höchstens einmal abfragt ist die Laufzeit in $ \mathcal{\left| V \right| + \left| E \right| }  $.\\
+		Der Algorithmus bedient sich dem Breitensuche-Algorithmus um den kürzesten Weg von zwei Knoten zu finden, wobei hier der Anfangspunkt gleich dem Endpunkt ist, sodass der Anfangspunkt wieder unlabeled wurde, sodass der kürzeste Weg von $ v $ nach $ v $ gesucht wurde.
+	\item Wenn bei der Breitensuche man einen Knoten findet, der schon gelabeled ist, dann gibt es einen Zyklus, da der Knoten von der Wurzel durch zwei verschiedene Wege erreicht werden kann, also wäre ein möglicher Zyklus von der Wurzel über den einen Weg zum schon gelablten Knoten zurück über den anderen Weg zur Wurzel.
+	\item Nach Aufgabe 2 ist azyklisch äquivalent dazu dass der Graph $ n - 1 $ Kanten hat.
+		Wenn weniger als zwei Knoten einen Grad von $ \leq 1 $ haben, dann ist die Summer aller Grade größer als $ 2(n-1) + 1 = 2n - 1 $.
+		Gäbe es $ n - 1 $ Kanten in diesem Graphen, dann ergibt dies aber die Summe aller Grade von $ 2(n - 1) $, da eine Kante den Grad von zwei Knoten um eins erhöht und wenn es null Kanten gibt, dann ist auch der Grad aller Knoten zusammengezählt 0. Da aber $ 2(n - 1) = 2n - 2 < 2n - 1 $ und die Summer aller Grade größer ist als $ 2n - 1 $, führt dies zu einem Widerspruch.
+\end{enumerate}
+
+\task{Aufgabe 4 - Zwei Farben}
+\begin{enumerate}[label=(\alph*)]
+	\item ~\\
+		\begin{tikzpicture}
+			\filldraw (-1, 0) circle (2pt) node [anchor = north east] {1};
+			\filldraw (1, 0) circle (2pt) node [anchor = north west] {2};
+			\filldraw (0, 1.732) circle (2pt) node [anchor = south] {3};
+			\draw (-1, 0) -- (1, 0);
+			\draw ( 0, 1.732) -- (1, 0);
+			\draw ( 0, 1.732) -- (-1, 0);
+		\end{tikzpicture}
+	\item ~
+		\begin{algorithm}
+			\For{v in Knoten}{
+				\For{w Nachbar von v}{
+					\If{v.color = w.color}{
+						\Return nicht zweifarbig
+					}
+				}
+			}
+			\Return zweifarbig
+		\end{algorithm}
+		Worst case alle Knoten und alle Kanten $ \mathcal{O} \left(\left| V \right| + \left| E \right| \right) $
+	\item ~
+		Siehe b)?
+\end{enumerate}
+
+
+
+\end{document}

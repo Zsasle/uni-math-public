@@ -1,0 +1,137 @@
+\documentclass[sectionformat = aufgabe]{gadsescript}
+\settitlelh{\today\\\semester\\Gruppe 3, Briefkasten 11, Baiz}
+\setsemester{Summer Semester 2024}%
+\setuniversity{University of Konstanz}%
+\setfaculty{Faculty of Science\\(Mathematics and Statistics)}%
+\settitle{Übungsblatt 06}
+\setsubtitle{Elias Gestrich}
+%Salisha Baiz, salisha.baiz@uni-konstanz.de
+
+\begin{document}
+\maketitle
+\setcounter{section}{6}
+\subsection{}
+\begin{enumerate}[label=(\alph*)]
+	\item 
+		\[
+			\sigma = \begin{pmatrix} 1 & 3 & 6 & 9 \end{pmatrix} \begin{pmatrix} 2 & 8 \end{pmatrix} \begin{pmatrix} 4 & 7 \end{pmatrix} = \begin{pmatrix} 1 & 9 \end{pmatrix} \begin{pmatrix} 1 & 6 \end{pmatrix} \begin{pmatrix} 1 & 3 \end{pmatrix} \begin{pmatrix} 2 & 8 \end{pmatrix} \begin{pmatrix} 4 & 7 \end{pmatrix} 
+		\]
+		Also
+		\[
+			\Signum ( \sigma ) = - 1
+		\]
+	\item Zu zeigen $ (\sigma \tau) (\alpha) = (\tau \sigma) (\alpha) $ für alle $ \alpha \in \N _n $:\\
+		Für $ \sigma (\alpha) \neq \alpha $, gilt $ \tau (\alpha) = \alpha $ und $ \sigma( \sigma (\alpha)) \neq \sigma (\alpha) $, also $ \tau ( \sigma (\alpha)) = \sigma (\alpha) $, daraus folgt:
+		\[
+			\sigma( \tau (\alpha)) = \sigma(\alpha) = \tau(\sigma(\alpha))
+		\]
+		Sei $ \sigma (\alpha) = \alpha $, zum Widerspruch
+		\[
+			\sigma(\tau(\alpha)) \neq \tau (\sigma(\alpha)) = \tau(\alpha)
+		\]
+		Daraus folgt aber $ \tau (\tau (\alpha)) = \tau(\alpha)$, also auch $ \tau (\alpha) = \alpha $, also $ \alpha = \sigma(\alpha) = \sigma(\tau(\alpha)) \neq \tau(\alpha) = \alpha $ was ein Widerspuch ist, also muss $ \sigma(\tau(\alpha)) = \tau(\sigma(\alpha)) $ was zu beweisen war.
+	\item Mithilfe vollständiger Induktion:
+		\begin{description}
+			\item[I.A.] 
+				Für $ m = 1 $ gilt $ \tau $ und $ \alpha_1 $ sind genau dann disjunkt, wenn $ \tau $ und $ \alpha_1 $ disjunkt sind.
+			\item[I.V.] $ \tau, \alpha_1, \dotsc, \alpha_m \in S_n $ mit $ \alpha_1, \dotsc, \alpha_m $ paarweise disjunkt so, dass $ \alpha_1 \dotsb \alpha_m $ und $ \tau $ genau dann disjunkt, wenn für alle $ 1 \leq i \leq m $ die Permutationenen $ \tau $ und $ \alpha_i $ disjunkt sind.
+			\item[I.S.] Zu zeigen, wenn $ \alpha_1, \dotsc, \alpha_{m + 1}  $ paarweise disjunkt, dann ist $ \alpha_1 \dotsb \alpha_{m + 1}  $ und $ \tau $ genau dann disjunkt, wenn für alle $ 1 \leq i \leq m + 1 $ die Permutationen $ \tau $ und $ \alpha_i $ disjunkt sind.\\
+				Beh. $ \tau $ und $ \alpha_1 \dotsb \alpha_{m + 1}  $ genau dann disjunkt, wenn $ \tau $ und $ \alpha_1 \dotsb \alpha_m $ disjunkt und $ \tau $ und $ \alpha_{m + 1}  $ disjunkt.\\
+				Aus der I.V. folgt, dass $ \alpha_1 \dotsb \alpha_m $ und $ \alpha_{m + 1}  $ disjunkt.\\
+				Sei $ \alpha_1 \dotsb \alpha_{m + 1}  $ und $ \tau $ disjunkt, zu zeigen für all $ 1 \leq i \leq m + 1 $ sind $ \tau $ und $ \alpha_I $ disjunkt.
+				Zum Widerspruch: $ \exists \alpha \in \N _n, 1 \leq i \leq m + 1 : \tau(\alpha) \neq \alpha \neq \alpha_i $. Also
+				\[
+					\prod_{j \neq i} \alpha_j
+				\]
+				disjunkt zu $ \alpha_i $ aus I.V., also $ \alpha_1 \dotsb \alpha_{m + 1} = \alpha_i \prod_{j \neq i} \alpha_j $,
+				also $ \alpha_1 \dotsb \alpha_{m + 1} (\alpha) = \alpha_i(\alpha) \neq \alpha $, also sind $ \alpha_1 \dotsb \alpha_{m + 1}  $ und $ \tau $ nicht disjunkt, was ein Widerspruch ist.\\
+				Seien für alle $ 1 \leq i \leq m + 1 $ die Permutationen $ \tau $ und $ \alpha_i $ disjunkt, zu zeigen $ \alpha_1 \dotsb \alpha_{m + 1}  $ und $ \tau $ sind disjunkt.\\
+				Zum Widerspruch: $ \tau $ nicht disjunkt $ \alpha_1 \dotsb \alpha_{m + 1}  $, also existiert ein $ \alpha \in \N _n $ so, dass $ \tau(\alpha) \neq \alpha \neq \alpha_1 \dotsb \alpha_{m + 1} (\alpha) $,
+				also existiert ein $ 1 \leq  i \leq m + 1 $ mit $ \alpha_i(\alpha) \neq \alpha \neq \tau $, was im Widerspruch zur Annahme steht.
+		\end{description}
+
+\end{enumerate}
+
+\subsection{}
+\begin{enumerate}[label=(\alph*)]
+	\item Beweis durch vollständige Induktion:
+		\begin{description}
+			\item[I.A.] $ \left| S_1 \right| = \left| \left\{ \begin{pmatrix} 1 \end{pmatrix}  \right\}  \right| = 1 = 1! $ 
+			\item[I.V.] $ \left| S_n \right| = n! $ 
+			\item[I.S.] Beh. $ \left| S_{n + 1}  \right| = (n + 1)! $.\\
+				Beh. $ S_{n + 1} = \left\{ \sigma \begin{pmatrix} i & n + 1 \end{pmatrix} : \sigma \in S_{n} \text{ und } i \in \N _{n + 1}  \right\}  $, wobei $ \begin{pmatrix} n + 1 & n + 1 \end{pmatrix} \coloneqq \begin{pmatrix} 1 \end{pmatrix}  $ sein soll.
+				\begin{description}
+					\item[``$ \subset  $'':] Sei $ \tau \in S_{n + 1}  $ zu zeigen, es gibt ein $ \sigma \in S_n $ und ein $ i \in \N _{n + 1}  $ mit $ \tau = \sigma \begin{pmatrix} i & n + 1 \end{pmatrix}  $.\\
+						Wähle $ \sigma $ mit $ \sigma(\alpha) \coloneqq \tau(\alpha) $ für $ \alpha \in \N _{n + 1}  $ mit $ \alpha \neq \tau^{-1} ( n + 1 ) $ und $ \alpha \neq n + 1 $. Sei $ \sigma(\tau^{-1} (n+1)) \coloneqq \tau(n + 1) $ und $ \sigma( n + 1 ) = n + 1 $,
+						und wähle $ i \coloneqq \tau^{-1} (\alpha) $ so,
+						dass $ \sigma \in S_n $ ist und $ \tau(\alpha) = \sigma(\alpha) = \sigma(\alpha) \begin{pmatrix} i & n + 1 \end{pmatrix} (\alpha)$ für $ i \neq \alpha \neq n + 1 $ und $ \tau(n + 1) = \sigma(i) = \sigma \begin{pmatrix} i & n + 1 \end{pmatrix} ( n + 1 ) $ 
+						und $ \tau (i) = n + 1 = \sigma(n + 1) = \sigma \begin{pmatrix} i & n + 1 \end{pmatrix} (i) $, also $ \tau = \sigma \begin{pmatrix} i & n + 1 \end{pmatrix}  $.
+					\item[``$ \supset  $'':] Sei $ \sigma \in S_n $ und $ 1 \leq i \leq n + 1 $, also $ \begin{pmatrix} i & n + 1 \end{pmatrix} \in S_{n + 1}  $, also $ \sigma \begin{pmatrix} i & n + 1 \end{pmatrix} \in S_{n + 1}  $ was zu zeigen war.
+				\end{description}
+				Beh. $ \forall \sigma, \tau \in S_{n} , i, j \in \N _{n + 1} : \sigma \begin{pmatrix} i & n + 1 \end{pmatrix} = \tau \begin{pmatrix} j & n + 1 \end{pmatrix} \implies \sigma = \tau \wedge i = j $\\
+				Bew. durch Kontraposition ($ \sigma \neq \tau \vee i \neq j \implies \sigma \begin{pmatrix} i & n + 1 \end{pmatrix} \neq \tau \begin{pmatrix} j & n + 1 \end{pmatrix}  $):
+				\begin{description}
+					\item[``$ \sigma \neq \tau $'':] 
+						\begin{description}
+							\item[``$ i = j $'':] Es existiert $ \alpha \in \N _n$ so, dass $ \sigma(\alpha) \neq \tau (\alpha) $ für $ \alpha \neq i $ gilt $ \sigma \begin{pmatrix} i & n + 1 \end{pmatrix} (\alpha) = \sigma(\alpha) \neq \tau (\alpha)  = \tau \begin{pmatrix} j & n + 1 \end{pmatrix} $, für $ \alpha = i $ gilt
+								$ \sigma \begin{pmatrix} i & n + 1 \end{pmatrix} (n + 1) = \sigma(i) = \sigma(\alpha) \neq \tau (\alpha)  =\tau (i) = \tau \begin{pmatrix} j & n + 1 \end{pmatrix} (n + 1) $, was zu zeigen war
+							\item[``$ i \neq j $ und $ i \neq n + 1 $'':] Es existiert $ \alpha \in \N _n $ mit $ \sigma(\alpha) \neq \tau(\alpha) $,
+								für $ i \neq \alpha \neq j $ gilt
+								$ \sigma \begin{pmatrix} i & n + 1 \end{pmatrix} ( \alpha ) = \neq \tau (\alpha) = \tau \begin{pmatrix} j & n + 1 \end{pmatrix} (i) $
+								für $ i = \alpha $ gilt:
+								$ \sigma \begin{pmatrix} i & n + 1 \end{pmatrix} ( \alpha) = \sigma(n + 1) = n + 1 = \tau (n + 1) \neq \tau (j) = \tau \begin{pmatrix} j & n + 1 \end{pmatrix} ( n + 1 ) \neq \tau \begin{pmatrix} j & n + 1 \end{pmatrix} (\alpha)  $
+						\end{description}
+					\item[``$ \sigma = \tau $'':] Damit $ \sigma \neq \tau \vee i \neq j $ gilt, muss also $ i \neq j $ gelten:
+						$ \sigma \begin{pmatrix} i & n + 1 \end{pmatrix} ( n + 1 ) = \sigma(i) \neq \sigma(j) = \tau(j) = \tau \begin{pmatrix} j & n + 1 \end{pmatrix} (n + 1) $ was zu zeigen war
+				\end{description}
+				Somit gilt $ \left| S_{n + 1}  \right| = \left| S_n \right| \cdot (n + 1) $.
+		\end{description}
+	\item Zu zeigen $ \begin{pmatrix} i_1 & i_2 & \hdots & i_m \end{pmatrix} \begin{pmatrix} i_m & i_{m - 1} & \hdots & i_1 \end{pmatrix} = \begin{pmatrix} 1 \end{pmatrix}  $.
+		Sei hierfür $ \alpha \in \N _n $ gegeben mit $ \alpha \neq i_j $ für alle $ 1 \leq j \leq m $, sodass gilt:  $ \begin{pmatrix} i_1 & i_2 & \hdots & i_m \end{pmatrix} \begin{pmatrix} i_m & i_{m - 1} & \hdots & i_1 \end{pmatrix} (\alpha) = \alpha $.
+		Sei nun $ \alpha \in \N _n $ mit $ \alpha = i_j $ für ein $ 1 \leq j \leq m $, so dass
+		$ \begin{pmatrix} i_1, i_2, \hdots, i_m \end{pmatrix} \begin{pmatrix} i_m, i_{m - 1} , \hdots, i_1 \end{pmatrix} (\alpha) = \begin{pmatrix} i_1, i_2, \hdots, i_m \end{pmatrix} (i_{j - 1} ) = i_j   $, was zu zeigen war.
+\end{enumerate}
+
+\subsection{}
+Sei $ \sigma \in S_n $ gegeben, und seien $ \alpha_1, \dotsc, \alpha_k \in S_n $ paarweise disjunkte Zyklen mit $ \sigma = \alpha_1 \dotsb \alpha_k $ und $ \beta_1, \dotsc, \beta_l \in S_n $ paarweise disjunkte Zyklen mit $ \sigma = \beta_1 \dotsb \beta_l $, \OE{} $ k \leq  l $
+Da $ \alpha_1 $ ein Zyklus gilt es existieren $ a_1, \dotsc, a_m \in S_n$, die paarweise verschieden sind, für die gilt $ \begin{pmatrix} a_1 & a_2 & \hdots & a_m \end{pmatrix} = \alpha_1 $
+da $ \alpha_1, \dotsc, \alpha_k $ paarweise disjunkt gilt für $ 1 < i \leq k, 1 \leq j \leq m  $, dass $ \alpha_i (a_j) = a_j $, also auch
+$ \sigma(\alpha) =  \alpha_1 \alpha_2 \dotsb \alpha_k (a_j) = \alpha_1(a_j) \neq a_j  $,
+da $ \beta_1, \dotsc, \beta_{l}  $ paarweise disjunkt, sind sie nach 6.1 (b) kommutativ, also \OE{} gilt $ \beta_1(a_j) \neq a_j $, also für $ 1 < i \leq k $ gilt $ \beta_i(a_j) = a_j $, also
+\[
+	\alpha_1 (a_j) = \alpha_1 \dotsb \alpha_k (a_j) = \sigma (a_j) = \beta_1 \dotsb \beta_k (a_j) = \beta_1 (a_j) 
+\]
+Also $ \begin{pmatrix} a_1 & a_2 & \hdots & a_m \end{pmatrix} = \beta_1 $.
+Führe dies für $ \alpha_2, \dotsc, \alpha_k $ weiter, so dass, $ \beta_i = \alpha_i $ für $ 1 \leq i \leq k $
+Daraus folgt
+\begin{align*}
+	\alpha_1 \dotsb \alpha_k &= \beta_1 \dotsb \beta_k \beta_{k + 1} \dotsb \beta_l \\
+	(1) &= \beta_{k + 1} \dotsb \beta_l
+\end{align*}
+Beh. $ k = l $ (sodass $ \beta_{k + 1} \dotsb \beta_l = (1) $), zum Widerspruch:
+$ k < l $, Dann existiert $ \alpha \in \N _n $ so, dass $ \beta_{k + 1} (\alpha) \neq  \alpha $, da $ \beta_{k + 1} , \dotsc, \beta_l $ paarweise disjunkte Zyklen, gilt $ \beta_i (\alpha) = \alpha $ für $ k + 1 < i \leq l $, also
+$ \beta_{k + 1} \dotsb \beta_l (\alpha) = \beta_{k + 1} (\alpha) \neq \alpha = (1) (\alpha) $, was ein Widerspruch ist.
+
+\subsection{}
+Für ein Zyklus $ \sigma \in S_n $ gilt, dass $ a_1, \dotsc, am $ existieren mit $ \sigma = \begin{pmatrix} a_1 & \hdots & a_m \end{pmatrix}  $, hierfür gilt $ m \leq n $ und
+\[
+	\begin{pmatrix} a_1 & \hdots & a_m \end{pmatrix} ^{m} (a_i) = \begin{pmatrix} a_1 & \hdots a_m \end{pmatrix} ^{i} (a_m) = \begin{pmatrix} a_1 & \hdots & a_m \end{pmatrix} ^{i - 1} (a_1) = a_i
+\]
+und insbesondere für $ \alpha \neq a_i $ für alle $ 1 \leq  i \leq m $: $ \begin{pmatrix} a_1 & \hdots & a_m \end{pmatrix} ^{m} (\alpha) = \alpha $.
+Also gilt:
+\[
+	\sigma^{n!} = \left( \sigma ^{m}  \right) ^{\prod_{i \neq m} i } = \operatorname{id}^{\prod_{i \neq m} i} = \operatorname{id}
+\]
+Da sich alle $ \tau \in S_n $ durch Produkt paarweise disjunkter Zyklen $ \tau_1, \dotsc, \tau_l $ darstellen lässt, gilt:
+\begin{align*}
+	\tau^{n!} &= \left( \tau_1 \dotsb \tau_l \right) ^{n!} \\
+	~ & = \underbrace{ \left( \tau_1 \dotsb \tau_l \right) \dotsb \left( \tau_1 \dotsb \tau_l \right) }_{n!\text{-mal} } \\
+	~ & = \underbrace{ \tau_1 \left( \tau_2 \dotsb \tau_l \right) \dotsb \tau_1 \left( \tau_2 \dotsb \tau_l \right) }_{n!\text{-mal} } \\
+	~ & \overset{6.1 (b)\&(c)}{=} \underbrace{\tau_1 \dotsb \tau_1}_{n!\text{-mal} } \left( \tau_2 \dotsb \tau_l \right) ^{n!} = \dotsb \\
+	~ & = \tau_1^{n!} \tau_2^{n!} \dotsb \tau_l^{n!} \\
+	~ & = \operatorname{id} \cdot \operatorname{id} \dotsb  \operatorname{id} \\
+	~ & = \operatorname{id} \qed
+\end{align*}
+
+
+\end{document}

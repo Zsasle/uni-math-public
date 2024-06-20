@@ -1,0 +1,169 @@
+\documentclass[sectionformat=aufgabe]{gadsescript}
+
+\setsemester{Winter Semester 2023/2024}%
+\setuniversity{University of Konstanz}%
+\setfaculty{Faculty of Science\\(Mathematics and Statistics)}%
+\settitle{Übungsblatt 2}
+\setsubtitle{Elias Gestrich}
+
+\begin{document}
+\maketitle
+
+\section{Metriken}
+\begin{enumerate}[label=(\alph*)]
+	\item Für eine Metrik muss gelten:
+		\begin{enumerate}[label=(\roman*)]
+			\item Positive Definitheit: $ \forall x, y \in X : d(x ,y) = 0 \iff x = y $:\\
+				Wenn $ x, y $ auf einer Geraden liegen, dann folgt pos. Def. aus Euklidischer Norm, sonst:
+				\begin{description}
+					\item[``$ \implies $'':] $ \left\| x \right\| + \left\| y \right\| = \underbrace{\sqrt{x_1^2 + x_2^2}}_{\geq 0} + \underbrace{\sqrt{y_1^2 + y_2^2} }_{\geq 0} = 0 \iff \left\| x \right\| = 0 \text{ und } \left\| y \right\| = 0 $
+					\item[``$ \impliedby $''] Wenn $ x = y $, dann liegen $ x $ und $ y $ auf einer Geraden durch $ (0, 0) $, somit tritt dieser Fall nicht auf
+				\end{description}
+			\item Symmetrie: $ \forall x, y \in X: d(x, y) = d(y, x) $:
+				\begin{description}
+					\item[Fall 1:] $ d(x, y) = \left\| x - y \right\| \overset{\text{Eukl.N.} }{=} \left\| y - x \right\| = d(y, x) $ 
+					\item[Fall 2:] $ d(x, y) = \left\| x \right\| + \left\| y \right\| = \left\| y \right\| + \left\| x \right\| = d(y, x) $
+				\end{description}
+			\item Dreiecksungleichung: $ \forall x, y, z \in X: d(x, y) \leq d(x, z) + d(z, y) $ 
+				\begin{description}
+					\item[Fall 1:] $ x, y, z $ auf einer Geraden durch $ (0,0) $, dann folgt Dreiecksungleichung aus Euklidischer Norm
+					\item[Fall 2:] $ x, y $ auf einer Geraden durch $ (0, 0) $, $ z $ nicht.
+						\begin{align*}
+							d(x, y) &= \left\| x - y \right\| && | \quad \text{Euklidische Norm}  \\
+								&\leq \left\| x - (0, 0) \right\| + \left\| (0, 0) - y \right\| \\
+								&\leq \left\| x \right\| + \left\| y \right\| \\
+								&\leq \left\| x \right\| + \left\| z \right\| + \left\| z \right\| + \left\| y \right\| \\
+								&\leq d(x, z) + d(z, y)
+						\end{align*}
+						
+					\item[Fall 3:] $ x, z $ oder $ y, z $ auf einer Geraden durch $ (0, 0) $, aber $ y $ bzw. $ x $ nicht, \OE{} $ x, z $ auf einer Geraden durch $ (0,0) $
+						\begin{align*}
+							d(x, y) &= \left\| x \right\| + \left\| y \right\| \\
+								&= \left\| x + (0, 0) \right\| + \left\| y \right\| && | \quad \text{Euklidische Norm}\\
+								&\leq \left\| x - z \right\| + \left\| -z + (0, 0) \right\| + \left\| y \right\| && | \quad \text{Euklidische Norm} \\
+								&\leq \left\| x - z \right\| + \left\| z \right\| + \left\| y \right\| \\
+								&\leq d(x, z) + d(z, y)
+						\end{align*}
+					\item[Fall 4:]  Keine der Variablen liegen auf einer Geraden durch $ (0, 0) $:
+						\begin{align*}
+							d(x, y) &= \left\| x \right\| + \left\| y \right\| && | \quad \text{Euklidische Norm}  \\
+								&\leq \left\| x \right\| + \left\| z \right\| + \left\| z \right\| + \left\| y \right\| \\
+								&\leq d(x, z) + d(z, y)
+						\end{align*}
+				\end{description}
+		\end{enumerate}
+		Wenn man sich zu jedem Punkt in $ \R ^2 $ eine unendlich lange Schiene Denke,
+		die durch den Ursprung $ (0, 0) $ und den Punkt selbst geht,
+		dann beschreibt die Eisenbahnmetrik den kürzesten Weg,
+		den eine Bahn auf diesen Schienen zwischen zwei Punkten fahren muss,
+		wenn sie bei $ (0, 0) $ auf andere Schienen umsteigen kann.
+		Dementsprechen kann man den Punkt $ (0, 0) $ als Zentralbahnhof verstehen, da alle Gleise dort zusammen kommen und die Bahn dort die Gleise wechseln kann/darf.
+	\item Pos. Def. folgt aus erstem Punkt.\\
+		Symmetrie $ \forall x, y \in X: d(x, y) \leq d(x, x) + d(y, x) = d(y, x) $ und $ d(y, x) \leq d(y, y) + d(x, y) \implies d(x, y) = d(y, x) $.
+		Dreiecksungleichung: $ \forall x, y, z \in X: d(x, z) \leq d(x, y) + d(z, y) \overset{\text{Sym} }{=} d(x, y) + d(y, z) $
+\end{enumerate}
+
+\section{Topologische Begriffe}
+\begin{enumerate}[label=(\alph*)]
+	\item 
+		\begin{align*}
+			B &= (0, 1) \cup (1, 2) \cup [3, 4] \cup \{5\} \cup \left\{ q \in Q: 6 \leq q \leq 7 \right\} \\
+			\bar{B} &= [0, 2] \cup [3, 4] \cup \{5\} \cup [6, 7] \\
+			\mathring{B} &= (0, 1) \cup (1, 2) \cup (3, 4) \\
+			\mathring{\bar{B} } &= (0, 2) \cup (3, 4) \cup (6, 7) \\
+			\bar{\mathring{B} } &= [0, 2] \cup [3, 4] \\
+			\bar{\mathring{\bar{B} } } &= [0, 2] \cup [3, 4] \cup [6, 7] \\
+			\mathring{\bar{\mathring{B} } } &= (0, 2) \cup (3, 4)
+		\end{align*}
+%\mathring{\bar{\mathring{\bar{B} }} }
+	\item Für $ \mathring{\bar{\mathring{\bar{B} }} } = \mathring{\bar{B} } $:
+		\begin{description}
+			\item[``$ \subset  $'':] $ \mathring{\bar{B} } \subset \bar{B} \implies \bar{\mathring{\bar{B} } } \subset \bar{\bar{B} } \implies \mathring{\bar{\mathring{\bar{B} } } } \subset \mathring{\bar{B} }  $
+				%Sei $ x \in \mathring{\bar{\mathring{\bar{B} }} } $, zu zeigen $ x \in \mathring{\bar{B} } $ Beweis durch Widerspruch, wir nehmen an $ x \not\in \mathring{\bar{B} } $, also $ \forall r \in \R : B_{r}(x) \not\subset \bar{B} $\\
+				%Da aber $ x \in \mathring{\bar{\mathring{\bar{B} } } } : \exists r \in \R : B_{r}(x) \subset \mathring{\bar{\mathring{\bar{B} }} } \subset \bar{\mathring{\bar{B} }} $,
+				%wir wählen ein solches $ r $,
+				%da aber $ B_{r}(x) \not \subset \bar{B} : \exists y \in B_{r}(x) : y \not\in \bar{B} $,
+				%gibt es auch keine Folge in $ \bar{B} $, die gegen $ y $ konvergiert,
+				%Da $ \mathring{\bar{B} } \subset \bar{B}  $,
+				%gibt es auch keine in $ \mathring{\bar{B} }  $,
+				%die gegen $ y $ konvergiert,
+				%also gilt $ y \not\in \bar{\mathring{\bar{B} } }  $,
+				%somit ist $ y $ nicht in,
+				%wodurch $ B_{r}(x) \not \subset \bar{\mathring{\bar{B} } }  $,
+				%was ein Widerspruch zur Annahme ist.
+			\item[``$ \supset $'':] $ \mathring{\bar{B} } \subset \bar{\mathring{\bar{B} } } \implies \mathring{\mathring{\bar{B} } } \subset \mathring{\bar{\mathring{\bar{B} } } } \implies \mathring{\bar{B} } \subset \mathring{\bar{\mathring{\bar{B} } } }  $, was zu zeigen war.
+		\end{description}
+
+		Für $ \bar{\mathring{\bar{\mathring{B }} } } = \bar{\mathring{B}} $:
+		\begin{description}
+			\item[``$ \subset  $'':] $ \mathring{\bar{\mathring{B} } } \subset \bar{\mathring{B} } \implies \bar{\mathring{\bar{\mathring{B} } } } \subset \bar{\bar{\mathring{B} } } \implies \bar{\mathring{\bar{\mathring{B} } } } \subset \bar{\mathring{B} }  $ 
+			\item[``$ \supset $'':] $ \mathring{B} \subset \bar{\mathring{B} } \implies \mathring{\mathring{B} } \subset \mathring{\bar{\mathring{B} } } \implies \mathring{B} \subset \mathring{\bar{\mathring{B} } } \implies \bar{\mathring{B} } \subset \bar{\mathring{\bar{\mathring{B} } } }  $
+		\end{description}
+\end{enumerate}
+
+\section{Offenheit}
+Sei für $ x \in \R ^n $ definiert $ B_r(x) \coloneqq \left\{ y \in \R ^n : \left\| x - y \right\| < r \right\}  $\\
+Sei $ x \in U $ gegeben, sei $ R \coloneqq \left\{ r \in \R : B_{r}(x) \subset U \right\}  $. Ist $ R $ nach oben unbeschränkt, dann ist bereits trivialer weise $ B_{\infty}(x) = U $, sonst sei $ r \coloneqq \sup R $\\
+\textbf{Beh.:} $ B_{r}(x) \subset U $
+\begin{proof*}
+	Sei $ R \supset (r_n)_{n \in \N } \overset{n \to \infty}{\longrightarrow} r $ eine monotone steigende Folge. Sodass gilt $ \forall \varepsilon > 0 : \exists N \in \N : \forall n \geq N : \left| r - r_n \right| = r - r_n < \varepsilon  $.\\
+	\textbf{Beh.:} $ \forall y \in B_{r} (x) : y \in U $
+	\begin{proof*}
+		Sei $ y \in B_{r}(x)  $ gegeben, zu zeigen $ y \in U $. Es gilt:
+		\begin{align*}
+			\left\| x - y \right\| < r &\iff r - \left\| x - y \right\| > 0 && | \quad \text{da $ (r_n) $ konvergente Folge }  \exists n \in \N :\\
+						   &\implies  r - \left\| x - y \right\| > r - r_n \\
+						   &\iff r_n > \left\| x - y \right\| \\
+						   &\iff y \in B_{r_n}(x) \\
+						   &\implies y \in U \qed
+		\end{align*}
+	\end{proof*}
+\end{proof*}
+Also gibt es für jedes $ x \in U $ ein größtes $ r \in \R $ sodass $ B_{r}(x)  \subset U $ oder es gilt bereits trivialer Weise $ B_{\infty}(x) = U = \R ^n $.
+
+Betrachten wir nun den Fall, dass für alle $ x \in U $ gilt, dass es ein größtes $ r $ gibt, sodass $ B_{r}(x)  \subset U $.
+
+Sei $ U_{\Q } \coloneqq \left\{ q \in \Q^n : q \in U \right\} $, da $ \Q ^n $ abzählbar ist, kann man alle $ q \in U_{\Q }  $ auf $ q_1, q_2, q_3, \dotsc $ abbilden.
+Da $ U $ offen ist, gilt: $ \forall i \in \N : \exists r_i \in \R : B_{r_i}(q_i) \subset U $ und $ r_i $ maximal.\\
+\textbf{Beh.:} $ \exists (r_i)_{i \in \N }  \subset \R : \bigcup_{i \in \N } B_{r_i} (q_i) = U $.
+\begin{proof*}
+	$ \bigcup_{i \in \N } B_{r_i}(q_i) \subset U $ trivial.\\
+	$ U \subset \bigcup_{i \in \N } B_{r_i}(q_i)  $:\\
+	Sei $ x \in U $ zu zeigen $ x \in \bigcup_{i \in \N } B_{r_i}(q_i)  $, d.h. zu zeigen: $ \exists i \in \N : x \in B_{r_i}(q_i)  $.\\
+	Wähle ein $ r $, so dass $ B_{r}(x) \subset U $ und
+	ein $ i \in \N  $, sodass $ \left\| x - q_i \right\| < \frac{ r }{ 4 }  $.
+	Dies geht, da $ \Q  $ dicht in $ \R  $.\\
+	Zu zeigen $ B_{\frac{ r }{ 2 } }(q_i) \subset U $ und $ x \in B_{\frac{ r }{ 2 } }(q_i)  $:
+	\begin{enumerate}[label=(\arabic*)]
+		\item Zu zeigen $ \forall y \in B_{\frac{ r }{ 2 } }(q_i) : y \in U $. Sei $ y \in B_{\frac{ r }{ 2 } }(q_i) $ gegeben, zu zeigen $ y \in U $.\\
+			$ y \in B_{\frac{ r }{ 2 } }(q_i) \implies \left\| q - y \right\| < \frac{ r }{ 2 }  $:
+			\begin{align*}
+				\left\| x - y \right\| &\overset{\triangle\text{-Ung.} }{\leq } \left\| x - q_i \right\| + \left\| q_i - y \right\| \\
+						       &\leq \frac{ r }{ 4 } + \frac{ r }{ 2 } \\
+						       &< r\\
+						       &\implies y \in B_{r}(x) \subset U
+			\end{align*}
+		\item Zu zeigen $ \left\| x - q_i \right\| < \frac{ r }{ 2 }  $:
+			$ \left\| x - q_i \right\| \leq \frac{ r }{ 4 } < \frac{ r }{ 2 }   $\qed
+	\end{enumerate}
+\end{proof*}
+
+Dies gilt nicht für allgemeine metrische Räume, da für die triviale Metrik für $ n = 1 $ und $ U \coloneqq (0, 1) $ alle Bälle mit Radius $ r $ um $ x_0 $ nur $ x_0 $ enthalten für $ r \leq  1 $ oder ganz $ \R  $, für $ r > 1 $.
+Da $ (0, 1) $ aber überabzählbare Elemente besitz, gibt es keine abzählbare Vereinigung von offenen Bällen, bzw. keine abzählbare Menge die gleich $ (0, 1) $ ist.
+
+\section{Hausdorff für metrische Räume}
+Sei $ U \coloneqq \left\{ a \in X : d(x, a) < \frac{ d(x, y) }{ 2 } \right\} $ und $ V \coloneqq \left\{ a \in X : d(y, a) < \frac{ d(x, y) }{ 2 }  \right\}  $.
+Zu zeigen $ U, V $ offen und $ U \cap V = \OO  $.\\
+$ U, V $ offen folgt direkt aus Definition.\\
+Beweis durch Widerspruch: wir nehmen an $ U \cap V \neq \OO \implies \exists a \in U \cap V $. Wähle ein solches $ a $. Für $ a $ gilt:
+\begin{enumerate}[label=(\roman*)]
+	\item $ d(x, a) < \frac{ d(x, y) }{ 2 }  $ und
+	\item $ d(y, a) < \frac{ d(x, y) }{ 2 }  $.
+\end{enumerate}
+Es gilt
+\[
+	d(x, y) \overset{\triangle-\text{Ung.} }{\leq } d(x, a) + d(y, a) < \frac{ d(x, y) }{ 2 } + \frac{ d(x, y) }{ 2 } = d(x, y)
+\]
+Was zum Widerspruch führt.\qed
+
+\end{document}

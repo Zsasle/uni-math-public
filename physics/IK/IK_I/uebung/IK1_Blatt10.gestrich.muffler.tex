@@ -1,0 +1,67 @@
+\documentclass[sectionformat = aufgabe]{gadsescript}
+
+\setsemester{Winter Semester 2023/2024}%
+\setuniversity{University of Konstanz}%
+\setfaculty{Faculty of Science (Physics)}%
+\settitle{Übungsblatt No. 10}
+
+\begin{document}
+\maketitle
+\setcounter{section}{1}
+\section{Drehimpulserhaltung}
+Es gilt mit $ m_e $ die Masse des Eises und $ m_p $ die Masse von Prof. Müller und Prof. Nowak, sodass sie zusammen (bzw. das gesamte Karussell) $ 2m_p $ wiegen.
+\begin{align*}
+	F_R &= -F_z\\
+	\left| F_R \right| &= \left| F_z \right|  \\
+	\left| \mu \cdot \vec F_G \right| &= | m_e \underbrace{\vec \omega \times \underbrace{\left(\vec \omega \times \vec r\right)}_{\text{orthogonal} }}_{\text{orthogonal} } |  \\
+	\mu \cdot m_e \cdot g &= m_e \omega^2 r\\
+	\mu &= \frac{ 1 }{ g } \omega^2 r \\
+\end{align*}
+Es gilt wegen Drehimpulserhaltung ($ M $ im Index steht für Prof. Müller, $ N $ für Prof. Nowak und 1 für vorher, 2 für wenn Prof. Müller einen Abstand von $ \qty{ 1 }{ \metre }  $ vom Mittelpunkt des Karussells steht):
+\begin{align*}
+	\vec L_1 &= \vec L_M + \vec L_N \\
+	L_1 &= L_M + L_N \\
+	J_1 \omega_1 &= J_M \omega_2 + J_N \omega_2\\
+	2m_p r_1^2 \omega_1 &= m_p r_M^2 \omega_2 + (m_p + m_e) r_1^2 \omega_2 \\
+	2 \cdot \qty{ 4 }{ \square\metre } \cdot \qty{ 1 }{ \per\second } &= \left( \qty{ 1 }{ \square\metre } + \left(1 + \frac{m_e}{ m_p }\right) \qty{ 4 }{ \square\metre } \right) \omega_2 \\
+	\omega_2 &= \frac{ \qty{ 8 }{ \per\second }  }{ 5 + \frac{4m_e}{ m_p } } \\
+\end{align*}
+oben Eingesetzt ergibt das:
+\begin{align*}
+	\mu &= \frac{ 1 }{ g } \cdot \frac{ \qty{ 64 }{ \per\square\second } }{ \left(5 + \frac{4m_e}{ m_p } \right)^2 } \cdot \qty{ 2 }{ \metre } \\
+	\mu &= \frac{ \qty{ 128 }{ \metre\per\square\second } }{ \left(5 + \frac{4m_e}{ m_p }\right)^2g } \\
+\end{align*}
+Da wahrscheinlich das Eis nicht mehr als $ \qty{ 0.1 }{ \kilogram }  $ und Prof. Müller und Prof. Nowak eher mehr als $ \qty{ 50 }{ \kilogram } $ wiegen wird, also $ \frac{4m_e}{ m_p } \ll 1 $ gilt:
+\begin{align*}
+	\mu &\approx \frac{ \qty{ 128 }{ \metre\per\square\second } }{ 25g } \\
+	\mu &\approx 0.52
+\end{align*}
+
+
+\section{Stabile Kreisbahnen}
+Zu dem Kraftfeld gehört für $ z \neq 1 $ das Potential $ V = - \frac{ 1 }{ 2 } \cdot \frac{ k }{ (z - 1) r^{z - 1}  } $, da $ \grad(V(r)) = \vec F(r) $ \\
+Es gilt:
+\begin{align*}
+	V_{eff}(r) &= \frac{ \vec L^2 }{ 2mr^2 } + V(r) \\
+	~&= \frac{ \vec L^2 }{ 2mr^2 } - \frac{ k }{ 2(z - 1 ) r^{z-1} } \\
+\end{align*}
+Für ein Minimum muss gelten, dass die erste Ableitung gleich Null ist, also:
+\begin{align*}
+	0 &= - \frac{ \vec L^2 }{ mr^3 } + \frac{ k }{ r^{z} } \\
+	\frac{ \vec L^2 }{ mr^3 } &= \frac{ k }{ r^z }  \\
+	r^{z-3} &= \frac{ mk }{ \vec L^2 } \\
+\end{align*}
+Außerdem muss die zweite Ableitung größer gleich Null sein, also:
+\begin{align*}
+	0 &< \frac{ 3\vec L^2 }{ mr^4 } - \frac{ zk }{ r^{z + 1 } } \\
+	\frac{ zk }{ r^{z + 1}  } &< \frac{ 3 \vec L^2 }{ mr^4 } \\
+	zk &< \frac{3 \vec L^2 }{ m } \cdot r^{z - 3} \quad \mid \quad \text{aus obiger Gleichung}  \\
+	zk &< \frac{3 \vec L^2 }{ m } \cdot \frac{ mk }{ \vec L^2 } \\
+	z &< 3 \\
+\end{align*}
+also gilt $ z < 3 $
+Da das Potential für $ r \to \infty $ begrenzt sein soll, muss $ z \geq 1 $ sein, da für $ z < 1 $ gilt, dass $ V \overset{r \to \infty}{\to } - \infty $.\\
+Für $ z = 1 $ gilt $ V = - k \log \left| x \right| $, was auch gegen unendlich geht.\\
+Und wenn $ z $ auch ganzzahlig sein soll gibt es nur $ z = 2 $ als Möglichkeit.
+
+\end{document}
