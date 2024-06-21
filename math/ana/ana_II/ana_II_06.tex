@@ -1,0 +1,114 @@
+\section{Der lokale Umkehrsatz \& implizite Funktionen}
+\begin{itemize}
+	\item $ f : \R ^n \to \R ^n $ differenzierbar.
+		Was müssen an $ x_0 \in \R ^n $ fordern, so dass es eine offene Menge $ V $ mit $ x_0 \in V $ \&
+		\[
+			\underbrace{f : V}_{f|_V} \to f(V)
+		\]
+		ist bijektiv mit differenzierbarer Umkehrfunktion?
+\end{itemize}
+\begin{itemize}
+	\item Falls $ y \in f(V) $, löse dann $ \exists ! x \in V : f(x) = y $.
+\end{itemize}
+\textbf{Idee:}
+\[
+	f(x) = \underbrace{f(x_0) + Df(x_0) (x - x_0)}_{\text{linearisertes $ f $} } + \left( \underbrace{\text{Rest} }_{\text{vernachlässigbar} } \right) 
+\]
+\textbf{lokal:}
+\[
+	f(x) \hat{=} f(x_0) + Df(x_0) (x - x_0) = y
+\]
+Wollen wir dies lösen, also
+\[
+	Df(x_0) (x - x_0) = y - f(x_0),
+\]
+so muss $ Df(x_0) $ invertierbar sein.
+Frage: Auch hinreichend?
+
+\begin{lemma}
+	Sei $ \operatorname{GL}(n) \coloneqq \left\{ A \in \R ^{n \times n} : A \text{ invertierbar}  \right\}  $ ist offen in $ \R ^{n \times n}  $ bezüglich jeder Norm, und inv: $ \operatorname{GL}(n) \ni A \mapsto A^{-1} \in \operatorname{GL}(n) $ ist stetig differenzierbar.
+\end{lemma}
+\begin{proof*}[Lem \ref{6.1}]
+	\[
+		A = \left( a_{ij}  \right) _{i, j = 1, \dotsc, n} \mapsto \det (A)
+	\]
+	ist ein Polynom, also stetig.
+	Damit $ \operatorname{GL}(n) = \det ^{-1} \underbrace{\left( \R \setminus \left\{ 0 \right\}  \right) }_{\text{offen} } $ offen.
+	Differenzierbarkeit folt aus der \textsc{Cramer}schen Regel.
+	Nämlich
+	\[
+		A^{-1} = \frac{ 1 }{ \det(A) } \operatorname{cof}(A)^{T} 
+	\]
+	\[
+		\operatorname{cof}(A) = m_{ij} = (-1)^{i + j} M_{ij} 
+	\]
+	mit $ M_{ij}  $, der $ (i, j) $-te Minore ($ \det $ der Matrix, ohne $ i $-te Zeile, $ j $-te Spalte).
+	(siehe Lin. Alg.)
+	Damitist $ A \mapsto \frac{ 1 }{ \det (A) } \operatorname{cof}(A) $ ist eine $ \R ^{n \times n}  $ - wertige Abbildung, deren einzelne Komponeneten rationale Funktionen in den Einträgen von $ A $ sind. $ \to  $ \textbf{Beh.}
+\end{proof*}
+
+\begin{theorem}
+	Sei $ \Omega_1 \subset \R ^n $ offen, $ \Omega_2 \subset \R ^m $ offen, $ f : \Omega_1 \to \Omega_2 $ bijektiv.
+	Sei $ x_0 \in \Omega_1 $ \& $ f $ in $ x_0 $ differenzierbar, $ f^{-1}  $ in $ f(x_0) $ differenzierbar.
+	Dann $ m = n $; $ Df(x_0) $ inv \& $ \left( Df^{-1}  \right) \left( f(x_0) \right) = \left( Df(x_0) \right) ^{-1}  $ 
+	\[
+		f^{-1} (f(x)) = x,
+		f(f^{-1} (x)) = x 
+		\implies \left( Df^{-1} \right) (x) \left( Df \right) \left( f^{-1} (x) \right) = 1
+	\]
+\end{theorem}
+\begin{proof*}[Thm. \ref{6.2}]
+	\[
+		A \coloneqq Df(x_0), B \coloneqq \left( Df^{-1}  \right) \left( f(x_0) \right) .
+	\]
+	\[
+		f \circ f^{-1} = \id_{\Omega_2} \& f^{-1} \circ f = \id_{\Omega_1} \overset{\text{Kettenregel} }{\implies } BA = E_n, AB = E_m
+	\]
+	Mit $ E_n $ ist die $ (n \times n ) $-Einheitsmatrix,
+	und $ E_m $ ist die $ (m \times m ) $-Einheitsmatrix.\qed
+\end{proof*}
+
+\textbf{Frage:} Wann ist $ f^{-1}  $ differenzierbar?
+
+\begin{lemma}
+	Seien $ \Omega_1, \Omega_2 \subset \R ^n $ offen, $ f : \Omega_1 \to \Omega_2 $ bijektiv \& stetig differenzierbar.
+	Weiter sei $ f^{-1}  $ stetig \& $ \forall x \in \Omega_1 : Df(x) \in \GL(n) $.
+	Dann ist $ f^{-1}  $ \textbf{stetig differenzierbar}.
+\end{lemma}
+\begin{proof*}[Lem \ref{6.3}]
+	Zu zeigen: $ f^{-1}  $ ist in jedem $ b = f(x_0), x_0 \in \Omega_1 $ differenzierbar
+	\begin{description}
+		\item[1. Reduktion] $ x_0 = 0, f(x_0) = 0. $ 
+			Ansonsten betrachte $ g(x) = f(x_0 + x) - f(x_0) $
+		\item[2. Reduktion] Sei $ C \coloneqq \left( Df(0) \right) ^{-1}  $. Wir zeigen die Aussage für $ \left( Cf \right) ^{-1}  $,
+			denn $ D \left( \left( C f \right)^{-1}   \right) = C \left( Df^{-1}  \right)  $ (+ $ C $ invertierbar!)
+		\item[3. Reduktion] Damit \OE{} $ Df(0) = E_n $.
+	\end{description}
+	\begin{itemize}
+		\item $ f $ in $ 0 $ differenzierbar $ \implies  \exists  r : \Omega_1 \overset{\text{stetig} }{\to }\R ^n : r(0) = 0 $ 
+			\& $ \forall x \in \Omega_1 : f(x) \overset{\text{\textbf{3. Red.}} }{=} f(0) + E_n x + r(x) \left\| x \right\| _2 $ 
+		\item Setze
+			\[
+				s(y) \coloneqq
+				\begin{cases}
+					-r(x) \frac{ \left\| x \right\| _2 }{ \left\| y \right\| _2 } , & y \neq 0, y = f(x)\\
+					0, & \text{sonst.} 
+				\end{cases}
+				{ \color{gadse-dark-green}
+					\implies -r(x) \left\| x \right\| _2 = s(y) \left\| y \right\| _2
+				}
+			\]
+			$ f(0) = 0 $. Also $ f^{-1} (0) = 0 $.
+			Für alle $ y = f(x), y \neq 0 $.
+			\begin{align*}
+				f^{-1} (y) = x &= f(x) - r(x) \left\| x \right\| _2\\
+				~ &= y + s(y) \left\| y \right\| _2 \\
+				~ &= \underbrace{f^{-1} (0)}_{0} + E_n y + s(y) \left\| y \right\| _2
+			\end{align*}
+			Dies gilt auch für $ y = 0 $.
+			Also ist $ f^{-1}  $ in $ 0 $ differenzierbar.
+			Also auch für alle $ x_0 \in \Omega_1 $.
+	\end{itemize}
+\end{proof*}
+
+

@@ -262,6 +262,7 @@
 \DeclareMathOperator{\Zr}	{Zr}
 \DeclareMathOperator{\Sr}	{Sr}
 \DeclareMathOperator{\Id}	{Id}
+\DeclareMathOperator{\id}	{Id}
 \DeclareMathOperator{\Graph}	{Gr}
 \DeclareMathOperator{\sgn}	{sgn}
 
@@ -271,9 +272,12 @@
 \DeclareMathOperator{\Spur}	{Sp}
 
 \DeclareMathOperator{\adj}	{adj}
+\DeclareMathOperator{\cof}	{cof}
 
 \DeclareMathOperator{\Div}	{div}
 \DeclareMathOperator{\Rot}	{rot}
+
+\DeclareMathOperator{\GL}	{GL}
 
 \DeclareMathOperator{\sech}	{sech}
 \DeclareMathOperator{\csch}	{csch}
