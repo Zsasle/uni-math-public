@@ -118,5 +118,152 @@ Also ist die Taylor-Entwicklung der Funktion $ f $ im Punkt $ x_0 = \left( \frac
 	T_{x_0} f(x) = 1 + \left< (0, 1), (x - x_0) \right> - \frac{ 1 }{ 2 } \left\| (x - x_0) \right\| _2^2
 \]
 
+\section{Schrankensatz}
+
+\begin{theorem*}[4.29]
+        Sei $ \Omega \subset \R ^n $, $ x_0 \in \Omega $, $ f : \Omega \to \R ^m $.
+        Sei $ \xi \in \R ^n $ so, dass
+        \[
+                [x_0, x_0 + \xi] \coloneqq \left\{ x_0 + t \xi : 0 \leq t \leq 1 \right\} \subset \Omega.
+        \]
+        Ist $ f $ stetig differenzierbar, so
+        \[
+                f\left( x_0 + \xi \right) - f(x_0) = \int_{0}^{1} \underbrace{Df}_{\in \R ^{m \times n} } (x_0 + t \xi ) \dd t \cdot \xi.
+        \]
+        Hierbei setzen wir für
+        \[
+                A : [a, b] \to \R ^{m \times n} ,
+        \]
+        wobei $ A(x) = \left( a_{ij} (x) \right) _{i = 1, \dotsc, m, j = 1, \dotsc, n}  $:
+        \[
+                \int_{a}^{b} A(x) \dd x \coloneqq \left( \int_{a}^{b} a_{ij} (x) \dd x \right) _{ij} .
+        \]
+\end{theorem*}
+\begin{proof*}[Thm. 2.29]
+        $ g(t) \coloneqq  f(x_0, + t\xi) $. Dann
+        \begin{align*}
+                f(x_0 + \xi) - f(x_0) &= g(1) - g(0) \\
+                                      &= \begin{pmatrix} g_1(1) - g_1(0) \\ \vdots \\ g_m (1) - g_m(0) \end{pmatrix} \\
+                                      &= \left( g_k(1) - g_k(0) \right) _{k = 1, \dotsc, m} \\
+                                      &\overset{\text{Hauptsatz} }{=} \left( \int_{0}^{1} \frac{ \dd }{ \dd t } g_k (t) \dd t \right) _{k = 1, \dotsc, m}  \\                                      &= \left( \int_{0}^{1} \frac{ \dd }{ \dd t } f_k (x_0 + t \xi) \right)_{k = 1, \dotsc, m}   \\
+                                      &\overset{\text{Kettenregel} }{=} \left( \left< \int_{0}^{1} \mathbf{Df_k} (x_0 + \xi) \dd t, \xi \right> \right) _{k = 1, \dotsc, m}  \\
+                                      &= \int_{0}^{1} \underbrace{Df}_{\R ^{m \times n} } (x_0 + t \xi) \dd t \cdot \underbrace{\xi}_{\R ^{n \times 1} } \qed        \end{align*}
+\end{proof*}
+\begin{theorem*}[Schrankensatz]
+        In der Situation von Thm 4.29 gilt
+        \[
+                \left\| f(x_0 + \xi) - f(x_0) \right\| _2 \leq M \left\| \xi \right\| _2,
+        \]
+        wobei
+        \[
+                M \coloneqq  \sup_{0 \leq t \leq 1}  \left\| \left( Df \right) \left( x_0 + t \xi \right)  \right\|
+        \]
+        Operatornorm, Lemma 4.22
+\end{theorem*}
+\begin{proof*}[Schrankensatz]
+        Nach Thm. 4.29:
+        \begin{align*}
+                \left\| f(x_0 + \xi) - f(x_0) \right\| _2 &= \left\| \int_{0}^{1} \left( Df \right) \left( x_0 + t\xi \right) \dd t \cdot \xi \right\| _2 \\
+                ~ \overset{(*)}{\leq } \int_{0}^{1} \left\| Df (x_0 + t\xi) \cdot \xi \right\| _2 \dd t \\
+                ~ & \leq \int_{0}^{1} \underbrace{\left| (Df) (x_0 + t\xi) \right| }_{\leq M} \cdot \left| \xi \right| _2 \dd t \\
+                ~ & \leq M \cdot \left\| \xi \right\| _2.
+        \end{align*}
+        \textbf{Zu $ (*) $}: Ist $ v : [a, b] \to \R ^m $ stetig.
+        Dann:
+        \[
+                \left\| \int_{a}^{b} v(t) \dd t \right\| _{2} \leq \int_{a}^{b} \left\| v(t) \right\| _2 \dd t.
+        \]
+        Sei hierzu
+        \[
+                \eta \coloneqq \int_{a}^{b} v(t) \dd t = \begin{pmatrix} \int_{a}^{b} v_1(t) \dd t \\ \vdots \\ \int_{a}^{b} v_m (t) \dd t \end{pmatrix}
+        \]
+        Definiere
+        \begin{align*}
+                K \coloneqq \left\| \eta \right\| _2 \implies K^2 &= \left\| \eta \right\| _2^2 \\
+                ~ &= \left< \eta, \eta \right> \\
+                ~ &= \left< \int_{a}^{b} v(t) \dd t, \eta \right> \\
+                  &= \int_{a}^{b} \left< v(t), \eta \right> \\
+                  & \overset{\text{Cauchy-Schwarz} }{\leq } \int_{a}^{b} \left\| v(t) \right\| _2 \cdot \underbrace{\left\| \eta \right\| _2}_{K} \dd t \\
+                  &= K \int_{a}^{b}\left\| v(t) \right\| _2 \dd t.
+        \end{align*}
+        \OE{} $ K \neq 0 $, kürze durch $ K $.\qed
+\end{proof*}
+
+\begin{enumerate}[label=(\alph*)]
+	\item Ich denke das ist ein Tippfehler und $ \varphi(1) = y $, weil ja.
+		Betrachte
+		\[
+			g \coloneqq f \circ \varphi_{x, y} 
+		\]
+		sodass $ g : \R \to \R  $. Sei $ L_g \coloneqq c \sup_{x \in \Omega} \left\| D f(x) \right\|  $
+		Dann gilt nach der Kettenregel
+		\[
+			Dg = (Df)(\varphi_{x, y} ) \cdot D\varphi_{x, y}  \leq \sup_{x \in \Omega} \left\| D f(x) \right\| \cdot c\left\| x - y \right\| = L_g \left\| x - y \right\| 
+		\]
+		Den Schrankensatz (Theorem 4.30) dürfen wir anwenden mit $ x_0 = 0 $ und $ \xi = 1 $, da $ [x_0, x_0 + \xi] = [0, 1] \subset [0, 1] $.
+		Nach diesem gilt:
+		\[
+			\left\| f(x) - f(y) \right\|_2 = \left\| g(0) - g(1) \right\|_2 = \left\| g(1) - g(0) \right\| _2 \leq M \left\| 1 - 0 \right\| _2
+		\]
+		mit
+		\[
+			M \coloneqq \sup_{0 \leq  t \leq 1} \left\| (Dg)(0 + 1 \cdot t) \right\| \leq L_g \left\| x - y \right\| _2
+		\]
+		Also 
+		\[
+			\left\| f(x) - f(y) \right\|_2 \leq  L_g \left\| x - y \right\| _2
+		\]
+	\item Sei $ \Omega \coloneqq B_{2}(0) \setminus \left[ \begin{pmatrix} 0 \\ 0 \end{pmatrix} , \begin{pmatrix} 1 \\ 0 \end{pmatrix}  \right] $.
+		Dann gibt es trivialer Weise (?) eine stetige Abbildung $ \psi_{x, y} : [0, 1] \to \Omega $ mit $ \psi_{x, y} (0) = x, \psi_{x, y} (1) = y $.
+		Betrachte die Folgen
+		\[
+			(x_i)_{i \in \N }: x_i = \left( 1, \frac{ 1 }{ i }   \right)
+		\]
+		\[
+			(y_i)_{i \in \N, i > 4 }: y_i = \left( 1, - \frac{ 1 }{ i } \right)
+		\]
+		So, dass
+		\begin{align*}
+			\left\| x_i - y_i \right\| _2^2
+			&= \left( 1 - 1 \right)^2
+			+ \left( \frac{ 1 }{ i } - \left( - \frac{ 1 }{ i }  \right) \right)^2 \\
+			&= 0 + \frac{ 4 }{ i } \\
+			&\overset{i \to \infty}{\longrightarrow} 0
+		\end{align*}
+		Angenommen es gibt solche $ \varphi_{x_i, y_i}  $, welche die Anforderungen erfüllt.
+		Der Weg von $ x_i $ nach $ y_i $ ist aber mindestens eine Länge von 2, da man einmal um den Schnitt herum muss.
+		Nach Definition 3.8 Ist $ \varphi_{x_i, y_i}  $ rektifizierbar mit
+		\[
+			2 \leq L_{\varphi_{x_i, y_i} } = \int_{0}^{1} \left\| \varphi_{x_i, y_i} ^\prime (t) \right\| \dd t \leq \int_{0}^{1} c \left\| x_i - y_i \right\| \dd t = c \left\| x_i - y_i \right\| \overset{i \to \infty}{\longrightarrow} 0  < 2.
+		\]
+		Was ein Widerspruch ist.
+		Also war die Annahme falsch und es existieren keine solche $ \varphi_{x_i, y_i}  $
+	\item Entweder, $ f(x) $ bildet auf den Winkel $ \varphi $ der Polardarstellung ab mit $ \varphi \in (0, 2 \pi ) $, oder
+		\[
+			f: \Omega \to \R , x \mapsto 
+			\begin{cases}
+				0, & x_1 \leq 0, \\
+				x_1, & x_1 > 0 \wedge x_2 > 0, \\
+				-x_1 & x_1 > 0 \wedge x_2 < 0
+			\end{cases}
+		\]
+		Dann wäre
+		\begin{align*}
+			\partial_1 f(x) &= \begin{cases}
+				0, & x_1 \leq 0, \\
+				1, & x_1 > 0 \wedge x_2 > 0,\\
+				-1 & x_1 > 0 \wedge x_2 < 0
+			\end{cases} \\
+			\partial_2 f(x) &= 0 \\
+			\partial_1^2 f(x) &= 0 \\
+			\partial_1\partial_2 f(x) &= 0 \\
+			\partial_2\partial_1 f(x) &= 0 \\
+			\partial_2^2 f &= 0 \\
+		\end{align*}
+		partielle Ableitungen sind stetig, da $ \partial_1 f(x_1, x_2) \to 0, x_1 \to 0 $.
+		Also $ f $ differenzierbar mit $ \sup_{x \in \Omega} \left\| Df \right\| < \infty $, aber analog zu (b) ist $ f $ nicht Lipschitzstetig
+\end{enumerate}
+
+
 \end{document}
 

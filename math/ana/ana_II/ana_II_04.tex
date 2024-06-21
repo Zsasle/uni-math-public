@@ -985,7 +985,7 @@ Sind $ v, w \in \R ^n \setminus \left\{ 0 \right\}  $, so definieren wir den \te
 	
 \end{proof*}
 
-\begin{theorem*}
+\begin{theorem*}[4.29]
 	Sei $ \Omega \subset \R ^n $, $ x_0 \in \Omega $, $ f : \Omega \to \R ^m $.
 	Sei $ \xi \in \R ^n $ so, dass
 	\[
@@ -997,7 +997,7 @@ Sind $ v, w \in \R ^n \setminus \left\{ 0 \right\}  $, so definieren wir den \te
 	\]
 	Hierbei setzen wir für
 	\[
-		A : [y, b] \to \R ^{m \times n} ,
+		A : [a, b] \to \R ^{m \times n} ,
 	\]
 	wobei $ A(x) = \left( a_{ij} (x) \right) _{i = 1, \dotsc, m, j = 1, \dotsc, n}  $:
 	\[
@@ -1017,7 +1017,7 @@ Sind $ v, w \in \R ^n \setminus \left\{ 0 \right\}  $, so definieren wir den \te
 	\end{align*}
 \end{proof*}
 
-\begin{theorem}[Schraukensatz]
+\begin{theorem}[Schrankensatz]
 	In der Situation von Thm 4.29 gilt
 	\[
 		\left\| f(x_0 + \xi) - f(x_0) \right\| _2 \leq M \left\| \xi \right\| _2, 
@@ -1050,7 +1050,7 @@ Sind $ v, w \in \R ^n \setminus \left\{ 0 \right\}  $, so definieren wir den \te
 		K \coloneqq \left\| \eta \right\| _2 \implies K^2 &= \left\| \eta \right\| _2^2 \\
 		~ &= \left< \eta, \eta \right> \\
 		~ &= \left< \int_{a}^{b} v(t) \dd t, \eta \right> \\
-		  &= \int_{a}^{b} \left< v(t \right> \\
+		  &= \int_{a}^{b} \left< v(t), \eta \right> \\
 		  & \overset{\text{Cauchy-Schwarz} }{\leq } \int_{a}^{b} \left\| v(t) \right\| _2 \cdot \underbrace{\left\| \eta \right\| _2}_{K} \dd t \\
 		  &= K \int_{a}^{b}\left\| v(t) \right\| _2 \dd t.
 	\end{align*}
