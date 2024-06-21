@@ -1,0 +1,217 @@
+\documentclass[sectionformat = aufgabe]{gadsescript}
+\settitlelh{\today\\\semester\\Gruppe 3, Briefkasten 11, Baiz}
+\setsemester{Summer Semester 2024}%
+\setuniversity{University of Konstanz}%
+\setfaculty{Faculty of Science\\(Mathematics and Statistics)}%
+\settitle{Übungsblatt 09}
+\setsubtitle{Elias Gestrich}
+%Salisha Baiz, salisha.baiz@uni-konstanz.de
+
+\begin{document}
+\maketitle
+\setcounter{section}{9}
+\subsection{}
+\textbf{Beh.:} Sei $ V_n $ die $ n \times n $ Vandermonde-Matrix. Dann gilt $ \det V_n = \prod_{1 \leq i < j \leq n}^{} (x_j - x_i)  $.
+\textbf{Bew.:}
+\begin{description}
+	\item[I.A.] $ n = 2 $. Dann gilt $ \det V_n = x_2 - x_1 = \prod_{1 \leq i < j \leq n}^{} (x_j - x_i)  $
+	\item[I.V.] $ \det V_{n} = \prod_{1 \leq i < j \leq n}^{} (x_j - x_i)  $.
+	\item[I.S.] $ n \curvearrowright n + 1 $. Zu zeigen $ \det V_{n + 1} = \prod_{1 \leq i < j \leq n + 1}^{} (x_j - x_i)  $.
+		\[
+			\det V_{n + 1} = \sum_{k=1}^{n + 1} (-1)^{k + n + 1} x_k^{n} \det V_{n, k} = \sum_{k=1}^{n + 1} (-1)^{k + n + 1} x_k^n \prod_{1 \leq i < j \leq n + 1, i, j \neq k}^{}  (x_j - x_i)
+		\]
+\end{description}
+
+\subsection{}
+\begin{enumerate}[label=(\alph*)]
+	\item Entwicklung nach der $ (m + n) $-ten Zeile, dann $ (m + n - 1) $-ten Zeile, usw.
+		\[
+			\det \begin{pmatrix} A & \mathcal{O} \\ \mathcal{O} & I_n \end{pmatrix} = 1 \cdot \det \begin{pmatrix} A & \mathcal{O} \\ \mathcal{O} & I_{n - 1}  \end{pmatrix} = \dotsb = \det(A)
+		\]
+		bzw. der 1-ten, 2-ten, usw. Zeile:
+		\[
+			\det \begin{pmatrix} I_n & \mathcal{O} \\ \mathcal{O} & A \end{pmatrix} = 1 \cdot \det \begin{pmatrix} I_{n - 1}  & \mathcal{O} \\ \mathcal{O} & A  \end{pmatrix} = \dotsb = \det(A)
+		\]
+	\item Wenn $ C $ invertierbar, dann $ \det(C) \neq 0 $ und $ \exists e_1, \dotsc, e_k \in Mat_{n \times n}  $ so, dass $ C = e_k \dotsb e_1 \cdot I_n $,
+		Sei dann $ E_i \coloneqq \begin{pmatrix} I_n  & \mathcal{O} \\ \mathcal{O} & e_i \end{pmatrix}  $ so, dass
+		\[
+			\begin{pmatrix} A & B \\ \mathcal{O} & C \end{pmatrix} = E_k \dotsb E_1 \cdot \begin{pmatrix} A & B \\ \mathcal{O} & I_n \end{pmatrix} 
+		\]
+		(Ich weiß, ich weiß muss man noch beweisen, aber jaaa)\\
+		Also
+		\[
+			\det 
+			\begin{pmatrix} A & B \\ \mathcal{O} & C \end{pmatrix}
+			= \det \left( E_k \dotsb E_1 \cdot \begin{pmatrix} A & B \\ \mathcal{O} & I_n \end{pmatrix} \right)
+			= \det \left( E_k \dotsb E_1 \right) \left( \begin{pmatrix} A & B \\ \mathcal{O} & I_n \end{pmatrix} \right)
+			= \det \left( C \right) \left( \begin{pmatrix} A & B \\ \mathcal{O} & I_n \end{pmatrix} \right)
+		\]
+		Wenn $ C $ nicht invertierbar, dann gibt es Elementarumformungen, so, dass eine Nullzeile bei Zeile $ n $ entsteht, sodass bei der Entwicklung nach der $ n $-ten Zeile 0 raus kommt.
+		Also $ \det(C) = 0  = \det (C) \begin{pmatrix} A & B \\ \mathcal{O} & I_n \end{pmatrix} = \det \begin{pmatrix} A & B \\ \mathcal{O} & C \end{pmatrix} $ 
+	\item Analog zur (a) Sei $ B_i $ Die $ n \times i $-Matrix, die man erhält, wenn man die $ i+1 $ bis $ n $-te Zeilen streicht.
+		Betrachte
+		\[
+			\det \begin{pmatrix} A & B_n \\ \mathcal{O} & I_n \end{pmatrix} = 1 \cdot \det \begin{pmatrix} A & B_{n - 1} \\ \mathcal{O} & I_{n - 1}  \end{pmatrix} = \dotsb = \det(A)
+		\]
+	\item Betrachte:
+		\[
+			\det \begin{pmatrix} A & B \\ \mathcal{O} & C \end{pmatrix} \overset{\text{(b)} }{=} \det \begin{pmatrix} A & \mathcal{O} \\ \mathcal{O} & C \end{pmatrix} \overset{\text{(c)} }{=} \det(C) \cdot \det \begin{pmatrix} A & \mathcal{O} \\ \mathcal{O} & I_n \end{pmatrix} \left( = \det (A) \det (C) \right) 
+		\]
+\end{enumerate}
+
+\subsection{}
+\begin{enumerate}[label=(\alph*)]
+	\item Betrachte
+		\begin{align*}
+			\adj\left( AB \right) &= B^{-1} A^{-1} AB \adj\left( AB \right)  \\
+			~ &\overset{\text{Kor. 16.7} }{=} B^{-1} A^{-1} \det\left( AB \right) I_n \\
+			~ &= B^{-1} A^{-1} \det(A) \det(B) I_n \\
+			~ &= B^{-1} \det(B) I_n A^{-1} \det(A) I_n \\
+			~ &= \adj(B) \adj(A)\qed
+		\end{align*}
+	\item Betrachte
+		\begin{align*}
+			\det\left( \adj(A) \right) &= \det\left( A^{-1} A \adj(A) \right)  \\
+			~ &\overset{\text{Kor. 16.7} }{=} \det (A^{-1} ) \det\left( \det(A) I_n \right)  \\
+			~ &= \det (A)^{-1} \det(A)^n  \\
+			~ &= \det(A)^{n - 1}  \qed
+		\end{align*}
+	\item Betrachte
+		\begin{align*}
+			\adj\left( \adj \left( A \right)  \right)
+			&\overset{\text{Kor. 16.7} }{=} \adj\left( A \right) ^{-1} \adj\left( A \right) \adj\left( \adj\left( A \right)  \right)  \\
+			&= \adj\left( A \right) ^{-1} \det \left( \adj\left( A \right)  \right)  \\
+			&\overset{\text{(b)} }{=} \left( A^{-1} A \adj\left( A \right)  \right) ^{-1} \det \left( A \right)^{n - 1} \\
+			&\overset{\text{Kor. 16.7} }{=} \left( A^{-1} \det\left( A \right)  \right) ^{-1} \det \left( A \right)^{n - 1}   \\
+			&= A \det\left( A \right) ^{-1} \det \left( A \right)^{n - 1}   \\
+			&= \det \left( A \right)^{n - 2} A   \qed
+		\end{align*}
+\end{enumerate}
+
+\subsection{}
+Löse das Gleichungssystem
+\[
+	\begin{pmatrix}
+		1 & 2 & 4 \\
+		2 & 2 & 1 \\
+		5 & 6 & 3 \\
+	\end{pmatrix} 
+	\begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} 
+	= 
+	\begin{pmatrix} 1 \\ 1 \\ 2 \end{pmatrix} 
+\]
+
+Nach Cramers Regel:
+\[
+	\begin{pmatrix}
+		1 & 2 & 4 \\
+		2 & 2 & 1 \\
+		5 & 6 & 3 \\
+	\end{pmatrix} ^{-1} 
+	\begin{pmatrix} 1 \\ 1 \\ 2 \end{pmatrix} 
+	= 
+	\begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} 
+\]
+Finde 
+\[
+	\begin{pmatrix}
+		1 & 2 & 4 \\
+		2 & 2 & 1 \\
+		5 & 6 & 3 \\
+	\end{pmatrix} ^{-1} 
+\]
+(Entschuldigung, ich schreibe nicht auf, was ich gemacht habe, das war mir in \LaTeX{} zu aufwendig)
+\[
+	\left(
+		\begin{array}{c c c | c c c}
+			1 & 2 & 4 & 1 & 0 & 0 \\
+			2 & 2 & 1 & 0 & 1 & 0 \\
+			5 & 6 & 3 & 0 & 0 & 1 \\
+		\end{array}
+	\right)
+	\rightsquigarrow
+	\left(
+		\begin{array}{c c c | c c c}
+			1 &  2 &  4  &  1 & 0 & 0 \\
+			0 & -2 & -7  & -2 & 1 & 0 \\
+			0 & -4 & -17 & -5 & 0 & 1 \\
+		\end{array}
+	\right)
+\]
+\[
+	\rightsquigarrow
+	\left(
+		\begin{array}{c c c | c c c}
+			1 &  0 & -3 & -1 &  1 & 0 \\
+			0 & -2 & -7 & -2 &  1 & 0 \\
+			0 &  0 & -3 & -1 & -2 & 1 \\
+		\end{array}
+	\right)
+	\rightsquigarrow
+	\left(
+		\begin{array}{c c c | c c c}
+			1 &  0 &  0 &  0			&  3				& -1 \\
+			0 & -2 &  0 & -2 + 7 \cdot 3^{-1}	&  1 + 7 \cdot 2 \cdot 3^{-1}	& -7 \cdot 3^{-1}  \\
+			0 &  0 & -3 & -1			& -2				& 1 \\
+		\end{array}
+	\right)
+\]
+\[
+	\rightsquigarrow
+	\left(
+		\begin{array}{c c c | c c c}
+			1 & 0 & 0 & 0			&  3				& -1 \\
+			0 & 1 & 0 & 1 - 7 \cdot 6^{-1}	&  -3 \cdot 6^{-1} - 14 \cdot 6^{-1}	& 7 \cdot 6^{-1}  \\
+			0 & 0 & 1 & 3^{-1} 		& 2 \cdot 3^{-1}		& -3^{-1}  \\
+		\end{array}
+	\right)
+\]
+\[
+	\rightsquigarrow
+	\left(
+		\begin{array}{c c c | c c c}
+			1 & 0 & 0 &  0			&  3			& -1 \\
+			0 & 1 & 0 & -1 \cdot 6^{-1}	&  - 17 \cdot 6^{-1}	& 7 \cdot 6^{-1}  \\
+			0 & 0 & 1 &  3^{-1} 		& 2 \cdot 3^{-1}	& -3^{-1}  \\
+		\end{array}
+	\right)
+\]
+Sodass
+\begin{align*}
+	\begin{pmatrix}
+		1 & 2 & 4 \\
+		2 & 2 & 1 \\
+		5 & 6 & 3 \\
+	\end{pmatrix} ^{-1} 
+	\begin{pmatrix} 1 \\ 1 \\ 2 \end{pmatrix} 
+	&= 
+	\left(
+		\begin{array}{c c c}
+			 0		&  3			& -1 \\
+			-1 \cdot 6^{-1}	& - 17 \cdot 6^{-1}	& 7 \cdot 6^{-1}  \\
+			 3^{-1} 	& 2 \cdot 3^{-1}	& -3^{-1}  \\
+		\end{array}
+	\right)
+	\begin{pmatrix} 1 \\ 1 \\ 2 \end{pmatrix} \\
+	~ &=
+	\begin{pmatrix} 
+		 0		+  3			  -2 \\
+		-1 \cdot 6^{-1}	  - 17 \cdot 6^{-1}	+ 14 \cdot 6^{-1}  \\
+		 3^{-1} 	+ 2 \cdot 3^{-1}	  -2 \cdot 3^{-1}  \\
+	\end{pmatrix} \\
+	~ &=
+	\begin{pmatrix} 
+		1 \\
+		-4 \cdot 6^{-1} \\
+		3^{-1} \\
+	\end{pmatrix} \\
+	~ &=
+	\begin{pmatrix} 
+		1 \\
+		-2 \cdot 3^{-1} \\
+		3^{-1} \\
+	\end{pmatrix} \\
+\end{align*}
+
+\end{document}
+
