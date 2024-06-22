@@ -1,0 +1,859 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{tabularray}
+\usepackage[dvipsnames]{xcolor}
+
+\makeatletter
+\newcommand{\qed}{\@ifstar\@qedwhite\@qedblack}
+\DeclareRobustCommand{\@qedblack}{%
+        \ifmmode \tag*{$\blacksquare$}%
+        \else \leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill\quad\hbox{$\blacksquare$}%
+        \fi%
+}
+\DeclareRobustCommand{\qedwhite}{%
+        \ifmmode \tag*{$\Box$}%
+        \else \leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill\quad\hbox{$\Box$}%
+        \fi%
+}
+\makeatother
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+%====================================================================
+% SETZEN SIE HIER DIE NUMMER DES ÜBUNGSBLATTES UND IHRE(N) NAMEN EIN
+% FILL IN THE SHEET NUMBER AND YOUR NAME(S)
+%====================================================================
+\newcommand{\sheetNum}{9} % Nummer des Übungsblatt / Sheet number
+\newcommand{\studentOne}{Alexandros Paraskevaidis} % Name 1
+\newcommand{\studentTwo}{Elias Gestrich} % Name 2
+%====================================================================
+
+\setkomafont{sectioning}{\normalfont\normalcolor\bfseries}
+\usepackage[left=2.5cm,right=2.5cm,top=2.0cm,bottom=2.5cm]{geometry}
+
+% Hyperlinks
+\usepackage{hyperref}
+
+% Pseudocode
+\usepackage[german,vlined,longend,ruled,linesnumbered]{algorithm2e}
+\SetKw{KwDownTo}{downto}
+\SetKw{KwAnd}{and}
+\SetKw{KwOr}{or}
+\DontPrintSemicolon
+
+% Grafiken
+\usepackage{graphicx}
+\graphicspath{{img/}}
+\usepackage{tikz}
+\usetikzlibrary {arrows.meta}
+
+% Makros für Aufgaben und Teilaufgaben
+\usepackage{marginnote}
+\reversemarginpar
+\setlength{\parindent}{0cm}
+\newcommand{\task}[1]{\subsubsection*{#1}}
+\newcommand{\subtask}[1]{\marginnote{#1)}}
+
+
+\begin{document}
+
+%====================================================================
+\begin{small}
+\begin{minipage}{0.5 \linewidth}
+  Algorithmen und Datenstrukturen\\
+  Sommersemester 2024
+\end{minipage}
+\begin{minipage}{0.5\linewidth}
+  \begin{flushright}
+    \studentOne\\
+    \studentTwo
+  \end{flushright}
+\end{minipage}
+\end{small}
+\begin{center}
+\begin{sffamily}\Large\bfseries \sheetNum. Übungsblatt\end{sffamily}
+\end{center}
+%====================================================================
+
+
+\task{Aufgabe 1 - Graph Zahl}
+\begin{enumerate}[label=\arabic*.]
+	\item Gegenbeispiel:\\
+		\begin{figure}[h]
+			\centering
+			\begin{tikzpicture}
+				\coordinate (0) at (0, 0);
+				\coordinate (1) at (2, 0);
+				\coordinate (2) at (4, 0);
+				\coordinate (3) at (4, 4);
+				\coordinate (4) at (0, 4);
+				\coordinate (5) at (0, 2);
+
+				\coordinate (6) at (1, 1);
+				\coordinate (7) at (2, 2);
+
+				\draw[line width = 2pt, green] (0) -- (1);
+				\draw[line width = 2pt, green] (1) -- (2);
+				\draw[line width = 2pt, green] (1) -- (7);
+				\draw[line width = 2pt, green] (2) -- (3);
+				\draw[line width = 2pt, green] (0) -- (5);
+				\draw[line width = 2pt, green] (5) -- (6);
+				\draw[line width = 2pt, green] (5) -- (4);
+
+				\draw (0) -- (1);
+				\draw (1) -- (2);
+				\draw (2) -- (3);
+				\draw (3) -- (4);
+				\draw (4) -- (5);
+				\draw (5) -- (0);
+
+				\draw (5) -- (6);
+				\draw (6) -- (1);
+				\draw (5) -- (7);
+				\draw (7) -- (1);
+
+				\filldraw (0) circle (2pt);
+				\filldraw (1) circle (2pt);
+				\filldraw (2) circle (2pt);
+				\filldraw (3) circle (2pt);
+				\filldraw (4) circle (2pt);
+				\filldraw (5) circle (2pt);
+				\filldraw (6) circle (2pt);
+				\filldraw (7) circle (2pt);
+
+			\end{tikzpicture}
+			\caption{Kein Tiefensuchbaum}
+		\end{figure}
+	\item Gegenbeispiel:\\
+		\begin{figure}[h]
+			\centering
+			\begin{tikzpicture}
+				\coordinate (0) at (0, 0);
+				\coordinate (1) at (2, 0);
+				\coordinate (2) at (0, 2);
+
+				\draw[line width = 2pt, green] (0) -- (1);
+				\draw[line width = 2pt, green] (0) -- (2);
+
+				\draw (0) -- node [anchor = north] {7} (1);
+				\draw (0) -- node [anchor = east]  {8} (2);
+				\draw (1) -- node [anchor = south west] {2} (2);
+
+				\filldraw (0) circle (2pt) node [anchor = north east] {$ v_0 $};
+				\filldraw (1) circle (2pt) node [anchor = west] {$ v_1 $};
+				\filldraw (2) circle (2pt) node [anchor = south] {$ v_2 $};
+
+			\end{tikzpicture}
+			\caption{Kürzeste Wege von 0}
+		\end{figure}
+		\begin{figure}[h]
+			\centering
+			\begin{tikzpicture}
+				\coordinate (0) at (0, 0);
+				\coordinate (1) at (2, 0);
+				\coordinate (2) at (0, 2);
+
+				\draw[line width = 2pt, green] (1) -- (2);
+				\draw[line width = 2pt, green] (1) -- (0);
+
+				\draw (0) -- node [anchor = north] {7} (1);
+				\draw (0) -- node [anchor = east]  {8} (2);
+				\draw (1) -- node [anchor = south west] {2} (2);
+
+				\filldraw (0) circle (2pt) node [anchor = north east] {$ v_0 $};
+				\filldraw (1) circle (2pt) node [anchor = west] {$ v_1 $};
+				\filldraw (2) circle (2pt) node [anchor = south] {$ v_2 $};
+			\end{tikzpicture}
+			\caption{MST}
+		\end{figure}
+	\newpage
+	\item Gegenbeispiel:
+		\begin{figure}[h]
+			\centering
+			\begin{tikzpicture}
+				\coordinate (0) at (0, 0);
+				\coordinate (1) at (2, 0);
+				\coordinate (2) at (0, 2);
+
+				\draw[line width = 2pt, green] (0) -- (1);
+				\draw[line width = 2pt, green] (1) -- (2);
+				\draw[line width = 2pt, green] (2) -- (0);
+
+				\draw (0) -- node [anchor = north] {1} (1);
+				\draw (0) -- node [anchor = east]  {1} (2);
+				\draw (1) -- node [anchor = south west] {1} (2);
+
+				\filldraw (0) circle (2pt) node [anchor = north east] {$ v_0 $};
+				\filldraw (1) circle (2pt) node [anchor = west] {$ v_1 $};
+				\filldraw (2) circle (2pt) node [anchor = south] {$ v_2 $};
+			\end{tikzpicture}
+			\caption{Kreis, der alle Knoten mit minimalen Kosten verbindet}
+		\end{figure}
+	\item
+		Wende den Kruskal-Algorithmus an, um den MST zu finden.
+		Dieser erzeugt einen eindeutigen MST.
+		Wenn es einen anderen MST geben würde, der nicht durch den Kruskal-Algorithmus gefunden werden kann, dann muss bei diesem eine Kante gewählt worden sein, die nicht zwei ZHK durch die billigste Kante verbindet.
+		Streiche diese Kante und wähle die billigste, die die zwei ZHK's verbindet.
+		Dieser Spannbaum ist nun kleiner als der MST, was ein Widerspruch darstellt.
+		Also ist der vom Kruskal-Algorithmus gefundene MST, ein eindeutiger MST.
+	\item Betrachte:
+		\begin{figure}[h]
+			\centering
+			\begin{tikzpicture}
+				\coordinate (0) at (0, 0);
+				\coordinate (1) at (2, 0);
+
+				\draw[line width = 2pt, green] (0) -- (1);
+
+				\draw (0) -- node [anchor = north] {1} (1);
+
+				\filldraw (0) circle (2pt) node [anchor = east] {$ v_0 $};
+				\filldraw (1) circle (2pt) node [anchor = west] {$ v_1 $};
+
+			\end{tikzpicture}
+			\caption{einzigartige Kosten, minimale Spannbaum enthält teuerste Kante}
+			\label{}
+		\end{figure}
+\end{enumerate}
+
+\newpage
+\task{Aufgabe 2 - Schnittverletzung}
+\begin{enumerate}[label=\arabic*.]
+	\item $ S = \left\{ v_0, v_3 \right\} , V \setminus S = \left\{ v_1, v_2 \right\} , M = \left\{ \left( v_0, v_3 \right)  \right\}  $
+		\begin{figure}[h]
+			\centering
+			\begin{tikzpicture}
+				\coordinate (0) at (0, 0);
+				\coordinate (1) at (2, 0);
+				\coordinate (2) at (2, 2);
+				\coordinate (3) at (0, 2);
+
+				\draw[line width = 3pt, blue] (0) -- (1);
+				\draw[line width = 3pt, blue] (0) -- (2);
+				\draw[line width = 3pt, blue] (2) -- (3);
+				\draw[line width = 2pt, green] (3) -- (0);
+				\draw[line width = 1.5pt, red] (0) -- (2);
+				% \draw[line width = 2pt, green] (1) -- (2);
+				% \draw[line width = 2pt, green] (2) -- (3);
+				% \draw[line width = 2pt, green] (3) -- (0);
+
+				\draw (0) -- node [anchor = north west] {3} (1) node [anchor = north west] {$ v_1 $};
+				\draw (0) -- node [anchor = north west] {1} (2) node [anchor = south west] {$ v_2 $};
+				\draw (1) -- node [anchor = west      ] {5} (2);
+				\draw (2) -- node [anchor = south west] {2} (3) node [anchor = south east] {$ v_3 $};
+				\draw (3) -- node [anchor = east      ] {4} (0) node [anchor = north east] {$ v_0 $};
+
+				\filldraw (0) circle (2pt);
+				\filldraw (1) circle (2pt);
+				\filldraw (2) circle (2pt);
+				\filldraw (3) circle (2pt);
+
+				\draw (1, -1) -- (1, 3);
+
+			\end{tikzpicture}
+			\caption{Grün = $ M $, Rot Schnittkante, Blau MST}
+		\end{figure}
+	\item ~
+		\begin{figure}[h]
+			\centering
+			\begin{tikzpicture}
+				\coordinate (0) at (0, 0);
+				\coordinate (1) at (2, 0);
+				\coordinate (2) at (0, 2);
+				\coordinate (3) at (4, 0);
+				\coordinate (4) at (6, 0);
+
+				\draw[line width = 2pt, green] (0) -- (2);
+				\draw[line width = 2pt, green] (2) -- (1);
+				\draw[line width = 2pt, green] (1) -- (3);
+				\draw[line width = 2pt, green] (3) -- (4);
+
+				\draw (0) -- node [anchor = north     ] {10} (1) node [anchor = north] {$ 9 $};
+				\draw (1) -- node [anchor = south west] { 1} (2) node [anchor = south] {$ 8 $};
+				\draw (2) -- node [anchor = east      ] { 8} (0) node [anchor = north east] {$ s $};
+				\draw (1) -- node [anchor = north     ] { 2} (3) node [anchor = north] {$ 11 $};
+				\draw (3) -- node [anchor = north     ] { 3} (4) node [anchor = north] {$ 15 $};
+
+				\filldraw (0) circle (2pt);
+				\filldraw (1) circle (2pt);
+				\filldraw (2) circle (2pt);
+				\filldraw (3) circle (2pt);
+				\filldraw (4) circle (2pt);
+
+			\end{tikzpicture}
+			\caption{{\color{Green}Dijkstra-Baum} gleich {\color{Green}MST}}
+		\end{figure}
+		\begin{figure}[h]
+			\centering
+			\begin{tikzpicture}
+				\coordinate (0) at (0, 0);
+				\coordinate (1) at (2, 0);
+				\coordinate (2) at (0, 2);
+				\coordinate (3) at (4, 0);
+				\coordinate (4) at (6, 0);
+
+				\draw[line width = 3pt, red] (0) -- (2);
+				\draw[line width = 3pt, red] (2) -- (1);
+				\draw[line width = 3pt, red] (1) -- (3);
+				\draw[line width = 3pt, red] (3) -- (4);
+
+				\draw[line width = 1.5pt, blue] (0) -- (2);
+				\draw[line width = 1.5pt, blue] (0) -- (1);
+				\draw[line width = 1.5pt, blue] (1) -- (3);
+				\draw[line width = 1.5pt, blue] (3) -- (4);
+
+				\draw (0) -- node [anchor = north     ] {10} (1) node [anchor = north] {$ 10 $};
+				\draw (1) -- node [anchor = south west] { 1} (2) node [anchor = south] {$ 10 $};
+				\draw (2) -- node [anchor = east      ] {10} (0) node [anchor = north east] {$ s $};
+				\draw (1) -- node [anchor = north     ] { 2} (3) node [anchor = north] {$ 11 $};
+				\draw (3) -- node [anchor = north     ] { 3} (4) node [anchor = north] {$ 15 $};
+
+				\filldraw (0) circle (2pt);
+				\filldraw (1) circle (2pt);
+				\filldraw (2) circle (2pt);
+				\filldraw (3) circle (2pt);
+				\filldraw (4) circle (2pt);
+			\end{tikzpicture}
+			\caption{{\color{blue}Dijkstra-Baum} nicht {\color{red}MST}}
+		\end{figure}
+		\newpage
+	\item ~
+		\begin{figure}[h]
+			\centering
+			\begin{tikzpicture}
+				\coordinate (0) at (0, 0);
+				\coordinate (1) at (2, 0);
+				\coordinate (2) at (0, 2);
+				\coordinate (3) at (4, 0);
+
+				\draw[line width = 2pt, green] (0) -- (1);
+				\draw[line width = 2pt, green] (1) -- (2);
+				\draw[line width = 2pt, green] (1) -- (3);
+
+				\draw (0) -- node [anchor = north     ] {1} (1) node [anchor = north] {$ v_1 $};
+				\draw (1) -- node [anchor = south west] {2} (2) node [anchor = south] {$ v_2 $};
+				\draw (2) -- node [anchor = east      ] {3} (0) node [anchor = north east] {$ v_0 $};
+				\draw (1) -- node [anchor = north     ] {5} (3) node [anchor = north] {$ v_3 $};
+
+				\filldraw (0) circle (2pt);
+				\filldraw (1) circle (2pt);
+				\filldraw (2) circle (2pt);
+				\filldraw (3) circle (2pt);
+			\end{tikzpicture}
+			\caption{MST enthält immer $ \left( v_1, v_3 \right)  $}
+		\end{figure}
+	\item ~
+		\begin{figure}[h]
+			\centering
+			\begin{tikzpicture}
+				\coordinate (0) at (0, 0);
+				\coordinate (1) at (2, 0);
+
+				\draw[line width = 2pt, green] (0) -- (1);
+
+				\draw (0) -- node [anchor = north     ] {1} (1);
+
+				\filldraw (0) circle (2pt) node [anchor = east] {$ v_0 $};
+				\filldraw (1) circle (2pt) node [anchor = west] {$ v_1 $};
+			\end{tikzpicture}
+			\caption{Graph, der einen eindeutigen Spannbaum hat, sodass für jeden Schnitt $ M $ die billigste Schnittkante eindeutig ist}
+		\end{figure}
+	\item $ S = \left\{ v_0, v_3 \right\} , V \setminus S = \left\{ v_1, v_2 \right\} , M = \left\{ \left( v_0, v_3 \right)  \right\}  $
+		\begin{figure}[h]
+			\centering
+			\begin{tikzpicture}
+				\coordinate (0) at (0, 0);
+				\coordinate (1) at (2, 0);
+				\coordinate (2) at (2, 2);
+				\coordinate (3) at (0, 2);
+
+				\draw[line width = 3pt, green] (0) -- (1);
+				\draw[line width = 3pt, green] (0) -- (2);
+				\draw[line width = 3pt, green] (2) -- (3);
+
+				\draw (0) -- node [anchor = north west] {3} (1) node [anchor = north west] {$ v_1 $};
+				\draw (0) -- node [anchor = north west] {1} (2) node [anchor = south west] {$ v_2 $};
+				\draw (1) -- node [anchor = west      ] {5} (2);
+				\draw (2) -- node [anchor = south west] {2} (3) node [anchor = south east] {$ v_3 $};
+				\draw (3) -- node [anchor = east      ] {4} (0) node [anchor = north east] {$ v_0 $};
+
+				\filldraw (0) circle (2pt);
+				\filldraw (1) circle (2pt);
+				\filldraw (2) circle (2pt);
+				\filldraw (3) circle (2pt);
+
+				\draw (1, -1) -- (1, 3);
+
+			\end{tikzpicture}
+		\end{figure}
+\end{enumerate}
+
+\task{Aufgabe 3 - Eingespannt}
+\begin{enumerate}[label=\alph*)]
+	\item Bei dem Schritt $ sort(E) $ sortiert man anstelle von nicht-absteigend nicht-aufsteigend.\\
+		\textbf{Korrektheit:} Wir wählen immer die teureste Kante, die zwei ZHK's miteinander verbindet\\
+		\textbf{Laufzeit:} selbe wie bei dem Algorithmus von Kruskal, also $ \mathcal{O} \left( m \log n \right)  $
+	\item 
+		Wenn $ p $ ein $ M $-augmentierender Pfad in $ G $ ist, dann sind die beiden Endknoten $ v_0, v_1 $ nicht in $ M $.
+		In dem von $ p $ induzierten neuen Matching sind alle Knoten von $ p $ inzident zu einer Matchingkante in $ M^* $,
+		Insbesondere sind $ v_0, v_1 $ inzident zu Matchingkanten von $ M^* $.
+		Also ist $ A^* = A \cup \left\{ v_0, v_1 \right\}  $, also $ A^\prime  \subsetneq A^*  $.
+\end{enumerate}
+
+\newpage
+\task{Aufgabe 4 - It's a match}
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\coordinate (A) at (0, 0);
+		\coordinate (B) at (0, 1);
+		\coordinate (C) at (0, 2);
+		\coordinate (D) at (0, 3);
+		\coordinate (E) at (0, 4);
+		\coordinate (F) at (0, 5);
+		\coordinate (0) at (5, 0);
+		\coordinate (1) at (5, 1);
+		\coordinate (2) at (5, 2);
+		\coordinate (3) at (5, 3);
+		\coordinate (4) at (5, 4);
+		\coordinate (5) at (5, 5);
+
+		% \draw[line width = 3pt, green] (0) -- (1);
+		% \draw[line width = 3pt, green] (0) -- (2);
+		% \draw[line width = 3pt, green] (2) -- (3);
+
+		% 0 Vanille
+		% 1 Erdbeere
+		% 2 Schokolade
+		% 3 Zitrone
+		% 4 Cola
+		% 5 Karamell
+
+		\draw (A) -- (1);
+		\draw (A) -- (3);
+		\draw (A) -- (5);
+
+		\draw (B) -- (2);
+		\draw (B) -- (4);
+		
+		\draw (C) -- (2);
+		\draw (C) -- (4);
+
+		\draw (D) -- (0);
+		\draw (D) -- (1);
+		\draw (D) -- (3);
+
+		\draw (E) -- (2);
+		\draw (E) -- (4);
+
+		\draw (F) -- (0);
+		\draw (F) -- (2);
+
+		\filldraw (A) circle (2pt) node [anchor = east] {Anna};
+		\filldraw (B) circle (2pt) node [anchor = east] {Bert};
+		\filldraw (C) circle (2pt) node [anchor = east] {Chris};
+		\filldraw (D) circle (2pt) node [anchor = east] {Dirk};
+		\filldraw (E) circle (2pt) node [anchor = east] {Emilia};
+		\filldraw (F) circle (2pt) node [anchor = east] {Franz};
+		
+		\filldraw (0) circle (2pt) node [anchor = west] {Vanille};
+		\filldraw (1) circle (2pt) node [anchor = west] {Erdbeere};
+		\filldraw (2) circle (2pt) node [anchor = west] {Schokolade};
+		\filldraw (3) circle (2pt) node [anchor = west] {Zitrone};
+		\filldraw (4) circle (2pt) node [anchor = west] {Cola};
+		\filldraw (5) circle (2pt) node [anchor = west] {Karamell};
+
+	\end{tikzpicture}
+\end{figure}
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\coordinate (A) at (0, 0);
+		\coordinate (B) at (0, 1);
+		\coordinate (C) at (0, 2);
+		\coordinate (D) at (0, 3);
+		\coordinate (E) at (0, 4);
+		\coordinate (F) at (0, 5);
+
+		\coordinate (0) at (5, 0);
+		\coordinate (1) at (5, 1);
+		\coordinate (2) at (5, 2);
+		\coordinate (3) at (5, 3);
+		\coordinate (4) at (5, 4);
+		\coordinate (5) at (5, 5);
+
+		\coordinate (s) at (2.5, -2);
+		\coordinate (t) at (2.5, 7);
+
+		\draw[line width = 2pt, green, ->] (A) -- (1);
+		\draw[line width = 2pt, green, ->] (D) -- (0);
+		\draw[line width = 2pt, green, ->] (F) -- (2);
+		% \draw[line width = 3pt, green] (0) -- (2);
+		% \draw[line width = 3pt, green] (2) -- (3);
+
+		% 0 Vanille
+		% 1 Erdbeere
+		% 2 Schokolade
+		% 3 Zitrone
+		% 4 Cola
+		% 5 Karamell
+
+		\draw (A) -- (1);
+		\draw[{Stealth[length=2mm]}-] (A) -- (3);
+		\draw[{Stealth[length=2mm]}-] (A) -- (5);
+
+		\draw[{Stealth[length=2mm]}-] (B) -- (2);
+		\draw[{Stealth[length=2mm]}-] (B) -- (4);
+		
+		\draw[{Stealth[length=2mm]}-] (C) -- (2);
+		\draw[{Stealth[length=2mm]}-] (C) -- (4);
+
+		\draw (D) -- (0);
+		\draw[{Stealth[length=2mm]}-] (D) -- (1);
+		\draw[{Stealth[length=2mm]}-] (D) -- (3);
+
+		\draw[{Stealth[length=2mm]}-] (E) -- (2);
+		\draw[{Stealth[length=2mm]}-] (E) -- (4);
+
+		\draw[{Stealth[length=2mm]}-] (F) -- (0);
+		\draw (F) -- (2);
+
+		\filldraw (A) circle (1pt) node [anchor = east] {Anna};
+		\filldraw (B) circle (1pt) node [anchor = east] {Bert};
+		\filldraw (C) circle (1pt) node [anchor = east] {Chris};
+		\filldraw (D) circle (1pt) node [anchor = east] {Dirk};
+		\filldraw (E) circle (1pt) node [anchor = east] {Emilia};
+		\filldraw (F) circle (1pt) node [anchor = east] {Franz};
+		
+		\filldraw (0) circle (1pt) node [anchor = west] {Vanille};
+		\filldraw (1) circle (1pt) node [anchor = west] {Erdbeere};
+		\filldraw (2) circle (1pt) node [anchor = west] {Schokolade};
+		\filldraw (3) circle (1pt) node [anchor = west] {Zitrone};
+		\filldraw (4) circle (1pt) node [anchor = west] {Cola};
+		\filldraw (5) circle (1pt) node [anchor = west] {Karamell};
+
+		\filldraw (s) circle (1pt) node [anchor = north] {$ s $};
+		\filldraw (t) circle (1pt) node [anchor = south] {$ t $};
+
+	\end{tikzpicture}
+\end{figure}
+\newpage
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\coordinate (A) at (0, 0);
+		\coordinate (B) at (0, 1);
+		\coordinate (C) at (0, 2);
+		\coordinate (D) at (0, 3);
+		\coordinate (E) at (0, 4);
+		\coordinate (F) at (0, 5);
+
+		\coordinate (0) at (5, 0);
+		\coordinate (1) at (5, 1);
+		\coordinate (2) at (5, 2);
+		\coordinate (3) at (5, 3);
+		\coordinate (4) at (5, 4);
+		\coordinate (5) at (5, 5);
+
+		\coordinate (s) at (2.5, -2);
+		\coordinate (t) at (2.5, 7);
+
+		\draw[line width = 2pt, green, ->] (A) -- (1);
+		\draw[line width = 2pt, green, ->] (D) -- (0);
+		\draw[line width = 2pt, green, ->] (F) -- (2);
+		\draw[line width = 1pt, red] (s) -- (3);
+		\draw[line width = 1pt, red] (3) -- (D);
+		\draw[line width = 1pt, red] (D) -- (0);
+		\draw[line width = 1pt, red] (0) -- (F);
+		\draw[line width = 1pt, red] (F) -- (2);
+		\draw[line width = 1pt, red] (2) -- (B);
+		\draw[line width = 1pt, red] (B) -- (t);
+
+		% 0 Vanille
+		% 1 Erdbeere
+		% 2 Schokolade
+		% 3 Zitrone
+		% 4 Cola
+		% 5 Karamell
+
+		\draw (A) -- (1);
+		\draw[{Stealth[length=2mm]}-] (A) -- (3);
+		\draw[{Stealth[length=2mm]}-] (A) -- (5);
+
+		\draw[{Stealth[length=2mm]}-] (B) -- (2);
+		\draw[{Stealth[length=2mm]}-] (B) -- (4);
+		
+		\draw[{Stealth[length=2mm]}-] (C) -- (2);
+		\draw[{Stealth[length=2mm]}-] (C) -- (4);
+
+		\draw (D) -- (0);
+		\draw[{Stealth[length=2mm]}-] (D) -- (1);
+		\draw[{Stealth[length=2mm]}-] (D) -- (3);
+
+		\draw[{Stealth[length=2mm]}-] (E) -- (2);
+		\draw[{Stealth[length=2mm]}-] (E) -- (4);
+
+		\draw[{Stealth[length=2mm]}-] (F) -- (0);
+		\draw (F) -- (2);
+
+		\filldraw (A) circle (1pt) node [anchor = east] {Anna};
+		\filldraw (B) circle (1pt) node [anchor = east] {Bert};
+		\filldraw (C) circle (1pt) node [anchor = east] {Chris};
+		\filldraw (D) circle (1pt) node [anchor = east] {Dirk};
+		\filldraw (E) circle (1pt) node [anchor = east] {Emilia};
+		\filldraw (F) circle (1pt) node [anchor = east] {Franz};
+		
+		\filldraw (0) circle (1pt) node [anchor = west] {Vanille};
+		\filldraw (1) circle (1pt) node [anchor = west] {Erdbeere};
+		\filldraw (2) circle (1pt) node [anchor = west] {Schokolade};
+		\filldraw (3) circle (1pt) node [anchor = west] {Zitrone};
+		\filldraw (4) circle (1pt) node [anchor = west] {Cola};
+		\filldraw (5) circle (1pt) node [anchor = west] {Karamell};
+
+		\filldraw (s) circle (1pt) node [anchor = north] {$ s $};
+		\filldraw (t) circle (1pt) node [anchor = south] {$ t $};
+
+	\end{tikzpicture}
+\end{figure}
+\newpage
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\coordinate (A) at (0, 0);
+		\coordinate (B) at (0, 1);
+		\coordinate (C) at (0, 2);
+		\coordinate (D) at (0, 3);
+		\coordinate (E) at (0, 4);
+		\coordinate (F) at (0, 5);
+
+		\coordinate (0) at (5, 0);
+		\coordinate (1) at (5, 1);
+		\coordinate (2) at (5, 2);
+		\coordinate (3) at (5, 3);
+		\coordinate (4) at (5, 4);
+		\coordinate (5) at (5, 5);
+
+		\coordinate (s) at (2.5, -2);
+		\coordinate (t) at (2.5, 7);
+
+		\draw[line width = 2pt, green, ->] (A) -- (1);
+		\draw[line width = 2pt, green, ->] (B) -- (2);
+		\draw[line width = 2pt, green, ->] (D) -- (3);
+		\draw[line width = 2pt, green, ->] (F) -- (0);
+		% \draw[line width = 1pt, red] (s) -- (0);
+		% \draw[line width = 1pt, red] (0) -- (F);
+		% \draw[line width = 1pt, red] (B) -- (t);
+
+		% 0 Vanille
+		% 1 Erdbeere
+		% 2 Schokolade
+		% 3 Zitrone
+		% 4 Cola
+		% 5 Karamell
+
+		\draw (A) -- (1);
+		\draw[{Stealth[length=2mm]}-] (A) -- (3);
+		\draw[{Stealth[length=2mm]}-] (A) -- (5);
+
+		\draw (B) -- (2);
+		\draw[{Stealth[length=2mm]}-] (B) -- (4);
+		
+		\draw[{Stealth[length=2mm]}-] (C) -- (2);
+		\draw[{Stealth[length=2mm]}-] (C) -- (4);
+
+		\draw[{Stealth[length=2mm]}-] (D) -- (0);
+		\draw[{Stealth[length=2mm]}-] (D) -- (1);
+		\draw (D) -- (3);
+
+		\draw[{Stealth[length=2mm]}-] (E) -- (2);
+		\draw[{Stealth[length=2mm]}-] (E) -- (4);
+
+		\draw (F) -- (0);
+		\draw[{Stealth[length=2mm]}-] (F) -- (2);
+
+		\filldraw (A) circle (1pt) node [anchor = east] {Anna};
+		\filldraw (B) circle (1pt) node [anchor = east] {Bert};
+		\filldraw (C) circle (1pt) node [anchor = east] {Chris};
+		\filldraw (D) circle (1pt) node [anchor = east] {Dirk};
+		\filldraw (E) circle (1pt) node [anchor = east] {Emilia};
+		\filldraw (F) circle (1pt) node [anchor = east] {Franz};
+		
+		\filldraw (0) circle (1pt) node [anchor = west] {Vanille};
+		\filldraw (1) circle (1pt) node [anchor = west] {Erdbeere};
+		\filldraw (2) circle (1pt) node [anchor = west] {Schokolade};
+		\filldraw (3) circle (1pt) node [anchor = west] {Zitrone};
+		\filldraw (4) circle (1pt) node [anchor = west] {Cola};
+		\filldraw (5) circle (1pt) node [anchor = west] {Karamell};
+
+		\filldraw (s) circle (1pt) node [anchor = north] {$ s $};
+		\filldraw (t) circle (1pt) node [anchor = south] {$ t $};
+
+	\end{tikzpicture}
+\end{figure}
+\newpage
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\coordinate (A) at (0, 0);
+		\coordinate (B) at (0, 1);
+		\coordinate (C) at (0, 2);
+		\coordinate (D) at (0, 3);
+		\coordinate (E) at (0, 4);
+		\coordinate (F) at (0, 5);
+
+		\coordinate (0) at (5, 0);
+		\coordinate (1) at (5, 1);
+		\coordinate (2) at (5, 2);
+		\coordinate (3) at (5, 3);
+		\coordinate (4) at (5, 4);
+		\coordinate (5) at (5, 5);
+
+		\coordinate (s) at (2.5, -2);
+		\coordinate (t) at (2.5, 7);
+
+		\draw[line width = 2pt, green, ->] (A) -- (1);
+		\draw[line width = 2pt, green, ->] (B) -- (2);
+		\draw[line width = 2pt, green, ->] (D) -- (3);
+		\draw[line width = 2pt, green, ->] (F) -- (0);
+		\draw[line width = 1pt, red] (s) -- (4);
+		\draw[line width = 1pt, red] (4) -- (B);
+		\draw[line width = 1pt, red] (B) -- (2);
+		\draw[line width = 1pt, red] (2) -- (C);
+		\draw[line width = 1pt, red] (C) -- (t);
+
+		% 0 Vanille
+		% 1 Erdbeere
+		% 2 Schokolade
+		% 3 Zitrone
+		% 4 Cola
+		% 5 Karamell
+
+		\draw (A) -- (1);
+		\draw[{Stealth[length=2mm]}-] (A) -- (3);
+		\draw[{Stealth[length=2mm]}-] (A) -- (5);
+
+		\draw (B) -- (2);
+		\draw[{Stealth[length=2mm]}-] (B) -- (4);
+		
+		\draw[{Stealth[length=2mm]}-] (C) -- (2);
+		\draw[{Stealth[length=2mm]}-] (C) -- (4);
+
+		\draw[{Stealth[length=2mm]}-] (D) -- (0);
+		\draw[{Stealth[length=2mm]}-] (D) -- (1);
+		\draw (D) -- (3);
+
+		\draw[{Stealth[length=2mm]}-] (E) -- (2);
+		\draw[{Stealth[length=2mm]}-] (E) -- (4);
+
+		\draw (F) -- (0);
+		\draw[{Stealth[length=2mm]}-] (F) -- (2);
+
+		\filldraw (A) circle (1pt) node [anchor = east] {Anna};
+		\filldraw (B) circle (1pt) node [anchor = east] {Bert};
+		\filldraw (C) circle (1pt) node [anchor = east] {Chris};
+		\filldraw (D) circle (1pt) node [anchor = east] {Dirk};
+		\filldraw (E) circle (1pt) node [anchor = east] {Emilia};
+		\filldraw (F) circle (1pt) node [anchor = east] {Franz};
+		
+		\filldraw (0) circle (1pt) node [anchor = west] {Vanille};
+		\filldraw (1) circle (1pt) node [anchor = west] {Erdbeere};
+		\filldraw (2) circle (1pt) node [anchor = west] {Schokolade};
+		\filldraw (3) circle (1pt) node [anchor = west] {Zitrone};
+		\filldraw (4) circle (1pt) node [anchor = west] {Cola};
+		\filldraw (5) circle (1pt) node [anchor = west] {Karamell};
+
+		\filldraw (s) circle (1pt) node [anchor = north] {$ s $};
+		\filldraw (t) circle (1pt) node [anchor = south] {$ t $};
+
+	\end{tikzpicture}
+\end{figure}
+\newpage
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\coordinate (A) at (0, 0);
+		\coordinate (B) at (0, 1);
+		\coordinate (C) at (0, 2);
+		\coordinate (D) at (0, 3);
+		\coordinate (E) at (0, 4);
+		\coordinate (F) at (0, 5);
+
+		\coordinate (0) at (5, 0);
+		\coordinate (1) at (5, 1);
+		\coordinate (2) at (5, 2);
+		\coordinate (3) at (5, 3);
+		\coordinate (4) at (5, 4);
+		\coordinate (5) at (5, 5);
+
+		\coordinate (s) at (2.5, -2);
+		\coordinate (t) at (2.5, 7);
+
+		\draw[line width = 2pt, green, ->] (A) -- (1);
+		\draw[line width = 2pt, green, ->] (B) -- (4);
+		\draw[line width = 2pt, green, ->] (C) -- (2);
+		\draw[line width = 2pt, green, ->] (D) -- (3);
+		\draw[line width = 2pt, green, ->] (F) -- (0);
+		% \draw[line width = 1pt, red] (s) -- (4);
+		% \draw[line width = 1pt, red] (4) -- (B);
+		% \draw[line width = 1pt, red] (C) -- (t);
+
+		% 0 Vanille
+		% 1 Erdbeere
+		% 2 Schokolade
+		% 3 Zitrone
+		% 4 Cola
+		% 5 Karamell
+
+		\draw (A) -- (1);
+		\draw[{Stealth[length=2mm]}-] (A) -- (3);
+		\draw[{Stealth[length=2mm]}-] (A) -- (5);
+
+		\draw[{Stealth[length=2mm]}-] (B) -- (2);
+		\draw (B) -- (4);
+		
+		\draw (C) -- (2);
+		\draw[{Stealth[length=2mm]}-] (C) -- (4);
+
+		\draw[{Stealth[length=2mm]}-] (D) -- (0);
+		\draw[{Stealth[length=2mm]}-] (D) -- (1);
+		\draw (D) -- (3);
+
+		\draw[{Stealth[length=2mm]}-] (E) -- (2);
+		\draw[{Stealth[length=2mm]}-] (E) -- (4);
+
+		\draw (F) -- (0);
+		\draw[{Stealth[length=2mm]}-] (F) -- (2);
+
+		\filldraw (A) circle (1pt) node [anchor = east] {Anna};
+		\filldraw (B) circle (1pt) node [anchor = east] {Bert};
+		\filldraw (C) circle (1pt) node [anchor = east] {Chris};
+		\filldraw (D) circle (1pt) node [anchor = east] {Dirk};
+		\filldraw (E) circle (1pt) node [anchor = east] {Emilia};
+		\filldraw (F) circle (1pt) node [anchor = east] {Franz};
+		
+		\filldraw (0) circle (1pt) node [anchor = west] {Vanille};
+		\filldraw (1) circle (1pt) node [anchor = west] {Erdbeere};
+		\filldraw (2) circle (1pt) node [anchor = west] {Schokolade};
+		\filldraw (3) circle (1pt) node [anchor = west] {Zitrone};
+		\filldraw (4) circle (1pt) node [anchor = west] {Cola};
+		\filldraw (5) circle (1pt) node [anchor = west] {Karamell};
+
+		\filldraw (s) circle (1pt) node [anchor = north] {$ s $};
+		\filldraw (t) circle (1pt) node [anchor = south] {$ t $};
+
+	\end{tikzpicture}
+\end{figure}
+
+Nein es gibt kein Maximummatching, sodass jedes Kind ein Eis bekommt, das es mag, da Bert, Chris und Emilia nur Schokolade oder Cola wollen, also kann mind. eine*r der drei nicht das gewünschte Eis bekommen.
+
+Es gibt auch kein Maximummatching, in dem Franz das schon gewählte Eis behalten dürfen, da wenn Franz Schokolade nimmt, für Bert, Chris und Emilia nur Cola übrig bleibt, also zwei der drei ohne Eis dastehen bleiben.
+
+\end{document}

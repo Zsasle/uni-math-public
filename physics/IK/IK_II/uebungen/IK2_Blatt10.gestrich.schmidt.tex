@@ -1,0 +1,141 @@
+\documentclass[sectionformat=aufgabe]{gadsescript}
+
+\setsemester{Summer Semester 2024}%
+\setuniversity{University of Konstanz}%
+\setfaculty{Faculty of Science\\(Physics)}%
+\settitle{Übungsblatt 10}
+\setsubtitle{Davina Schmidt, Elias Gestrich}
+
+\sisetup{exponent-mode = input}
+
+\begin{document}
+\maketitle
+
+\section{Spiralbahn}
+\begin{enumerate}[label=\alph*)]
+	\item
+		\begin{align*}
+			\vec F &= m_e \cdot \ddot {\vec r} \\
+			       &= m_e \cdot \left( \ddot \rho - \rho \dot \varphi^2, \rho \ddot \varphi + 2 \dot \rho \dot \varphi, \ddot z  \right) \\
+			       &= -e \vec v \times B \vec e_z \\
+			       &= -e B \left( \dot \rho \vec e_\rho + \rho \dot \varphi \vec e_\varphi + \dot z \vec e_z \right) \times  \vec e_z \\
+			       &= -e B \left( - \dot \rho \vec e_\varphi + \rho \dot \varphi \vec e_\rho \right)\\
+			       &= -e B \left( \rho \dot \varphi , - \dot \rho, 0 \right)\\
+		\end{align*}
+		Also
+		\begin{align*}
+		       m_e \cdot %
+		       \begin{pmatrix} %
+			       \ddot \rho - \rho \dot \varphi^2 \\%
+			       \rho \ddot \varphi + 2 \dot \rho \dot \varphi \\%
+			       \ddot z%
+		       \end{pmatrix} %
+		       &= -e B%
+		       \begin{pmatrix} %
+			       \rho \dot \varphi \\%
+			       - \dot \rho \\%
+			       0
+		       \end{pmatrix}\\%
+		       \begin{pmatrix} %
+			       \ddot \rho - \rho \dot \varphi^2 \\
+			       \rho \ddot \varphi + 2 \dot \rho \dot \varphi \\
+			       \ddot z
+		       \end{pmatrix} %
+		       &= -\frac{e B}{ m_e } 
+		       \begin{pmatrix} 
+			       \rho \dot \varphi \\
+			       - \dot \rho \\
+			       0
+		       \end{pmatrix}\\%
+		       0 &= %
+		       \begin{pmatrix} 
+			       \ddot \rho + \left( \frac{eB}{ m_e } - \dot \varphi  \right)  \rho \dot \varphi \\
+			       \rho \ddot \varphi + \left( 2 \dot \varphi - \frac{eB}{ m_e } \right) \dot \rho \\
+			       \ddot z
+		       \end{pmatrix} 
+		\end{align*}
+	\item für $ z $-Komponente gilt:
+		\[
+			\ddot z = 0
+		\]
+		also $ \dot z = v_z $ ist Konstant
+	\item Für $ \rho = \text{konst.}  $ gilt $ \dot \rho = \ddot \rho = 0 $, also
+		\begin{align*}
+		       0 &= %
+		       \ddot \rho + \left( \frac{eB}{ m_e } - \dot \varphi  \right)  \rho \dot \varphi \\
+			 &= \left( \frac{eB}{ m_e } - \dot \varphi  \right)  \rho \dot \varphi \\
+		\end{align*}
+		Also $ \rho = 0 $ oder $ \dot \varphi = 0 $ oder $ \dot \varphi = \frac{ eB }{ m_e }  $.
+		Und
+		\begin{align*}
+		       0 &= \rho \ddot \varphi + \left( 2 \dot \varphi - \frac{eB}{ m_e } \right) \dot \rho \\
+		         &= \rho \ddot \varphi \\
+		\end{align*}
+		Also $ \rho = 0 $ oder $ \ddot \varphi = 0 $.
+		Für $ \rho = 0 $ ist die Bewegungsgleichung trivial und $ \vec r (t) = \left( 0, 0, v_z t \right) $.
+		Für $ \dot \varphi = 0 $ ist die Bewegungsgleichung ebenfalls trivial mit $ \vec r(t) = \left( \rho_0, \varphi_0, v_z t \right)  $.
+		Für $ \dot \varphi = \frac{ eB }{ m_e } = \omega_c $ gilt $ \varphi = \omega_c t $, $ \rho = \rho_0 $ also
+		\[
+			\vec r(t) = \left( \rho_0, \omega_c t, v_z t \right)
+		\]
+		also
+		\[
+			\dot {\vec r}(t) =
+			\left( 0, \rho_0 \omega_c, v_z \right) ,
+			\dot {\vec r}_r(t) =
+			\left( 0, \rho_0 \omega_c \right)
+		\]
+		mit
+		\[
+			\left| \vec v_r \right| = \rho_0 \omega_c = const. = v_{0, r} 
+		\]
+		also $ \rho_0 = \frac{ v_{0, r}  }{ \omega_c }  $
+\end{enumerate}
+
+\section{Kraft auf eine Leiterschleife}
+Das $ B $ Feld:
+\[
+	\vec B = \frac{ \mu_0 }{ 2 \pi  } \frac{ I_2 }{ \rho } \vec e_{\varphi} 
+\]
+
+Dann ist die resultierende Kraft auf die rechteckige Leiterschleife, die Kraft, die auf alle Seiten der Leiterschleife einwirkt.
+Für die Seite, die $ a $ von dem geraden Leiter, durch den der Strom $ I_2 $ fließt entfernt ist gilt also
+\begin{align*}
+	\vec F_a &= \int_{0}^{L} I_1 \dd \vec r \times \frac{ \mu_0 }{ 2 \pi  } \frac{ I_2 }{ a } \vec e_\varphi \\
+	~ &= \int_{0}^{L} I_1 \dd z \vec e_z \times \frac{ \mu_0 }{ 2 \pi  } \frac{ I_2 }{ a } \vec e_\varphi \\
+	~ &= \int_{0}^{L} I_1 \frac{ \mu_0 }{ 2 \pi  } \frac{ I_2 }{ a } \vec e_{z} \times \vec e_\varphi \dd z \\
+	~ &= - \int_{0}^{L} \frac{ \mu_0 }{ 2 \pi  } \frac{ I_1 I_2 }{ a } \vec e_\rho \dd z \\
+	~ &= - \frac{ \mu_0 }{ 2 \pi  } \frac{ I_1 I_2L }{ a } \vec e_\rho \\
+\end{align*}
+
+Und dann für die Seite die $ b $ von dem geraden Leiter entfernt ist:
+\begin{align*}
+	\vec F_b &= \int_{0}^{L} - I_1 \dd \vec r \times \frac{ \mu_0 }{ 2 \pi  } \frac{ I_2 }{ b } \vec e_\varphi \\
+	~ &= \int_{0}^{L} - I_1 \dd z \vec e_z \times \frac{ \mu_0 }{ 2 \pi  } \frac{ I_2 }{ b } \vec e_\varphi \\
+	~ &= \int_{0}^{L} - I_1 \frac{ \mu_0 }{ 2 \pi  } \frac{ I_2 }{ b } \vec e_{z} \times \vec e_\varphi \dd z \\
+	~ &= \int_{0}^{L} \frac{ \mu_0 }{ 2 \pi  } \frac{ I_1 I_2 }{ b } \vec e_\rho \dd z \\
+	~ &= \frac{ \mu_0 }{ 2 \pi  } \frac{ I_1 I_2L }{ b } \vec e_\rho \\
+\end{align*}
+
+Und jeweils für die Seiten: ($ + $ für die rechte, $ - $ für die linke Seite)
+\begin{align*}
+	F_s &= \pm \int_{a}^{b} I_1 \dd \vec r \times \frac{ \mu_0 }{ 2 \pi  } \frac{ I_2 }{ \rho } \vec e_\varphi \\
+	~ &= \pm \int_{a}^{b} \frac{ \mu_0 }{ 2 \pi  } \frac{ I_1I_2 }{ \rho } \vec e_\rho \times \dd \rho\\
+	~ &= \pm \int_{a}^{b} \frac{ \mu_0 }{ 2 \pi  } \frac{ I_1I_2 }{ \rho } \vec e_z \dd \rho\\
+	~ &= \pm \frac{ \mu_0 I_1I_2 }{ 2 \pi  } \left[ \ln \rho \right]_a^b \vec e_z \\
+	~ &= \pm \frac{ \mu_0 I_1I_2 }{ 2 \pi  } \ln \frac{ b }{ a } \vec e_z \\
+\end{align*}
+Also für die rechte und linke Seite betragsmäßig gleich, aber mit unterschiedlichen Vorzeichen, also gleichen sich die Kräfte aus.
+
+Resultierende Kraft:
+\[
+	F_a + F_b = 
+	- \frac{ \mu_0 }{ 2 \pi  } \frac{ I_1 I_2L }{ a } \vec e_\rho \\
+	+ \frac{ \mu_0 }{ 2 \pi  } \frac{ I_1 I_2L }{ b } \vec e_\rho \\
+	= \left( \frac{ 1 }{ b } - \frac{ 1 }{ a }  \right) \frac{ \mu_0I_1I_2L }{ 2 \pi  } \vec e_\rho \\
+	= - \left( \frac{ b - a }{ ab } \right) \frac{ \mu_0I_1I_2L }{ 2 \pi  } \vec e_\rho \\
+\]
+
+Also wird die rechteckige Leiterschleife von dem geraden Leiter angezogen.
+
+\end{document}
