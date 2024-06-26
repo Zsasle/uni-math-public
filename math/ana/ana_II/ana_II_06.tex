@@ -81,7 +81,7 @@ Frage: Auch hinreichend?
 		\item[1. Reduktion] $ x_0 = 0, f(x_0) = 0. $ 
 			Ansonsten betrachte $ g(x) = f(x_0 + x) - f(x_0) $
 		\item[2. Reduktion] Sei $ C \coloneqq \left( Df(0) \right) ^{-1}  $. Wir zeigen die Aussage für $ \left( Cf \right) ^{-1}  $,
-			denn $ D \left( \left( C f \right)^{-1}   \right) = C \left( Df^{-1}  \right)  $ (+ $ C $ invertierbar!)
+			denn $ D \left( \left( C f \right)^{-1}   \right) = C^{-1}  \left( Df^{-1}  \right)  $ (+ $ C $ invertierbar!)
 		\item[3. Reduktion] Damit \OE{} $ Df(0) = E_n $.
 	\end{description}
 	\begin{itemize}
@@ -109,6 +109,167 @@ Frage: Auch hinreichend?
 			Also ist $ f^{-1}  $ in $ 0 $ differenzierbar.
 			Also auch für alle $ x_0 \in \Omega_1 $.
 	\end{itemize}
+	---\\
+	Zunächst gilt
+	\[
+		f^{-1} \circ f = id_{\Omega_1} ,
+	\]
+	damit folgt nach Kettenregel
+	\[
+		\left( Df^{-1}  \right) \left( f(x) \right) \left( Df(x) \right) = E_n,
+	\]
+	also
+	\[
+		\left( Df^{-1}  \right) \left( f(x) \right) = \left( Df(x) \right) ^{-1} 
+	\]
+	mit $ y = f(x) $ folgt, dass
+	\[
+		Df^{-1} = \underbrace{\operatorname{inv}}_{\text{Lem. \ref{6.1} stetig}}  \circ \underbrace{Df}_{\text{stetig nach Vor.} }  \circ \underbrace{f^{-1}}_{\text{stetig nach I teil des Bew.}}
+	\]
+	Also $ Df^{-1}  $ stetig\qed
 \end{proof*}
+
+\begin{definition}
+	Seien $ \Omega_1, \Omega_2 \subset \R ^n $ offen.
+	Eine stetig differenzierbare, bijektive Abbildung $ f: \Omega_1 \to \Omega_2 $ heißt \textbf{Diffeomorphismus}, falls 
+	\[
+		f^{-1} : \Omega_2 \to \Omega_1
+	\]
+	ebenfalls stetig differenzierbar ist.
+\end{definition}
+
+\begin{theorem}[Lokaler Umkehrsatz]
+	Sei $ \Omega \subset \R ^n $ offen und $ f: \Omega \to \R ^n $ stetig differenzierbar.
+	Sei $ x_0 \in \Omega $ so, dass $ Df(x_0) $ invertierbar ist.
+	Dann gibt es eine offene Umgebung $ U $ von $ x_0 $, sodass $ f(U) $ eine offene Umgebung von $ f(x_0) $ ist und $ f|_U : U \to f(U) $ ein Diffeomorphismus ist: $ f|_U $ ist stetig differenzierbar und $ \left( f|_{U} \right)^{-1}  $ ist stetig differenzierbar.
+\end{theorem}
+\begin{proof*}[Theorem \ref{6.5}]
+	\OE{} Sei \OE{} $ x_0 = 0 $ und $ f(x_0) = 0 $, ansonsten betrachte $ x \mapsto f\left( x + x_0 \right) - f(x_0) $.
+	Betrachte mit $ C \coloneqq \left( Df(0) \right) ^{-1}  $ den Isomorphismus $ T : x \mapsto Cx $.
+	Nach Lemma \ref{5.3} gilt
+	\[
+		D\left( T \circ f \right) \left( 0 \right) = C \cdot Df(0) = E_n.
+	\]
+	Also können wir annehmen, dass $ x_0 = f(x_0) = 0 $ und $ Df(0) = E_n $
+	Wir benutzen:
+	\begin{itemize}
+		\item den Schrankensatz
+		\item den Banachschen Fixpunktsatz
+	\end{itemize}
+	\begin{description}
+		\item[Schritt 1] Wir wollen
+			\[
+				f(x) = y
+			\]
+			lösen.
+			Setzen für $ y \in \R ^n $ und $ x \in \Omega $ 
+			definiere
+			\[
+				g_y (x) \coloneqq y + x - f(x).
+			\]
+			Wir wollen
+			\[
+				g_y(x) = x
+			\]
+			lösen.
+			Nach Voraussetzung ist $ Df $ stetig in $ x_0 = 0 $. Daher gibt es ein $ r> 0 $, sodss
+			\[
+				K \coloneqq \overline{B_{2r}}(0) \subset \Omega,
+			\]
+			sowie
+			\[
+				\forall x \in K : \left\| E_n - Df(x) \right\| < \frac{ 1 }{ 2 } 
+			\]
+			Da $ Dg_y(x) = E_n Df(x) $, folgt mit Schrankensatz
+			\[
+				\forall x_1, x_2 \in K : \left\| g_y(x_1) - g_y(x_2) \right\| \leq \max_{x \in K} \left\| E_n - Df(x) \right\| \left\| x_1 - x_2 \right\| _2 \leq  \frac{ 1 }{ 2 } \left\| x_1 - x_2 \right\| _2
+			\]
+			Daraus folgt, dass $ \forall x \in K, y \in B_{r}(0) : \left\| g_y (x) \right\| _2 \leq \left\| g_y(x) - g_y(0) \right\| _2 + \left\| g_y(0) \right\| _2 \leq \frac{ 1 }{ 2 } \left\| x \right\| _2 + \left\| y \right\| _2 < r + r = 2r $.\\
+			$ \implies g_y : K \to K $ ist kontrahierende selbstabbildung.
+			Da $ K $ abgeschlossen und beschränkt ist, ist $ K $ kompakt, als BFS anwendbar.
+			\begin{itemize}
+				\item Ziel erreicht: Für jedes $ y \in B_{r}(0)  $ gibt es genau ein $ x \in K $ so, dass $ g_y(x) = x $, also $ f(x) = y $ mit $ B_{2r}(0)  $.
+			\end{itemize}
+			Für $ y \in B_{r}(0)  $ definieren wir $ h(y) $ also das eindeutig bestimmte $ x \in B_{2r}(0)  $, also
+			\[
+				h(y) \coloneqq  x,
+			\]
+			\[
+				V \coloneqq B_{r}(0) 
+			\]
+			und 
+			\[
+				U \coloneqq f^{-1} (V) \cap B_{2r}(0) 
+			\]
+			Dies definiert eine Umkehrabbildung
+			\[
+				h : V \to U
+			\]
+			zu $ f|_U : U \to f(U) $
+		\item[Schritt 2]
+			\textbf{$ h $ ist stetig}\\
+			Seien $ y_1, y_2 \in V $.
+			Definiere $ x_1 = h(y_1) $ und $ x_2 \coloneqq h(y_2) $.
+			Da $ g_y(x) = x $ folgt $ x_1 - x_2 = g_0(x_1) - g_0(x_2) + f(x_1) - f(x_2) $.
+			D.h.
+			\[
+				\left\| x_1 - x_2 \right\| _2 \leq \frac{ 1 }{ 2 } \left\| x_1 - x_2 \right\| _2 + \left\| f(x_1) - f(x_2) \right\| _2,
+			\]
+			also
+			\[
+				\left\| h(y_1) - h(y_2) \right\| _2 \leq 2 \left\| y_1 - y_2 \right\| _2.
+			\]
+			Also $ h $ stetig.
+		\item[Schritt 3]
+				Invertierbarkeit von $ Df(x) $ auf $ U $.
+				Sei $ x \in U $, dann gilt $ \left\| x \right\| _2 < 2r $.
+				Dann gilt
+				\[
+					\forall v \in \R ^n : \left\| v - Df(x) v \right\| _2 \leq  \frac{ 1 }{ 2 } \left\| v \right\| _2
+				\]
+				Angenommen $ v \in \Kern \left( Df(x) \right)  $.
+				Dann $ \left\| v \right\| _2 \leq \frac{ 1 }{ 2 } \left\| v \right\| _2 $, also $ v = 0 $.
+				Also $ Df(x) $ invertierbar.
+				Behauptung folgt aus Lemma \ref{6.3} \qed
+	\end{description}
+\end{proof*}
+
+\begin{corollary}[Satz von der Offenheit]
+	Sei $ \Omega \subset \R ^n $ offen und $ f: \Omega \to \R ^n $ eine stetig differenzierbare Funktion, sodass $ Df(x) $ für alle $ x \in \Omega $ invertierbar ist.
+	Dann ist $ f(\Omega) $ offen.
+\end{corollary}
+\begin{proof*}[Korollar \ref{6.6}]
+	Nach lokalem Umkehrsatz gibt es für jedes $ x \in \Omega $ eine offene Umgebung $ U_x $, sodass $ f\left( U_x \right)  $ offen ist.
+	D.h.  
+	\[
+		f(\Omega) = \bigcup_{x \in \Omega} f\left( U_x \right) 
+	\]
+	ist offen.\qed
+\end{proof*}
+
+\begin{example}
+	\[
+		f(x_1, x_2) = \left(x_1x_2^2, x_1^{x_2} \right)
+	\]
+	auf
+	\[
+		\Omega = \left( 0, \infty \right) \times \R .
+	\]
+	Wir beachten, dass $ x_1^{x_2} = \exp \left( x_2 \log x_1 \right)  $.
+	Damit gilt
+	\[
+		Df(x) =
+		\begin{pmatrix} 
+			x_2^2 & 2x_1x_2 \\
+			x_2x_1^{x_2 - 1} & \log \left( x_1 \right) x_1^{x_2}
+		\end{pmatrix} ,
+	\]
+	im Punkt $ (1, 2) $ gibt
+	\[
+		Df(1, 2) = \begin{pmatrix} 4 & 4 \\ 2 & 0 \end{pmatrix} 
+	\]
+	ist invertierbar.
+	$ \implies  $ Lokal umkehrbar.
+\end{example}
 
 

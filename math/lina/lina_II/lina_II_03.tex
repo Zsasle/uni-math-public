@@ -333,9 +333,9 @@ Umgekehrt, sei $ T \in \mathcal{L} \left( V, V \right) , \operatorname{Char Pol}
 	Sei $ \dim V = n, T \in \mathcal{L} \left( V, V \right)  $.
 	Es gilt: $ T $ ist diagonalisierbar genau dann wenn $ \operatorname{Char Pol}(T) = \prod_{i = 1}^{k} (x - d_i)^{l_i}   $.
 
-	\textbf{Therminologie:} $ \dim W_d $ wird auch als $ d \in K $ Eigenwert \textbf{geometrische Vielfachheit} der Eigenwerte $ d $ genannt
+	\textbf{Terminologie:} $ \dim W_d $ wird auch als $ d \in K $ Eigenwert \textbf{geometrische Vielfachheit} der Eigenwerte $ d $ genannt
 
-	$ T $ ist diagonalisierbar (über $ K $) genau dannw wenn $ \operatorname{Char Pol}(T) $ als Produkt von lin. Faktoren über $ K $ zerfüllt \textbf{und} die algebraische Vielfachheit jeder Nullstelle ist gleich geometrischer Vielfachheit jeder Eigenwerte
+	$ T $ ist diagonalisierbar (über $ K $) genau dann wenn $ \operatorname{Char Pol}(T) $ als Produkt von lin. Faktoren über $ K $ erfüllt \textbf{und} die algebraische Vielfachheit jeder Nullstelle ist gleich geometrischer Vielfachheit jeder Eigenwerte
 \end{subtheorem}
 
 \begin{subtheorem}
@@ -475,5 +475,177 @@ $ \dim V = n, T \in \mathcal{L} \left( V, V \right) , V $ $ K $-Vektorraum
 \begin{subproposition}
 	Sei $ T $ diagonalisierbar. Dann zerfällt das $ \operatorname{Min Pol}(T) $ (über $ K $) in verschiedene lineare Faktoren
 \end{subproposition}
+\begin{subproof*}[Proposition \ref{3.19.7}]
+	Sei $ T $ diagonalisierbar und $ c_1, \dotsc, c_k \in K $ die verschiedenen Eigenwerte.
+	Setze $ p \coloneqq \operatorname{Min Pol} T $.
+	Wegen Satz \ref{3.19.6} ist $ \deg p \geq k $.
+	Betrachte $ q(x) \coloneqq \left( x - c_1 \right) \dotsb \left( x - c_k \right)  $.
+	Wir berechnen:
+	\[
+		\left( T - c_1 I \right) \dotsb \left( T - c_k I \right) (\alpha) = 0
+	\]
+	für $ \alpha $ Eigenvektor $ \in V $ (weil $ \alpha $ Eigenvektor zum Eigenwert $ c_i $, für geeignetes $ i $).
+	Da es eine Basis gibt bestehend aus Eigenvektoren für $ T $.
+	Also $ q(T) $ verschwindet auf dieser Basis der Eiegnvektoren.
+	Das impliziert
+	\[
+		q(T) = 0
+	\]
+	Also $ q(x) \in \operatorname{Annihilator}(T) $ 
+	Es folgt nun aus Bemerkung \ref{3.19.3} $ \deg q = k \leq  \deg p $ und $ q $ ist normiert, folgt $ q(x) = p(x) $
+\end{subproof*}
+
+\begin{subexample}
+	Wir berechnen $ \operatorname{Min Pol} A \coloneqq p $ für $ A $ im Beispiel \ref{3.17.9} (ii)
+	\[
+		\operatorname{Char Pol}(A) = (x - 1)(x - 2)^2
+	\]
+	$ A $ ist \textbf{nicht} diagonalisierbar.
+	Also hier können wir \textbf{nicht} Proposition \ref{3.19.7} anwenden.
+	Aber wir können Satz \ref{3.17.6} anwenden.
+	Also $ p $ die Nullstellen $ 1 $ und $ 2 $ hat.
+	Wir probieren Polynome der Form
+	\[
+		\left( x - 1 \right) ^{k} \left( x - 2 \right) ^{l} 
+	\]
+	mit $ k \geq 1, l \geq 1, 2 \leq k + l \leq 3^2 = 9 $ 
+	Wir probieren $ k = l = 1 $ 
+	\[
+		\left( A - I \right) \left( A - 2I \right) = \begin{pmatrix} 2 & 0 & -1 \\ 2 & 0 & -1 \\ 4 & 0 & - 2 \end{pmatrix} 
+	\]
+	Also ist $ \deg (p) \geq 3 $.
+	Nun probieren wir:
+	\[
+		\left( x - 1 \right) ^2 \left( x - 2 \right) \text{oder} 
+	\]
+	\[
+		\left( x - 1 \right) \left( x - 2 \right) ^2
+	\]
+	Wir berechnen:
+	\[
+		\left( A - I \right) \left( A - 2I \right) ^2 = 0
+	\]
+	Also ist $ p(x) = \left( x - 1 \right) \left( x - 2 \right) ^2 \implies \operatorname{Min Pol} A = \operatorname{Char Pol} A$ .\qed
+\end{subexample}
+
+\subsection{Skript 20}
+\begin{subtheorem}[von Cayley Hamilton]
+	Sei $ \dim V = n, L \in \mathcal{L} \left( V, V \right) $
+	\[
+		f \coloneqq \operatorname{Char Pol}(L).
+	\]
+	Es gilt $ f(L) = 0 $.
+	Insbesondere teilt $ \operatorname{Min Pol}(L) $ das $ \operatorname{Char Pol}(L) $
+\end{subtheorem}
+\begin{subproof*}[Satz von Cayley Hamilton \ref{3.20.1}]
+	Sei $ \mathcal{K}  $ die Algebra der Polynome in $ L $ und $ \mathcal{B} = \left( \alpha_1, \dotsc, \alpha_n \right)  $ für $ V $.
+	Setze
+	\[
+		A \coloneqq  [L]_{\mathcal{B} } 
+	\]
+	d.h.
+	\[
+		L(\alpha_i) = \sum_{j=1}^{n} A_{ji} \alpha_j
+	\]
+	$ \forall i \leq i \leq n $ 
+	\begin{itemize}
+		\item Wir schreiben diese um, als
+			\begin{equation}
+				\label{eq:Satz von Cayley Hamilton.1}
+				\tag{$ 1 $}
+				\sum_{j=1}^{n} \left( \delta_{ij} L - A_{ji} I \right) (\alpha_j) = 0 \quad \forall 1 \leq i \leq n
+			\end{equation}
+			Sei $ B $ die $ n \times n $ Matrix mit den Koeffizienten in $ \mathcal{K}  $ definiert durch
+			\[
+				B_{ij}  = S_{ij} L - A_{ji} I
+			\]
+			\textbf{Beh.:}
+			\[
+				\det B = f(L) \text{ und} 
+			\]
+			\[
+				\det B = 0
+			\]
+		\item Wir haben $ f(x) = \det\left( xI - A \right) = \det \left( xI - A \right)^t $.
+			Wir berechnen
+			\[
+				\left( xI - A \right) _{ij} ^t = \delta_{ij} x - A_{ji} 
+			\]
+			Also gilt:
+			\[
+				\left( xI - A \right) _{ij} ^t (L) = \delta_{ij} L - A_{ji} I = B_{ij} 
+			\]
+			Außerdem gilt:
+			\begin{align*}
+				f(L) &= \left[ \det \left( xI - A \right)  \right] (L) \\
+				~ &= \left[ \det \left( xI - A \right) ^{t}  \right] (L) \\
+				~ &= \det \left(  \left( xI - A \right) ^{t} (L) \right)  \\
+				~ &= \det B.
+			\end{align*}
+		\item Wir zeigen $ \det B = 0 $. Dafür genügt es zu zeigen, dass
+			\[
+				\left( \det B \right) \left( \alpha_k \right) = 0 \quad k = 1, \dotsc, n
+			\]
+			Wegen \eqref{eq:Satz von Cayley Hamilton.1} gelten $ B_{ij}  $ und $ \alpha_j $:
+			\begin{equation}
+				\label{eq:Satz von Cayley Hamilton.2}
+				\tag{$ 2 $}
+				\sum_{j=1}^{n} B_{ij} (\alpha_j) = 0 \quad \forall 1 \leq i \leq n
+			\end{equation}
+		\item Setze $ \tilde B = \adj B $ 
+			Aus \eqref{eq:Satz von Cayley Hamilton.2} folgt, für alle $ k $ und $ i $ 
+			\[
+				\tilde B_{ki} \left( \sum_{j=1}^{n} B_{ij} \alpha_j \right) = 0 = \sum_{j=1}^{n} \tilde B_{ki} B_{ij} \alpha_j
+			\]
+			Wir summieren über $ i $ und bekommen
+			\[
+				0 = \sum_{i=1}^{n} \sum_{j=1}^{n} \tilde B_{ki} B_{ij} \alpha_j = \sum_{j=1}^{n} \underbrace{\left( \sum_{i=1}^{n} \tilde B_{ki} B_{ij}  \right) }_{\text{$ kj $-te Koef von $ \tilde B B $} } \left( \alpha_j \right) 
+			\]
+	\end{itemize}
+\end{subproof*}
+
+\subsubsection{Trigonalisierbarkeit}
+Sei $ V $ endlich dimensional $ K $-VR
+\begin{subdefinition}
+	$ T \in \mathcal{L} (V, V) $ ist trigonalisierbar falls es eine Basis $ \mathcal{B}  $ für $ V $ gibt so dass $ [T]_\mathcal{B}  $ eine obere $ \triangle $-Matrix ist (d.h. $ a_{ij} = 0 $ für $ i > j $)
+\end{subdefinition}
+
+\begin{subtheorem}
+	Es gilt:
+	$ T $ ist trigonalisierbar $ \iff \operatorname{Char Pol}(T) $ zerfällt in linear-Faktoren über $ K $,
+	(d.h. $ \operatorname{Char Pol}(T) = \left( x - c_1 \right) ^{n_1} \dotsb \left( x - c_k \right) ^{n_k}  $ mit $ c_i \in K $)
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{3.20.3}]
+	\begin{description}
+		\item[``$ \implies  $'']
+			$ [T]_{\mathcal{B} } = A $ $ \triangle $-Matrix $ \implies \det \left( xI - A \right) = \prod_{i = 1}^{n} \left( x - a_{ii}  \right)   $.
+		\item[``$ \impliedby  $'']
+			Wir beweisen per Induktion über $ \dim V = n $ eine Basis $ \mathcal{B} = \left( \alpha_1 , \dotsc, \alpha_n \right)  $ aufbauen wofür $ [T]_{\mathcal{B} }  $ eine $ \triangle $-Matrix ist.
+			Da $ T $ mindestens ein Eigenwert $ c_1 \in K $ hat, sei $ \alpha \neq 0 $ ein Eigenvektor $ \left\{ \alpha \right\}  $ linear unabhängig $ \overset{\text{Basis Ergänzung} }{\implies } \left( \alpha, \beta_2, \dotsc, \beta_n \right)  $ für $ V $, Matrixdarstellung von $ T $ in dieser Basis
+			\begin{equation}
+				\label{eq:3.20.3.1}
+				\tag{$ * $}
+				\left( 
+					\begin{array}{c | c c c}
+						c_1 & a_{12} & \hdots a_{1n} \\ \hline
+						0 & a_{22} & \hdots a_{2n} \\
+						\vdots \\
+						0 & a_{n2} & \hdots a_{nn} \\
+					\end{array}
+				\right) 
+			\end{equation}
+			\[
+				\Gamma \in M_{(n - 1) \times (n - 1)} (K)
+			\]
+			Setze $ W = \Span \left\{ \beta_2, \dotsc, \beta_n \right\}  $ definiere $ G \in \mathcal{L} \left( W, W \right)  $ 
+			\[
+				G w = \Gamma w \text{ für alle $ w \in W $} 
+			\]
+			Wir sehen aus \eqref{eq:3.20.3.1} $ \operatorname{Char Pol}(T) = (x - c_1) \operatorname{Char Pol}(G) $\\
+			Eindeutigkeit der Faktoren in $ K[x] $, folgt $ \operatorname{Char Pol}(G) $ Produkt von linearen Faktoren.
+			I.A. liefert nun eine geordnete Basis $ \left( \alpha_1, \dotsc, \alpha_n \right)  $ so, dass die Matrixdarstellung von $ G $ eine obere $ \triangle $-Matrix ist\qed
+	\end{description}
+\end{subproof*}
+
 
 
