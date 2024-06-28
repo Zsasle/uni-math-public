@@ -256,6 +256,8 @@
 \DeclareMathOperator{\Char}	{Char}
 \DeclareMathOperator{\Span}	{span}
 \DeclareMathOperator{\Kern}	{ker}
+\DeclareMathOperator{\Bild}	{Bild}
+\DeclareMathOperator{\Image}	{Im}
 \DeclareMathOperator{\Rang}	{Rang}
 \DeclareMathOperator{\Dim}	{dim}
 \DeclareMathOperator{\mat}	{Mat}

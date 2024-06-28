@@ -647,5 +647,195 @@ Sei $ V $ endlich dimensional $ K $-VR
 	\end{description}
 \end{subproof*}
 
+\subsection{Skript 21}
+\setcounter{subsubsection}{11}
+\subsubsection{Invariante Unterräume}
+
+\begin{subdefinition}
+	Sei $ W \subseteq V $ ein Unterraum und $ T \in \mathcal{L} (V, V) $.
+	Dann ist $ W $ \textbf{T-invariant} falls $ T(W) \subseteq W $
+\end{subdefinition}
+
+\begin{subexample}
+	\begin{enumerate}[label=(\arabic*)]
+		\setcounter{enumi}{-1}
+		\item $ \left\{ 0 \right\}  $, und $ V $ sind $ T $-invariant für aale $ T \in \mathcal{L} (V, V) $.
+		\item Sei $ D $ der Ableitung Operator auf $ V \coloneqq K[x] $ und $ W = K[x] \leq d $.
+			Dann ist $ W $ $ T $-invariant
+		\item Sei $ U \subset \mathcal{L} (V, V) $ so, dass $ TU = UT $, setze
+			\begin{enumerate}[label=(\alph*)]
+				\item $ W = \Bild (U) $ 
+				\item $ N = \ker (U) $
+			\end{enumerate}
+			Dann sind $ W $ und $ N $ $ T $-invariant
+			\begin{subproof*}
+				\begin{enumerate}[label=(\alph*)]
+					\item Sei $ \alpha \in \Bild (U) $, $ \exists \beta $ so, dass $ \alpha = U(\beta) $.
+						\[
+							T(\alpha) = T\left( U\left( \beta \right)  \right) = U\left( T\left( \beta \right)  \right) \in \Bild U
+						\]
+					\item Sei $ \alpha \in N $, berechne $ U\left( T\left( \alpha \right)  \right) = t\left( U\left( \alpha \right)  \right) = T(0) = 0 \implies T(\alpha) \in N $\qed
+				\end{enumerate}
+			\end{subproof*}
+		\item $ W \subseteq V $ ist $ T $-invariant $ \implies  $ $ W $ ist $ g(T) $-invariant für alle $ g(x) \in K[x] $ ÜB
+		\item Für alle $ g \in K[x] $ gilt
+			\[
+				g(T) T = T g(T) \text{(\textbf{ÜA})}
+			\]
+			Insbesondere gilt $ g(T) = cI - T $.
+			Daraus folgt wegen (2) $ \ker (T - cI) $ $ T $-invariant,
+			d.h. der Eigenraum zum Eigenwert $ c \in K $ ist $ T $-invariant.
+	\end{enumerate}
+\end{subexample}
+
+\begin{itemize}
+	\item \textbf{Der Operator $ T_w $}:
+		sei $ T \in \mathcal{L} (V, V) $, $ W \subseteq V $ ist $ T $-invariant.
+		setze
+		\[
+			T|_W \coloneqq T_W
+		\]
+		\[
+			T_W : W \to W,
+		\]
+		also ist
+		\[
+			T_W \in \mathcal{L} (W, W)
+		\]
+	\item[$ \dagger $]
+		\label{Matrix Darstellung für TW}
+		Matrix Darstellung für $ T_W $:
+		Sei $ W \subseteq V $ $ T $-invariant mit $ \dim W = r $.
+		Sei $ \mathcal{B} ^\prime = \left( \alpha_1, \dotsc, \alpha_r \right)  $ 
+		eine geordnete Basis für $ W $.
+		Ergänze $ \mathcal{B} ^\prime  $ zu einer Basis $ \mathcal{B} = \left( \alpha_1, \dotsc, \alpha_r, \alpha_{r + 1} , \dotsc, \alpha_n \right)  $ für $ V $.
+		Betrachte $ A = [T]_{\mathcal{B} }  $ Wir haben die Gleichungen
+		\[
+			T(\alpha_j) = \sum_{i=1}^{n} A_{ij} \alpha_i
+		\]
+		Da $ W $ $ T $-invariant ist, sind $ T\left( \alpha_j \right) \in W $ für $ j \leq r $
+		Also
+		\[
+			T(\alpha_j) = \sum_{i=1}^{r} A_{ij} \alpha_i
+		\]
+		Das heißt $ A_{ij} = 0 $ für $ j \leq r $ und $ i > r $
+		Also sieht $ A $ so aus
+		\[
+			A = \begin{pmatrix} B & C \\ 0 & D \end{pmatrix} 
+		\]
+		wobei $ B : r \times r $, $ C : r \times (n - r) $, $ D : \left( n - r \right) \times \left( n - r \right)  $ und $ B = \left[ T_W \right]_{\mathcal{B} ^\prime }  $.
+\end{itemize}
+
+\begin{sublemma}
+	Sei $ T \in \mathcal{L} (V, V) $  $ W \subseteq V $, $ T $-invariant.
+	Es gelten:
+	\begin{enumerate}[label=(\alph*)]
+		\item $ \operatorname{Char Pol} T_W $ teilt $ \operatorname{Char Pol} T $ 
+		\item $ \operatorname{Min Pol} T_W $ teilt $ \operatorname{Min Pol} T $ 
+	\end{enumerate}
+\end{sublemma}
+\begin{subproof*}[Lemma \ref{3.21.3}]
+	Seien $ \mathcal{B} ^\prime  $ und $ \mathcal{B}  $ so gewählt wie in ($ \dagger $), in $ A $ und $ B $ wie in ($ \dagger $) ÜB $ \implies  $ 
+	\begin{enumerate}[label=(\roman*)]
+		\item
+			\[
+				\underbrace{\det \left( xI - A \right) }_{\operatorname{Char Pol} T} = \underbrace{\det \left( xI - B \right) }_{\operatorname{Char Pol} T} \det \left( xI - D \right) \qed
+			\]
+		\item
+			\[
+				A^k = \begin{pmatrix} B^k & C_k \\ 0 & D^k \end{pmatrix} 
+			\]
+			wobei $ C_k $ eine $ r \times \left( n - r \right)  $-Matrix für $ k \in \N_0  $.
+	\end{enumerate}
+	Es folgt daraus, dass ein Polynom $ q \in \operatorname{Annihilator}(A) $ ist $ q $ auch $ \in \operatorname{Annihilator} (B) $.
+	Also teilt $ \operatorname{Min Pol} B $ das $ \operatorname{Min Pol} A $. \qed
+\end{subproof*}
+
+\subsection{Skript 22}
+\begin{sublemma}
+	Sei $ W \subseteq V $ ein Unterraum, sei $ \mathcal{B} ^\prime  $ eine geordnete Basis für $ W $, und
+	\[
+		\mathcal{B} ^\prime \cup \mathcal{B} ^{\prime\prime} 
+	\]
+	eine ergänzende Basis für $ V $.
+	Dann gelten
+	\begin{enumerate}[label=(\roman*)]
+		\item $ \overline{\mathcal{B} ^{\prime\prime}}  $ ist eine Basis für $ V / W $ 
+		\item Umgekehrt, wenn $ \left( \overline{\beta_{r + 1} }, \dotsc, \overline{\beta_n}  \right)  $ eine geordnete Basis für $ V / W $ ist, dann ist
+			\[
+				\mathcal{B} ^\prime  \cup \left\{ \beta_{r + 1} , \dotsc, \beta_n \right\} 
+			\]
+			ist eine Basis für $ V $.\qed
+	\end{enumerate}
+\end{sublemma}
+
+\begin{subnote*}
+	Sei $ W \subseteq V $ $ T $-invariant.
+	Dann ist die Abbildung
+	\[
+		\overline{T} : V / W \to V / W
+	\]
+	so definiert
+	\[
+		\overline{T} \left( \overline{\alpha}  \right) \coloneqq \overline{T ( \alpha )} 
+	\]
+	ist wohldefiniert und ist linear.
+	Also ist $ \overline{T} \in \mathcal{L} \left( V / W, V / W \right)  $.
+	\begin{subproof*}
+		\begin{description}
+			\item[``wohldefiniert'':] Zu zeigen
+				$ \overline{\alpha_1} = \overline{\alpha_2} \implies  \overline{T(\alpha_1)} = \overline{T\left( \alpha_2 \right) } $\\
+				\textbf{Bew.:}
+				$ \alpha_1 - \alpha_2 \in W \implies T(\alpha_1 - \alpha_2) \in W \implies T(\alpha_1) - T(\alpha_2) \in W \implies \overline{T(\alpha_1)} = \overline{T(\alpha_2)}  $\qed
+		\end{description}
+	\end{subproof*}
+\end{subnote*}
+
+\begin{subtheorem}
+	Sei $ W \subseteq V $ $ T $-invariant $ \mathcal{B} ^\prime  $ geordnete Basis für $ W $, ergänzt
+	\[
+		\mathcal{B} = \mathcal{B} ^\prime \cup \mathcal{B} ^{\prime\prime} 
+	\]
+	von $ V $.
+	Es gilt
+	\[
+		A = [T]_\mathcal{B} = \begin{pmatrix} B & C \\ 0 & D \end{pmatrix} 
+	\]
+	wobei $ D = \left[ \overline{T}  \right]_{\overline{\mathcal{B} ^{\prime\prime} } }  $ 
+	und $ \mathcal{B} = \left[ T_W \right]_{\mathcal{B} ^\prime }  $.
+\end{subtheorem}
+\begin{subproof}[Satz \ref{3.22.2}]
+	\begin{equation}
+		\label{3.22.2.1}
+		\tag{$ * $}
+		T(\alpha_i) = \sum_{j=1}^{n} A_{ji} \alpha_j \quad \text{für $ 1 \leq i \leq n $} 
+	\end{equation}
+	\[
+		A =
+		\left( 
+			\begin{array}{c|c|c|c}
+				B & A_{1, r + 1} & & \\\cline{1-1}
+				  & \vdots & & \\
+				  & A_{r, r + 1} & & \\
+				  & \vdots & & \\
+				  & A_{n, r + 1} & &
+			\end{array}
+		\right) 
+	\]
+	\begin{equation}
+		\label{3.22.2.2}
+		\tag{$ ** $}
+		T(\alpha_i) = \sum_{j=1}^{r} A_{ji} \alpha_j \quad \text{für $ 1 \leq i \leq n $} \sum_{j=r + 1}^{n} A_{ji} \alpha_j \quad \text{für $ 1 \leq i \leq n $} 
+	\end{equation}
+	\textbf{Also ist}
+	\[
+		\overline{T(\alpha_i)} = \sum_{j=r + 1}^{n} A_{ji} \overline{\alpha_j} = \overline{T} \left( \overline{\alpha_j}  \right) 
+	\]
+	für $ r + 1 \leq  i \leq n $\qed
+\end{subproof}
+
+\begin{subcorollary}
+	$ \operatorname{Char Pol} T = \left( \operatorname{Char Pol} T_W \right) \left( \operatorname{Char Pol} \overline{T}  \right)  $
+\end{subcorollary}
 
 

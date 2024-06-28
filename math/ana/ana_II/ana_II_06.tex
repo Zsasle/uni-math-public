@@ -272,4 +272,275 @@ Frage: Auch hinreichend?
 	$ \implies  $ Lokal umkehrbar.
 \end{example}
 
+\begin{corollary}
+	Seien $ U \subseteq \R ^n $ offen und
+	\[
+		f : U \to \R ^n
+	\]
+	eine injektiv, stetig differenzierbar mit $ Df(x) $ invertierbar für alle $ x \in U $.
+	Dann ist $ f(U) $ offen und
+	\[
+		f^{-1} : f(U) \to \R ^n
+	\]
+	stetig differenzierbar.
+\end{corollary}
+\begin{proof*}[Korollar ref{6.8}]
+	Nach Korollar \ref{6.6}: $ f(U) $ offen.
+	Sei nun $ b \in f(U) $ und sei $ a = f^{-1} (b) $.
+	Nach Satz \ref{6.5} existiert eine offene Umgebung $ W \subseteq f(U) $ von b, sodass $ f_{|W} ^{-1}  $ stetig differenzierbar ist.\qed
+\end{proof*}
+
+\begin{example}
+	Sei $ f: \left( 0, \infty \right) \times \left( 0, 2 \pi  \right) \to \R ^2 $ definiert als
+	\[
+		f(r, \varphi) = \left( r \cos \varphi, r \sin \varphi \right) 
+	\]
+	$ f $ ist injektiv und stetig differenzierbar.
+	Es ist
+	\[
+		Df\left( r, \varphi \right) =
+		\begin{pmatrix} 
+			\cos \varphi & - r \sin \varphi \\
+			\sin \varphi &   r \cos \varphi
+		\end{pmatrix} 
+	\]
+	Also $ \det \left( Df\left( r, \varphi \right)  \right) = r \cos ^2 \varphi + r \sin ^2 \varphi = r > 0 $.
+	Also ist $ Df\left( r, \varphi \right)  $ invertierbar und somit $ g = f^{-1}  $ stetig differenzierbar auf $ \R \setminus \left\{ 0 \right\}  $.
+	Für $ (x, y) = f(r, \varphi) $ gilt
+	\[
+		Dg(x, y) = \left( Df(r, \varphi) \right) ^{-1} =
+		\begin{pmatrix} 
+			\cos \varphi & \sin \varphi \\
+			- \frac{ 1 }{ r } \sin \varphi & \frac{ 1 }{ r } \cos \varphi
+		\end{pmatrix} 
+		=
+		\begin{pmatrix} 
+			\frac{ x }{ \left\| (x, y) \right\|  } & \frac{ y }{ \left\| (x, y) \right\|  } \\
+			- \frac{ y }{ \left\| (x, y) \right\| ^2 } & \frac{ x }{ \left\| (x, y) \right\| ^2 } 
+		\end{pmatrix} 
+	\]
+\end{example}
+
+Sei nun $ F : \R ^2 \to \R  $ mit $ F\left( a, b \right) = 0 $.
+Wir suchen für die eindeutige Lösbarkeit der Gleichung
+\[
+	F(x, y) = 0
+\]
+Werte $ y $ in Abhängigkeit von $ x $ in einer Umgebung von $ (a, b) $
+
+\begin{example}
+	Für
+	\[
+		F\left( x, y) \right) = x - y^2.
+	\]
+	Es ist $ F(1, 1) = 0 $ 
+	Definiere
+	\[
+		g : \left( 0, \infty \right) \to \R 
+	\]
+	durch
+	\[
+		g(x) = \sqrt{x} 
+	\]
+	Dann gilt $ f(x, g(x)) = 0 $ in einer Umgebung von $ (1, 1) $
+\end{example}
+
+\begin{definition*}[Notation]
+	Für  
+	\[
+		g : X \to Y
+	\]
+	sei $ \Graph(g) = \left\{ \left( x, g(x) \right) : x \in X \right\}  $ der Graph von $ g $
+\end{definition*}
+
+\begin{note*}
+	Seien $ \left( u, v \right) \in \R ^k \times \R ^m $ und $ W $ Umgebung von $ (u, v) $.
+	Dann existieren Umgebungen $ W_0 $ von $ u $ und $ W_1 $ von $ v $ mit $ W_0 \times W_1 \subseteq W $.
+	\begin{proof*}
+		Für $ x = (x_1, \dotsc, x_k) \in \R ^k $ und $ y = \left( y_1, \dotsc, y_m \right) \in \R ^m $ ist
+		\[
+			\left\| (x, y) \right\| _2^2 = \left\| x \right\| _2^2 + \left\| y \right\| _2^2 \leq \left( \left\| x \right\| _2 + \left\| y \right\| _2 \right) ^2,
+		\]
+		also 
+		\[
+			\left\| (x, y) \right\| _2 \leq \left\| x_2 \right\| + \left\| y \right\| _2
+		\]
+		Wähle also $ \varepsilon > 0 $ mit $ B_{\varepsilon}(\left( u, v \right) ) \subseteq W $.
+		Dann ist
+		\[
+			B_{\frac{ \varepsilon }{ 2 } }(u) \times B_{\frac{ \varepsilon }{ 2 } }(v) \subseteq B_{\varepsilon}((u, v)) \subseteq W.\qed
+		\]
+	\end{proof*}
+\end{note*}
+
+\begin{definition*}[Notation]
+	Seien
+	\[
+		U_1 \subseteq \R ^k \text{ und} 
+	\]
+	\[
+		U_2 \subseteq \R ^m
+	\]
+	offen und 
+	\[
+		F : U_1 \times U_2 \to \R ^m
+	\]
+	differenzierbar.
+	Für $ (a, b) \in U_1 \times U_2 $ setze
+	\[
+		\frac{ \partial F }{ \partial x } (a, b)
+		=
+		\begin{pmatrix} 
+			D_1 F_1(a, b) & \hdots & D_k F_1(a, b) \\
+			\vdots & \ddots & \vdots \\
+			D_1 F_m (a, b) & \hdots & D_k F_m(a, b)
+		\end{pmatrix} 
+		\text{ und} 
+	\]
+	\[
+		\frac{ \partial F }{ \partial y } (a, b)
+		=
+		\begin{pmatrix} 
+			D_{k + 1}  F_1(a, b) & \hdots & D_{k + m}  F_1(a, b) \\
+			\vdots & \ddots & \vdots \\
+			D_{k + 1}  F_m (a, b) & \hdots & D_{k + m}  F_m(a, b)
+		\end{pmatrix} 
+		.
+	\]
+	Es gilt also
+	\[
+		DF(a, b) = 
+		\left( 
+			\begin{array}{c|c}
+				\frac{ \partial F }{ \partial x } (a, b) & \frac{ \partial F }{ \partial y } (a, b)
+			\end{array}
+		\right) 
+	\]
+	Somit ist für $ \left( u, v \right) \in \R ^k \times \R ^m $ 
+	\[
+		DF(a, b) (u, v) = \frac{ \partial F }{ \partial x } (a, b) \cdot u + \frac{ \partial F }{ \partial y } (a, b) \cdot v.
+	\]
+\end{definition*}
+
+\begin{theorem}[Implizite Funktionen]
+	Seien
+	$
+		U_1 \subseteq \R ^k
+	$
+	und
+	$
+		U_2 \subseteq \R ^m
+	$
+	offen und sei
+	\[
+		F : U_1 \times U_2 \to \R ^m
+	\]
+	stetig differenzierbar.
+	Weiter sei
+	$
+		(a, b) \in U_1 \times U_2
+	$
+	mit
+	\[
+		F(a, b) = 0
+	\]
+	und
+	\[
+		\frac{ \partial F }{ \partial y } (a, b)
+	\]
+	sei invertierbar.
+	Dann gibt es offene Umgebungen $ V_1 \subseteq U_1 $ von $ a $ und $ V_2 \subseteq U_2 $ von $ b $, sowie eine stetig differenzierbare Funktion
+	\[
+		g : V_1 \to V_2
+	\]
+	mit
+	\[
+		\Graph(g) = \left\{ (x, y) \in V_1 \times V_2 : F(x, y) = 0 \right\} \quad \left( \text{d.h. } F(x, g(x)) = 0 \right) 
+	\]
+	Weiterhin gilt
+	\[
+		Dg(a) =
+		- \left(
+			\frac{ \partial F }{ \partial y } (a, b)
+		\right)^{-1} 
+		\frac{ \partial F }{ \partial x } (a, b)
+	\]
+\end{theorem}
+\begin{proof*}[Satz \ref{6.11}]
+	Definiere
+	\[
+		H : U_1 \times U_2 \to \R ^{k + m} 
+	\]
+	durch
+	\[
+		H(x, y) = \left( x, F(x, y) \right) .
+	\]
+	$ H $ ist stetig differenzierbar und es gilt
+	\[
+		DH(a, b) =
+		\begin{pmatrix} 
+			E_k & 0 \\
+			\frac{ \partial F }{ \partial x  } (a, b) & \frac{ \partial F }{ \partial y } (a, b)
+		\end{pmatrix} .
+	\]
+	Es ist
+	\[
+		\det \left( DH(a, b) \right) = \underbrace{\det \left( \frac{\partial F}{ \partial y } (a, b) \right) }_{\neq 0 \text{ nach Annahme} } \cdot  \det(E_k) \neq 0
+	\]
+	Also ist $ DH(a, b) $ invertierbar $ \implies  $ Lokaler Umkehrsatz:
+	\begin{itemize}
+		\item Es gibt eine offene Umgebung $ V \subseteq  U_1 \times  U_2 $ von $ (a, b) $ und $ W \subseteq \R ^{k + m}  $ von $ H(a, b) $ derart, dass $ h \coloneqq H_{|V}  $ eine Bijektion von $ V $ nach $ W $ ist, für die $ h^{-1}  $ stetig differenzierbar ist.
+	\end{itemize}
+	Sei 
+	\[
+		h^{*} : W \to \R ^m
+	\]
+	die Funktion, die
+	\[
+	h^{-1}(u, v) = \left( u, h^{*} (u, v) \right)
+	\]
+	für alle $ (u, v) \in W $ erfüllt.
+	Dann
+	\begin{equation}
+		\label{eq:6.11.1}
+		\tag{$ * $}
+		\forall (x, y) \in V : \left( F(x, y) = 0 \iff H(x, y) = (x, 0) \iff y = h^{*} (x, 0) \right) 
+	\end{equation}
+	Nach Bemerkung existieren offene Umgebungen $ W_1 $ von $ a $ und $ V_2 $ von $ b $ mit $ W_1 \times V_2 \subseteq V $.
+	Nun ist $ h^{*} (a, 0) = b $ und $ x \mapsto h^{*} (x, 0) $ ist stetig.
+	Also existiert eine offene Umgebung $ V_1 \subseteq W_1 $ von $ a $ mit $ h^{*} (x, 0) \in V_2 $ für alle $ x \in V_1 $.
+	Definiere
+	\[
+		g : V_1 \to V_2 \quad \text{durch} \quad g(x) = h^{*} (x, 0).
+	\]
+	$ h^{-1}  $ ist stetig differenzierbar, also ist es auch $ g $ und es gilt
+	\[
+		\Graph(g) = \left\{ (x, y) \in V_1 \times V_2 : F(x, y) = 0 \right\} ,
+	\]
+	denn
+	\begin{description}
+		\item[``$ \subseteq  $''] 
+			Sei $ x \in V_1 $.
+			Dann ist $ (x, g(x)) \in V_1 \times V_2 $ und $ g(x) = h^{*} (x, 0) $, also
+			\[
+				F(x, g(x)) = 0
+			\]
+			nach \eqref{eq:6.11.1}.
+		\item[``$ \subseteq $'']
+			Sei $ (x, y) \in V_1 \times V_2 $ mit $ F(x, y) = 0 $.
+			Dann $ (x, y) \in V $, nach \eqref{eq:6.11.1} $ y = g(x) $
+	\end{description}
+	Nun zum Zusatz:
+	Es ist $ F(a, g(x)) = 0 $, da $ g(a) = b $.
+	Also gilt für $ g(x) = F(x, g(x)) $, dass
+	\[
+		0 = Dg(a) = DF(a, b) \begin{pmatrix} E_k \\ Dg(a) \end{pmatrix} = \frac{ \partial F }{ \partial x } (a, b) + \frac{ \partial F }{ \partial y } (a, b) Dg(a)
+	\]
+	und daher
+	\[
+		Dg(a) = - \left( \frac{ \partial F }{ \partial y } (a, b) \right) ^{-1}  \frac{ \partial F }{ \partial x } (a, b) \qed
+	\]
+	
+\end{proof*}
+
 
