@@ -838,4 +838,180 @@ Sei $ V $ endlich dimensional $ K $-VR
 	$ \operatorname{Char Pol} T = \left( \operatorname{Char Pol} T_W \right) \left( \operatorname{Char Pol} \overline{T}  \right)  $
 \end{subcorollary}
 
+Ziel ist es Korollar \ref{3.22.6} zu beweisen\\
+Hintergrund: in Satz \ref{3.20.3} hatten wir bewiesen $ V $ end. dim. VR, $ T \in \mathcal{L} (V, V) $.\\
+$ T $ ist \textbf{trigonalisierbar} genau dann, wenn \textbf{$ \operatorname{Char Pol} T $} im Produkt von linearen Faktoren über $ K $ zerfällt.
+{
+	\color{gadse-red} Kor. \ref{3.22.6} gibt uns dieselbe Charakterisierung mithilfe von
+	\[
+		\operatorname{Min Pol} T
+	\]
+	anstatt
+	\[
+		\operatorname{Char Pol} T
+	\]
+}
+
+\setcounter{subenvironmentnumber}{5}
+\begin{subcorollary}
+	Sei $ K $ Körper, $ T \in \mathcal{L} (V, V) $, $ V $ endlich dimensionaler Vektorraum.
+	Dann ist $ T $ trigonalisierbar genau dann, wenn $ \operatorname{Min Pol} T $ im Produkt von linearen Faktoren über $ K $ zerfällt.
+\end{subcorollary}
+
+\begin{subproposition*}
+	Sei $ K $ Körper, $ V $ endl. $ K $-VR, $ T \in \mathcal{L} (V, V) $\\
+	\textbf{Es gilt:} $ \operatorname{Char Pol} T $ zerfällt im Produkt von linearen Faktoren über $ K $ genau dann, wenn $ \operatorname{Min Pol} T $ zerfällt im Produkt von linearen Faktoren über $ K $.
+\end{subproposition*}
+
+Für den Beweis der Proposition brauchen wir ein Konzept und Aussage, die wir erst in der Vorlesung Algebra I im Wintersemester 2024 beweisen werden.
+
+\begin{subdefinition}
+	Sei $ K $ ein Körper und $ p \in K[x] $, $ \deg p = n $, $ n \in \N  $.
+	Eine Körpererweiterung
+	\[
+		Z | K
+	\]
+	ist ein \textbf{Zerfällungskörper für $ p $}, wenn $ p(x) $ zerfällt im Produkt von linearen Faktoren über $ Z $.
+	Das heißt $ \exists l_i \in \N  $, $ c_i \in \Z  $ und $ l \in \N  $ so, dass
+	\begin{equation}
+		\label{eq:Faktorisierung}
+		\tag{$ * $}
+		p(x) = \prod_{i = 1}^{l} (x - c_i)^{l_i}  
+	\end{equation}
+	
+	Das heißt, $ c_1, \dotsc, c_l $ sind Nullstellen von $ p $ und
+	\[
+		\sum_{i=1}^{l} l_i = n
+	\]
+\end{subdefinition}
+
+\begin{subtheorem*}
+	Sei $ K $ ein Körper, $ p \in K[x], \deg p \in \N  $.
+	Dann gibt es ein Zerfällungskörper $ Z | K $ für $ p $.
+	\begin{subproof*}
+		VL Algebra I
+	\end{subproof*}
+\end{subtheorem*}
+
+\begin{subproof*}[Proposition]
+	Sei $ Z | K $ ein Zerfällungskörper von
+	\[
+		\operatorname{Char Pol}_K T.
+	\]
+	Dann sind die NS von $ \operatorname{Char Pol}_Z T $ die $ c_1, \dotsc, c_l $ wie in der Faktorisierung \eqref{eq:Faktorisierung}.
+	Wir haben aber bewiesen, dass $ \MinPol_Z T $ und $ \CharPol_Z T $ dieselbe Nullstelle in $ Z $ haben.
+	Insbesondere ist $ Z $ auch ein Zerfällungskörper für $ \MinPol_Z T $.
+	Das heißt wiederum, das $ \MinPol_Z T $ im Produkt von linearen Faktoren und umgekehrt zerfällt:
+	wenn $ \MinPol_Z T $ in Produkt von linearen Faktoren in $ Z $ zerfällt, dann ist $ Z $ Zerfällungskörper für $ \CharPol_Z T $, also zerfällt $ \CharPol_Z T $ in Produkt von linearen Faktoren wie in \eqref{eq:Faktorisierung}.\\
+	Aber
+	\begin{align*}
+		\CharPol_Z T &= \CharPol_K T \\
+		\MinPol_Z T &= \MinPol_K T \\
+	\end{align*}
+\end{subproof*}
+
+\begin{subcorollary}[Charakterisierung von Trigonalisierbarkeit]
+	Sei $ K $ ein Körper, $ V $ ednl dim. $ K $-VR, und $ T \in \mathcal{L} (V, V) $.
+	Es gilt:
+	$ T $ ist trigonalisierbar über $ K $ genau dann, wenn $ \CharPol T $ zerfällt über $ K $ genau dann wenn $ \MinPol T $ zerfällt über $ K $
+\end{subcorollary}
+
+\subsection{Skript 23}
+\setcounter{subsubsection}{12}
+\subsubsection{Direkte Summe und Primzerlegung}
+\begin{sublemma}
+	Sei $ V $ $ K $-VR, $ W_1, \dotsc, W_k $ Unterräume von $ V $.
+	Die folgende Aussagen sind äquivalent.
+	\begin{enumerate}[label=(\roman*)]
+		\item $ W_1, \dotsc, W_k $ sind unabhängig, d.h. sei $ \alpha_i \in W_i $ für $ 1 \leq i \leq k $ so, dass
+			\[
+				\sum_{i=1}^{k} \alpha_i = 0,
+			\]
+			dann ist $ \alpha_i = 0 $ $ \forall i = 1, \dotsc, k $.
+		\item 
+			\[
+				W_j \cap \left( W_1, \dotsc, W_j \right) = \left\{ 0 \right\} \text{ für }  2 \leq j \leq k
+			\]
+		\item Ist $ \mathcal{B} _i $ eine Basis für $ W_i $, dann ist
+			\[
+				\mathcal{B} = \bigcup_{i = 1} ^{k} \mathcal{B} _I
+			\]
+			eine Basis für $ W_1 + \dotsb + W_k $\qed
+	\end{enumerate}
+\end{sublemma}
+
+\begin{subdefinition*}[Notation und Terminologie]
+	Wir schreiben $ V = W_1 + \dotsb + W_k $, wenn $ V $, die \textbf{Summe} von Unterräumen $ W_i $ ist, und wir schreiben
+	\[
+		V = W_1 \oplus \dotsb \oplus W_k
+	\]
+	wenn die Unterräume $ W_1, \dotsc, W_k $ die Bedingungen von Lemma \ref{3.23.1} erfüllen und sagen $ V $ ist die \textbf{direkte Summe}.
+\end{subdefinition*}
+T
+\begin{subtheorem}[Primzerlegung von $ V $ bezüglich Primfaktorisierung $ \MinPol $ T]
+	Sei $ V $ endl dim über $ K $, $ T \in \mathcal{L} (V, V) $.
+	Setze $ \MinPol T = p = p_1^{r_1} \dotsb p_k^{r_k}  $ die Primfaktorisierung in $ K[x] $ 
+	(wobei $ p_i $ verschiedene normierte irreduzible Polynome in $ K[x] $ sind und $ r_i \in \N  $)
+	Setze $ W_i = \Kern p_i (T) ^{r_i}  $ für $ 1 \leq i \leq k $.
+	Dann sind $ W_i $, für $ 1 \leq i \leq k $, $ T $-invariante Unterräume, und darüber hinaus gelten
+	\begin{enumerate}[label=(\roman*)]
+		\item $ V = W_1 \oplus \dotsb \oplus W_k $ 
+		\item $ \MinPol T_{W_i} = p_i^{r_i}  $ für $ 1 \leq i \leq k $.
+	\end{enumerate}
+\end{subtheorem}
+
+\begin{subproposition}
+	Sei $ V $ endl dim $ K $-VR $ T \in \mathcal{L} (V, V) $.
+	$ \MinPol T = m = m_1 m_2 $ mit $ \ggT(m_1, m_2) = 1 $
+	Setze $ V_1 = \Kern m_i (T) $ für $ i = 1, 2 $.
+	Es gelten: $ V_1, V_2 $ sind $ T $-invariant und $ V = V_1 \oplus V_2 $ und $ \MinPol T_{V_i} = m_i $ für $ i = 1, 2 $
+\end{subproposition}
+\begin{subproof*}[Proposition \ref{3.23.3}]
+	Da $ m_1, m_2 $ relativprim sind $ \exists q_1, \dotsc, q_2 \in K[x] $ so, dass 
+	\[
+		1 = m_1 q_1 + m_2 q_2
+	\]
+	oder
+	\begin{equation}
+		\label{eq:3.23.3.1}
+		\tag{$ * $}
+		I = m_1(T) q_1(T) + m_2(T) q_2(T)
+	\end{equation}
+	\textbf{Beh 1:} $ V_1 = I_m  m_2(T) $ und $ V_2 = I_m m_1(T) $\\
+	\textbf{Bew.:} $ 0 = m(T) = m_1(T) m_2(T) $, also $ I_m m_2(T) \subseteq \Kern m_1(T) $ 
+	umgekehrt $ v \in \Kern m_1(T) $, gilt wegen \eqref{eq:3.23.3.1}
+	\[
+		v = \underbrace{q_1(T) m_1(T)(v)}_{= 0} + \underbrace{m_2(T) \left( q_2(t) \right) (v)}_{\in I_m m_2(v)}
+	\]
+	\textbf{Beh. 2} $ V = V_1 \oplus V_2 $\\
+	\textbf{Bew.:}
+	\begin{enumerate}[label=(\arabic*)]
+		\item Summe:\\
+			Sei $ v \in V $, wegen \eqref{eq:3.23.3.1} schreibe
+			\[
+				v = \underbrace{m_1(T) q_1(T)(v)}_{\in I_m m_1} + \underbrace{m_2(T)q_2(T)(v)}_{\in I_m m_2(T)} 
+			\]
+		\item direkt:\\
+			Sei $ v \in V_1 \cap V_2 $, wegen \eqref{eq:3.23.3.1} gilt $ v = \underbrace{q_1(T) m_1(T)(v)}_{ = 0}  + \underbrace{q_2(T) m_2(T)(v)}_{= 0}  $.
+			Sei nun \ldots
+	\end{enumerate}
+	Da $ V_i = \Kern m_i(T) $ für $ i = 1, 2 $ ist es klar, dass $ m_i\left( T_{V_i}  \right) = 0 $, d.h.
+	\begin{equation}
+		\label{eq:3.23.3.2}
+		\tag{$ * * $}
+		\tilde m_1 | m_1 \text{ und } 
+		\tilde m_2 | m_2
+	\end{equation}
+	\textbf{Beh. 3:} $ \tilde m_1 \tilde m_2 $ annihiliert $ T $
+	\textbf{Bew.:} Seien $ v_1 \in V_1 $ und $ v_2 \in V_2 $, $ v = v_1 + v_2 \in V $, rechne
+	\begin{align*}
+		\tilde m_1(T) \tilde m_2 (T) (v_1 + v_2 &= 
+		\tilde m_1(T) \left[ \tilde m_2 (T) (v_2) + \tilde m_2 (T) (v_1) \right]\\
+		~ &= \tilde m_1(T) \left[ 0 + \underbrace{\tilde m_2 (T) (v_1)}_{\in V_1 \text{ weil Bsp \ref{3.20.2} (4)} } \right]\\
+		~ &= 0
+	\end{align*}
+	Da $ \tilde m_2 \tilde m_1 $ annihiliert $ T $ $ \implies m_1m_2 | \tilde m_1 \tilde m_2 $.
+	Aber $ m_1, m_2 $ sind normiert folgt nun aus \eqref{eq:3.23.3.2}, dass $ \tilde m_1 = m_1 $ und $ \tilde m_2 = m_2 $\qed
+\end{subproof*}
+
 

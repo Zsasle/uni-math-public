@@ -268,6 +268,9 @@
 \DeclareMathOperator{\Graph}	{Gr}
 \DeclareMathOperator{\sgn}	{sgn}
 
+\DeclareMathOperator{\MinPol}	{Min Pol}
+\DeclareMathOperator{\CharPol}	{Char Pol}
+
 \DeclareMathOperator{\grad}	{grad}
 %\DeclareMathOperator{\deg}{deg}
 \DeclareMathOperator{\support}	{support}

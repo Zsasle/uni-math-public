@@ -540,6 +540,124 @@ Werte $ y $ in Abhängigkeit von $ x $ in einer Umgebung von $ (a, b) $
 	\[
 		Dg(a) = - \left( \frac{ \partial F }{ \partial y } (a, b) \right) ^{-1}  \frac{ \partial F }{ \partial x } (a, b) \qed
 	\]
+\end{proof*}
+
+\begin{itemize}
+	\item \textbf{Satz üver die implizite Funktion.}
+		\textbf{Frage:} Können wir $ f^{-1} \left( \left\{ 0 \right\}  \right) = \left\{ x : f\left( x \right) = 0 \right\}  $ lokal als Graph schreiben.
+		D.h., gegeben $ x_0 \in f^{-1} \left( \left\{ 0 \right\}  \right) , \exists U $ offen, $ x_0 \in U $, $ V \subset \R ^{n - 1}  $ offen, $ g : V \to \R : U \cap f^{-1} \left( \left\{ 0 \right\}  \right) = \left\{ \left( x^\prime , g(x^\prime ) \right) : x^\prime \in V \right\}  $ 
+		\[
+			f: (x, y) = x^2 + y^2 - 1, x_0 = \left( 0, -1 \right) .
+		\]
+		Dann ist $ f^{-1} \left( \left\{ 0 \right\}  \right) \cap U $ realisierbar als $ \left\{ \left( x, g(x) \right) : x \in \left( -\alpha, \alpha \right)  \right\}  $, $ g\left( x^\prime  \right) = - \sqrt{1 - \left| x^\prime  \right| ^2}  $
+	\item $ \Omega_1 \subset \R ^k, \Omega_2 \subseteq \R ^m $ offen, $ F: \Omega_1 \times \Omega_2 \to \R ^m, F = \left( F_1, \dotsc, F^m \right)  $ stetig differenzierbar.
+		Für $ (a, b) \in \Omega_1 \times \Omega_2 $ setze
+		\[
+			\frac{ \partial F }{ \partial x } (a, b) =
+			\begin{pmatrix} 
+				\partial_1 F_1(a, b) & \hdots & \partial_k F_1(a, b) \\
+				\vdots & \ddots & \vdots \\
+				\partial_1 F_m(a, b) & \hdots & \partial_k F_m(a, b)
+			\end{pmatrix}, 
+			\frac{ \partial F }{ \partial y } (a, b) =
+			\begin{pmatrix} 
+				\partial_{k + 1}  F_1(a, b) & \hdots & \partial_{k + m}  F_1(a, b) \\
+				\vdots & \ddots & \vdots \\
+				\partial_{k + 1}  F_m(a, b) & \hdots & \partial_{k + m}  F_m(a, b)
+			\end{pmatrix}, 
+		\]
+		Dann
+		\[
+			DF(a, b) = \left( \frac{\partial F}{ \partial x } \left( a, b \right) , \frac{ \partial F }{ \partial y } (a, b)  \right) 
+		\]
+		$ \rightsquigarrow F(a, b) = 0 \& \frac{ \partial F }{ \partial y } (a, b) $ invertierbar.
+		Dann $ \exists V_1 \subset \Omega_1, V_2 \subset \Omega_2 $ offene Umgegungen von $ a $ bzw. $ b $, $ g : V_1 \to V_2 $ stetig differenzierbar mit
+		\[ 
+			\Graph(g) \coloneqq \left\{ (x, y) \in V_1 \times V_2 : F(x, y) = 0 \right\}
+		\]
+		\[
+			\& Dg(a) = - \left( \frac{\partial F }{ \partial y }  \right) ^{-1} \frac{ \partial F }{ \partial x } (a, b)
+		\]
+\end{itemize}
+
+\begin{example}
+	\[
+		F(x, y) \coloneqq x^2 + y^2 - 1, m = 1, k = 1
+	\]
+	\[
+		F : \underbrace{\R }_{k = 1}\times \underbrace{\R }_{m = 1}\to \underbrace{\R }_{m = 1}
+	\]
+	\begin{itemize}
+		\item $ x_0 = \left( 0, -1 \right)  $ 
+			\[
+				\frac{ \partial F }{ \partial x } = 2x,
+				\frac{ \partial F }{ \partial y } = 2y,
+			\]
+			dann $ \frac{ \partial F }{ \partial y } (0, -1) = -2 \neq 0 \implies  $ \textbf{inv.}, also in Einklang mit Parametrisierung $ g(x) = - \sqrt{1 - \left| x \right| ^2}  $.
+		\item 
+			Bei $ x_0 = \left( -1, 0 \right)  $ wegen $ \frac{ \partial F }{ \partial y } (-1, 0) = 0 $ nicht erwartbar.
+	\end{itemize}
+\end{example}
+
+\begin{example}
+	\[
+		F(x_1, \dotsc, x_8) = x_1^2 + \dotsb + x_4^2 - x_5^2 - \dotsb - x_8^2.
+	\]
+	Wir nennen $ F^{-1} \left( \left\{ 0 \right\}  \right) \eqcolon \mathcal{K}  $ den \textbf{Simonskegel}:
+	$ x \in \mathcal{K} \implies \lambda x \in \mathcal{K}  $.
+\end{example}
+
+\subsection*{Extrema unter Nebenbedingungen}
+\[
+	f : \Omega \to \R \text{ (Wärmeverteilung)} 
+\]
+{
+	\color{gadse-dark-blue}
+	\[
+		\gamma : [0, 1] \to \Omega \text{ (Lokation der Krösen)} 
+	\]
+}
+\textbf{Ziel:} Maximiere $ f \circ \gamma : [0, 1] \to \R  $\\
+Das ist fast trivial, Grund: $ \gamma \hat{=}  $ Parametrisierung wird als bekannt vorausgesetzt.
+Allgemein ist eine solche nicht bekannt.
+
+\begin{theorem}[Lagrange-Multiplikatoren]
+	Sei $ \Omega \subset \R ^n $ offen, $ f : \Omega \to \R  $ stetig differenzierbar \& setze $ \mathcal{M}  \coloneqq \left\{ x \in \Omega : f(x) = 0 \right\}  $.
+	Sei $ a \in \mathcal{M}  $ mit $ D f(a) \neq 0 $, \& sei $ h : \Omega \to \R  $ stetig differenzierbar so, dass $ h $ in $ a $ ein lokales Extremum unter $ f = 0 $ besitzt:
+	D.h., $ \exists U \subset \Omega $ offen, $ a \in U : \forall x \in U \cap \mathcal{M} : \underbrace{h(x) \leq h(a)}_{\text{lok. Max} } $ bzw. $ \underbrace{h(a) \leq  h(x)}_{\text{lok. Min.} } $.
+	Dann $ \exists \lambda \in  \R : $ 
+	\fbox{$ Dh(a) = \lambda D f(a). $} Ein solches $ \lambda $ heißt \textbf{Lagrangemultiplikator}.
+	\begin{itemize}
+		\item Sagt nur, was in kritischen Punkten gelten muss!
+	\end{itemize}
+\end{theorem}
+\begin{proof*}[Theorem \ref{6.14} Lagrange-Multiplikatoren]
+	\OE{} $ \partial_n f(a) \neq 0 $, $ n \geq 2 $.
+	\[
+		a \coloneqq \left( a_1, \dotsc, a_n \right) , c \coloneqq \left( a_1, \dotsc, a_{n - 1}  \right) .
+	\]
+	Nach impliziter Funktionen $ \exists V $ offene Umgebung von $ c $, $ W $ offenen Umgebung von $ a_n : V \times W \subset \Omega $, $ g : V \to W $ stetig differenzierbar mit $ \Graph(g) = \mathcal{M} \cap \left( V \times W \right)  $.
+	Weiter:
+	\begin{equation}
+		\label{eq:6.14.1}
+		\tag{$ * $}
+		\forall i \in \left\{ 1, \dotsc, n - 1 \right\} : \partial_i g(c) = - \frac{ \partial_i f(a) }{ \partial_n f(a) }.
+	\end{equation}
+	Sei $ h^*(x) \coloneqq h(x, g(x)) $.
+	Nun: $ h^* $ hat Extremum (lokal) in $ c $, also
+	\[
+		\forall i \in \left\{ 1, \dotsc, n - 1 \right\} : 0 = \partial_i h^*(c) = ( ( Dh ) ( c, \underbrace{g(c)}_{= a_n} )  ) \cdot \begin{pmatrix} e_i \\ \partial_i g(c) \end{pmatrix} = \left( \partial_i h \right) (a) + \left( \partial_n h \right) (a) \left( \partial_i g \right) (c).
+	\]
+	\textbf{Setze:}
+	\[
+		\lambda \coloneqq \frac{ \partial_n h(a) }{ \partial_n f(a) } ,
+	\]
+	\[
+		( \partial_i h(a)) = - (\partial_n h)(a) (\partial_i g) (c) + \eqref{eq:6.14.1}
+	\]
+	\[
+		(\partial_n h) (a) = \lambda (\partial_n f) (a) \qed
+	\]
 	
 \end{proof*}
 
