@@ -1,0 +1,412 @@
+\section{Euklidische und Unitäre Räume}
+\setcounter{subsection}{24}
+\subsection{Skript 25}
+\setcounter{subsubsection}{14}
+\subsubsection{Innere Produkte:}
+\setcounter{subenvironmentnumber}{-1}
+\begin{subdefinition}
+	Eine \textbf{inneres Produkt} (auch \textbf{Skalar}produkt) auf $ V $ ist eine Abbildung
+	\[
+		V \times V \to K, (x, y) \mapsto (x | y)
+	\]
+	so, dass
+	\begin{enumerate}[label=(\arabic*)]
+		\item $ (x|y) = \overline{(y|y)}  $ {\color{gadse-orange} $ \leftarrow $ Da $ (x|x) = \overline{(x|x)}  $, also $ (x|x) \in \R  $.}
+		\item $ (c_1x_1 + c_2x_2|y) = c_1(x_1|y) + c_2(x_2|y) $ 
+		\item $ (x|x) \geq 0 $ und $ (x|x) = 0 \iff x = 0 $
+	\end{enumerate}
+\end{subdefinition}
+
+\begin{subnote}[Bemerkung]
+	Wir folgern: $ (x|c_1y_1 + c_2y_2) = \overline{(c_1y_1 + c_2y_2| x)} = \overline{c_1(y_1|x) + c_2(y_2|x)} = \overline{c_1} \overline{(y_1|x)} + \overline{c_2} \overline{(y_2|y)} = \overline{c_1} (x|y_1) + \overline{c_2} (x|y_2) $.
+\end{subnote}
+
+Wir setzen $ (x|x) = \left\| x \right\| ^2 $ und $ \left\| x \right\| \coloneqq \sqrt{(x|x)}  $ nennen wir die \textbf{Norm von $ x $}.
+
+\begin{subnote}[Bemerkung]
+	Es gilt $ \left\| cx \right\| = \left| c \right| \left\| x \right\|  $.\qed
+\end{subnote}
+
+\begin{subdefinition*}[Terminologie]
+	\begin{itemize}
+		\item $ K = \R , \left( V, ( \cdot | \cdot ) \right)  $ ist \textbf{euklidischer Raum} und $ ( \cdot | \cdot ) $ heißt \textbf{symmetrisch} \textbf{bilineare} \textbf{positiv definite} Form.
+		\item $ K = \C, \left( V, ( \cdot | \cdot ) \right)  $ heißt \textbf{hermitescher} oder \textbf{unitärer} Raum und $ ( \cdot | \cdot ) $ ist \textbf{hermitesch} \textbf{symmetrisch}, oder \textbf{konjugiert bilieare} \textbf{positiv definite} Form
+	\end{itemize}
+\end{subdefinition*}
+
+\begin{subexample}
+	Auf $ V = K^n $ so definiert: \textbf{standard Skalarprodukt}
+	\[
+		(x|y) = \sum_{i=1}^{n} \varepsilon _i \overline{\eta_i} 
+	\]
+	wobei $ x = \left( \varepsilon _1, \dotsc, \varepsilon _n \right) \in V, y = (\eta_1, \dotsc, \eta_n) \in V $.
+\end{subexample}
+
+\begin{subdefinition}
+	Ansatz $ \left( V, ( \cdot | \cdot ) \right)  $ 
+	\begin{enumerate}[label=(\roman*)]
+		\item $ x, y \in V $ sind \textbf{orthogonal} falls $ (x|y) = 0 $ (oder $ (y|x) = 0 $)
+		\item $ W_1, W_2 \subseteq V $ Unterräume von $ V $\\
+			$ W_1, W_2 $ sind \textbf{orthogonal} wenn $ (x|y) = 0 $ $ \forall x \in W_1 $ und $ y \in W_2 $ 
+		\item $ S \subseteq V $ ist \textbf{orthonormal} falls $ (x|y) = 0 $ für $ x \neq y $ und $ (x|y) = 1 $ für $ x = y \neq 0 $.
+			Also $ S = \left\{ x_1, \dotsc, x_n \right\}  $ ist orthonormal falls $ (x_i|x_j) = \delta_{ij} $ $ \forall i, j = 1, \dotsc, n $
+	\end{enumerate}
+\end{subdefinition}
+
+\begin{subnote}
+	\begin{enumerate}[label=(\roman*)]
+		\item $ S  $ ist orthonormal $ \implies  $ $ S $ ist linear unabhängig
+			\begin{subproof*}
+				Sei
+				\[
+					\sum c_i x_i = 0 \implies 0 = \left( \sum c_ix_i|x_j \right) = \sum c_i (x_i|x_j) = c_j \quad \forall j
+				\]
+				
+			\end{subproof*}
+		\item $ \dim V = n \implies  \left| S \right| \leq n $ wenn $ S $ orthonormal
+	\end{enumerate}
+\end{subnote}
+
+\begin{subnote}
+	orthogonale $ \dim V \coloneqq \max \left\{ \left| S \right| ; S \text{orthonormal}  \right\}  $
+\end{subnote}
+
+\begin{subnote}
+	orthonormale $ \dim V \leq \dim V $
+\end{subnote}
+
+\begin{subdefinition*}[Notation]
+	Für $ S \subseteq V $ setze $ S^{\perp} \coloneqq \left\{ x \in V | (x|s) = 0 \right\} \forall s \in S $
+\end{subdefinition*}
+
+\begin{subnote}
+	\begin{enumerate}[label=(\roman*)]
+		\item $ S^{\perp}  $ ist ein Unterraum
+		\item $ S \subseteq \left( S^{\perp}  \right) ^{\perp} = S^{\perp\perp}  $ 
+		\item $ \Span  (S) \subseteq S^{\bot\bot} $
+	\end{enumerate}
+\end{subnote}
+\begin{subproof*}[Bemerkung \ref{4.25.8}]
+	Wir beweisen
+	\begin{enumerate}[label=(\roman*)]
+		\item $ 0 = (0|y) \implies \left\{ 0 \right\} \subseteq S^{\perp}  $
+			Für $ x_1, x_2 \in S^{\perp} , c \in K : \left( x_1 + cx_2 | s \right) = (x_1|s) + c(x_2|s) = 0 $ $ \forall s \in S $
+	\end{enumerate}
+	(ii) und (iii) folgen aus (i) \qed
+\end{subproof*}
+
+\begin{subdefinition}
+	Sei $ W \subseteq V $ ein Unterraum, $ W^{\perp}  $ heißt das \textbf{orthogonale Kompement von $ W $ in $ V $}
+\end{subdefinition}
+
+\begin{subtheorem}[Bessel's Ungleichung]
+	Sei $ S = \left\{ x_1, \dotsc, x_n \right\}  $ orthonormal, $ x \in V $.
+	Setze $ c_i \coloneqq (x|x_i) $ für $ i = 1, \dotsc, n $.
+	Es gelten:
+	\begin{enumerate}[label=(\roman*)]
+		\item 
+			\[
+				\sum_{i}^{} \left| c_i \right| ^2 \leq \left\| x \right\| ^2
+			\]
+		\item 
+			\[
+				x^\prime \coloneqq x - \sum_{i}^{} c_i x_i
+			\]
+			ist orthogonal zu $ x_j $ $ \forall j = 1, \dotsc, n $
+	\end{enumerate}
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{4.25.10} Bessel's Ungleichung]
+	\begin{enumerate}[label=(\roman*)]
+		\item Wir berechnen
+			\begin{align*}
+				0 \leq (x^\prime | x^\prime ) &= (x - \sum c_i x_i | x - \sum c_i x_i) \\
+				~ &= (x | x) - \sum_i c_i (x_i|x) - \sum_i \overline{c_i} (x|x_i) + \sum_{ij} c_i \overline{c_j} (x_i|x_j)  \\
+				~ &= \left\| x \right\| - \sum_i c_i \overline{c_i} - \sum_i \overline{c_i} c_i + \sum_i c_i \overline{c_i}  \\
+				~ &= \left\| x \right\| - \sum_i \left| c_i \right| ^2 \\
+			\end{align*}
+			damit ist die (i) bewiesen
+		\item 
+			\[
+				(x^\prime | x_j) = (x | x_j) - \sum_i c_i(x_i|x_j) = c_j - c_i = 0 \qed
+			\]
+			
+	\end{enumerate}
+	
+\end{subproof*}
+
+\subsection{Skript 26}
+\begin{subtheorem}[Ungleichung von Schwarz]
+	Für alle $ x, y \in V $ gilt:
+	\[
+		\left| (x|y) \right| \leq \left\| x \right\| \left\| y \right\| .
+	\]
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{4.26.1} Ungleichung von Schwarz]
+	wenn $ y = 0 $ passt.\\
+	Sei $ y \neq 0 $ setze
+	\[
+		y_1 \coloneqq \frac{ y }{ \left\| y \right\|  }
+	\]
+	so, dass $ \left| y_1 \right|  $ ist orthonormal.
+	Bessel $ \implies \left| (x|y_1) \right| \leq \left\| x \right\| ^2 $, d.h.
+	\[
+		\frac{ 1 }{ \left\| y \right\|  } \left| (x |y) \right| ^2 \leq \left\| x \right\| ^2 \implies \left| (x|y) \right| ^2 \leq \left\| x \right\| ^2 \left\| y^2 \right\| 
+	\]
+\end{subproof*}
+
+\begin{subdefinition}
+	\[
+		\delta(x, y) = \left\| x - y \right\| 
+	\]
+	ist \textbf{Distanz} zwischen $ x $ und $ y $.
+\end{subdefinition}
+
+\begin{subproposition}
+	$ \forall x, y, z \in V $ 
+	\begin{enumerate}[label=(\roman*)]
+		\item $ \delta(x, y) = \delta(y, x) $ 
+		\item $ \delta(x, y) \geq 0 $, $ \delta(x, y) = 0 \iff x = y $ 
+		\item $ \delta(x, y) \leq \delta(x, z) + \delta(z, y) $
+	\end{enumerate}
+\end{subproposition}
+\begin{subproof*}[Proposition \ref{4.26.3}]
+	\begin{description}
+		\item[(iii)] 
+			\begin{align*}
+				\left\| x + y \right\| ^2 &= ( x + y | x + y ) \\
+				~ &= \left\| x \right\| ^2 + (x | y) + (y | x) + \left\| y \right\| ^2 \\
+				~ &= \left\| x \right\| ^2 + 2 \Real (x |y) + \left\| y \right\| ^2 \\
+				~ &\leq \left\| x \right\| ^2 + 2 \left| (x | y) \right|  + \left\| y \right\| ^2 \\
+				~ &\leq \left\| x \right\| ^2 + 2 \left\| x \right\| \left\| y \right\| + \left\| y \right\| ^2 \\
+				~ &= \left( \left\| x \right\| + \left\| y \right\|  \right) ^2 \qed
+			\end{align*}
+	\end{description}
+\end{subproof*}
+
+\begin{subtheorem}[Gram-Schmidt Verfahren]
+	Sei $ (V, ( \cdot | \cdot )) $ inneres Produkt $ \dim V = n $.
+	Dann hat $ V $ eine orthonormale Basis.
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{4.26.4} Gram-Schmidt Verfahren]
+	Sei $ \mathcal{X}  = \left\{ x_1, \dotsc, x_n \right\} $ eine Basis für $ V $.
+	Wir werden eine orthonormale Basis
+	\[
+		\mathcal{J} = \left\{ y_1, \dotsc, y_n \right\} 
+	\]
+	per Induktion aufbauen
+	\begin{description}
+		\item[I.A.:] $ x_1 \neq 0 $. Setze $ y_1 \coloneqq \frac{ x_1 }{ \left\| x_1 \right\|  }  $ 
+		\item[I.Annahme:] Seien $ y_1, \dotsc, y_r $ schon definiert so, dass $ \left\{ y_1, \dotsc, y_r \right\}  $ orthonormal und $ y_j \in \Span \left\{ x_1, \dotsc, x_j \right\} \forall j = 1, \dotsc, r $.
+		\item[I.S.:]
+			Setze
+			\[
+				c_j \coloneqq (x_{r + 1} | y_j) \forall j = 1, \dotsc, r
+			\]
+			Betrachte $ z \coloneqq x_{r + 1} - \sum_{i}^{r} c_i y_i $ 
+			Berechne
+			\[
+				(z|y_j) = (x_{r + 1} | y_j) - c_j = c_j - c_j = 0 \quad \forall j = 1, \dotsc, r
+			\]
+			\[
+				z \in \Span \left\{ x_{r + 1}, y_1, \dotsc, y_r \right\} 
+			\]
+			
+			Setze $ y_{r + 1} \coloneqq \frac{ z }{ \left\| z \right\|  }  $.\\
+			\textbf{Bew.:} $ \left\{ y_1, \dotsc, y_{r + 1}  \right\}  $ orthonormal, l.u., $ \Span \left\{ x_1, \dotsc, x_n \right\} = \Span \left\{ y_1, \dotsc, y_n \right\}  $\qed
+	\end{description}
+\end{subproof*}
+
+$ (V, ( \cdot | \cdot ) $ $ K $-VR, $ K = \R  $ oder $ \C  $: $ \dim V < \infty $
+\setcounter{subenvironmentnumber}{6}
+\begin{subtheorem}
+	Sei $ W \subseteq V $ ein Unterraum.
+	Es gelten
+	\begin{enumerate}[label=(\arabic*)]
+		\item $ V = W \oplus W^{\perp}  $ 
+		\item $ W^{\perp\perp} = W $
+	\end{enumerate}
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{4.26.7}]
+	\begin{enumerate}[label=(\arabic*)]
+		\item Sei $ \mathcal{X}  = \left\{ x_1, \dotsc, x_n \right\}  $ eine orthonormale Basis für $ W $ (Existenz folgt aus Gram-Schmidt).
+			Sei $ z \in V $.
+			setze
+			\[
+				x \coloneqq \sum_{i=1}^{n} c_i x_i
+			\]
+			wobei $ c_i \coloneqq (z | x_i) $.
+			Es ist $ x \in W $.
+			Bessel liefert $ y \coloneqq z - x $ ist orthogonal zu $ x_i $ $ \forall i = 1, \dotsc, n $, und somit $ y \in W^{\perp}  $.
+			Also $ z = x + y $, wobei $ x \in W, y \in W^{\perp}  $.
+			Es gilt $ W \cap W^{\perp} = \left\{ 0 \right\}  $ (weil $ (x|x) = 0 \iff x = 0  $\qed
+		\item Sei $ z \in V $, $ z = x + y $ wie in (1).
+			Berechne $ (z | x) = \left\| x \right\| ^2 + (y|x) = \left\| x \right\| ^2 $.
+			Analog $ (z|y) = \left\| y \right\| ^2 $.
+			Sei nun $ z \in W^{\perp\perp}  $, dann ist $ (z|y) = 0 = \left\| y \right\|^2  $.
+			Also $ z = x \in W $\qed
+	\end{enumerate}
+\end{subproof*}
+
+\setcounter{subsubsection}{15}
+\subsubsection{Beziehung zu linearen Funktionalen}
+\begin{subtheorem}[Riesz Darstellung]
+	Sei $ f \in V^* $, dann $ \exists ! y \in V $ so, dass
+	\begin{equation}
+		\label{eq:4.26.8.1}
+		\tag{$ \dag $}
+		\forall x \in V : {\color{gadse-red} f}(x) {\color{gadse-red}=} (x | {\color{gadse-red}})
+	\end{equation}
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{4.26.8} Riesz Darstellung]
+	$ \exists z $ 
+	\begin{itemize}
+		\item Sei $ f = 0 $ setze $ y = 0 $, dann sind Forderungen erfüllt
+		\item Sei $ f \neq 0 $, betrachte
+			\[
+				W \coloneqq \Kern (f) \subsetneq V \text{ oder} 
+			\]
+			\[
+				W^{\perp} \neq \left\{ 0 \right\} 
+			\]
+		\item sei $ y_0 \neq 0 $, $ y_0 \in W^{\perp}  $ 
+			\OE{} $ \left\| y_0 \right\| = 1 $.
+			Setze $ y \coloneqq \overline{f(y_0)} y_0 $.
+			Beobachte
+			\[
+				(y_0 | y) = (y_0 | \overline{f(y_0) y_0} = f(y_0) (y_0 | y_0) = f(y_0)
+			\]
+			somit gilt \eqref{eq:4.26.8.1} für $ y_0 $ 
+		\item Für $ x = \lambda y_0 $ berechnen wir allgemein.
+			\[
+				f(x) = f(\lambda y_0) = \lambda f(y_0) = \lambda (y_0 | y) = (\lambda y_0 | y) = (x | y).
+			\]
+			Also \eqref{eq:4.26.8.1}
+		\item Für $ x \in W $ berechne:
+			\[
+				(x | y) = (x | \overline{f(y_0)} y_0) = f(y_0) (x | y_0) = 0 = f(x).
+			\]
+			Also \eqref{eq:4.26.8.1} erfüllt.
+			Sei nun $ x \in V $ beliebig und schreibe $ x = x_0 + \lambda y_0 $ wobei $ \lambda \coloneqq \frac{ f(x) }{ f(y_0) }  $ und $ x_0 \coloneqq x - \lambda y_0 $ 
+			Berechne
+			\[
+				f(x_0) = f(x) - \frac{ f(x) }{ f(y_0) } f(y_0) = 0
+			\]
+			also ist $ x_0 \in W $ und
+			\[
+				f(x) = f(x_0) + f(\lambda y_0) \overset{\text{\eqref{eq:4.26.8.1}} }{=} (x_0 | y) + ( \lambda y_0 | y) = (x_0 + \lambda y_0 | y) = (x | y)
+			\]
+			Damit \eqref{eq:4.26.8.1} erfüllt.
+	\end{itemize}
+	\textbf{Eindeutigkeit:} Seien $ y_1, y_2 \in V $ mit $ (x | y_1) = (x|y_2) $ $ \forall x \in V $.
+	Dann ist $ (x | (y - y_2) ) = 0 $ $ \forall x \in V $.
+	Insbesondere gilt es auch für $ x = y_1 - y_2 $.
+	Also $ y_1 - y_2 = 0 \implies y_1 = y_2 $\qed
+\end{subproof*}
+
+\begin{subtheorem}
+	Die Abbildung
+	\[
+		\rho : V^* \to V, f \mapsto y
+	\]
+	(wobei $ y = \rho(f) $ eindeutig definiert ist (RDS) durch {\color{gadse-orange}$ f(x) = (x | \rho(f)) $ $ \forall x \in V $} erfüllt:
+	\begin{enumerate}[label=(\roman*)]
+		\item $ \rho(f_1 + f_2) = \rho(f_1) + \rho(f_2) $ 
+		\item $ \rho $ surjektiv
+		\item $ \rho $ injektiv und {\color{gadse-orange}Achtung}
+		\item $ \rho(cf) = \overline{c} \rho(f) $ $ \forall c \in K $
+	\end{enumerate}
+	{\color{gadse-orange}$ \rho $ ist ein konjugierter Isomorphismus}
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{4.26.9}]
+	\begin{enumerate}[label=(\roman*)]
+		\item ÜA
+		\item Sei $ y \in V $, setze $ \forall x \in V : f(x) \coloneqq (x | y) $.
+			Dann ist $ f \in V^* $ und $ \rho(f) = y $ 
+		\item $ f(x) = (x|y) = 0 \implies f = 0 $ 
+		\item setze $ z \coloneqq \rho(cf) $, $ y \coloneqq \rho(f) $. Zu zeigen: $ z = \overline{c} y $, d.h. zu zeigen:
+			\[
+				\forall x \in V : (cf)(x) = (x| \overline{c} y)
+			\]
+			Tatsächlich berechne:
+			\[
+				(cf)(x) = cf(x) = c(x | y) = (x | \overline{c} y) \qed
+			\]
+	\end{enumerate}
+\end{subproof*}
+
+\begin{subcorollary}
+	{\color{gadse-orange}Übertragung}
+	\begin{enumerate}[label=\Roman*.]
+		\item $ \forall f_1, f_2 \in V^* $ setze
+			\[
+				(f_1 | f_2) \coloneqq (\rho(f_1) | \rho(f_2))
+			\]
+			definiert ein inneres Produkt auf $ V^* $.
+		\item Sei $ \mathcal{X}  = \left\{ x_1, \dotsc, x_n \right\}  $ und eine Basis für $ V $, $ \exists  $ eine Basis $ \mathcal{Y} = \left\{ y_1, \dotsc, y_n \right\}  $ eine Basis für $ V $ so, dass
+			\[
+				(x_i | y_j) = \delta_{ij}  $ $ \forall i, j = 1, \dotsc, n
+			\]
+		\item Für $ W \subseteq V $ Unterräume gilt
+			\[
+				\rho(W^\circ) = W^{\perp} 
+			\]
+			{\color{gadse-red}
+			\item Sei $ T \in \mathcal{L} (V, V) $ Definiere $ T^* $ durch $ (Tx |y) \coloneqq (x|T^*y) $ $ \forall x \in V $, also d.h.
+				$ \forall y, z \in V : T^*(y) = z $ genau dann wenn $ \forall x \in V : (x|z) = (Tx|y) $
+			}
+			$ T^* \in \mathcal{L} (V, V) $\\
+			\textbf{Def:} $ T^* $ ist die \textbf{transponierte konjugierte zu $ T $}
+	\end{enumerate}
+\end{subcorollary}
+
+Eigenschaften von $ T^* $ 
+\begin{enumerate}[label=(\arabic*)]
+	\item $ (cT)^* = \overline{c} T^* $, $ c \in K $ 
+	\item Seien $ \mathcal{X} $ und $ \mathcal{Y}  $ die $ \delta $-Basen wie in II.
+		Sei $ [T]_{\mathcal{X} } \coloneqq A $ und
+		Es gilt: $ [T^*]_\mathcal{Y} = \overline{A^{t} } \coloneqq A^{*}  $ d.h. die $ ij $-te Koeffizient von $ A^* $ ist $ \overline{a_{ji} }  $ 
+	\item $ \det A^* = \overline{\det A}  $ 
+	\item die Eigenwerte von $ A^{*}  $ sind die Konjugierten der Eigenwerte von $ A $\qed
+\end{enumerate}
+
+\subsection{Skript 27}
+\setcounter{subsubsection}{16}
+\subsubsection{Hermite'sche Operatoren}
+\[
+	T^* : (Tx |y) = (x | T^*y) \text{ oder } (x | Ty) = (T^*x | y)
+\]
+\begin{subdefinition}
+	\begin{enumerate}[label=(\roman*)]
+		\item Sei $ T \in \mathcal{L} (V, V) $.
+			$ T $ ist \textbf{Hermite'sch} (oder \textbf{selbstadjungiert}) falls $ T^* = T $, d.h. $ T $ ist Hermite'sch falls gilt
+		\item $ K = \R  $, $ T = T^* $. $ T $ ist \textbf{reell symmetrisch}
+		\item $ K = \C  $, $ T = T^* $ $ T $ heißt komplex Hermite'sch
+	\end{enumerate}
+\end{subdefinition}
+
+\begin{subtheorem}
+	Sei $ T \in \mathcal{L} (V, V) $ Hermite'sch.
+	Es gelten $ (Tx | x) \in \R  $ $ \forall x \in V $ und alle Eigenwerte von $ T $ sind reell.
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{4.27.2}]
+	Wir berechnen für $ x \in V $ 
+	$ (Tx | x) = (x | T(x) = (Tx | x) $.
+	Sei nun $ Tx = cx $ mit $ x \in V, x \neq 0 $ dann ist
+	\[
+		\underbrace{(Tx | x)}_{\in \R } = (c x | x) = c \underbrace{\left\| x \right\| ^2}_{\in \R ^x}
+	\]
+	$ \implies c \in \R  $.\qed
+\end{subproof*}
+
+\begin{subnote}[Matrixdarstellung]
+	Sei $ \mathcal{X}  $ eine orthonormale Basis (Gram-Schmidt). In diesem Fall ist $ \mathcal{Y}  $ von II gleich $ \mathcal{X}  $. (d.h. $ \mathcal{X}  $ ist selbstdual).
+	Sei $ T $ Hermite'sch, $ T = T^* $, dann bekommen wir
+	\[
+		A = [T]_{\mathcal{X} } \overset{(2)}{=} \overline{A^t} = A^*
+	\]
+	Das heißt\\
+	$ a_{ij} = \overline{a_{ji} }  $ (A ist komplex Hermite'sch). ($ \C  $)\\
+	$ a_{ij} = a_{ji} $ ($ A $ ist symmetrisch) ($ \R  $)
+\end{subnote}
+
+

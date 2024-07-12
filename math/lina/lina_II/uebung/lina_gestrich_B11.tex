@@ -1,0 +1,74 @@
+\documentclass[sectionformat = aufgabe]{gadsescript}
+\settitlelh{\today\\\semester\\Gruppe 3, Briefkasten 11, Baiz}
+\setsemester{Summer Semester 2024}%
+\setuniversity{University of Konstanz}%
+\setfaculty{Faculty of Science\\(Mathematics and Statistics)}%
+\settitle{Übungsblatt 11}
+\setsubtitle{Elias Gestrich}
+%Salisha Baiz, salisha.baiz@uni-konstanz.de
+
+\begin{document}
+\maketitle
+\setcounter{section}{11}
+\subsection{}
+\begin{enumerate}[label=(\alph*)]
+	\setcounter{enumi}{1}
+	\item Sei $ A_i $ $ A $ ohne die $ i+1, \dotsc, n $-ten Zeilen und Spalten.
+		Entwickle die $ n $-te Zeile $ \det(A) $, sodass
+		\[
+			\det(A) = (-1)^{n + n} a_{nn}  \det(A_{n - 1} ) = (-1)^{2n} a_{nn} \det(A_{n - 1} ) = a_{nn} \det(A_{n - 1} )
+		\]
+		Folge dieses Scheme:
+		\begin{align*}
+			\det(A) &= a_{nn}  \det(A_{n - 1} ) \\
+			~ &= \underbrace{(-1)^{2(n - 1)}}_{= 1} a_{nn} a_{(n-1),(n-1)}   \det(A_{n - 2} ) \\
+			~ &= \dotsb = a_{nn} a_{(n-1),(n-1)} \dotsb a_{22} \det(a_{11}) \\
+			~ &= \prod_{i=1}^{n} a_{ii}  
+		\end{align*}
+\end{enumerate}
+
+\subsection{}
+\begin{enumerate}[label=(\alph*)]
+	\item 
+		\textbf{Vor.:} $ \mathcal{B}  $ Basis zu $ W $ und $ \left( \overline{\alpha_1} , \dotsc, \overline{\alpha_n}  \right)   $ Basis zu $ V / W $, also insbesondere $ \overline{\alpha_1} , \dotsc, \overline{\alpha_n}  $ linear unabhängig\\
+		\textbf{Bew.:}
+		Zu zeigen $ \mathcal{B} ^\prime \coloneqq \left\{ \alpha_1, \dotsc, \alpha_n \right\}  $ l.u. und $ \mathcal{B} \cap \mathcal{B} ^\prime  $ l.u., also $ \Span \mathcal{B} ^\prime \cap W = \left\{ 0 \right\}  $, also für $ c_1, \dotsc, c_n \in K $, die nicht alle Null sind gilt:
+		\[
+			\sum_{i=1}^{n} c_i \alpha_i \not\in W
+		\]
+		Zum Widerspruch, nehme an es gäbe soche $ c_1, \dotsc, c_n $, dann würde gelten
+		\[
+			\sum_{i=1}^{n} c_i \alpha_i \in W \implies \overline{\sum_{i=1}^{n} c_i \alpha_i} = \overline{0} = \sum_{i=1}^{n} c_i \overline{\alpha_i} 
+		\]
+		also $ \overline{\alpha_1}, \dotsc, \overline{\alpha_n}   $ linear abhängig was im Widerspruch zur Vor. steht.
+	\item 
+		\textbf{Vor.:} Für alle $ \alpha \in W $ gilt $ T(\alpha) \in W $\\
+		\textbf{Beh.:} Für alle $ f \in K[x] $ gilt für alle $ \alpha \in W $, dass $ f(T)(\alpha) \in W $.\\
+		\textbf{Bew.:} Beh. $ \forall i \in N_{0}, \alpha \in W  : T^{i} (\alpha) \in W  $.
+		Bew. der Beh. durch vollständige Induktion:
+		Sei $ \alpha \in W $ beliebig:
+		\begin{description}
+			\item[I.A.] $ i = 0 $: $ T^{0} (\alpha) = \Id(\alpha) = \alpha \in W $
+			\item[I.V.] $ T^{i} (\alpha) \in W $ 
+			\item[I.S.] $ i \rightsquigarrow i + 1 $:
+				\[
+					T^{i + 1} (\alpha) = T \left( \underbrace{T^{i} (\alpha)}_{\in W \text{ nach I.V.} } \right) \in W
+				\]
+		\end{description}
+\end{enumerate}
+
+\subsection{}
+\begin{enumerate}[label=(\alph*)]
+	\item Sei $ \mathcal{B}_1  $ Basis von $ U_1 $ und $ \mathcal{B} _2 $ Basis von $ U_2 $, sodass $ \mathcal{B} = \mathcal{B} _1 \cap \mathcal{B} _2 $ eine geordnete Basis von $ U $, wobei die ersten $ m $ Elementen aus $ U_1 $ und die $ m+1 $ bis $ n $-ten Elemente aus $ U_2 $ kommen.
+		Dann ist nach Vorlesung
+		\[
+			[T]_{\mathcal{B} } = \begin{pmatrix} [T_{U_1} ]_{\mathcal{B} _1} & C \\ 0 & D  \end{pmatrix}
+		\]
+		so dass
+		Das $ \MinPol T $
+\end{enumerate}
+
+
+
+\end{document}
+

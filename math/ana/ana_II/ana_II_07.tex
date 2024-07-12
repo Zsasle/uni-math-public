@@ -1,0 +1,207 @@
+\section{Einführung in Maß-\& Integrationstheorie}
+\begin{itemize}
+	\item \textbf{Ziel:} Erweiterung der Integrationstheorie von 1-dim auf mehrdimensionale Fall.
+		Teaser auf Ana III.
+\end{itemize}
+\textbf{Idee:}
+\begin{itemize}
+	\item Ana I: Erkläre Integrale für Treppenfunktion, dann Grenzübergang via $ \sup $-Norm: Regelintegral, sehr restriktiv.
+	\item Ana II: Erklärt Integral für einfache Funktionen, dann Grenzübergang auf Integrallevel.\\
+		$ \to  $ Ana III: ``Grund'' hierfür:
+	\item Treppenfunktion:
+		\[
+			\sum_{i=1}^{N} \alpha_i \I_{I_i} 
+		\]
+		$ I_i $ Intervalle, partitionieren $ [a, b] $ 
+	\item Einfache Funktionen:
+		\[
+			\sum_{i=1}^{N} \alpha_i \I_{\Omega_i} 
+		\]
+		$ \Omega_i $ ``messbare'' Mengen.
+\end{itemize}
+
+\subsection{\mathsec{\sigma}{}-Algebren \& Messbarkeit}
+\begin{definition}
+	Sei $ \Omega  $ eine Menge, $ \mathcal{A} \subset \mathcal{P} (\Omega) $ (Potenzmenge) heißt \textbf{$ \sigma $-Algebra}, falls
+	\begin{enumerate}[label=(\roman*)]
+		\item $ \OO , \Omega \in \mathcal{A}  $ 
+		\item $ A \in \mathcal{A} \implies A^c \in \mathcal{A}  $ 
+		\item $ A_1, A_2, \dotsc, \in \mathcal{A} \implies \bigcup_{i = 1} ^{\infty} A_i \in \mathcal{A}  $.
+	\end{enumerate}
+	$ (\Omega, \mathcal{A} ) $ heißt \textbf{Messraum}
+\end{definition}
+\begin{itemize}
+	\item \textbf{Unterschied zur Topologie:} Eine Topologie auf $ \Omega $ ist ein System $ \mathcal{T} \subset \mathcal{P} (\Omega) $ mit
+		\begin{enumerate}[label=(\roman*)]
+			\item $ \OO , \Omega \in \mathcal{T}  $ 
+			\item $ A, B \in \mathcal{T} \implies A \cap B \in \mathcal{T}  $ 
+			\item $ A_1, A_2, \dotsc \in \mathcal{T} \implies \bigcup_{i = 1} ^{\infty} A_i \in \mathcal{T}  $
+		\end{enumerate}
+		Topologie kann keine Komplementbildung!
+\end{itemize}
+
+\begin{lemma}
+	Sei $ \Omega $ eine Menge \& $ \left( A_i \right) _{i \in I}  $ eine Familie von $ o $-Algebren.
+	Dann ist $ \bigcap_{i \in  I} A_i $ eine $ \sigma $-Algebra.
+\end{lemma}
+\begin{proof*}[Lemma \ref{7.2}]
+	Übungsaufgabe
+\end{proof*}
+
+Damit ist für $ \mathcal{A} \subset \mathcal{P}  $, dann ist $ o(\mathcal{A} ) \coloneqq \bigcap_{} \left\{ \mathcal{B} : \mathcal{B} \text{ $ \sigma $-Algebra mit $ \mathcal{A}  \subset \mathcal{B}  $}  \right\}  $ die kleinste $ \sigma $-Algebra, die $ \mathcal{A}  $ enthält.
+
+\begin{definition}
+	Sei $ (\Omega, \mathcal{T} ) $ ein topologischer Raum. Dann heißt $ \mathcal{B} (\Omega) \coloneqq \sigma(\mathcal{T} ) $.
+	\begin{itemize}
+		\item $ \mathcal{B} (\Omega) \hat{=}  $ kleinsten $ o $-Algebra, die alle offenen Mengen enthält.
+		\item Auf $ \R ^n $ bilden die bezüglich der euklidischen Norm offenen Mengen eine Topologie.
+			Damit ist $ \mathcal{B} (\R ^n) $ eine kanonische $ o $-Algebra auf $ \R ^n $.
+	\end{itemize}
+\end{definition}
+
+\begin{definition}
+	Seien $ (\Omega_1, \mathcal{A}_1 ), (\Omega_2, \mathcal{A} _2) $ zwei Messräume.
+	$ f : \Omega_1 \to \Omega_2 $ heißt $ (\mathcal{A} _1, \mathcal{A} _2) $ messbar, falls
+	\[
+		\forall A \in \mathcal{A} _2 : f^{-1} (A) \in \mathcal{A} _1.
+	\]
+	\begin{itemize}
+		\item Oft nützlich: Funktionen mit Werten in $ \overline{\R } = \R  \cup \left\{ + \infty, - \infty \right\}  $.
+			Dann $ f : \Omega \to \overline{\R }, (\Omega, \Sigma ) $ Messraum,
+			$ \Sigma $-messbar, $ f^{-1} ((t, \infty]) \in \Sigma , \forall t \in \R  $
+	\end{itemize}
+\end{definition}
+
+\begin{example}[Einfache Funktion]
+	Sei $ (\Omega, \Sigma) $ ein Messraum \& $ A_1, \dotsc, A_N \in \Sigma, \alpha_1, \dotsc, \alpha_N \in \R  $.
+	Dann heißt
+	\[
+		x \mapsto f(x) \coloneqq \sum_{i=1}^{N} \alpha_i \I_{A_i}(x)
+	\]
+	\textbf{einfache Funktion}
+\end{example}
+
+\begin{definition}
+	Sei $ (\Omega, \mathcal{A} ) $ ein Messraum.
+	Wir nennen $ \mu : \mathcal{A} \to [0, \infty]  $ ein \textbf{Maß}, falls
+	\begin{enumerate}[label=(\roman*)]
+		\item $ \mu ( \OO ) = 0 $,
+		\item Sind $ A_1, A_2, \dotsc, \in \mathcal{A}  $ \textbf{paarweise disjunkt}, so
+			\[
+				\mu \left( \bigcup_{i = 1} ^{\infty} A_i \right) = \sum_{i=1}^{\infty} \mu(A_i).
+			\]
+			\begin{itemize}
+				\item $ \mu (A_1 \cup A_2) = \mu(A_1) + \mu(A_2) - \mu(A_1 \cap A_2) $
+				\item $ \mu $ heißt \textbf{Wahrscheinlichkeitsmaß}, falls $ \mu(\Omega) = 1 $
+					Falls $ \mu(\Omega) < \infty $, so heißt $ \mu $ \textbf{endliches Maß}
+			\end{itemize}
+	\end{enumerate}
+\end{definition}
+
+Zur ``Volumenmessung'' in $ \R ^n $:
+\begin{theorem}
+	Es gibt  genau ein Maß $ \mathcal{L} ^n $ auf $ \mathcal{B} \left( \R ^n \right)  $ ($ \hat{=}  $ Borelsche $ \sigma $-Algebra), das für alle $ a_1 <b_1, \dotsc, a_n < b_n $ gilt:
+	\[
+		\mathcal{L} ^n \left( (a_1, b_1) \times \dotsb \times (a_n, b_n) \right) = \prod_{i=1}^{n} (b_i - a_i) 
+	\]
+\end{theorem}
+
+\subsection{Das Lebesgueintegral}
+\begin{itemize}
+	\item Hervorragende Eigenschaften bezüglich Vertauschen von Grenzprozessen.
+	\item \textbf{Recap:} (Regelintegral)\\
+		Für Treppenfunktion $ f = \sum_{i=1}^{N} \alpha_1 \I_{I_i} $
+		\[
+			\int_{0}^{1}f \dd x = \sum_{i=1}^{N} \alpha_i \left| I_i \right| 
+		\]
+		Regelfunktion $ \hat{=}  $ es gibt eine Folge von Treppenfunktionen, die gegen die Funktionen bezüglich der \textbf{Supremumsnorm} konvergiert.($ \left\| f \right\| _{\infty;[0, 1]} \coloneqq \sup_{x \in [0, 1]} \left| f(x) \right|  $)\\
+		Da die Sup-Norm die absolute ``Größe'' von Funktionen kontrolliert, ist dieser Integralbegriff \textbf{zu restriktiv}
+\end{itemize}
+
+\textbf{Lebesques Ansatz}\\
+Sei $ (\Omega, \Sigma, \mu) $ ein Maßraum (Menge, $ \sigma $-Algebra, Maß).
+\begin{enumerate}[label=(L\arabic*)]
+	\item Ist
+		\[
+			f = \sum_{i=1}^{N} \alpha_i \I_{A_i} 
+		\]
+		einfach, so sei
+		\[
+			\int _{\Omega} f \dd \mu \coloneqq \sum_{i=1}^{N} \alpha_i \mu (A_i) \qquad (A_i \in \mathcal{A} )
+		\]
+		Hierbei $ \alpha_1, \dotsc, \alpha_N \geq 0 $.
+	\item Ist $ f : \Omega \to \overline{\R } _+ = \R _{\geq 0} \cup \left\{ \infty \right\}  $ messbar (also $ \Sigma \text{-}  \mathcal{B} (\overline{\R } _+) $-messbar), so existiert eine folge $ (f_i) $ von einfachen Funktionen mit $ f_i \nearrow f $.
+	\item Für $ f : \Omega \to \overline{\R } _+ $ messbar sei nun
+		\[
+			\int _\Omega f \dd \mu = \lim_{i \to \infty} \int _\Omega f_i \dd \mu,
+		\]
+		wobei $ (f_i) $ eine Folge von einfachen Funktionen mit $ f_i \nearrow f $ ist (existent nach (L2)).
+		Diese Def. von $ \int _\Omega f \dd \mu $ hängt \textbf{nicht} von $ (f_i) $ ab.
+		$ \I_\Q  $\\
+		\textbf{Lebesque:} $ \mathcal{L} ^(\Q ) = 0 $.\\
+		\textbf{Grund:} $ x \in \R  $, so $ \mathcal{L} ^1\left( \left\{ x \right\}  \right) = 0 $.
+		Sind $ U, V $ messbar, so $ \mathcal{L} ^1(U) \leq \mathcal{L} ^1(V) $ 
+		Für $ \varepsilon > 0 $ ist $ \mathcal{L} ^1((x - \varepsilon, x + \varepsilon )) = 2 \varepsilon  \implies \mathcal{L} ^1(\left\{ x \right\} ) \leq \mathcal{L} ^1 ((x - \varepsilon ), (x + \varepsilon )) = 2 \varepsilon \searrow 0 $.
+		Damit nach $ \sigma $-Add. 
+		\[
+			\left( \mu \left( \bigcup_{i = 1} ^\infty A_i \right) = \sum_{i=1}^{\infty} \mu (A_i), \text{ falls  die $ A_i $'s messbar + pw. disjunkt}  \right) :
+		\]
+		\[
+			\Q  = \bigcup_{i = 1} ^\infty \left\{ x_i \right\} \implies \mathcal{L} ^1(\Q ) = \sum_{i=1}^{\infty} \mathcal{L} ^1 ( \left\{ x_i \right\} ) = 0.
+		\]
+		Damit
+		\[
+			\int_{\R }^{} \I_{\Q } \dd \mathcal{L} ^1 = 0, \int_{\R }^{} \I_{\R  \setminus \Q } \dd \mathcal{L} ^1 = +\infty
+		\]
+	\item \textbf{Letztlich:}\\
+		Ist $ f : \Omega \to \overline{\R }  $ messbar, so setze $ f^+ \coloneqq \max \left\{ f, 0 \right\}  $, $ f^- \coloneqq \max \left\{ -f, 0 \right\}  $ (womit $ f = f^+ - f^- $).
+		Wir definieren, falls entweder
+		\[
+			\int _\Omega f^+ \dd \mu, \int _\Omega f^{-} \dd \mu, \qquad \int _\Omega f \dd \mu \coloneqq \int _\Omega f^+ \dd \mu - \int_{\Omega}^{} f^- \dd \mu.
+		\]
+		Messbare Funktionen.
+		$ f : \Omega \to \overline{\R }  $ mit $ \int _\Omega f^+ \dd \mu < \infty $ oder $ \int _\Omega f^- \dd \mu < \infty $ heißen \textbf{quasiintegrabel}.
+		Ist $ \int_{\Omega}^{} \left| f \right| \dd \mu < \infty $, so heißt $ f $ \textbf{integrabel}.
+\end{enumerate}
+
+\subsection{Fundamente der Lebesgueintegral}
+\begin{itemize}
+	\item Vertauschen von Grenzprozessen.
+		Für das \textbf{Regelintegral}: $ [a, b], f_i \to f $ gleichmäßig $ \implies \int_{a}^{b} f_i(x) \dd x \to \int_{a}^{b} f(x) \dd x $
+\end{itemize}
+\begin{theorem}[Dominierte Konvergenz, Lebesgue]
+	Sei $ (\Omega, \Sigma, \mu) $ Maßraum, sowie $ f, f_1, f_2, \dotsc : \Omega \to \R  $ integrabel und $ f_i \to f $ \textbf{punktweise}.
+	Weiter gebe es ein integrables $ F: \Omega \to \R  $ mit $ \forall i \in \N : \left| f_i \right| \leq \left| F \right|  $.
+	Dann gilt
+	\[
+		\int_\Omega \underbrace{f}_{= \lim_{i \to \infty} f_i} \dd \mu = \lim_{i \to \infty} \int _\Omega f_i \dd \mu.
+	\]
+	\begin{itemize}
+		\item $ \Omega = \R  $, $ \Sigma = \mathcal{B} (\R ) $, $ \mu = \mathcal{L} ^1 $ , $ f_i = \I_{(i, i + 1)}  $, $ f = 0 $, dann $ f_i \to f $ punktweise.\\
+			\begin{tikzpicture}
+				\begin{axis}[
+					xmin= -0, xmax= 4,
+					ymin= -0, ymax = 2,
+					axis lines = middle,
+					xtick = { 1, 2, 3 },
+					ytick = { },
+					xticklabels = {$ i $, $ i + 1 $, $ i + 2 $},
+					yticklabels = {},
+					height = 4cm,
+					width = 8cm,
+				]
+					\addplot[domain=1:2, samples=100]{1};
+				\end{axis}
+			\end{tikzpicture}\\
+			$ \forall i \in \N : \int _\Omega f_i \dd \mu = \int _{\R } \I_{i, i + 1} \dd \mathcal{L} ^1 = 1  $. \& $ \int _\Omega f \dd \mu = 0 $. $ (1 \nleftarrow 0) $
+	\end{itemize}
+	Eine integrierbare Majorante $ F $ muss notwendigerweise für Große $ x $ einmal ``unter'' $ f_i $ liegen. Unmöglich.
+	\begin{itemize}
+		\item $ \Omega = (0, 1), \Sigma = \mathcal{B}((0, 1)), \mu = \mathcal{L}^1  $. $ f_i \coloneqq i \I_{\left(0, \frac{ 1 }{ i } \right)}  $.
+			$ \forall i \in \N : \int _\Omega f_i \dd \mu = 1 $.
+			$ f_i \to 0 $ punktweise überall, und $ \int _\Omega f \dd \mu = 0 $. ($ 1 \nrightarrow 0 $)
+	\end{itemize}
+	
+\end{theorem}
+
+

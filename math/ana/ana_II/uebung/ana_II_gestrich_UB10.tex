@@ -1,0 +1,189 @@
+\documentclass[sectionformat=aufgabe]{gadsescript}
+
+\setsemester{Summer Semester 2024}%
+\setuniversity{University of Konstanz}%
+\settitlelh{\today\\\semester\\Gruppe 3, Jonathan Weihing}
+\setfaculty{Faculty of Science\\(Mathematics and Statistics)}%
+\settitle{Übungsblatt 10}
+\setsubtitle{Elias Gestrich}
+\usepackage{subfig}
+
+\begin{document}
+\maketitle
+\section{Polarkoordinaten}
+\begin{enumerate}[label=(\alph*)]
+	\item Die Länge $ l_g $ einer Kurve $ g: [a, b] \to \R ^2 $ ist gegeben durch
+		\[
+			l_g = \int_{a}^{b} \left| g'(t) \right| \dd t
+		\]
+		Für die Kurve $ \gamma $ gilt also
+		\begin{align*}
+			l_{\gamma} &= \int_{a}^{b} \left| \gamma^\prime (\phi) \right| \dd \phi \\
+			~ &= \int_{a}^{b}\left\| \frac{\dd f(r(\phi), \phi) }{ \dd \phi }  \right\| \dd \phi \\
+			~ &= \int_{a}^{b} \left| \frac{\dd ( r (\phi) \cos \phi, r (\phi) \sin (\phi) ) }{ \dd \phi }  \right| \dd \phi \\
+			~ &= \int_{a}^{b} \left| ( r^\prime  (\phi) \cos \phi - r(\phi) \sin \phi, r^\prime  (\phi) \sin (\phi) + r(\phi ) \cos \phi \right| \dd \phi \\
+			~ &= \int_{a}^{b} \sqrt{ ( r^\prime  (\phi) \cos \phi - r(\phi) \sin \phi )^2 + ( r^\prime  (\phi) \sin (\phi) + r(\phi ) \cos \phi )^2 } \dd \phi \\
+			~ &= \int_{a}^{b} [ ( r^\prime  (\phi)^2 \cos^2 (\phi) - 2 r(\phi) r^\prime (\phi) \cos (\phi) \sin (\phi) +  r(\phi)^2 \sin^2  \phi ) \\
+			~ & \qquad + ( r^\prime  (\phi)^2 \sin^2 (\phi) + 2 r(\phi) r^\prime (\phi) \cos (\phi) \sin (\phi) +  r(\phi )^2 \cos^2 \phi ) ]^{\frac{ 1 }{ 2 } }  \dd \phi \\
+			~ &= \int_{a}^{b} \sqrt{ r^\prime  (\phi)^2 ( \cos^2 (\phi) + \sin ^2(\phi) ) +  r(\phi)^2 ( \sin^2 (\phi ) + \cos^2 \phi ) } \dd \phi \\
+			~ &= \int_{a}^{b} \sqrt{ r^\prime  (\phi)^2  +  r(\phi)^2  } \dd \phi \qed
+		\end{align*}
+	\newpage
+	\item ~
+		\begin{enumerate}[label=(\alph*)]
+			\item ~\\
+				\begin{tikzpicture}
+					\begin{axis}[
+						xmin= -1, xmax= 1,
+						ymin= -0.5, ymax = 1.5,
+						axis lines = middle,
+						xtick = { -1, 0, 1 },
+						ytick = { -0.5, 0.5, 1.5 },
+						extra x ticks = { -1, -0.5, 0, 0.5, 1 },
+						extra y ticks = { -0.5, 0, 0.5, 1, 1.5 },
+						extra x tick labels = {},
+						extra y tick labels = {},
+						height = 8cm,
+						width = 8cm,
+					]
+						\addplot[domain=-0:pi, samples=100, parametric] function{sin(t) * cos(t), sin(t) * sin(t)};
+					\end{axis}
+				\end{tikzpicture}\\
+				Es handelt sich um einen Kreis, mit Radius 0.5 und Mittelpunkt bei $ (0, 0.5) $, da
+				\begin{align*}
+					&\left\| (r(\phi) \cos (\phi), r(\phi) \sin (\phi)) - (0, 0.5) \right\| \\
+					=&\, \sqrt{r(\phi)^2 \cos ^2(\phi) + r(\phi)^2 \sin^2 (\phi) - 2 \cdot 0.5 \cdot r(\phi) \sin (\phi) + 0.25} \\
+					=&\, \sqrt{\sin ^2(\phi) - \sin ^2(\phi) + 0.25} \\
+					=&\,  0.5
+				\end{align*}
+				Also hat jeder Punkt der Kurve einen Abstand von 0.5 zum Punkt $ (0, 0.5) $, was zu zeigen war.
+			\item
+				\begin{align*}
+					l &= \int_{0}^{\pi } \sqrt{r(\phi)^2 + r^\prime (\phi)^2} \dd \phi \\
+					  &= \int_{0}^{\pi } \sqrt{\sin ^2(phi) + \cos ^2(\phi)} \dd \phi \\
+					  &= \int_{0}^{\pi }1 \dd \phi = \pi 
+				\end{align*}
+		\end{enumerate}
+\end{enumerate}
+
+\section{Implizite Funktion}
+Sei $ \psi(x, y): B_{1}((2, 1)) \to \R, (x, y) \mapsto - \frac{x^2}{ 2 } + \sqrt{\frac{x^4}{ 4 } + 3xy - y + 2}  $, sodass
+\begin{align*}
+	G(x, y, \psi(x, y))
+	&= {\color{gadse-red} \frac{ x^4 }{ 4 }}
+	{\color{gadse-dark-green} - 2 \cdot \frac{ x^2 }{ 2 } \cdot \sqrt{\frac{ x^4 }{ 4 } + 3xy - y + 2 }} + {\color{gadse-red}\frac{ x^4 }{ 4 }} + 3xy - y + 2 \\
+	&\qquad - 3xy - {\color{gadse-red}\frac{ x^4 }{ 2 }} + {\color{gadse-dark-green}x^2 \sqrt{\frac{ x^4 }{ 4 } + 3xy - y + 2 }}\\
+	&\qquad + y - 2\\
+	&= 0
+\end{align*}
+$ \psi(x, y) $ ist wohldefiniert, da für $ (a, b) \in B_{1}((2, 1))  $ existieren $ \xi_x, \xi_y \in (-1, 1) $, sodass $ (a, b) = ( 2 + \xi_x, 1 + \xi_y) $ und
+\begin{align*}
+	\psi(a, b)
+	&= \frac{ (2 + \xi_x)^4 }{ 4 } + 3(2 + \xi_x)(1 + \xi_y) - (1 + \xi_y) + 2\\
+	&= \frac{ (2 + \xi_x)^4 }{ 4 } + (1 + \xi_y)(3(2 + \xi_x) - 1) + 2\\
+	&= \frac{ (2 + \xi_x)^4 }{ 4 } + (1 + \xi_y)(6 + 3\xi_x - 1) + 2\\
+	&= \frac{ (2 + \xi_x)^4 }{ 4 } + (1 + \xi_y)(5 + 3\xi_x) + 2\\
+	&\geq  \frac{ (2 - 1)^4 }{ 4 } + (1 - 1)(5 - 3) + 2\\
+	&> 0
+\end{align*}
+Also ist die Wurzel wohldefiniert in $ \R  $
+
+\[
+	\frac{ \partial \psi }{ \partial x } = -x + \frac{ 1 }{ 2 } \left( \frac{ \frac{ 3 }{ 4 } x^3 + 3y }{ \sqrt{\frac{ x^4 }{ 4 } + 3xy - y + 2}  }  \right) 
+\]
+\[
+	\frac{ \partial \psi }{ \partial y } = \frac{ 1 }{ 2 } \left( \frac{ 3x - y }{ \sqrt{\frac{ x^4 }{ 4 } + 3xy - y + 2}  }  \right) 
+\]
+Also
+\begin{align*}
+	\frac{ \partial \psi }{ \partial x } (2, 1)
+	&= -2 + \frac{ 1 }{ 2 } \left( \frac{ \frac{ 3 }{ 4 } \cdot 8 + 3 }{ \sqrt{\frac{ 16 }{ 4 } + 6 - 1 + 2}  }  \right)\\
+	&= -2 + \frac{ 1 }{ 2 } \left( \frac{6 + 3}{ \sqrt{4 + 6 - 1 + 2}  }  \right) \\
+	&= \frac{ 9 }{ 2 \sqrt{11}  } - 2\\
+	&= \frac{ 9\sqrt{11} }{ 22 } - 2\\
+	&= \frac{ -44 + 9 \sqrt{11} }{ 22 } 
+\end{align*}
+\begin{align*}
+	\frac{ \partial \psi }{ \partial y } (2, 1)
+	&= \frac{ 1 }{ 2 } \left( \frac{6 - 1}{ \sqrt{11}  }  \right)  \\
+	&= \frac{ 5 \sqrt{11} }{ 22 }
+\end{align*}
+
+Also $ \frac{\partial \psi }{ \partial y }  $ invertierbar.
+
+\subsection{Implizite Funktion II}
+Formuliere das Gleichungssystem als
+\begin{align*}
+	( u(x, y) )^2 + v(x, y) e^{-u(x, y)} + x(u(x, y)) - 1 &= 0 \\
+	xy + y(v(x, y)) + \frac{ u(x, y) }{ v(x, y) } - x &= 0
+\end{align*}
+und definiere
+\[
+	F: \R ^4 \to \R ^2,
+	\begin{pmatrix} x \\ y \\ u \\ v \end{pmatrix}
+	\mapsto
+	\begin{pmatrix}
+		u^2 + v e^{-u} + xu - 1 \\
+		xy + yv + \frac{ u }{ v } - x
+	\end{pmatrix} 
+\]
+
+Für $ (x_0, y_0) = 0 $ gilt
+\[
+	0 + 0 + \frac{ u(0, 0) }{ v(0, 0) } - 0 = 0
+\]
+Also $ u(0, 0) = 0 $
+Also
+\[
+	0^2 + v(0, 0)e^{-0} + 0 - 1 = 0
+\]
+Also $ v(0, 0) = 1 $
+
+Es gilt insbesondere $ F(0, 0, 0, 1) = 0 $.
+Es gilt:
+\[
+	\begin{pmatrix} 
+		\partial_u F_1 & \partial_v F_1 \\
+		\partial_u F_2 & \partial_v F_2
+	\end{pmatrix} 
+	=
+	\begin{pmatrix} 
+		2u - v e^{-u} + x & e^{-u} \\
+		\frac{ 1 }{ v } & y - \frac{ u }{ v^2 } 
+	\end{pmatrix} 
+\]
+Für $ (x, y) = (0, 0) $ ist
+\begin{align*}
+	\begin{pmatrix} 
+		2u - v e^{-u} + x & e^{-u} \\
+		\frac{ 1 }{ v } & y - \frac{ u }{ v^2 } 
+	\end{pmatrix} 
+	&=
+	\begin{pmatrix}
+		0 - 1 + 0 & 1 \\
+		1 & 0 - 0
+	\end{pmatrix} \\
+	&=
+	\begin{pmatrix} -1 & 1\\ 1 & 0 \end{pmatrix} \\
+	&\rightsquigarrow
+	\det \begin{pmatrix} -1 & 1 \\ 1 & 0 \end{pmatrix} = 0 - 1 \neq 0\\
+	~&\rightsquigarrow
+	\begin{pmatrix} -1 & 1\\ 1 & 0 \end{pmatrix} ^{-1} \\
+	&=
+	\frac{ 1 }{ -1 } \begin{pmatrix} 0 & -1\\ -1 & -1 \end{pmatrix} \\
+	~&=
+	\begin{pmatrix} 0 & 1\\ 1 & 1 \end{pmatrix}
+\end{align*}
+Also invertierbar, nach dem Satz über implizite Funktionen gibt es also eine offene Menge $ U $ um $ (0, 0) $, so dass für $ (x, y) \in U $ gilt: $ F(x, y, u(x, y), v(x, y)) = 0 $
+Außerdem ist
+\[
+	D(u, v)(0, 0) = - \begin{pmatrix} 0 & 1 \\ 1 & 1 \end{pmatrix} \begin{pmatrix} 1 & 0 \\ 1 & 1 \end{pmatrix} = - \begin{pmatrix} 1 & 1 \\ 2 & 1 \end{pmatrix} 
+\]
+Also
+\[
+	\partial_x u (0, 0) = 1, \partial_y u(0, 0) = 1, \partial_x v (0, 0) = 2, \partial_y v (0, 0) = 1
+\]
+
+
+\end{document}
+

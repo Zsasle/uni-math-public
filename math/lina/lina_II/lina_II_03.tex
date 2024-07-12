@@ -1014,4 +1014,200 @@ T
 	Aber $ m_1, m_2 $ sind normiert folgt nun aus \eqref{eq:3.23.3.2}, dass $ \tilde m_1 = m_1 $ und $ \tilde m_2 = m_2 $\qed
 \end{subproof*}
 
+\begin{subtheorem}[Diag. Kriterium für $ \MinPol T $]
+	(Umkerhung von Prop. \ref{3.19.7})
+	$ T $ ist diagonalisierbar $ \iff \MinPol T $ zerfällt in verschiedene lineare Faktoren in $ K[x] $.
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{3.23.4}]
+	\begin{description}
+		\item[``$ \implies  $''] siehe Prop \ref{3.19.7}
+		\item[``$ \impliedby  $'']
+			folgt von \textbf{Satz \ref{3.23.2}}:
+			Seien $ p_i $ alle linear für alle $ i $, also ist $ p_i = \MinPol T = \left( x - c_1 \right) \dotsb \left( x - c_k \right)  $ wobei $ c_i \neq c_j $ für $ 1 \leq i \neq j \leq k $.
+			In diesem Fall nach Satz \ref{3.23.2} $ W_i = \Kern(T - c_i I) =  $ der Eigenraum zum Eigenwert $ c_i $.
+			Satz \ref{3.23.2} liefert $ V = W_1 \oplus \dotsb \oplus W_k $, also hat $ V $ (wegen Lemma \ref{3.23.1}) eine Basis von Eigenvektoren. \qed
+	\end{description}
+\end{subproof*}
+
+\subsubsection{Jordanketten, Jordan Zelldn und die Jordan Normalform.}
+\begin{subdefinition}
+	Sei $ c \in K $ Eigenwert für $ T $, $ 0 \neq v_1 \in V $ Eigenvektor zum $ c $.
+	Sei $ l \in \N  $ und $ v_2, \dotsc, v_l \in V $.
+	Der Vektoren-Tupel $ \left( v_1, \dotsc, v_l \right)  $ ist eine Jordankette der Länge $ l $ zum Eigenwert $ c $, falls
+	\[
+		\left( T - cI \right) v_i = v_{i - 1} \text{ für $ i = 2, \dotsc, l $} 
+	\]
+	\[
+		\left( T - cI \right) v_i = 0 \text{ für $ i = 1 $} 
+	\]
+\end{subdefinition}
+
+\begin{sublemma}
+	Sei $ \mathcal{B} = (v_1, \dotsc, v_l) $ eine Jordankette.
+	Dann ist $ \left\{ v_1, \dotsc, v_l \right\}  $ linear unabhängig und
+	\[
+		W \coloneqq \Span \left\{ v_1, \dotsc, v_l \right\} 
+	\]
+	ist $ T $-invariant.
+	Die Matrixdarstellung $ [T_W]_\mathcal{B}  $ ist \textbf{die Jordan Zelle
+	\[
+		J_l(c)
+	\]
+	der Dimension $ l $ zum Eigenwert $ c $}.
+	Es gilt:
+	\[
+		[T_W]_{\mathcal{B} } = \begin{pmatrix} 
+			c & 1 & 0 & \hdots & 0 \\
+			0 & c & 1 &  \ddots & \vdots \\
+			\vdots & \ddots & \ddots & \ddots & \\
+			0 & & \hdots & c & 1 \\
+			0 & & \hdots &   & c \\
+		\end{pmatrix} 
+	\]
+\end{sublemma}
+
+\subsection{Skript 24}
+\setcounter{subenvironmentnumber}{-1}
+
+\begin{subnote}[Erinnerung]
+	Sei $ W \subseteq V $ und $ W^\prime \subseteq V $ so, dass $ V = W \oplus W^\prime  $, dann heißt \textbf{$ W^\prime  $ Komplement von $ W $ in $ V $}.
+\end{subnote}
+
+\begin{subnote}[Bemerkung]
+	Sei $ W \subseteq V $ und $ v_1, \dotsc, v_s \in V $ linear unabhängig so, dass $ \Span \left\{ v_1, \dotsc, v_s \right\} \cap W = \left\{ 0 \right\}  $.
+	Dann kann man $ \left\{ v_1, \dotsc, v_s \right\}  $ zu einer Basis von einem Komplement von $ W $ fortsetzen.
+\end{subnote}
+\begin{subproof*}[Bemerkung \ref{3.24.1}]
+	ÜA
+\end{subproof*}
+
+\begin{subtheorem}[Jordan Normalform]
+	Sei $ \MinPol T = (x - c)^{r}  $, mit $ c \in K $.
+	Dann hat $ V $ eine Basis aus Jordanketten zum Eigenwert $ c $ ({\color{gadse-red}eine Jordanbasis})
+	Die längsten Ketten haben die Länge $ r $, die Anzahl der Ketten in jeder Länge ist eindeutig bestimmt.
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{3.24.2} Jordan Normalform]
+	Beobachte $ \Kern (T - cI) \subseteq \dotsb \subseteq \Kern (T - cI)^{r} = V $.\\
+	\textbf{Behauptung:}
+	Seien $ j \geq 2 $ und $ v^1, \dotsc, v^s \in \Kern(T - cI)^j $ linear unabhängig und $ \Span \left\{ v^1, \dotsc, v^s \right\} \cap \Kern (T - cI) ^{j - 1} = \left\{ 0 \right\}  $.
+	\textbf{Dann gelten}:
+	\begin{enumerate}[label=\arabic*.]
+		\item $ w^1 \coloneqq \left( T - cI \right) v^1, \dotsc, w^s \coloneqq (T - cI) v^s \in \Kern(T - cI)^{j - 1}  $ sind linear unabhängig und
+		\item $ \Span \left\{ w^1, \dotsc, w^s \right\} \cap \Kern (T - cI)^{j - 1} = \left\{ 0 \right\}  $
+	\end{enumerate}
+	\textbf{Bew. der Beh.:}
+	\begin{enumerate}[label=\arabic*.]
+		\item $ 0 = ( T - cI )^{j} v^i = \left( T - cI \right) ^{j - 1} \underbrace{\left( T - cI \right) v^i}_{w^i} $.
+			\begin{itemize}
+				\item Sei
+					\[
+						\sum_{i=1}^{s} w^i = 0,
+					\]
+					so
+					\[
+						\sum_{i=1}^{s} c_i (T - cI) v^{i} = 0
+					\]
+					Also
+					\[
+						\left( T - cI \right) \sum_{i=1}^{s} c_i v^i = 0.
+					\]
+					Also
+					\[
+						\sum_{i=1}^{s} c_i v^i \in \Kern (T - cI) ^{j - 1}
+					\]
+					(weil $ \left( T - cI \right) ^{j - 1} \left( \sum_{}^{} c_i v^i \right) \left( T - cI \right) ^{j-2} \underbrace{\left( T - cI \right) \left( \sum_{}^{} c_i v^i \right) }_{0} = 0 $)
+					Also ist
+					\[
+						\sum_{i=1}^{s} c_i v^i \in \Span \left\{ v^1, \dotsc, v^s \right\} \cap \Kern \left( T - cI \right) ^{j - 1} .
+					\]
+					Also
+					\[
+						\sum_{i=1}^{s} c_i v^i = 0 \bot\qed
+					\]
+			\end{itemize}
+		\item Betrachte $ \sum c_i w^i $ so, dass
+			$ \left( T - cI \right) ^{j - 2} \left( \sum c_i w^i \right) = 0 $.
+			Dann ist $ (T - cI)^{j - 1} \left( \sum c_i v^i \right) = 0 $,
+			so $ \sum c_i v^i = 0 $, so $ (T - cI)v^i = 0 = \sum c_i w^i $\qed
+	\end{enumerate}
+	Wir bauen nun eine Basis aus Jordanketten folgendermaßen:
+	\begin{itemize}
+		\item $ n_r = \dim \Kern (T - cI)^{r} - \dim \Kern \left( T - cI \right) ^{r - 1}  $ und schreibe
+			\[
+				\Kern \left( T - cI \right) ^{r} = V = V_r \oplus \Kern \left( T - cI \right) ^{r - 1} .
+			\]
+			Sei $ \left\{ v_r^1, \dotsc, v_r^{n_r}  \right\}  $ eine Basis für $ V_r $.
+			Setze
+			\[
+				v_{r - 1} ^1 \coloneqq (T - cI)v_r^1, \dotsc, v_{r - 1}^{n_r} \in \Kern \left( T - cI \right) ^{r - 1} 
+			\]
+			und ergänze zu einer Basis von einem Komplement $V_{r - 1} $ von $\Kern(T - cI)^{r - 2}$ in $ \Kern (T -cI)^{r - 1}  $.
+		 	\[
+				\left\{ v_{r - 1} ^1, \dotsc, v_{r - 1} ^{n_r} , v_{r - 1} ^{n_r + 1} , \dotsc, v_{r - 1} ^{n_r + n_{r - 1} }  \right\}
+			\]
+			Also ist $ n_{r - 1} = \dim \Kern (T - cI)^{r - 1} - \dim \Kern (T - cI)^{r - 2} - n_r $ und $ \Kern (T - cI)^{r - 1} = V_{r - 1} \oplus \Kern(T - cI)^{r - 2}  $.
+			Wir verfahren so weiter für $  i = r - 2 , \dotsc, 1 $.
+			Dabei berechnen wir immer:
+			\[
+				\color{gadse-red}
+				n_i \coloneqq \dim \Kern (T - cI)^{i} - \dim \Kern \left( T - cI \right) ^{i - 1} - n_r - \dotsb - n_{i + 1} .
+			\]
+			Im letztem Schrirtt bekommen wir
+			\[
+				v_1 = (T - cI) v_2^1, \dotsc, v_1^{n_r + \dotsb + n_2} = \left( T - cI \right) v_2^{n_r + \dotsb + n_2} , \dotsc
+			\]
+			welches wir zu einer Baiss von $ \Kern (T - cI) $ ergänzen
+			\[
+				v_1^1, \dotsc, v_1^{n_r + \dotsb + n_2} , v_1^{n_r + \dotsb n_2 + 1} , \dotsc, v_1^{n_r + \dotsb + n_2 + n_1} 
+			\]
+			Insbesondere
+			\[
+				n_1 = \dim \Kern(I - cI)^1 - \dim \Kern(T - cI)^0 - n_r - \dotsb - n_2 = \dim \Kern(T - cI) - \sum_{i=2}^{r} n_i
+			\]
+			Dies ist die Gestalt der Jordanbasis für $ V $, die wir so erhalten (wobei jede ``Spalte'' hierunter ist eine Jordankette):
+			\[
+				\mathcal{B} =
+				\begin{array}{c c c | c c c | c | c c c}
+					v_r^1, & \dotsc, & v_r^{n_r} &&& & &&& \\
+					v_{r - 1} ^1, & \dotsc, & v_{r - 1} ^{n_r} , & v_{r - 1} ^{n_r + 1} , & \dotsc, & v_{r - 1} ^{n_r + n_{r - 1} } \\
+						      & \vdots & & & \vdots & & &&& \\
+					v_1^1, & \hdots, & v_1^{n_r} , & v_1^{n_r + 1} , & \hdots, & v_1^{n_r + n_{r - 1} } , & \hdots & v_1^{n_r + \dotsb + n_2 + 1} , & \hdots, & v_1^{n_r + \dotsb + n_2 + n_1} 
+				\end{array}
+			\]
+			(Also $ n_r $ Jordanketten der Länge $ r $, $ n_{r - 1}  $ Jordanketten der Länge $ r - 1 $, \ldots, $ n_1 $ Jordanketten der Länge 1)\qed
+	\end{itemize}
+\end{subproof*}
+
+\begin{subnote}
+	\[
+		[T]_{\mathcal{B} } =
+		\begin{pmatrix} 
+			J_r(c) \\
+			& \ddots \\
+			&& J_r(c) \\
+			&&& \ddots \\
+			&&&& J_1(c) \\
+			&&&&& \ddots \\
+			&&&&&& J_1(c)
+		\end{pmatrix} 
+	\]
+	wobei die Jordanzelle $ J_i(c) $ $ n_i $-mal erscheint
+\end{subnote}
+
+\begin{subcorollary}
+	Falls $ \MinPol T $ (oder $ \CharPol T $ zerfällt über $ K $, dann hat $ V $ eine Basis von Jordanketten zu den verschiedenen Eigenwert.
+\end{subcorollary}
+\begin{subproof*}[Korollar \ref{3.24.4}]
+	$ \MinPol T = \left( x - c_1 \right) ^{r_1} \dotsb (x - c_k)^{r_k}  $ Primzerlegung Satz $ \ref{3.23.2} $ liefert
+	\[
+		V = W_1 \oplus \dotsb \oplus W_k
+	\]
+	mit $ W_i $ $ T $-inv- und $ \MinPol T_{W_i} = \left( x - \subset c_i \right) ^{r_i}  $ $ \forall i = 1, \dotsc, k $.
+	Die Jordan nOrmalform lierfert Basen $ \mathcal{B} _{c_i}  $ con Jordanketten für $ T_{W_i}  $ für jeden Eigenwert $ c_i $.
+	Setze
+	\[
+		\mathcal{B} = \bigcup_{i = 1} ^{k} \mathcal{B} _{c_i} .\qed
+	\]
+\end{subproof*}
+
 

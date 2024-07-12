@@ -1,0 +1,166 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{tabularray}
+\usepackage[dvipsnames]{xcolor}
+
+\makeatletter
+\newcommand{\qed}{\@ifstar\@qedwhite\@qedblack}
+\DeclareRobustCommand{\@qedblack}{%
+        \ifmmode \tag*{$\blacksquare$}%
+        \else \leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill\quad\hbox{$\blacksquare$}%
+        \fi%
+}
+\DeclareRobustCommand{\qedwhite}{%
+        \ifmmode \tag*{$\Box$}%
+        \else \leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill\quad\hbox{$\Box$}%
+        \fi%
+}
+\makeatother
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+%====================================================================
+% SETZEN SIE HIER DIE NUMMER DES ÜBUNGSBLATTES UND IHRE(N) NAMEN EIN
+% FILL IN THE SHEET NUMBER AND YOUR NAME(S)
+%====================================================================
+\newcommand{\sheetNum}{9} % Nummer des Übungsblatt / Sheet number
+\newcommand{\studentOne}{Alexandros Paraskevaidis} % Name 1
+\newcommand{\studentTwo}{Elias Gestrich} % Name 2
+%====================================================================
+
+\setkomafont{sectioning}{\normalfont\normalcolor\bfseries}
+\usepackage[left=2.5cm,right=2.5cm,top=2.0cm,bottom=2.5cm]{geometry}
+
+% Hyperlinks
+\usepackage{hyperref}
+
+% Pseudocode
+\usepackage[german,vlined,longend,ruled,linesnumbered]{algorithm2e}
+\SetKw{KwDownTo}{downto}
+\SetKw{KwAnd}{and}
+\SetKw{KwOr}{or}
+\DontPrintSemicolon
+
+% Grafiken
+\usepackage{graphicx}
+\graphicspath{{img/}}
+\usepackage{tikz}
+\usetikzlibrary {arrows.meta}
+
+% Makros für Aufgaben und Teilaufgaben
+\usepackage{marginnote}
+\reversemarginpar
+\setlength{\parindent}{0cm}
+\newcommand{\task}[1]{\subsubsection*{#1}}
+\newcommand{\subtask}[1]{\marginnote{#1)}}
+
+
+\begin{document}
+
+%====================================================================
+\begin{small}
+\begin{minipage}{0.5 \linewidth}
+  Algorithmen und Datenstrukturen\\
+  Sommersemester 2024
+\end{minipage}
+\begin{minipage}{0.5\linewidth}
+  \begin{flushright}
+    \studentOne\\
+    \studentTwo
+  \end{flushright}
+\end{minipage}
+\end{small}
+\begin{center}
+\begin{sffamily}\Large\bfseries \sheetNum. Übungsblatt\end{sffamily}
+\end{center}
+%====================================================================
+
+
+\task{Aufgabe 1 - Raumzeit}
+$ [1,3], [3.5, 5], [5.5, 11.5], [17, 19], [21, 22], [25, 27], [30, 31] $\\
+$ I_1 = \left\{ [1, 5], [5.5, 11.5], [14, 24], [25, 27], [30, 31] \right\}  $,
+$ I_2 = \left\{ [1, 3], [3.5, 5], [7, 15], [16, 26] \right\}  $,
+$ I_3 = \left\{ [1, 18], [20, 24] \right\}  $,
+$ I_4 = \left\{ [2, 4], [4, 6], [8, 12], [17, 19], [21, 22], [23, 32] \right\}  $,
+$ I_5 = \left\{ [10, 20], [21, 27] \right\}  $.\\
+$ D(26) = 4, D(I) = 5 $
+
+\task{Aufgabe 2 - Profitabel}
+Sortiere Jobs $ i $ nach Profit $ p_i $.
+Gehe nun vom Job mit höchsten Profit zum niedrigsten und führe folgenden Algorithmus aus:
+Teile den Job $ i $ der Zeiteinheit vor $ t_i $ ein, sodass er genau dann fertig wird, wenn die Deadline ist.
+Ist zu dieser Zeit schon ein Job geplant und der Zeitslot vorher ist nach Zeitpunkt 0, dann teile den Job zu dieser Zeit an.
+Sonst lasse den Job und er wird nicht ausgeführt.\\
+Korrektheit: Da alle Jobs eine Zeiteinheit dauern, müsste wenn der Algorithmus nicht Korrekt ist, ein Job durch einen anderen ersetzt werden.
+Da der Algorithmus aber immer den Profitablesten nimmt, heißt dies, dass ein profitablerer Job, durch einen ersetzt wird, der weniger profitabel ist.
+
+\task{Aufgabe 3 - Manchmal optimal}
+\begin{description}
+	\item[$ \left| S \right| \leq 1 $] trivial, man kann sowieso nichts aufteilen.
+	\item[$ \left| S \right| = 2 $] Sei $ S = \left\{ s_1, s_2 \right\}  $ mit $ s_1 \leq  s_2 $, dann ist $ 0 \leq 2 s_1 \iff s_2 - s_1 \leq s_2 + s_1 $, also ist es schlauer $ s_1 $ und $ s_2 $ in unterschiedliche Haufen zu packen.
+	\item[$ \left| S \right| = 3 $] Sei $ S = \left| s_1, s_2, s_3 \right|  $ mit $ s_1 \leq s_2 \leq s_3 $.
+		Dann sortiert der Greedy Algorithmus $ S_1 = \left\{ s_3 \right\} , S_2 = \left\{ s_1, s_2 \right\}  $, also zu zeigen
+		$ \left| s_3 + s_2 - s_1 \right| \geq   \left| s_3 - s_2 - s_1 \right| \leq \left| s_3 + s_1 - s_2 \right| $,
+		hierfür, für $ s_1 + s_2 \leq  s_3 $:
+		$ \left| s_3 + s_2 - s_1 \right| \geq s_3 \geq s_3 - s_2 - s_1 = \left| s_3 - s_2 - s_1 \right|   $,
+		$ \left| s_3 + s_1 - s_2 \right| = s_3 + s_1 - s_2 \geq s_3 - s_1 - s_2 = \left| s_3 - s_1 - s_2 \right|  $
+		für $ s_1 + s_2 > s_3 $:
+		$ | s_3 + \underbrace{s_2 - s_1}_{\geq 0} | \geq s_3 = s_3 + s_3 - s_3 \geq s_2 + s_1 - s_3 = \left| s_3 - s_2 - s_1 \right|   $,
+		$ | \underbrace{s_3 - s_2}_{\geq 0} + s_1 | = s_3 + s_1 - s_2 \geq s_3 + s_1 - s_3 \geq s_2 + s_1 - s_3 = \left| s_3 - s_2 - s_1 \right| $, was zu zeigen war.
+	\item[$ \left| S \right| = 4 $]
+		Sei $ S = \left\{ s_1, s_2, s_3, s_4 \right\}  $ mit $ s_1 \leq s_2 \leq s_3 \leq s_4 $.
+		Nach vorherigem Schritt sortiert der Greedy Algorithmus die ersten drei Elemente wie folt ein:
+		$ S_1 = \left\{ s_4 \right\} , S_2 = \left\{ s_2, s_3 \right\}  $, für $ s_2 + s_3 \geq s_4 $ wird dann $ s_1 in S_1 $ gepackt, sonst in $ S_2 $.
+		\begin{description}
+			\item[$ s_2 + s_3 \geq s_4 $:] 
+				Zu zeigen: $ \left| s_4 + s_1 - s_2 - s_3 \right| \leq | s_4 + s_1 + s_2 - s_3 | $:
+				Für $ s_4 + s_1 \geq s_2 + s_3 $:
+				$ \left| s_4 + s_1 + s_2 - s_3 \right| = s_4 + s_1 + s_2 - s_3 \geq s_4 + s_1 - s_2 - s_3 = \left| s_4 + s_1 - s_2 - s_3 \right|  $\\
+				Für $ s_4 + s_1 < s_2 + s_3 $:
+				$ \left| s_4 + s_1 + s_2 - s_3 \right| = s_4 + s_1 + s_2 - s_3 \geq s_3 + s_1 + s_2 - s_4 \geq s_3 + s_2 - s_4 - s_1 = \left| s_4 + s_1 - s_2 - s_3 \right|  $, analog für $ \left| s_4 + s_1 - s_2 - s_3 \right| \leq \left| s_4 + s_1 + s_3 - s_2 \right| $.\\
+				Zu zeigen $ \left| s_4 - s_1 - s_2 - s_3 \right| \geq \left| s_4 + s_1 - s_2 - s_3 \right|  $:
+				$ \left| s_4 - s_1 - s_2 - s_3 \right| = s_1 + s_2 + s_3 - s_4 \geq  s_2 + s_3 - s_1 - s_4 = \left| s_4 + s_1 - s_2 - s_3 \right|  $ 
+			\item[$ s_2 + s_3 < s_4 $]
+				Zu zeigen $ \left| s_4 - s_3 - s_2 - s_1 \right| \leq \left| s_4 + s_1 - s_2 - s_3 \right|  $:
+				Für $ s_4 \geq s_1 + s_2 + s_3 $:
+				$ \left| s_4 + s_1 - s_2 - s_3 \right| = s_4 + s_1 - s_2 - s_3 \geq s_4 - s_1 - s_2 - s_3 = \left| s_4 - s_3 - s_2 - s_1 \right|  $
+				sonst:
+				$ \left| s_4 + s_1 - s_2 - s_3 \right| = s_4 + s_1 - s_2 - s_3 \geq s_2 + s_3 + s_1 - s_4 = \left| s_4 - s_3 - s_2 - s_1 \right|  $, rest ist analog.
+		\end{description}
+	\item[$ \left| S \right| = 5 $]
+		Wähle $ S = \left\{ 10, 8, 6, 5, 4 \right\}  $, dann sortiert der Greedy-Algorithmus: $ S_1 = \left\{ 10, 5 \right\}, S_2 = \left\{ 8, 6, 4 \right\}   $ so, dass $ \left| 10 + 5 - 8 - 6 - 4 \right| = 3 $, aber für $ S_1 = \left\{ 10, 6 \right\} , S_2 = \left\{ 8, 5, 4 \right\}  $, wäre $ \left| 10 + 6 - 8 - 5 - 4 \right| = 1 $
+\end{description}
+
+\task{Aufgabe 4 - Mit Sack und Pack}
+\begin{enumerate}[label=(\alph*)]
+	\item 
+		Wenn alle Gegenstände das gleiche Gewicht haben, dann ist die Anzahl der Gegenstände die in den Rucksack passen fest.\\
+		\textbf{Beh.:} Wenn man die teuersten Gegenstände mitnimmt, ist der Rucksack optimal gepackt.\\
+		\textbf{Bew.:} Zum Widerspruch: Wir haben ein Gegenstand mitgenommen, der nicht zu den teuersten gehört, dafür haben wir einen teureren nicht mitgenommen.
+		Tausche diese beiden Gegenstände, dann ist der Rucksack besser bepackt, also war der Rucksack nicht optimal gepackt.
+
+		Wie können wir die teuersten Gegenstände mitnehmen? Sortiere in polynomieller Zeit die Gegenstände nach Wert, nicht-aufsteigend, dann stopfe solange die teuersten Gegenstände in den Rucksack, bis dieser voll ist.
+	\item 
+		Bins mit größe 6, Volumen von Gegenständen: 5, 2, 6, 1
+		First Fit: $ \left\{ 5, 1 \right\} , \left\{ 2 \right\} , \left\{ 6 \right\}  $,
+		Next Fit : $ \left\{ 5 \right\} , \left\{ 2 \right\} , \left\{ 6 \right\}, \left\{ 1 \right\}   $
+
+		2-Approximation:
+		\textbf{Beh.:} der Durchschnitt der Inhalte $ B - 1 $ Bins ist mind. die Hälfte des gesamten Fassungsvermögen.
+		Betrachte: Die Fülle eines Bins ist mindestens so groß wie das Volumen, das dem letzem Bin fehlt, sonst würde der Inhalt dieses Bins in den letzen passen.
+		Packe die Bins also in Zweier-Paare, sodass maximal ein Bin ohne Paar übrigbleibt, sodass Bin 1 und Bin 2 ein Paar, Bin 3 und Bin 4 ein anderes und so weiter, alle einzelnen Paare haben zusammen mindestens den Inhalt von zwei Bins, also durchschnittlich ist mindestens voll.
+		Wenn man nun den Durchschnitt dieser Paare nimmt, sind wiederum alle durchschnittlich mind. zur Hälfte gefüllt.
+		Der übrig bleibende Bin ist konstant maximal 1 Bin.
+
+\end{enumerate}
+
+
+\end{document}

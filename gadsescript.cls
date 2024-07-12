@@ -723,6 +723,7 @@
 \newcommand{\OO}{\emptyset}
 \newcommand{\I}{\mathds{1}}
 \newcommand{\dd}{~\text{d}}
+\newcommand{\ddd}{\partial}
 \newcommand{\mathsec}[2]{\texorpdfstring{$#1$}{#2}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%

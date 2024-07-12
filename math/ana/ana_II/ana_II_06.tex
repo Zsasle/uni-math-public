@@ -284,7 +284,7 @@ Frage: Auch hinreichend?
 	\]
 	stetig differenzierbar.
 \end{corollary}
-\begin{proof*}[Korollar ref{6.8}]
+\begin{proof*}[Korollar \ref{6.8}]
 	Nach Korollar \ref{6.6}: $ f(U) $ offen.
 	Sei nun $ b \in f(U) $ und sei $ a = f^{-1} (b) $.
 	Nach Satz \ref{6.5} existiert eine offene Umgebung $ W \subseteq f(U) $ von b, sodass $ f_{|W} ^{-1}  $ stetig differenzierbar ist.\qed
@@ -658,7 +658,46 @@ Allgemein ist eine solche nicht bekannt.
 	\[
 		(\partial_n h) (a) = \lambda (\partial_n f) (a) \qed
 	\]
-	
 \end{proof*}
 
+\textbf{Letztes Mal:} Lagrange-Multiplikatoren
+\begin{itemize}
+	\item $ U \subset \R ^n $ offen, $ f: U \to \R  $ stetig differenzierbar, $ m \coloneqq \left\{ x \in U: f(x) = 0 \right\}  $.
+		Sei $ a \in m : Df(a) \neq 0 $. Weiter sei $ j \coloneqq U \to \R  $ stetig differenzierbar, sodass $ h $ unter $ m $ ein lokales Extremum besitzt.
+		Dann ex. $ \lambda \in \R  $ mit
+		\[
+			Dh(a) = \lambda Df(a)
+		\]
+\end{itemize}
+
+Finde diejenigen Punkte $ (x, y, z) \in \mathbb{S} ^{2}  $, die von $ a = (1, 1, 1) $ den kleinsten/größten Abstand haben.
+Setze:
+\[
+	f(x, y, z) = x^2 + y^2 + z^2 - 1 \text{ und} 
+\]
+\[
+	h(x, y, z) = \left( x - 1 \right) ^2 + (y-1)^2 + (z - 1)^2.
+\]
+Auf $ \mathbb{S}^2 $ ist $ Df(x, y, z) \neq 0 $.
+Angenommen $ (x, y, z) $ lok. Extremstelle.
+Dann: 
+\[
+	Dh(x, y, z) = \lambda Df(x, y, z) \iff \begin{pmatrix} 2(x - 1) \\ 2(y - 1) \\ 2(z - 1) \end{pmatrix} = \lambda \begin{pmatrix} 2x \\ 2y \\ 2z \end{pmatrix} 
+\]
+Also $ x - 1 = \lambda x \implies x = \frac{ 1 }{ 1 - \lambda } = y = z $.
+Andererseits gilt $ 1 \overset{!}{=} x^2 + y^2 + z^2 = \frac{ 3 }{ (1 - \lambda)^2 }  $.
+Also $ \lambda = 1 \pm \sqrt{3}  $.
+Also sind $ P_1 = \frac{ 1 }{ \sqrt{3}  } (1, 1, 1) $ und $ P_2 = - \frac{ 1 }{ \sqrt{3}  } (1, 1, 1) $ Kandidat*innen für lok Extrema.
+Da $ \mathbb{S} $ kompakt, ex. Max./Min durch Einsetzen in $ h $ ergibt sich $ P_1 $ also Min. und $ P_2 $ 
+
+\begin{description}
+	\item[1-Nebenbedingung:]
+		\[
+			D(f(x, y, z) + \lambda h(x, y, z))
+		\]
+	\item[$ n $-Nebenbedingungen:] 
+		\[
+			D \left( f(x, y, z) + \sum_{j=1}^{n} \lambda_j h_j (x, y, z) \right) = 0
+		\]
+\end{description}
 
