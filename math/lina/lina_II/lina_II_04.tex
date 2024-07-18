@@ -398,7 +398,7 @@ Eigenschaften von $ T^* $
 	$ \implies c \in \R  $.\qed
 \end{subproof*}
 
-\begin{subnote}[Matrixdarstellung]
+\begin{subnote*}[Matrixdarstellung]
 	Sei $ \mathcal{X}  $ eine orthonormale Basis (Gram-Schmidt). In diesem Fall ist $ \mathcal{Y}  $ von II gleich $ \mathcal{X}  $. (d.h. $ \mathcal{X}  $ ist selbstdual).
 	Sei $ T $ Hermite'sch, $ T = T^* $, dann bekommen wir
 	\[
@@ -407,6 +407,150 @@ Eigenschaften von $ T^* $
 	Das heißt\\
 	$ a_{ij} = \overline{a_{ji} }  $ (A ist komplex Hermite'sch). ($ \C  $)\\
 	$ a_{ij} = a_{ji} $ ($ A $ ist symmetrisch) ($ \R  $)
+\end{subnote*}
+
+\begin{subnote}
+	\begin{enumerate}[label=(\roman*)]
+		\item umgekehrt sei $ A $ Hermite'sche Matrix, und $ \mathcal{X}  $ eine orthonormale Basis für $ V $, $ \mathcal{X}  = \left\{ x_1, \dotsc, x_n \right\}  $.
+			Dann ist der Operator $ T_A \in \mathcal{L} (V, V) $ ist auch Hermite'sch
+			(\textbf{Erinnerung:} 
+			\[
+				T_A \left( \sum_{i=1}^{n} \varepsilon _i x_i \right) \coloneqq A \begin{pmatrix} \varepsilon_1 \\ \vdots \\ \varepsilon _n \end{pmatrix} 
+			\]
+		\item $ T_1, T_2 $ Hermite'sch $ \implies T_1 + T_2 $ 
+		\item Sei $ T \neq 0 $ Hermite'sch und $ \alpha \in K $, $ \alpha \neq 0 $, dann ist $ \alpha T $ Hermite'sch genau dann wenn $ \alpha \in \R  $ 
+		\item $ T $ ist invertierbar und Hermite'sch $ \iff T^{-1}  $ Hermite'sch
+	\end{enumerate}
 \end{subnote}
 
+\begin{subtheorem}
+	Seien $ T_1, T_2 $ Hermite'sch. Es gilt: $ T_1 T_2 $ ist Hermite'sch genau dann wenn
+	\[
+		T_1 T_2 = T_2 T_1
+	\]
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{4.27.4}]
+	Wir berechnen:
+	\[
+		\left( T_1 T_2 \right) ^* = T_1 T_2 \iff T_2^* T_1^* = T_1 T_2 \iff  T_2 T_1 = T_1 T_2 \qed
+	\]
+\end{subproof*}
+
+\begin{subtheorem}
+	\begin{enumerate}[label=(\roman*)]
+		\item Sei $ T_1 $ Hermite'sch und $ T_2 \in \mathcal{L} (V, V) $, $ T_2 \neq 0 $ dann ist $ T_2^* T_1 T_2 $ Hermite'sch
+		\item umgekehrt $ T_2^* T_1 T_2 $ Hermite'sch ist und $ T_2 $ invertierbar, dann ist $ T_1 $ Hermite'sch
+	\end{enumerate}
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{4.27.5}]
+	\begin{enumerate}[label=(\roman*)]
+		\item \[
+				\left( T_2^* T_1 T_2 \right) ^* = T_2^* T_1^* T_2^{* *} = T_2^* T_1 T_2
+		\]
+	\item 
+		\[
+			T_2^* T_1 T_2 = \left( T_2^* T_1 T_2 \right) ^* = T_2^* T_1^* T_2
+		\]
+		Nun ist $ T_2 $ invertierbar, es folgt aus Bemerkung \ref{4.27.3}, dass $ T_2^* $ invertierbar ist:
+		Die letzte Gleichung multiplizieren links mit $ \left( T_2^* \right) ^{-1}  $ und rechts mit $ T_2^{-1}  $ und bekommen $ T_1 = T_1^* $\qed
+	\end{enumerate}
+\end{subproof*}
+
+\subsubsection{Cartesische Zerlegung eines Operators}
+\begin{subdefinition}
+	$ T \in \mathcal{L} (V, V) $ heißt schief Hermite'sch, wenn $ T^* = - T $
+\end{subdefinition}
+
+\begin{subnote}
+	Sei $ T \in \mathcal{L} (V, V) $ 
+	\begin{itemize}
+		\item schreibe
+			\begin{equation}
+				\label{eq:4.27.7.1}
+				\tag{$ \dag $}
+				T = T_1 + T_2
+			\end{equation}
+			wobei
+			\[
+				T_1 \coloneqq \frac{ T + T^* }{ 2 } \text{ und} 
+			\]
+			\[
+				T_2 \coloneqq \frac{ T - T^* }{ 2 } 
+			\]
+			bemerke, dass $ T_1^* = T_1 $ Hermite'sch und $ T_2^* = - T^* $ schief Hermite'sch
+		\item $ K = C : T_2 $ ist schief Hermite'sch $ \iff $ $ T_2 = i T_3 $ wobei $ T_3 $ komplex Hermite'sch ist
+		\item In diesem Fall ist \eqref{eq:4.27.7.1} äquivalent zu
+			\[
+				T = T_1 + iT_3
+			\]
+	\end{itemize}
+\end{subnote}
+
+\subsection{Skript 28}
+\setcounter{subsubsection}{18}
+\subsubsection{Isometrie}
+\begin{subdefinition}
+	Sei $ U \in \mathcal{L} (V, V) $ $ U $ ist eine \textbf{Isometrie} wenn $ U^* = U^{-1}  $.\\
+	$ K = \R  $ \textbf{orthogonal}\\
+	$ K = \C  $ \textbf{unitär}
+\end{subdefinition}
+
+\setcounter{subenvironmentnumber}{1}
+\begin{subtheorem}
+	Für $ U \in \mathcal{L} (V, V) $sind äquivalent:
+	\begin{enumerate}[label=(\arabic*)]
+		\item $ U^* U = U U^* = \Id $ 
+		\item $ (Ux|Uy) = (x|y) $ $ \forall x, y \in V $ 
+		\item $ \left\| Ux \right\| = \left\| x \right\|  $ $ \forall x \in V $.
+		\item $ \left\| Ux - Uy \right\| = x - y $
+	\end{enumerate}
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{4.28.2}]
+	\begin{description}
+		\item[``(1)$ \implies  $(2)'']
+			\textbf{Berechne:} $ (Ux | Uy) = (x | U^* U y) = (x | y) $
+		\item[``(2)$ \implies  $(3)'']
+			anwenden von (2) mit $ x = y $.
+		\item[``(3)$ \implies  $(1)'']
+			Wir haben wegen Erinnerung 27.0:
+			\[
+				\left( Ux | Ux \right) = (U^* U x | x) = (x | x)
+			\]
+			Also $ \left( [U^* U - \Id]x | x \right) = 0 $ $ \forall x \in V $\\
+			setze: $ T \coloneqq U^* U  - \Id $. wegen \ref{4.27.3} (ii) ist Hermite'sch.
+			Ferner gilt: $ (Tx|x) = 0 $ $ \forall x \in V $\\
+			\textbf{Behauptung:} $ (Tx|y) = 0 $ $ \forall x, y \in V $\\
+			\textbf{Beweis der Behauptung:} benutze folgende Gleichungen für Hermite'sche Operatoren.
+			Für $ K = \R  $:
+			\[
+				2(Tx|y) = (T(x + y) | x + y) - (T(x - y)| x - y) \text{ \textbf{Bitte Prüfen!}} 
+			\]
+			Für $ K = \C  $ 
+			\[
+				4(Tx|y) = (T(x + y)| (x + y)) - (T(x - y) | x - y) + i(T(x + iy)|(x + iy)) - i(T(x - iy)|(x - iy))
+			\]
+			womit die Beh. bewiesen ist.\\
+			Also Beh. gilt insbesondere für $ x = y $. Das heißt: $ (Tx | Tx) = 0 $ $ \forall x \in V $. D.h. $ \left\| Tx \right\| = 0 $ $ \forall x \in V $, also $ Tx = 0 $ $ \forall x \in V $ $ \implies T = 0 $
+	\end{description}
+\end{subproof*}
+
+\begin{subnote}
+	$ U $ Isometrie $ \implies $ (4) $ \left\| Ux - Uy \right\| = \left\| x - y \right\|  $ $ \forall x, y \in V $.
+\end{subnote}
+
+\begin{subtheorem}
+	Eigenwerte von Isometrien haben den absoluten Betrag gleich 1.
+\end{subtheorem}
+\begin{subproof*}[Satz \ref{4.28.4}]
+	Sei $ c \in \C  $ Eigenwert $ x \neq 0 $, $ x \in V $ Eigenvektor.
+	Also $ Ux = cx $. Es ist $ \left\| Ux \right\| = \left\| x \right\|  $ also $ \left\| cx \right\| = \left| c \right| \left\| x \right\| = \left\| x \right\|  $\qed
+\end{subproof*}
+
+\subsubsection{4.28.5}
+Sei $ \mathcal{X} = \left\{ x_1, \dotsc, x_n \right\}  $ eine orthonormale Basis, $ U \in \mathcal{L} (V, V) $.
+Dann ist $ U $ eine Isometrie genau dann wenn
+\[
+	U \mathcal{X} \coloneqq \left\{ Ux_1, \dotsc, Ux_n \right\} 
+\]
+eine orthonormale Basis ist.\qed
 

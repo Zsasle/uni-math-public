@@ -1,0 +1,62 @@
+\documentclass[sectionformat=aufgabe]{gadsescript}
+
+\setsemester{Summer Semester 2024}%
+\setuniversity{University of Konstanz}%
+\setfaculty{Faculty of Science\\(Physics)}%
+\settitle{Übungsblatt 10}
+\setsubtitle{Davina Schmidt, Elias Gestrich}
+
+\sisetup{exponent-mode = input}
+
+\begin{document}
+\maketitle
+
+\section{Ebene elektromagnetische Welle}
+
+\section{Impedanz}
+$ U_{ind} = L \frac{ \dd I }{ \dd t } = L \dot I $, $ U_C = \frac{ Q }{ C }  $, $ U_R = R \cdot I $
+
+Kirchhoff: $ U_1 = U_{ind} + U_{R} + U_{C} $,
+\[
+	\frac{ \dd U_e }{ \dd t } = L \frac{ \dd ^2 I }{ \dd t^2 } + R \cdot \frac{ \dd I }{ \dd t }  + \frac{ 1 }{ C } \cdot I
+\]
+
+komplexer Lösungsansatz nach dem Skript:
+\[
+	U_1 = U_0 \exp i \omega t 
+\]
+$ \implies  $ sinus/cosinus Kurve
+\[
+	I = I_0 \exp i ( \omega t + \varphi )
+\]
+$ \implies  $ selbe Peridendauer, aber möglicher weiße Phasenverschoben?
+
+oben Einsetzen:
+\[
+	i \omega U_1 = - \omega ^2 L I + i \omega R I + \frac{ 1 }{ C } I
+\]
+also
+\[
+	Z_1 = \frac{U_1}{ I }  = \left( i \omega L + R - i\frac{ 1 }{ \omega C } \right)
+\]
+
+$ Z_2 = \frac{ U_2 }{ I } = R  $
+
+
+$ U_2 = R \cdot I = R \cdot \frac{ U_1 }{ R + i\left( \omega L - \frac{ 1 }{ \omega C }  \right)  }  $
+\[
+ 	U_2 = \frac{ 1 }{ 1 + i \left( \omega \frac{ L }{ R } - \frac{ 1 }{ \omega CR }  \right)  } U_1
+	= \frac{ 1 - i \left( \omega \frac{ L }{ R } - \frac{ 1 }{ \omega CR }  \right) }{ 1 + \left( \omega \frac{ L }{ R } - \frac{ 1 }{ \omega CR }  \right) ^2 } U_1
+\]
+\[
+	\left| U_2 \right| = \sqrt{\frac{ 1 + \left( \omega \frac{ L }{ R } - \frac{ 1 }{ \omega CR }  \right) ^2 }{ \left( 1 + \left( \omega \frac{ L }{ R } - \frac{ 1 }{ \omega CR }  \right) ^2 \right) ^2 }} \left| U_1 \right| = \sqrt{\frac{ 1 }{ 1 + \left( \omega \frac{ L }{ R } - \frac{ 1 }{ \omega C R }  \right) ^2 } } \left| U_1 \right| 
+\]
+
+Also maximal wenn
+\[
+	\omega \frac{ L }{ R } - \frac{ 1 }{ \omega C R } = 0 \iff LC = \frac{ 1 }{ \omega^2 } \iff \omega = \frac{ 1 }{ \sqrt{LC}  } 
+\]
+
+
+
+\end{document}

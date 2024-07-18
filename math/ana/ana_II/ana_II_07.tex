@@ -22,13 +22,13 @@
 
 \subsection{\mathsec{\sigma}{}-Algebren \& Messbarkeit}
 \begin{definition}
-	Sei $ \Omega  $ eine Menge, $ \mathcal{A} \subset \mathcal{P} (\Omega) $ (Potenzmenge) heißt \textbf{$ \sigma $-Algebra}, falls
+	Sei $ \Omega  $ eine Menge, $ \mathfrak{A} \subset \mathcal{P} (\Omega) $ (Potenzmenge) heißt \textbf{$ \sigma $-Algebra}, falls
 	\begin{enumerate}[label=(\roman*)]
-		\item $ \OO , \Omega \in \mathcal{A}  $ 
-		\item $ A \in \mathcal{A} \implies A^c \in \mathcal{A}  $ 
-		\item $ A_1, A_2, \dotsc, \in \mathcal{A} \implies \bigcup_{i = 1} ^{\infty} A_i \in \mathcal{A}  $.
+		\item $ \OO , \Omega \in \mathfrak{A}  $ 
+		\item $ A \in \mathfrak{A} \implies A^c \in \mathfrak{A}  $ 
+		\item $ A_1, A_2, \dotsc, \in \mathfrak{A} \implies \bigcup_{i = 1} ^{\infty} A_i \in \mathfrak{A}  $.
 	\end{enumerate}
-	$ (\Omega, \mathcal{A} ) $ heißt \textbf{Messraum}
+	$ (\Omega, \mathfrak{A} ) $ heißt \textbf{Messraum}
 \end{definition}
 \begin{itemize}
 	\item \textbf{Unterschied zur Topologie:} Eine Topologie auf $ \Omega $ ist ein System $ \mathcal{T} \subset \mathcal{P} (\Omega) $ mit
@@ -48,22 +48,22 @@
 	Übungsaufgabe
 \end{proof*}
 
-Damit ist für $ \mathcal{A} \subset \mathcal{P}  $, dann ist $ o(\mathcal{A} ) \coloneqq \bigcap_{} \left\{ \mathcal{B} : \mathcal{B} \text{ $ \sigma $-Algebra mit $ \mathcal{A}  \subset \mathcal{B}  $}  \right\}  $ die kleinste $ \sigma $-Algebra, die $ \mathcal{A}  $ enthält.
+Damit ist für $ \mathfrak{A} \subset \mathcal{P}  $, dann ist $ o(\mathfrak{A} ) \coloneqq \bigcap_{} \left\{ \mathfrak{B} : \mathfrak{B} \text{ $ \sigma $-Algebra mit $ \mathfrak{A}  \subset \mathfrak{B}  $}  \right\}  $ die kleinste $ \sigma $-Algebra, die $ \mathfrak{A}  $ enthält.
 
 \begin{definition}
-	Sei $ (\Omega, \mathcal{T} ) $ ein topologischer Raum. Dann heißt $ \mathcal{B} (\Omega) \coloneqq \sigma(\mathcal{T} ) $.
+	Sei $ (\Omega, \mathcal{T} ) $ ein topologischer Raum. Dann heißt $ \mathfrak{B} (\Omega) \coloneqq \sigma(\mathcal{T} ) $.
 	\begin{itemize}
-		\item $ \mathcal{B} (\Omega) \hat{=}  $ kleinsten $ o $-Algebra, die alle offenen Mengen enthält.
+		\item $ \mathfrak{B} (\Omega) \hat{=}  $ kleinsten $ \sigma $-Algebra, die alle offenen Mengen enthält.
 		\item Auf $ \R ^n $ bilden die bezüglich der euklidischen Norm offenen Mengen eine Topologie.
-			Damit ist $ \mathcal{B} (\R ^n) $ eine kanonische $ o $-Algebra auf $ \R ^n $.
+			Damit ist $ \mathfrak{B} (\R ^n) $ eine kanonische $ \sigma $-Algebra auf $ \R ^n $.
 	\end{itemize}
 \end{definition}
 
 \begin{definition}
-	Seien $ (\Omega_1, \mathcal{A}_1 ), (\Omega_2, \mathcal{A} _2) $ zwei Messräume.
-	$ f : \Omega_1 \to \Omega_2 $ heißt $ (\mathcal{A} _1, \mathcal{A} _2) $ messbar, falls
+	Seien $ (\Omega_1, \mathfrak{A}_1 ), (\Omega_2, \mathfrak{A} _2) $ zwei Messräume.
+	$ f : \Omega_1 \to \Omega_2 $ heißt $ (\mathfrak{A} _1, \mathfrak{A} _2) $ messbar, falls
 	\[
-		\forall A \in \mathcal{A} _2 : f^{-1} (A) \in \mathcal{A} _1.
+		\forall A \in \mathfrak{A} _2 : f^{-1} (A) \in \mathfrak{A} _1.
 	\]
 	\begin{itemize}
 		\item Oft nützlich: Funktionen mit Werten in $ \overline{\R } = \R  \cup \left\{ + \infty, - \infty \right\}  $.
@@ -82,11 +82,11 @@ Damit ist für $ \mathcal{A} \subset \mathcal{P}  $, dann ist $ o(\mathcal{A} ) 
 \end{example}
 
 \begin{definition}
-	Sei $ (\Omega, \mathcal{A} ) $ ein Messraum.
-	Wir nennen $ \mu : \mathcal{A} \to [0, \infty]  $ ein \textbf{Maß}, falls
+	Sei $ (\Omega, \mathfrak{A} ) $ ein Messraum.
+	Wir nennen $ \mu : \mathfrak{A} \to [0, \infty]  $ ein \textbf{Maß}, falls
 	\begin{enumerate}[label=(\roman*)]
 		\item $ \mu ( \OO ) = 0 $,
-		\item Sind $ A_1, A_2, \dotsc, \in \mathcal{A}  $ \textbf{paarweise disjunkt}, so
+		\item Sind $ A_1, A_2, \dotsc, \in \mathfrak{A}  $ \textbf{paarweise disjunkt}, so
 			\[
 				\mu \left( \bigcup_{i = 1} ^{\infty} A_i \right) = \sum_{i=1}^{\infty} \mu(A_i).
 			\]
@@ -100,7 +100,7 @@ Damit ist für $ \mathcal{A} \subset \mathcal{P}  $, dann ist $ o(\mathcal{A} ) 
 
 Zur ``Volumenmessung'' in $ \R ^n $:
 \begin{theorem}
-	Es gibt  genau ein Maß $ \mathcal{L} ^n $ auf $ \mathcal{B} \left( \R ^n \right)  $ ($ \hat{=}  $ Borelsche $ \sigma $-Algebra), das für alle $ a_1 <b_1, \dotsc, a_n < b_n $ gilt:
+	Es gibt  genau ein Maß $ \mathcal{L} ^n $ auf $ \mathfrak{B} \left( \R ^n \right)  $ ($ \hat{=}  $ Borelsche $ \sigma $-Algebra), das für alle $ a_1 <b_1, \dotsc, a_n < b_n $ gilt:
 	\[
 		\mathcal{L} ^n \left( (a_1, b_1) \times \dotsb \times (a_n, b_n) \right) = \prod_{i=1}^{n} (b_i - a_i) 
 	\]
@@ -127,10 +127,10 @@ Sei $ (\Omega, \Sigma, \mu) $ ein Maßraum (Menge, $ \sigma $-Algebra, Maß).
 		\]
 		einfach, so sei
 		\[
-			\int _{\Omega} f \dd \mu \coloneqq \sum_{i=1}^{N} \alpha_i \mu (A_i) \qquad (A_i \in \mathcal{A} )
+			\int _{\Omega} f \dd \mu \coloneqq \sum_{i=1}^{N} \alpha_i \mu (A_i) \qquad (A_i \in \mathfrak{A} )
 		\]
 		Hierbei $ \alpha_1, \dotsc, \alpha_N \geq 0 $.
-	\item Ist $ f : \Omega \to \overline{\R } _+ = \R _{\geq 0} \cup \left\{ \infty \right\}  $ messbar (also $ \Sigma \text{-}  \mathcal{B} (\overline{\R } _+) $-messbar), so existiert eine folge $ (f_i) $ von einfachen Funktionen mit $ f_i \nearrow f $.
+	\item Ist $ f : \Omega \to \overline{\R } _+ = \R _{\geq 0} \cup \left\{ \infty \right\}  $ messbar (also $ \Sigma \text{-}  \mathfrak{B} (\overline{\R } _+) $-messbar), so existiert eine folge $ (f_i) $ von einfachen Funktionen mit $ f_i \nearrow f $.
 	\item Für $ f : \Omega \to \overline{\R } _+ $ messbar sei nun
 		\[
 			\int _\Omega f \dd \mu = \lim_{i \to \infty} \int _\Omega f_i \dd \mu,
@@ -169,7 +169,7 @@ Sei $ (\Omega, \Sigma, \mu) $ ein Maßraum (Menge, $ \sigma $-Algebra, Maß).
 	\item Vertauschen von Grenzprozessen.
 		Für das \textbf{Regelintegral}: $ [a, b], f_i \to f $ gleichmäßig $ \implies \int_{a}^{b} f_i(x) \dd x \to \int_{a}^{b} f(x) \dd x $
 \end{itemize}
-\begin{theorem}[Dominierte Konvergenz, Lebesgue]
+\begin{theorem*}[Dominierte Konvergenz, Lebesgue]
 	Sei $ (\Omega, \Sigma, \mu) $ Maßraum, sowie $ f, f_1, f_2, \dotsc : \Omega \to \R  $ integrabel und $ f_i \to f $ \textbf{punktweise}.
 	Weiter gebe es ein integrables $ F: \Omega \to \R  $ mit $ \forall i \in \N : \left| f_i \right| \leq \left| F \right|  $.
 	Dann gilt
@@ -177,7 +177,7 @@ Sei $ (\Omega, \Sigma, \mu) $ ein Maßraum (Menge, $ \sigma $-Algebra, Maß).
 		\int_\Omega \underbrace{f}_{= \lim_{i \to \infty} f_i} \dd \mu = \lim_{i \to \infty} \int _\Omega f_i \dd \mu.
 	\]
 	\begin{itemize}
-		\item $ \Omega = \R  $, $ \Sigma = \mathcal{B} (\R ) $, $ \mu = \mathcal{L} ^1 $ , $ f_i = \I_{(i, i + 1)}  $, $ f = 0 $, dann $ f_i \to f $ punktweise.\\
+		\item $ \Omega = \R  $, $ \Sigma = \mathfrak{B} (\R ) $, $ \mu = \mathcal{L} ^1 $ , $ f_i = \I_{(i, i + 1)}  $, $ f = 0 $, dann $ f_i \to f $ punktweise.\\
 			\begin{tikzpicture}
 				\begin{axis}[
 					xmin= -0, xmax= 4,
@@ -193,15 +193,152 @@ Sei $ (\Omega, \Sigma, \mu) $ ein Maßraum (Menge, $ \sigma $-Algebra, Maß).
 					\addplot[domain=1:2, samples=100]{1};
 				\end{axis}
 			\end{tikzpicture}\\
-			$ \forall i \in \N : \int _\Omega f_i \dd \mu = \int _{\R } \I_{i, i + 1} \dd \mathcal{L} ^1 = 1  $. \& $ \int _\Omega f \dd \mu = 0 $. $ (1 \nleftarrow 0) $
+			$ \forall i \in \N : \int _\Omega f_i \dd \mu = \int _{\R } \I_{i, i + 1} \dd \mathcal{L} ^1 = 1  $. \& $ \int _\Omega f \dd \mu = 0 $. $ (1 \nrightarrow 0) $
 	\end{itemize}
 	Eine integrierbare Majorante $ F $ muss notwendigerweise für Große $ x $ einmal ``unter'' $ f_i $ liegen. Unmöglich.
+\end{theorem*}
+
+\begin{itemize}
+	\item $ \Omega = (0, 1), \Sigma = \mathfrak{B}((0, 1)), \mu = \mathcal{L}^1  $. $ f_i \coloneqq i \I_{\left(0, \frac{ 1 }{ i } \right)}  $.
+		$ \forall i \in \N : \int _\Omega f_i \dd \mu = 1 $.
+		$ f_i \to 0 $ punktweise überall, und $ \int _\Omega f \dd \mu = 0 $. ($ 1 \nrightarrow 0 $)
+		\[
+			\underbrace{\int _{\R } f \dd \mathcal{L} ^1}_{\text{``Masse''}}  = 0 \neq \lim_{i \to \infty} \underbrace{\int _{\R } f_i \dd \mathcal{L} ^1}_{\text{``Masse''} } \quad \text{Masse geht verloren} 
+		\]
+	\item Kann hierbei auch im Limes dazukommen? \textbf{Nein}, wegen \textbf{Lemma von Fatou}.
+\end{itemize}
+	
+\begin{theorem}[Monotone Konvergenz, Beppo Levi]
+	Sei $ \left( \Omega, \Sigma, \mu \right)  $ Maßraum, $ f_1, f_2, f_3, \dotsc : \Omega \to \R  $ messbar mit $ f_i \nearrow f $ für ein $ f : \Omega \to \R  $ messbar.
+	So gilt
+	\[
+		\int _\Omega f \dd \mu = \lim_{i \to \infty} \int _\Omega f_i \dd \mu.
+	\]
+	{$ [ f_i \nearrow f : \forall i \in \N : \forall x \in \Omega : f_i (x) \leq f_{i + 1} (x) \& \forall x \in \Omega : f(x) \lim_{i \to \infty} f_i(x)] $}
 	\begin{itemize}
-		\item $ \Omega = (0, 1), \Sigma = \mathcal{B}((0, 1)), \mu = \mathcal{L}^1  $. $ f_i \coloneqq i \I_{\left(0, \frac{ 1 }{ i } \right)}  $.
-			$ \forall i \in \N : \int _\Omega f_i \dd \mu = 1 $.
-			$ f_i \to 0 $ punktweise überall, und $ \int _\Omega f \dd \mu = 0 $. ($ 1 \nrightarrow 0 $)
+		\item Keine integrierbare Majorante gefordert! Speziell darf $ \int _\Omega f \dd \mu = \infty $ passieren.
+		\item Stattdessen bei \textbf{punktweiser Konvergenz}:
+			\[
+				\left| f \right| \leq \lim_{i \to \infty} \left| f_i \right| \leq \left| F \right| \& F \text{ integrierbar} ,
+			\]
+			also auch $ f $ integrierbar, also $ \int_{\Omega}^{} \left| f \right| \dd \mu < \infty $
+	\end{itemize}
+\end{theorem}
+
+\begin{corollary}[Lemma von Fatou]
+	Sei $ (\Omega, \Sigma, \mu) $ ein Maßraum \& $ f, f_1, \dotsc : \Omega \to \R  $ messbar mit $ f = \lim_{i \to \infty} f_i $ punktweise.
+	Angenommen, $ \forall i \in \N  : f_i \geq 0 $.
+	Dann
+	\[
+		\underbrace{ \int_{\Omega}^{} f \dd \mu }_{ \int _\Omega \liminf_{i \to \infty} f_i \dd \mu } \leq \liminf_{i \to \infty} \int _\Omega f_i \dd \mu
+	\]
+\end{corollary}
+\begin{proof*}[Corollary \ref{7.9}]
+	\[
+		g_k \coloneqq \inf_{l \geq k} f_l \nearrow \liminf_{i \to \infty} f_i.
+	\]
+	Dann
+	\[
+		\int_{\Omega}^{}g_k \dd \mu \overset{k \to \infty}{\longrightarrow} \int \underbrace{\liminf_{i \to \infty} f_i}_{f} \dd \mu
+	\]
+	\[
+		\int _\Omega f \dd \mu \leq \lim_{k \to \infty} \int _\Omega \underbrace{\inf_{l \geq k} f_j}_{f_k} \dd \mu = \lim_{k \to  \infty} \int_{\Omega}^{} f_k \dd \mu.\qed
+	\]
+\end{proof*}
+
+\begin{itemize}
+	\item 
+		\[
+			f_i = \I_{[i, i + 1]} \geq 0, \quad \int _\Omega f \dd \mu = 0 < 1 = \liminf_{i \to \infty} \underbrace{\int _\Omega f_i \dd \mu}_{1}.
+		\]
+	\item 
+		\[
+			f_i = i \I_{\left(0, \frac{ 1 }{ i } \right)} , \Omega = \R , \Sigma = \mathfrak{B} (\R ), \mu = \mathcal{L} ^1.
+		\]
+		$ f_i \to 0 $ punktweise
+		\[
+			\int _\Omega f \dd \mu = 0 < 1 = \liminf_{i \to \infty} \int _\Omega f_i \dd \mu
+		\]
+\end{itemize}
+
+\begin{note*}
+	Wir können \textbf{nicht} ohne Weiteres auf $ f_i \geq 0 $ verzichten.
+	$ f_i \coloneqq - \frac{ 1 }{ i } \I_{(0, i)}  $, so $ f_i \to 0 $ (gleichmäßig), also $ f \equiv 0 $.
+	\[
+		\int _\Omega f \dd \mu = 0 > -1 = \liminf_{i \to \infty} \int _\Omega f_i \dd \mu.
+	\]
+	(Hierbei $ \Omega = \R , \Sigma = \mathfrak{B} (\R ), \mu = \mathcal{L} ^1 $)
+
+	Ausweg: Man nimmt an, dass $ \exists H : \Omega \to \R _{\geq 0}  $ integrierbar mit $ \forall i \in \N : f_i \geq - H $.
+		Denn dann $ 0 \leq H + f_i \overset{i \to \infty}{\longrightarrow} H + f $ punktweise, also nach
+		\[
+			\int _\Omega H + f \dd \mu \leq  \liminf_{i \to \infty} \int _\Omega H + f_i.
+		\]
+		\[
+			\underbrace{\int _\Omega H \dd \mu}_{\in \R } + \int _\Omega f \dd \mu \leq \underbrace{\int _\Omega H \dd \mu}_{\in \R } + \liminf_{i \to \infty} \int _\Omega f_i \dd \mu.
+		\]
+		\[
+			\iff \int _\Omega f \dd \mu \leq  \liminf_{i \to \infty} \int _\Omega f_i \dd \mu.
+		\]
+\end{note*}
+
+\begin{itemize}
+	\item $ \R ^2 = \R \times \R  $; Lebesguemaß auf $ \R ^2 $: Eindeutig bestimmtes Maß auf $ \mathfrak{B} (\R ): \mathcal{L} ^2 \left( \left( a, b \right) \times \left( c, d \right)  \right) = \left( d - c \right) \cdot (b - a) $. $ (\forall a, b, c, d) $
+		\[
+			\int_{\R ^2}^{} f(x, y) \dd \mathcal{L} ^2 (x, y) \overset{?}{=} \int_{\R }^{} \int _\R f(x, y) \dd \mathcal{L} ^1(x) \dd \mathcal{L} ^1(y).
+		\]
+		{[Guido Fubini]}
+	\item Ein Maßraum heißt \textbf{$ \sigma $-endlich}, falls 
+		\[
+			\exists V_1, V_2, \dotsc \in \Sigma : V_1 \subset V_2 \subset \dotsb, \Omega = \bigcup_{k \in \N } V_k \; \& \; \forall k \in \N : \mu (V_k) < \infty.
+		\]
+		Dies ist z.B. erfüllt für alle endlichen Maße, aber auch:
+		$ \R ^k $ mit $ \Sigma = \mathfrak{B} (\R ^n), \mu = \mathcal{L} ^n. $ 
+		\[
+			\R ^n = \bigcup_{k \in \N } [-k, k]^n \; \& \; \forall k \in \N : \mathcal{L} ^n \left( [-k, k]^n \right) = (2k)^n < \infty.
+		\]
+	\item Für zwei Maßräume $ \left( \Omega_1, \Sigma_1, \mu_1 \right) , \left( \Omega_2, \Sigma_2, \mu_2 \right)  $ sei $ \Sigma_1 \otimes \Sigma_2 $ die von allen Mengen der Form $ A \times B, A \in \Sigma_1, B \in \Sigma_2 $ erzeugt $ \sigma $-Algebra auf $ \Omega_1 \times \Omega_2 $.
+		Wir nennen $ \mu : \Sigma_1 \otimes \Sigma_2 \to [0, \infty] $ ein Produktmaß bezüglich $ \mu_1 \& \mu_2 $, falls
+		\[
+			\forall A \in \Sigma_1: \forall B \in \Sigma_2 : \mu (A \times B) = \mu_1(A) \mu(B)
+		\]
+		Sind $ (\Omega_1, \Sigma_1, \mu_1), \left( \Omega_2, \Sigma_1, \mu_2 \right)  $ $ \sigma $-endlich, so ist ein Produktmaß eindeutig durch $ \mu_1, \mu_2 $ festgelegt.
+\end{itemize}
+
+\begin{theorem}[Fubini]
+	Seien $ \left( \Omega_1, \Sigma_1, \mu_1 \right) , \left( \Omega_2, \Sigma_2, \mu_2 \right)  $ zwei $ \sigma $-endliche Maßräume \& sei $ f: \Omega_1 \times \Omega_2 \to \R  $ $ \Sigma_1 \otimes \Sigma_2 $-messbar \& auf $ \Omega_1 \times \Omega_2 $ integrierbar,
+	\[
+		\int _{\Omega_1 \times \Omega_2} \left| f \right| \dd \mu < \infty,
+	\]
+	wobei $ \mu \coloneqq \mu_1 \otimes \mu_2 $ \textbf{das} Produktmaß von $ \mu_1, \mu_2 $ ist.
+	Dann ist für $ \mu_1 $-fast alle $ x \in \Omega_1 $ die Funktion $ \Omega_2 \ni y \mapsto f(x, y) \in \R  $ $ \Sigma_2 $-messbar, für $ \mu_2 $-fast alle $ y \in \Omega_2 $ die Funktion $ \Omega_1 \ni x \mapsto f(x, y) \in \R  $ $ \Sigma_1 $-messbar, und es gilt:
+	\[
+		\int _{\Omega_1 \times  \Omega_2} f(x, y) \dd \left( \mu_1 \otimes \mu_2 \right) \left( x, y \right) = \int _{\Omega_1} \int _{\Omega_2} f(x, y) \dd \mu_2(y) \dd \mu_1(x) = \int _{\Omega_2} \int _{\Omega_1} f(x, y) \dd\mu_1(x) \dd \mu_2 (y).
+	\]
+\end{theorem}
+
+\begin{theorem}[Transformationssatz ($ \hat{=} $ Substitutionsregel aus Ana. I)]
+	Sei $ \Omega \subset \R ^n $ offen, $ \Phi: \Omega \to \Phi(\Omega) $ ein $ C^1 $-\textbf{Diffeomorphismus} ($ \Phi: \Omega \to \Phi(\Omega) $ ist $ C^1 $, $ \Phi $ ist bijektiv \& $ \Phi^{-1} : \Phi(\Omega) \to \Omega $ ist $ C^1 $).
+	Dann ist eine Funktion $ f : \Phi(\Omega) \to \R  $ bezüglich $ \mathcal{L} ^n $ integrierbar genau dann, wenn $ \Omega \ni x \mapsto f (\Phi(x)) \left| \det D \Phi(x) \right|  $ integrierbar bezüglich $ \mathcal{L} ^1 $ ist.
+	In diesem Fall gilt:
+	\[
+		\int _{\Phi(\Omega)}  f \dd \mathcal{L} ^n = \int _{\Omega} f (\Phi) \left| \det D \Phi \right| \dd \mathcal{L} ^n
+	\]
+\end{theorem}
+
+\begin{example}
+	\[
+		\int_{-\infty}^{\infty} e^{- \frac{ x^2 }{ 2 } } \dd x = \sqrt{2 \pi } .
+	\]
+	\begin{itemize}
+		\item 
+			\begin{align*}
+				\left( \int _\R e^{-x^2}  \right) ^2 &= \int_{\R }^{} e^{- \frac{ x^2 }{ 2 } } \dd \mathcal{L} ^1(x) \int_{\R }^{} e^{- \frac{ y^2 }{ 2 } } \dd \mathcal{L} ^1 (y) \\
+				~&\overset{\text{Fubini} }{=} \int_{\R } \int _{\R } e^{\frac{ - x^2 - y^2 }{ 2 } } \dd \mathcal{L} ^1(x) \dd \mathcal{L} ^1(y) \\
+				~&\overset{z = (a, b)}{=} \int _{\R ^2} e^{- \frac{\left| z \right| ^2}{ 2 } } \dd \mathcal{L} ^2(z)
+			\end{align*}
 	\end{itemize}
 	
-\end{theorem}
+\end{example}
 
 
