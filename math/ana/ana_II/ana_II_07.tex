@@ -326,19 +326,138 @@ Sei $ (\Omega, \Sigma, \mu) $ ein Maßraum (Menge, $ \sigma $-Algebra, Maß).
 	\]
 \end{theorem}
 
-\begin{example}
+\begin{example*}
 	\[
 		\int_{-\infty}^{\infty} e^{- \frac{ x^2 }{ 2 } } \dd x = \sqrt{2 \pi } .
 	\]
 	\begin{itemize}
 		\item 
 			\begin{align*}
-				\left( \int _\R e^{-x^2}  \right) ^2 &= \int_{\R }^{} e^{- \frac{ x^2 }{ 2 } } \dd \mathcal{L} ^1(x) \int_{\R }^{} e^{- \frac{ y^2 }{ 2 } } \dd \mathcal{L} ^1 (y) \\
+				\left( \int _\R e^{- \frac{ x^2 }{ 2 } }  \right) ^2 &= \int_{\R }^{} e^{- \frac{ x^2 }{ 2 } } \dd \mathcal{L} ^1(x) \int_{\R }^{} e^{- \frac{ y^2 }{ 2 } } \dd \mathcal{L} ^1 (y) \\
 				~&\overset{\text{Fubini} }{=} \int_{\R } \int _{\R } e^{\frac{ - x^2 - y^2 }{ 2 } } \dd \mathcal{L} ^1(x) \dd \mathcal{L} ^1(y) \\
 				~&\overset{z = (a, b)}{=} \int _{\R ^2} e^{- \frac{\left| z \right| ^2}{ 2 } } \dd \mathcal{L} ^2(z)
 			\end{align*}
+		\item Transformationssatz: $ \Omega \subset \R ^n $ offen, $ \Phi: \Omega \to \Phi(\Omega) $ $ C^1 $-Diffeomorphismus
+			\[
+				\int _{\Phi(\Omega)}  f \dd \mathcal{L} ^n = \int _{\Omega} f (\Phi) \left| \det D \Phi \right| \dd \mathcal{L} ^n
+			\]
+		\item \textbf{Polarkoordinaten:}
+			Wir können Elemente von $ \R ^2 $ durch Angabe des Winkels $ \varphi $ \& des Radius $ r $ festlegen
+			$ (x, y) \leftrightarrow (r, \varphi) $\\
+			$ r \in (0, \infty), \varphi \in (0, 2 \pi ), (0, \infty) \times (0, 2 \pi ) $ ist offen in $ \R ^2 $
+			\[
+				\Phi : (r, \varphi) \mapsto \begin{pmatrix} r \cos \varphi \\ r \sin \varphi \end{pmatrix}
+			\]
+			\[
+				\Phi : (0, \infty) \times (0, 2 \pi ) \to \R ^2 \setminus \left\{ (x, y) : x \geq 0, y = 0 \right\} .
+			\]
+			Dann ist $ \Phi $ ein $ C^1 $-Diffeomorphismus.
+			$ \Omega = \left( 0, \infty \right) \times \left( 0, 2 \pi  \right)  $ 
+			\[
+				\int _{(0, \infty) \times (0, 2 \pi )} f\left( \Phi(r, \varphi) \right) \left| \det D \Phi (r, \varphi) \right| \dd \mathcal{L} ^2 (r, \varphi) = (*)
+			\]
+			\[
+				\det D \Phi (r, \varphi) = \det \begin{pmatrix} \cos \varphi & - r \sin \varphi \\ \sin \varphi & r \cos \varphi \end{pmatrix} = r \left( \cos ^2 \varphi + \sin ^2 \varphi \right) = r
+			\]
+			\begin{align*}
+				(*) &= \int _{(0, \infty) \times (0, 2 \pi )} f \begin{pmatrix} r \cos \varphi \\ r \sin \varphi \end{pmatrix} \cdot r \dd \mathcal{L} ^2 (r, \varphi)\\
+				~ &\overset{\text{Fubini} }{=} \int_{0}^{\infty} r \int_{0}^{2 \pi } f \begin{pmatrix} r \cos \varphi \\ r \sin  \varphi \end{pmatrix} \dd \varphi \dd r \\
+				~ &= \int_{0}^{\infty} r \int_{0}^{2 \pi } e ^{- \frac{ r^2 }{ 2 } } \dd \varphi \dd r \\
+				~ &= 2 \pi \int_{0}^{\infty} r e ^{- \frac{ r^2 }{ 2 } } \dd r \\
+				~ &= 2 \pi  \lim_{\alpha \to \infty} \left[ - e ^{- \frac{ r^2 }{ 2 } }  \right]_{0} ^{\alpha}  \\
+				~ &= 2 \pi
+			\end{align*}
 	\end{itemize}
-	
-\end{example}
+	\[
+		2 \pi \overset{!}{=} \int _{\Phi (\Omega)} e ^{- \frac{\left| x \right| ^2}{ 2 } } \dd \mathcal{L}^2 (x) = \int _{\R ^2 \setminus l} e ^{- \frac{ \left| (x, y) \right| ^2 }{ 2 } } \dd \mathcal{L} ^2(x, y), 
+	\]
+	wobei $ l \coloneqq \left\{ (x, y) : x \geq 0, y = 0 \right\} . $ 
+	Aber $ \mathcal{L} ^2(l) = 0 $, da $ l $ als Gerade eindimensional ist \& vom \textbf{zwei}dimensionalen Lebesquemaß ignoriert wird.
+	Also
+	\[
+		2 \pi = \int _{\R ^2} e ^{- \frac{\left| (x, y) \right| ^2 }{ 2 } } \dd \mathcal{L} ^2 (x, y) = \left( \int_{- \infty}^{\infty} e ^{- \frac{ x^2 }{ 2 } } \dd x \right) ^2 \implies \int_{- \infty}^{\infty} e ^{- \frac{ x^2 }{ 2 } } \dd x = \sqrt{2 \pi } ,
+	\]
+	also 
+	\[
+		\frac{ 1 }{ \sqrt{2 \pi }  } \int_{- \infty}^{\infty} e ^{- \frac{ x^2 }{ 2 } } \dd x = 1.
+	\]
+	Die Funktion $ x \mapsto \frac{ 1 }{ \sqrt{2 \pi }  } e ^{- \frac{ x^2 }{ 2 } }  $ heißt \textbf{Gaußsche Wahrscheinlichskeitsdichte}, \& $ \mathfrak{B} (\R ) \ni A \mapsto \int_{A}^{} \frac{ 1 }{ \sqrt{2 \pi }  } e ^{- \frac{ x^2 }{ 2 } } \dd x $ ist das Wahrscheinlichkeitsmaß der Gaußschen Normalverteilung
+\end{example*}
+
+\[
+	\int _{\R ^2} e ^{- \frac{\left| (x, y) \right| ^2}{ 2 } } \dd \mathcal{L} ^2 (x, y) \overset{?}{<}\infty.
+\]
+Dies ist Voraussetzung, um Fubini anzuwenden.
+\textbf{Hierzu}:
+\[
+	(x, y) \mapsto e ^{- \frac{ \left| (x, y) \right| ^2 }{ 2 } } .
+\]
+Speziell ist für ein Polynom $ p  $ die Funktion $ p (x, y) \cdot e ^{ - \frac{ \left| ( x, y ) \right|^2 }{ 2 } }  $ durch eine Konstante $ C > 0 $ beschränkt.
+Wir schreiben
+\[
+	\int _{\R ^2} (\dotsc) = \underbrace{\int _{B_1(0)} \underbrace{e ^{- \frac{ \left| (x, y) \right| ^2 }{ 2 } }}_{\leq 1} \dd \mathcal{L} ^2 (x, y)}_{< \infty}  + \int _{\R ^2 \setminus B_1(0)} \underbrace{p(x, y) e ^{- \frac{ \left| (x, y) \right| ^2 }{ 2 } }}_{\leq C}  \frac{ 1 }{ p(x, y) } \dd \mathcal{L} ^2 (x, y)
+\]
+\begin{align*}
+	C \int _{\R ^2 \setminus B_1(0)} \frac{\dd \mathcal{L}^2 (x, y)}{ p (x, y) } &\overset{(1 + \left| x \right| ^2 + \left| y \right| ^2)^2 = p(x, y)}{=} C \int _{\R ^2 \setminus B_1(0)} \frac{ \dd \mathcal{L} ^2 (x, y) }{ (1 + \left| x \right| ^2 + \left| y \right| ^2)^2 } \\
+	~ &= C \int_{1}^{\infty} \int_{0}^{2 \pi } r \frac{ 1 }{ (1 + r^2)^2 } \dd \varphi \dd r \\
+	~ &= C \cdot 2 \pi \int_{1}^{\infty} \underbrace{\frac{ r }{ ( 1 + r^2)^2 }}_{\simeq \frac{ 1 }{ r^3 } }  \dd r  \\
+	~ & \leq C^\prime \underbrace{\int_{1}^{\infty} \frac{ \dd r }{ r^3 } }_{< \infty} \\
+	~ &< \infty.
+\end{align*}
+
+\begin{itemize}
+	\item Zwiebelformel als By-Produkt des Beweises:
+		In $ n $ Dimensionen können wir ebenso eine Polarkoordinaten Abbildung angeben.
+		Diese Abbildung $ \Phi $ erfüllt $ \left| \det D \Phi (r, \varphi_1, \dotsc, \varphi_{n - 1}  \right| = r^{n - 1} $.
+		Ist $ f : \R ^n \to \R  $ eine integrierbare Funktion, so gilt:
+		\[
+			\int _{\R ^n} f \dd \mathcal{L} ^n = \int_{0}^{\infty} r^{n - 1} \int _{\ddd B_r(0)} f(x) \dd \sigma (x) \dd r.
+		\]
+		Hierbei ist $ \sigma $ das Oberflächenmaß.
+		Dieses $ \sigma $ gibt uns den ``Flächeninhalt'' von Oberflächen an.
+		\[
+			\int _{\ddd B_r(0)} f(x) \dd \sigma (x) \simeq \frac{ 1 }{ r^{n + \alpha}  } , \alpha > 0.
+		\]
+		Für große Werte von $ r : \frac{ r^{n - 1} }{ r ^{n + \alpha}  } = \frac{ 1 }{ r^{1 + \alpha}  }  $ (als Kommentar zum vorherigen Beweis).
+\end{itemize}
+
+\[
+	F = (F_1, \dotsc, F_n), \Div (F) = \sum_{i=1}^{n} \frac{ \ddd F_i }{ \ddd x_i } 
+\]
+Ist $ F $ die Geschwindigkeit eines Fluids, so gibt uns $ \Div(F) $ ein Maß für die Quellen des Fluids.
+Wie viel Wasser kommt hinzu?
+Summiere $ \Div F $ über $ \Omega $, also betrachte 
+\[
+	\int_{\Omega}^{} \Div(F) \dd \mathcal{L} ^n.
+\]
+Nach dem \textbf{Satz von Gauß} muss dies mit der Wassermenge übereinstimmen, die am Rand austritt.
+Hierzu benötigen wir Mengen mit $ C^1 $-Rand.
+Speziell sei $ \Omega \subset \R ^n $ so:
+Es gibt $ V_1, \dotsc, V_N \subset \R ^n $ offen mit
+\[
+	\ddd \Omega \subset \bigcup_{j = 1} ^{N} V_j
+\]
+und für jedes $ j \in \left\{ 1, \dotsc, N \right\}  $ gibt es eine affin-lineare Abbildung $ T_j : \R ^n \to \R ^n $.
+\begin{enumerate}[label=(\roman*)]
+	\item Es gibt $ U_j \subset  \R ^{n - 1}  $ offen \& $ f_j : U_j \to \R  $ so: $ T_j(V_j) \cap \ddd \Omega = \Graph(f_j) = \left\{ \left( x^\prime , f_j(x^\prime ) \right) : x^\prime \in U_j \right\}  $ 
+	\item $ f_j \in C^1 $.
+	\item $ \exists h_j > 0 : \forall x \in V_j :$\\
+		$ x \in \R ^n \setminus \Omega \implies T_j (x) \in \left\{ (x^\prime , y) : y > f_j(x^\prime ) \right\}  $,\\
+		$ x \in \Omega \implies T_j(x) \in \left\{ (x^\prime , y) : y < f_j (x^\prime ) \right\}  $
+\end{enumerate}
+Sei nun für $ z \in \Graph(f_j) $, $ \mathbb{H}_{j} (z) $ die Tangentialhyperebene an $ \Graph(f) $ in $ z $.
+Dann gibt es genau \textbf{einen} Vektor $ \nu \in \mathdollar^{n - 1}  $, der auf $ \mathbb{H}_j(z) $ orthogonal steht und in Richtung $ \left\{ (x^\prime , y) : x^\prime \in U_j : y > f_j(x^\prime ) \right\}  $ zeigt.
+Über die Abbildung $ T_j $ definiert dies in natürlicher Weise des \textbf{Einheitsnormalenfeld} $ \nu : \ddd \Omega \to \mathdollar^{n - 1}  $
+
+\begin{subtheorem}[Gauß, Divergenzsatz ($ \hat{=} $ Quellenbilanz)]
+	Sei $ \Omega \subset \R ^n $ offen, beschränkt mit $ C^1 $-Rand.
+	Ist $ F = (F_1, \dotsc, F_n) : \overline{\Omega} \to \R  $ stetig \& in $ \Omega $ differenzierbar, so gilt
+	\[
+		\text{\fbox{
+			$\int _\Omega \Div(F) \dd \mathcal{L} ^n = \int _{\ddd \Omega} F \cdot \nu \dd \sigma,$
+		}}
+	\]
+	wobei $ \nu : \ddd \Omega \to \mathdollar ^{n - 1}  $ das Einheitsnormalenfeld an $ \ddd \Omega $ ist.
+\end{subtheorem}
 
 

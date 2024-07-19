@@ -546,11 +546,207 @@ Eigenschaften von $ T^* $
 	Also $ Ux = cx $. Es ist $ \left\| Ux \right\| = \left\| x \right\|  $ also $ \left\| cx \right\| = \left| c \right| \left\| x \right\| = \left\| x \right\|  $\qed
 \end{subproof*}
 
-\subsubsection{4.28.5}
-Sei $ \mathcal{X} = \left\{ x_1, \dotsc, x_n \right\}  $ eine orthonormale Basis, $ U \in \mathcal{L} (V, V) $.
-Dann ist $ U $ eine Isometrie genau dann wenn
-\[
-	U \mathcal{X} \coloneqq \left\{ Ux_1, \dotsc, Ux_n \right\} 
-\]
-eine orthonormale Basis ist.\qed
+\subsubsection{Orthonormal-Basis wechseln}
+\begin{subtheorem}
+	Sei $ \mathcal{X} = \left\{ x_1, \dotsc, x_n \right\}  $ eine orthonormale Basis, $ U \in \mathcal{L} (V, V) $.
+	Dann ist $ U $ eine Isometrie genau dann wenn
+	\[
+		U \mathcal{X} \coloneqq \left\{ Ux_1, \dotsc, Ux_n \right\} 
+	\]
+	eine orthonormale Basis ist.\qed
+\end{subtheorem}
+
+\begin{subdefinition}
+	Sei $ A \in M_{n \times n} (K) $ 
+	\begin{itemize}
+		\item wenn $ K = \R $, $ A $ ist \textbf{orthogonal} wenn $ A A^t = A^t A = I_n $ 
+		\item wenn $ K = \C $, $ A $ ist \textbf{unitär} wenn $ A A^* = A^* A = I_n $
+	\end{itemize}
+\end{subdefinition}
+
+\begin{subnote}
+	\begin{enumerate}[label=(\roman*)]
+		\item Seien $ U $ eine Isometrie und $ \mathcal{X}  $ eine orthonormale Basis, dann ist $ [U]_{\mathcal{X} }  $ unitär (bzw. orthogonal)
+		\item Sei $ \mathcal{X}  $ eine orthonormale Basis und $ \mathcal{B}  $ eine beliebige Basis.
+			Dann ist $ \mathcal{B}  $ orthonormal genau dann, wenn die Basiswechsel Matrix unitär (bzw. orthogonal) ist.
+	\end{enumerate}
+\end{subnote}
+
+\subsubsection{Spektraltheorie}
+\begin{enumerate}[label=(\alph*)]
+	\item Hermite'sche $ (T^* = T) $ 
+	\item schief Hermite'sche $ (T^* = -T) $ 
+	\item unitäre (bzw. orthogonale) $ (T^* = T^{-1})  $
+\end{enumerate}
+alle diese Operatoren erfüllen folgende Eigenschaft:
+
+\begin{subdefinition}
+	$ T \in \mathcal{L} (V, V) $ ist \textbf{normal}, falls $ T^* T = T T^* $
+\end{subdefinition}
+
+\begin{subtheorem}[Spektralsatz für normale Operatoren]
+	(vgl. Satz \ref{3.23.2} Primzerlegung)\\
+	Sei $ T \in \mathcal{L} (V, V) $ normal und setze $ p = \MinPol(T) $.
+	Dann ist $ p = p_1 \dotsb p_k $ wobei $ p_i $ irreduzible und normiert ist $ \forall i \in 1, \dotsc, k $ (i.e. $ \deg p_i = \text{1 oder 2} $)
+	Für jedes $ i = 1, \dotsc, k $: Sei $ W_i \coloneqq \Kern p_i (T) $ der $ T $-invariante Unterraum von $ V $.
+	Dann ist $ W_i $ orthogonal zu $ W_j $ für alle $ i \neq j $ und
+	\[
+		V = W_1 \oplus \dotsb \oplus W_k
+	\]
+	i.e. $ V $ ist die orthogonale direkte Summe von $ W_1, \dotsc, W_k $.
+\end{subtheorem}
+Für den Beweis brauchen wir
+\begin{sublemma}
+	Sei $ T \in \mathcal{L} (V, V) $ und sei $ W \subseteq V $ $ T $-invariant.
+	Dann ist $ W^\perp \subseteq V $ $ T^* $-invariant
+\end{sublemma}
+\begin{subproof*}[Hilfslemma \ref{4.28.10}]
+	Sei $ u \in W^\perp $ und $ w \in W $, und berechne
+	\[
+		(w | T^*u) = (Tw|u) = 0 \quad \forall w \in W
+	\]
+	Also ist $ T^*u \in W^\perp $\qed
+\end{subproof*}
+
+\subsection{Skript 29}
+
+\begin{subnote}
+	Da $ (T^*)^* = T $ (siehe ÜA).
+	Nun können wir Lemma \ref{4.28.10} auf $ T^* $ anwenden und bekommen
+	\[
+		W \subseteq V \quad T^*\text{-invariant} 
+	\]
+	dann ist
+	\[
+		W^\perp \subseteq V \quad T \text{-invariant} 
+	\]
+\end{subnote}
+
+\begin{sublemma}
+	Sei $ T \in \mathcal{L} (V, V) $ \textbf{normal} und $ g(x) \in K[x] $ und $ W \coloneqq \Kern g(T) $.
+	Dann ist $ W^\perp $ $ T $-invariant
+\end{sublemma}
+\begin{subproof*}[Lemma \ref{4.29.2}]
+	Wir zeigen, dass $ W $ $ T^* $-invariant ist.
+	Nun $ T $ normal $ \implies T T^* = T^*T \implies g(T)T^* = T^* g(T) $.
+	Sei $ u \in W $. Berechne
+	\[
+		g(T) T^* (u) = T^* (g(T)(u)) = 0.
+	\]
+	Also $ T^*(u) \in W $.
+	Also $ W $ $ T^* $-invariant.
+	Aus Bem. \ref{4.29.1} folgt: $ W^\perp $ $ T $-invariant
+\end{subproof*}
+
+\begin{subnote}
+	Sei $ g $ ein Faktor vo $ p \coloneqq \MinPol (T) $, dann ist $ g(T) $ \textbf{nicht} invertierbar.
+	In der Tat:
+	Sei $ p = gh $ mit $ 0 < \deg h < \deg p $.
+	Wäre $ g(T) $ invertierbar, dann hätten wir
+	\[
+		0 = g(T)^{-1} p(T) = g(T)^{-1} g(T) h(T)
+	\]
+	Also $ h(T) = 0 $, aber $ \deg h < \deg p $\qed
+\end{subnote}
+
+\begin{subproof}[Spektralsatz Satz \ref{4.28.9}]
+	\begin{itemize}
+		\item Wir bemerkten vorab, dass $ W_i $ $ T $-invariant (siehe \ref{3.21.2} (2))
+		\item Sei $ p = p_1 \dotsb p_k $ 
+			wir zeigen $ p_i \neq p_j $ für $ i \neq j $ und
+			\[
+				V = W_1 \oplus \dotsb \oplus W_k
+			\]
+			die orthogonale direkte Summe.
+	\end{itemize}
+	Beweis per Induktion mache
+	\begin{description}
+		\item[Ind. Anf.:]  $ k = 1 $ passt
+		\item[Ind. Ann.:] gilt $ k - 1 $ 
+		\item[Ind. Sch.] Lemma \ref{4.29.2} impliziert dass $ W_1^\perp $ $ T $-invariant ist.
+			Bemerke $ p_1 = \MinPol (T_{W_{1} } ) $ 
+			Betrachte $ T_{W_1^\perp}  $ und 
+			\[
+				\Kern p_1 \left( T_{W_1^\perp}  \right) = \left\{ 0 \right\} 
+			\]
+			($ x \in W_1^\perp $ und $ x \in \Kern p_1 (T) = W_1 \implies x = 0 $)
+			Also ist $ p_1\left( T_{W_1^\perp}  \right)  $ ist invertierbar, und \textbf{somit} (wegen Bem. \ref{4.29.3}) ist $ p_1 $ \textbf{kein} Faktor von $ \MinPol (T_{W_1^\perp} ) $.
+			Setze
+			\[
+				P_2 \coloneqq \MinPol \left( T_{W_1^\perp}  \right) 
+			\]
+			Also sind $ p_1, P_2 $ teilerfremd.
+			Also ist $ p = \operatorname{kgV} (p_1, P_2) = p_1 P_2 $.
+			Also ist $ P_2 = p_2 \dotsb p_k $, und $ p_1 \neq p_j $ für $ j = 2, \dotsc, k $.
+			\begin{itemize}
+				\item Nun wollen wir Ind. Ann. auf $ T_{W_1^\perp}  $ anwenden.
+					Da $ T $ normal ist, ist auch $ T_{W_1^\perp}  $ normal.
+					Wir bekommen (wie im Beweis Satz \ref{3.23.3}) folgt nun
+					\[
+						W_1^\perp = W_2 \oplus \dotsb \oplus W_k.
+					\]
+			\end{itemize}
+			Alles zusammen
+			\[
+				V = W_1 \oplus W_1^\perp = W_1 \oplus \dotsb W_k
+			\]
+			orthogonale direkte Summe\qed
+	\end{description}
+\end{subproof}
+
+\begin{subcorollary}[zum Spektralsatz]
+	für $ K = \C  $\\
+	Sei $ T \in \mathcal{L} (V, V) $ normal.
+	Es gibt eine orthonormale Basis bestehend aus Eigenvektoren von $ T $.
+\end{subcorollary}
+\begin{subproof*}[Spektralsatz]
+	$ \forall i = 1, \dotsc, k $, sind die $ p_i $ linear, $ p_i = (x - z_i) $ und $ W_i $ der Eigenraum zum Eigenwert $ z_i $.
+	Wähle eine orthonormal-Basis G-S. $ \mathcal{X} _i $ für $ W_i $ und setze $ \forall i = 1, \dotsc, k $ 
+	\[
+		\mathcal{X} = \mathcal{X} _1 U \dotsb U \mathcal{X} _k\qed
+	\]
+\end{subproof*}
+
+\begin{subcorollary}[Eigenvektoren von Hermite'schen Operatoren]
+	$ K = \C  $, $ T $ normal.
+	Es gilt: $ T $ ist Hermite'sch $ \iff  $ Eigenwerte von $ T \in \R  $ sind.
+\end{subcorollary}
+\begin{subproof*}[Korollar Eigenvektoren von Hermite'schen Operatoren]
+	\begin{description}
+		\item[``$ \implies  $'':] 
+			Satz \ref{4.27.2}
+		\item[``$ \implies  $'':] 
+			Folgt aus orthogonal diagonalisierbar:
+			\[
+				D = [T]_{\mathcal{X} } = \begin{pmatrix} d_1 & & 0 \\ & \ddots & \\ 0 & & d_n \end{pmatrix} 
+			\]
+			$ d_i \in \R  $, $ D^* = D $\qed
+	\end{description}
+\end{subproof*}
+
+\begin{subcorollary}[Eigenwerte von unitär]
+	Sei $ K = \C  $, $ T $ normal.
+	Es gilt $ T $ ist unitär $ \iff  $ alle Eigenwerte von $ T $ absolut Betrag $ = 1 $ haben.
+\end{subcorollary}
+\begin{subproof*}[Eigenwerte von unitären Operatoren]
+	\begin{description}
+		\item[``$ \implies  $'':] 
+			Satz \ref{4.28.4}
+		\item[``$ \impliedby  $'':]
+			Aus Kor. orthogonal diagonalisierbar haben wir bekommen,
+			$ \mathcal{X}  $ eine orthogonale Basis bestehend aus Eigenvektoren.
+			\[
+				D \coloneqq [T]_{\mathcal{X} } = \begin{pmatrix} z_1 && 0 \\ &\ddots& \\ 0 && z_n \end{pmatrix} 
+			\]
+			$ z_i $ sind Eigenwerte von $ \C  $.\\
+			Beh.: $ D $ ist unitär!\\
+			\textbf{Berechne} $ D^* = \overline{D^t} = \begin{pmatrix} \overline{z_1} &&0 \\ &\ddots&\\ 0 && \overline{z_n}  \end{pmatrix}  $\\
+			Berechne
+			\[
+				\mathbb{D}^* = \begin{pmatrix} z_1 \overline{z_1}  && 0 \\ &\ddots& \\ 0 && z_n \overline{z_n}  \end{pmatrix} = \begin{pmatrix} 1 &&0 \\ &\ddots& \\ 0 && 1 \end{pmatrix} \qed
+			\]
+	\end{description}
+	
+\end{subproof*}
+
 
